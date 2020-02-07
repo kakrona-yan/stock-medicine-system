@@ -1,0 +1,153 @@
+.btn-circle {
+  border-radius: 10rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  &.btn-sm {
+    height: 1.8rem;
+    width: 1.8rem;
+    font-size: 0.75rem;
+  }
+  &.btn-lg {
+    height: 3.5rem;
+    width: 3.5rem;
+    font-size: 1.35rem;
+  }
+}
+
+.btn-icon-split {
+  padding: 0;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: stretch;
+  justify-content: center;
+  .icon {
+    background: fade-out($black, .85);
+    display: inline-block;
+    padding: $btn-padding-y $btn-padding-x;
+  }
+  .text {
+    display: inline-block;
+    padding: $btn-padding-y $btn-padding-x;
+  }
+  &.btn-sm {
+    .icon {
+      padding: $btn-padding-y-sm $btn-padding-x-sm;
+    }
+    .text {
+      padding: $btn-padding-y-sm $btn-padding-x-sm;
+    }
+  }
+  &.btn-lg {
+    .icon {
+      padding: $btn-padding-y-lg $btn-padding-x-lg;
+    }
+    .text {
+      padding: $btn-padding-y-lg $btn-padding-x-lg;
+    }
+  }
+}
+.upload-profile{
+  border: 1px solid $gray-400;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 70px;
+  position: relative;
+}
+.btn-file{
+  overflow: hidden;
+  position: relative;
+  border-radius: 0px;
+  background: $blue;
+  padding: 8px;
+  color: $white;
+  border: 1px solid $gray-400;
+  max-width: 100%;
+  &:hover{
+    color: $gray-300;
+  }
+}
+.btn-file input[type=file]{
+  background: $white;
+  cursor: pointer;
+  display: block;
+  font-size: 100px;
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0;
+  outline: none;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: 0;
+}
+.img-upload {
+  .alert{
+      margin-bottom: 10px;
+  }
+  img{
+      margin-top: 10px;
+      max-height: 140px;
+      max-width: 250px;
+  }
+}
+.img-remove-btn{
+  display: none;
+  position: absolute;
+  bottom: 17px;
+  background: $white;
+  color: $red;
+  border-radius: 0px;
+  max-width: 135px;
+  width: 100%;
+  bottom: 20px;
+  cursor: pointer;
+  border-radius: 10rem;
+}
+.img-url-tab{
+  display: none;
+}
+.display_album{
+position: relative;
+}
+#stage-gallery {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid $gray-400;
+  padding: 15px;
+}
+.btn-ablum {
+  background: $gray-400;
+  padding: 12px 10px;
+  max-width: 438px;
+  border-radius: 0px;
+  color: $gray-800;
+}
+.count_image {
+  position: absolute;
+  right: 0px;
+  width: 30px;
+  height: 30px;
+  background: $red;
+  color: $white;
+  text-align: center;
+  font-size: 18px;
+  line-height: 30px;
+}
+.btn-remore {
+  position: absolute;
+  top: -8px;
+  right: 17px;
+}
+.crop-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid $blue;
+}
+.thumbnail{
+  max-width: 30px;
+}

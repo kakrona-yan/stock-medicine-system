@@ -1,0 +1,32 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Fortawesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+
+// Variables
+@import 'components/variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Select2
+@import '~select2/src/scss/core';
+
+// Import Custom SB Admin 2 Mixins and Components
+@import "components/mixins.scss";
+@import "components/global.scss";
+@import "components/utilities.scss";
+
+// Custom Components
+@import "components/dropdowns.scss";
+@import "components/navs.scss";
+@import "components/buttons.scss";
+@import "components/cards.scss";
+@import "components/charts.scss";
+@import "components/login.scss";
+@import "components/error.scss";
+@import "components/footer.scss";
