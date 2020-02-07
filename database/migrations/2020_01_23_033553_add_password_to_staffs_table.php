@@ -14,7 +14,7 @@ class AddPasswordToStaffsTable extends Migration
     public function up()
     {
         Schema::table('staffs', function (Blueprint $table) {
-            $table->string('password')->after('dob');
+            $table->string('password')->after('address');
             $table->integer('user_id')->length(11)->after('id');
         });
     }
