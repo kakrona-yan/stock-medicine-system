@@ -18,7 +18,7 @@ class CreateStaffsTable extends Migration
             $table->string('firstname', 100)->nullable();
             $table->string('lastname', 100)->nullable();
             $table->string('email', 255)->nullable();
-            $table->string('phone1', 255);
+            $table->string('phone1', 255)->nullable();
             $table->string('phone2', 255)->nullable();
             $table->text('address')->nullable();
             $table->string('thumbnail')->nullable();
