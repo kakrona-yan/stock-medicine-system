@@ -24,5 +24,12 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('js/canvas-particle.js') }}"></script>
+    <script>
+        $( window ).on( "load", function(){
+            setTimeout(function() {
+                $('.swipe-load').fadeOut(700);
+            }, 2000);
+        });
+    </script>
 </body>
 </html>
