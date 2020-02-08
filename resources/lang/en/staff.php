@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'RRPS-PAAMA | List Staff',
+    'title' => 'RRPS-PHAMA | List Staff',
     'list' => [
         'name' => 'Name',
         'firstname' => 'Firstname',

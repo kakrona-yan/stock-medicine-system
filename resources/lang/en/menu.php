@@ -1,6 +1,6 @@
 <?php
 return [
-    'shop_name' => 'RRPS-PAAMA',
+    'shop_name' => 'RRPS-PHAMA',
     'dashboard' => 'Dashboard',
     'user' => 'Users',
     'category' => 'Categories',

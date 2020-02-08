@@ -6,7 +6,7 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h5 class="mb-0 text-gray-800">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            RRPS-PAAMA
+            RRPS-PHAMA
         </h5>
     </div>
     <!-- Content Row -->

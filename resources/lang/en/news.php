@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'RRPS-PAAMA | News',
+    'title' => 'RRPS-PHAMA | News',
     'sub_title' => 'News',
     'confirm_delete' => 'confirm delete',
     'list' => [
