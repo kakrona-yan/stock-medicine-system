@@ -86,7 +86,6 @@ class CustomersController extends Controller
                 if ($request->exists('thumbnail') && !empty($customerRequest['thumbnail'])) {
                     $customerRequest['thumbnail'] = uploadFile($customerRequest['thumbnail'], config('upload.customer'));
                 }
-                $customerRequest['dob'] = $customerRequest['dob'] ? date('Y-m-d', strtotime($customerRequest['dob'])) : null;
                 $this->customer->create($customerRequest);
                 return \Redirect::route('customer.index')
                     ->with('success',__('flash.store'));
@@ -172,7 +171,6 @@ class CustomersController extends Controller
                 if (!empty($request->thumbnail)) {
                     $customerRequest['thumbnail'] = uploadFile($request->thumbnail, config('upload.customer'));
                 }
-                $customerRequest['dob'] =  $customerRequest['dob'] ? date('Y-m-d', strtotime($customerRequest['dob'])) : null;
                 $customer->update($customerRequest);
                 return \Redirect::route('customer.index')
                     ->with('warning',__('flash.update'));

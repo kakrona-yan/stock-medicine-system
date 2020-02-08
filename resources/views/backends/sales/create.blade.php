@@ -146,9 +146,9 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="money_owed">Note</label>
+                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="note">Note</label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-                                                    <textarea class="form-control" name="note">{{ old('dob', $request->note) }}</textarea>
+                                                    <textarea class="form-control" name="note">{{ old('note', $request->note) }}</textarea>
                                                 </div>
                                             </div>
                                         </fieldset>
