@@ -195,7 +195,7 @@
         $("#category_id").select2({
             allowClear: false
         }).on('select2:select', function (e) {
-            let routeUrl = "{{config('app.url')}}/admin/sales/product";
+            let routeUrl = "{{config('app.url')}}/sales/product";
             let category_id = e.params.data.id;
             $.ajax({
                 url     : routeUrl,
