@@ -32,7 +32,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div id="addsupplier" class="tab-pane active">
-                            <form class="form-main" action="{{route('sale.update', $sale->id)}}" method="POST" enctype="multipart/form-data">
+                            <form class="form-main" action="{{route('sale.update', $sale)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group w-100 d-inline-flex justify-content-end">
                                     <button type="submit" class="btn btn-circle btn-primary w-25 mr-2">Save</button>
@@ -105,30 +105,58 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 mb-3 mt-md-2">
+                                        <fieldset class="edit-master-registration-fieldset">
+                                            <legend class="edit-application-information-legend text-left">Sale Product:</legend>
+                                            <div class="table-responsive cus-table">
+                                            <table class="table table-striped table-bordered">
+                                                <thead class="bg-primary text-light">
+                                                    <tr>
+                                                        <th style="width: 50px;">#</th>
+                                                        <th>Product Name</th>
+                                                        <th>Quantity</th>
+                                                        <th>Product Free</th>
+                                                        <th>Unit Price</th>
+                                                        <th>Total</th>
+                                                        <th style="width: 20px;">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="dynamic_sale_product">
+
+                                                </tbody>
+                                            </table>
+                                        </fieldset>
+                                    </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                                         <fieldset class="edit-master-registration-fieldset">
                                             <legend class="edit-application-information-legend text-left">Payment:</legend>
                                             <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="total_quantity">Total Quantity</label>
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-                                                    <input type="text" class="form-control" id="total_quantity" name="total_quantity" readonly="" value="{{ old('total_quantity', $sale->total_quantity ? $sale->total_quantity : 0) }}">
+                                                <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_quantity">Total Quantity = Quantities + Product Frees</label>
+                                                <div class="col-12 col-sm-12 col-md-4">
+                                                    <input type="text" class="form-control" id="total_quantity" name="total_quantity" readonly="" value="{{ old('total_quantity', $sale->total_quantity ? $sale->total_quantity : 0) }}"><span></span>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-4">
+                                                    <input type="text" class="form-control" id="quantities" readonly="" value="0">
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-md-4">
+                                                    <input type="text" class="form-control" id="productFrees" readonly="" value="0">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="total_amount">Total Amount</label>
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+                                                <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_amount">Total Amount</label>
+                                                <div class="col-12 col-sm-12 col-md-12">
                                                     <input type="text" class="form-control" id="total_amount" name="total_amount" readonly="" value="{{ old('total_amount', $sale->total_amount ? $sale->total_amount : 0) }}">
                                                 </div>
                                             </div>
                                              <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="total_discount">Dicount</label>
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+                                                <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_discount">Dicount</label>
+                                                <div class="col-12 col-sm-12 col-md-12">
                                                     <input type="text" class="form-control" id="total_discount" name="total_discount" value="{{ old('dototal_discountb', $sale->total_discount ? $sale->total_discount : 0) }}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="total_money_revice">Received Amount<span class="text-danger">*</span></label>
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+                                                <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_money_revice">Received Amount<span class="text-danger">*</span></label>
+                                                <div class="col-12 col-sm-12 col-md-12 ">
                                                     <input type="text" class="form-control {{ $errors->has('money_change') ? ' is-invalid' : '' }}" id="total_money_revice" name="money_change" value="{{ old('money_change', $sale->money_change ? $sale->money_change : 0) }}"
                                                         oninput="calculatorMoney(this)"
                                                     >
@@ -153,27 +181,6 @@
                                             </div>
                                         </fieldset>
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 mb-3 mt-md-2">
-                                        <fieldset class="edit-master-registration-fieldset">
-                                            <legend class="edit-application-information-legend text-left">Sale Product:</legend>
-                                            <div class="table-responsive cus-table">
-                                            <table class="table table-striped table-bordered">
-                                                <thead class="bg-primary text-light">
-                                                    <tr>
-                                                        <th style="width: 50px;">#</th>
-                                                        <th>Product Name</th>
-                                                        <th>Quantity</th>
-                                                        <th>Unit Price</th>
-                                                        <th>Total</th>
-                                                        <th style="width: 20px;">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="dynamic_sale_product">
-
-                                                </tbody>
-                                            </table>
-                                        </fieldset>
-                                    </div>
                                 </div>
                             </form><!--/form-main-->
                         </div><!--/tab-add-category-->
@@ -195,7 +202,7 @@
         $("#category_id").select2({
             allowClear: false
         }).on('select2:select', function (e) {
-            let routeUrl = "{{config('app.url')}}RRPS-PHAMAt";
+            let routeUrl = "{{config('app.url')}}/sales/product";
             let category_id = e.params.data.id;
             $.ajax({
                 url     : routeUrl,
@@ -262,14 +269,17 @@
     }
 
     var i = 0;
-    var totalQuantity = 0;
+    // var totalQuantity = 0;
     var totalAmount = 0;
-    
+    var amountProductFree = 0;
+    var amountQuantity = 0;
+
     function checkSaleProduct(id, title, price) {
         let html = '<tr id="sale_product_'+id+'">';
             html += '<td><input type="hidden" class="form-control" name="sale_product['+i+'][product_id]" value="'+id+'"/>'+id+'</td>';
             html += '<td><input type="text" class="form-control" value="'+title+'" readonly/></td>';
             html += '<td><input type="number" min="0" id="quantity_'+id+'" data-id="'+id+'" data-quantity="1" class="form-control" name="sale_product['+i+'][quantity]" value="1" oninput="updateQuantity(this)"/></td>';
+            html += '<td><input type="number" min="0" id="productFree_'+id+'" data-id="'+id+'" data-productFree="0" class="form-control" name="sale_product['+i+'][product_free]" value="0" oninput="updateProductFree(this)"/></td>';
             html += '<td><input type="text" min="0" id="rate_'+id+'" data-id="'+id+'" data-rate="'+price+'" class="form-control" name="sale_product['+i+'][rate]" value="'+price+'" oninput="updateRate(this)"/></td>';
             html += '<td><input type="text" id="amount_'+id+'" class="form-control" name="sale_product['+i+'][amount]" value="'+price+'" readonly /></td>';
             html += '<td class="text-center">';
@@ -281,9 +291,15 @@
         // calculator
         let quantity = $('#quantity_'+id).val();
         let rate = $('#rate_'+id).val();
+        let productFree = $('#productFree_'+id).val();
         let amount = quantity * rate;
-        totalQuantity +=Number(quantity);
+        
+        amountQuantity +=Number(quantity);
+        amountProductFree += Number(productFree);
         totalAmount += Number(amount);
+        $('#quantities').val(amountQuantity);
+        $('#productFrees').val(amountProductFree);
+        let totalQuantity = amountQuantity + amountProductFree;
         $('input[name="total_quantity"]').val(totalQuantity);
         $('input[name="total_amount"]').val(totalAmount);
         i++;
@@ -294,13 +310,15 @@
         let id = $(this).attr("data-id");
         let quantity = $('#quantity_'+id).val();
         let amount = $('#amount_'+id).val();  
-        let totalQuantityPayment = $('input[name="total_quantity"]').val();
+        let totalQuantityPayment = $('#qunatities').val();
         let totalAmountPayment = $('input[name="total_amount"]').val();
         totalQuantityPayment = Number(totalQuantityPayment) - Number(quantity);
         totalAmountPayment = Number(totalAmountPayment) - Number(amount);
-        $('input[name="total_quantity"]').val(totalQuantityPayment);
+        $('#qunatities').val(totalQuantityPayment);
+        let totalQuantity = totalQuantityPayment + amountProductFree;
+        $('input[name="total_quantity"]').val(totalQuantity);
         $('input[name="total_amount"]').val(totalAmountPayment);
-        totalQuantity = totalQuantityPayment;
+        amountQuantity = totalQuantityPayment;
         totalAmount = totalAmountPayment;
         $('#sale_product_'+id).remove();
         $('#product_'+id).prop('checked', false);
@@ -315,19 +333,22 @@
         let rate = $('#rate_'+id).val();
         let oldAmount =$('#amount_'+id).val();
         // Payment
-        let totalQuantityPayment = $('input[name="total_quantity"]').val();
+        let totalQuantityPayment = $('#quantities').val();
         let totalAmountPayment = $('input[name="total_amount"]').val();
         let amount = quantity * rate;
-        totalQuantityPayment = totalQuantityPayment - Number(oldQuantity)
+
+        totalQuantityPayment = totalQuantityPayment - Number(oldQuantity);
         totalQuantityPayment += Number(quantity);
         totalAmountPayment = totalAmountPayment - Number(oldAmount);
         totalAmountPayment += Number(amount);
+        let totalQuantity =  totalQuantityPayment + amountProductFree;
         // output value
-        $('input[name="total_quantity"]').val(totalQuantityPayment);
+        $('#quantities').val(totalQuantityPayment)
+        $('input[name="total_quantity"]').val(totalQuantity);
         $('input[name="total_amount"]').val(totalAmountPayment);
         $('#amount_'+id).val(amount);
         $(data).attr('data-quantity', quantity);
-        totalQuantity = totalQuantityPayment;
+        amountQuantity = totalQuantityPayment;
         totalAmount = totalAmountPayment;
     }
     // update Rate 
@@ -354,6 +375,23 @@
         let totalAmountPayment = $('input[name="total_amount"]').val();
         let moneyOwed = Number(totalAmountPayment) - Number(revicePrice);
         $("#money_owed").val(moneyOwed);
+    }
+    // updateProductFree
+    function updateProductFree(data) {
+        let id = $(data).attr("data-id");
+        let productFree = $('#productFree_'+id).val();
+        let oldProductFree = $(data).attr("data-productFree");
+        // Payment
+        let productFreePayment = $('#productFrees').val();
+        productFreePayment = Number(productFreePayment) - Number(oldProductFree)
+        productFreePayment += Number(productFree);
+        let totalQuantityPayment = amountQuantity + productFreePayment
+        // output value
+        $('#productFrees').val(productFreePayment);
+        $('input[name="total_quantity"]').val(totalQuantityPayment);
+        $(data).attr('data-productFree', productFree);
+        amountProductFree = productFreePayment;
+        
     }
 </script>
 @endpush

@@ -11,6 +11,7 @@ class SaleProduct extends Model
         'product_id',
         'rate',
         'quantity',
+        'product_free',
         'amount',
         'discount',
         'discount_type',
