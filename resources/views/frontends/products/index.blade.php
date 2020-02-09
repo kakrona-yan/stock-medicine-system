@@ -8,7 +8,7 @@
         <!-- For demo purpose -->
         <div class="row text-center text-white mb-5">
           <div class="col-lg-7 mx-auto">
-            <h1 class="display-4 font-weight-bold"><i class="fas fa-user-md"></i> MEDECIN LIST</h1>
+            <h1 class="display-4 font-weight-bold"><i class="fas fa-user-md"></i> MEDECIN LIST <i class="fas fa-user-md"></i></h1>
           </div>
         </div>
         <!-- End -->
