@@ -105,6 +105,27 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 mb-3 mt-md-2">
+                                        <fieldset class="edit-master-registration-fieldset">
+                                            <legend class="edit-application-information-legend text-left">Sale Product:</legend>
+                                            <div class="table-responsive cus-table">
+                                            <table class="table table-striped table-bordered">
+                                                <thead class="bg-primary text-light">
+                                                    <tr>
+                                                        <th style="width: 50px;">#</th>
+                                                        <th>Product Name</th>
+                                                        <th>Quantity</th>
+                                                        <th>Unit Price</th>
+                                                        <th>Total</th>
+                                                        <th style="width: 20px;">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="dynamic_sale_product">
+
+                                                </tbody>
+                                            </table>
+                                        </fieldset>
+                                    </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                                         <fieldset class="edit-master-registration-fieldset">
                                             <legend class="edit-application-information-legend text-left">Payment:</legend>
@@ -153,27 +174,6 @@
                                             </div>
                                         </fieldset>
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 mb-3 mt-md-2">
-                                        <fieldset class="edit-master-registration-fieldset">
-                                            <legend class="edit-application-information-legend text-left">Sale Product:</legend>
-                                            <div class="table-responsive cus-table">
-                                            <table class="table table-striped table-bordered">
-                                                <thead class="bg-primary text-light">
-                                                    <tr>
-                                                        <th style="width: 50px;">#</th>
-                                                        <th>Product Name</th>
-                                                        <th>Quantity</th>
-                                                        <th>Unit Price</th>
-                                                        <th>Total</th>
-                                                        <th style="width: 20px;">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="dynamic_sale_product">
-
-                                                </tbody>
-                                            </table>
-                                        </fieldset>
-                                    </div>
                                 </div>
                             </form><!--/form-main-->
                         </div><!--/tab-add-category-->
@@ -195,7 +195,7 @@
         $("#category_id").select2({
             allowClear: false
         }).on('select2:select', function (e) {
-            let routeUrl = "{{config('app.url')}}/sales/product";
+            let routeUrl = "{{config('app.url')}}/admin/sales/product";
             let category_id = e.params.data.id;
             $.ajax({
                 url     : routeUrl,

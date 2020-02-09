@@ -44,6 +44,13 @@ class Sale extends BaseModel
     {
         $sales = $this->where('is_delete', '<>', DeleteStatus::DELETED)
             ->orderBy('id', 'DESC');
+        // login of staff
+        if(\Auth::user()->isRoleStaff()) {
+            $staffId = \Auth::user()->staff ? \Auth::user()->staff->id : \Auth::id();
+            $sales->where('staff_id', $staffId)
+                ->whereYear('sale_date', date('Y'))
+                ->whereMonth('sale_date', date('m'));
+        }
         // Check flash danger
         flashDanger($sales->count(), __('flash.empty_data'));
         $limit = config('pagination.limit');
