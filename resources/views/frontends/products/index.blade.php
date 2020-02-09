@@ -18,14 +18,14 @@
             <ul class="list-group shadow">
                 <li class="list-group-item">
                     <form id="product-search" action="{{ route('product_rrps') }}" method="GET" class="form form-horizontal form-search form-inline mb-2">
-                        <div class="d-flex align-items-center justify-content-between mt-1">
-                        <div class="form-group mb-2 mr-2">
+                        <div class="d-md-flex align-items-center justify-content-between mt-1">
+                        <div class="form-group mb-2">
                             <input type="text" class="form-control mr-1" id="title" 
                                 name="title" value="{{ old('title', $request->title)}}"
                                 placeholder="title"
                             >
                         </div>
-                        <div class="form-group mb-2 mr-3 select-group" style="width:180px;">
+                        <div class="form-group mb-2 select-group pr-md-1 pl-md-1 d-inline-flex" style="width:180px;">
                             <select class="form-control w-100" id="category_id" name="category_id" >
                                 <option value="">Please select</option>
                                 @foreach($categories as $id => $name)
@@ -33,7 +33,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group mb-2">
+                        <div class="form-group mb-2 d-inline-flex">
                             <button type="submit" class="btn btn-circle btn-primary"><i class="fa fa-search mr-2"></i> @lang('button.search')</button>
                         </div>
                         </div>
@@ -80,7 +80,7 @@
                             </ul>
                         </div>
                       </div>
-                      <img src="{{$product->thumbnail? asset(getUploadUrl($product->thumbnail, config('upload.product'))) : asset('images/no-thumbnail.jpg') }}" width="200" class="ml-lg-5 order-1 order-lg-2"" alt="{{$product->title}}">
+                      <img src="{{$product->thumbnail? asset(getUploadUrl($product->thumbnail, config('upload.product'))) : asset('images/no-thumbnail.jpg') }}" width="200" class="ml-lg-5 order-1 order-lg-2 mb-2" alt="{{$product->title}}">
                     </div>
                     <!-- End -->
                   </li>
