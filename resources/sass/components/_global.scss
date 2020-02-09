@@ -18,11 +18,14 @@
   font-family: "NationalCartoon";
   src:  url('../fonts/NationalCartoon.ttf');
 }
-html {
+html, body {
   position: relative;
   min-height: 100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #545454;
 }
-
 body {
   font-size: 16px;
   height: 100%;

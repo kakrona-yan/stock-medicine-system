@@ -34,7 +34,7 @@
                             </select>
                         </div>
                         <div class="form-group mb-2">
-                            <button type="submit" class="btn btn-circle btn-primary"><i class="fa fa-search"></i> @lang('button.search')</button>
+                            <button type="submit" class="btn btn-circle btn-primary"><i class="fa fa-search mr-2"></i> @lang('button.search')</button>
                         </div>
                         </div>
                         <div class="form-group d-block w-100">
@@ -70,7 +70,7 @@
                         </p>
                         <div class="d-flex align-items-center justify-content-between mt-1">
                             
-                            <div class="prince text-danger">${{$product->price}}</div>
+                            <div class="prince text-danger font-weight-bold">USA {{$product->price}}</div>
                             <ul class="list-inline small">
                                 <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
                                 <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
