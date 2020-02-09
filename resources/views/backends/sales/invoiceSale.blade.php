@@ -66,9 +66,6 @@
             width: 100%;
             margin-bottom: 5px;
         }
-        .table-bordered {
-            border: 1px solid #e3e6f0;
-        }
         .table th, .table td {
             padding: 6px;
             vertical-align: top;
@@ -173,7 +170,7 @@
                 <tr>
                     <th>Product</th>
                     <th>Quantity</th>
-                    <th>ProductFree</th>
+                    <th>Product Free</th>
                     <th>Rate</th>
                     <th>Amount</th>
                 </tr>
@@ -192,17 +189,19 @@
             <tfoot>
                 <tr>
                     <td colspan="4" class="text-right">Total</td>
-                    <td class="text-right">USA {{money_format('%.2n', $sale->total_amount)}}</td>
+                    <td class="text-right">
+                        USA {{money_format('%.2n', $sale->total_amount)}}
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="text-right"><strong>Receive Product Amount :</strong></td>
-                    <td class="text-right" style="background:#b9b9b9">
+                    <td colspan="4" class="text-right" style="border: none;"><strong>Receive Product Amount :</strong></td>
+                    <td class="text-right">
                         <input type="text" class="form-control" name="receive_money" accept="application/pdf">
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="text-right"><strong>Pay Amount </strong></td>
-                    <td class="text-right" style="background:#b9b9b9">
+                    <td colspan="4" class="text-right" style="border: none;"><strong>Pay Amount </strong></td>
+                    <td class="text-right">
                         <input type="text" class="form-control" name="pay_amount" accept="application/pdf">
                     </td>
                 </tr>

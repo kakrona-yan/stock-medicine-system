@@ -1,5 +1,12 @@
 @extends('backends.layouts.master')
 @section('title', 'Create Sale Product')
+<style>
+    .span-p{
+        position: absolute;
+        right: -4px;
+        top: 5px;
+    }
+</style>
 @section('content')
 <div id="category-list">
     <!-- Page Heading -->
@@ -131,12 +138,14 @@
                                         <fieldset class="edit-master-registration-fieldset">
                                             <legend class="edit-application-information-legend text-left">Payment:</legend>
                                             <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_quantity">Total Quantity = Quantities + ProductFrees</label>
+                                                <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_quantity">Total Quantity = Quantities + Product Frees</label>
                                                 <div class="col-12 col-sm-12 col-md-4">
-                                                    <input type="text" class="form-control" id="total_quantity" name="total_quantity" readonly="" value="{{ old('total_quantity', $request->total_quantity ? $request->total_quantity : 0) }}"><span></span>
+                                                    <input type="text" class="form-control" id="total_quantity" name="total_quantity" readonly="" value="{{ old('total_quantity', $request->total_quantity ? $request->total_quantity : 0) }}">
+                                                    <span class="span-p">=</span>
                                                 </div>
                                                 <div class="col-12 col-sm-12 col-md-4">
                                                     <input type="text" class="form-control" id="quantities" readonly="" value="0">
+                                                    <span class="span-p">+</span>
                                                 </div>
                                                 <div class="col-12 col-sm-12 col-md-4">
                                                     <input type="text" class="form-control" id="productFrees" readonly="" value="0">
@@ -181,6 +190,10 @@
                                             </div>
                                         </fieldset>
                                     </div>
+                                </div>
+                                <div class="form-group w-100 d-inline-flex justify-content-end mt-5">
+                                    <button type="submit" class="btn btn-circle btn-primary w-25 mr-2">Save</button>
+                                    <a href="{{route('sale.index')}}" class="btn btn-circle btn-secondary w-25">back</a>
                                 </div>
                             </form><!--/form-main-->
                         </div><!--/tab-add-category-->
@@ -309,16 +322,25 @@
         e.preventDefault();
         let id = $(this).attr("data-id");
         let quantity = $('#quantity_'+id).val();
-        let amount = $('#amount_'+id).val();  
-        let totalQuantityPayment = $('#qunatities').val();
+        let amount = $('#amount_'+id).val();
+        let productFree = $('#productFree_'+id).val();
+        let totalQuantityPayment = $('#quantities').val();
+        let totalProductFreePayment = $('#productFrees').val();
         let totalAmountPayment = $('input[name="total_amount"]').val();
+
         totalQuantityPayment = Number(totalQuantityPayment) - Number(quantity);
+        totalProductFreePayment = Number(totalProductFreePayment) - Number(productFree);
         totalAmountPayment = Number(totalAmountPayment) - Number(amount);
-        $('#qunatities').val(totalQuantityPayment);
-        let totalQuantity = totalQuantityPayment + amountProductFree;
+
+        let totalQuantity = totalQuantityPayment + totalProductFreePayment;
+
+        $('#quantities').val(totalQuantityPayment);
+        $('#productFrees').val(totalProductFreePayment);
         $('input[name="total_quantity"]').val(totalQuantity);
         $('input[name="total_amount"]').val(totalAmountPayment);
+
         amountQuantity = totalQuantityPayment;
+        amountProductFree = totalProductFreePayment;
         totalAmount = totalAmountPayment;
         $('#sale_product_'+id).remove();
         $('#product_'+id).prop('checked', false);
