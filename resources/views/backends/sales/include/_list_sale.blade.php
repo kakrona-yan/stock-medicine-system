@@ -78,6 +78,7 @@
                                                 <tr class="border-sale">
                                                     <td class="w-47">{{$productSale->product ? $productSale->product->title : '' }}</td>
                                                     <td>{{$productSale->quantity}}</td>
+                                                    <td>{{$productSale->product_free}}</td>
                                                     <td>{{$productSale->rate}}</td>
                                                     <td>{{$productSale->amount}}</td>
                                                 </tr>

@@ -114,7 +114,8 @@ class SalesController extends Controller
                                 'sale_id'       => $sale->id,
                                 'product_id'    => $saleProduct['product_id'],
                                 'rate'          => $saleProduct['rate'],
-                                'quantity'      => $saleProduct['quantity'], 
+                                'quantity'      => $saleProduct['quantity'],
+                                'product_free'  => $saleProduct['product_free'],
                                 'amount'        => $saleProduct['amount']
                             ]);
                         }

@@ -173,23 +173,17 @@
                 <tr>
                     <th>Product</th>
                     <th>Quantity</th>
+                    <th>ProductFree</th>
                     <th>Rate</th>
                     <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
-            @php
-                $total = 0;
-                $totalQuantity=0;
-            @endphp
             @foreach ($sale->productSales as $productSale)
-                @php
-                    $total +=$productSale->amount;
-                    $totalQuantity +=$productSale->quantity;
-                @endphp
                 <tr>
                     <td style="width:340px;">{{$productSale->product ? $productSale->product->title : '' }}</td>
                     <td class="text-right">{{$productSale->quantity}}</td>
+                    <td class="text-right">{{$productSale->product_free}}</td>
                     <td class="text-right">{{$productSale->rate}}</td>
                     <td class="text-right">{{$productSale->amount}}</td>
                 </tr>
