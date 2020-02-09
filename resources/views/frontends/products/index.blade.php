@@ -59,7 +59,7 @@
                     <div class="media align-items-lg-center flex-column flex-lg-row p-1">
                         <div class="media-body order-2 order-lg-1">
                         <h5 class="mt-0 font-weight-bold mb-2">
-                          <i class="fas fa-capsules text-success"></i> {{$product->title}}
+                            <i class="fas fa-capsules text-success"></i> {{$product->id}}. {{$product->title}}
                         </h5>
                         <p style="font-size: 12px;">
                             <i class="fas fa-bullhorn mr-1 text-blue-100"></i>

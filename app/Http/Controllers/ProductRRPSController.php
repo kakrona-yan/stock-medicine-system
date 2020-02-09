@@ -21,8 +21,7 @@ class ProductRRPSController extends Controller
     public function pageProduct(Request $request)
     {
         try {
-            $products = $this->product->where('is_delete', '<>', DeleteStatus::DELETED)
-            ->orderBy('id', 'DESC');
+            $products = $this->product->where('is_delete', '<>', DeleteStatus::DELETED);
             // Check flash danger
             flashDanger($products->count(), __('flash.empty_data'));
             $limit = config('pagination.limit');
