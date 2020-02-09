@@ -42,8 +42,7 @@ class Sale extends BaseModel
 
     public function filter($request)
     {
-        $sales = $this->where('is_delete', '<>', DeleteStatus::DELETED)
-            ->orderBy('id', 'DESC');
+        $sales = $this->where('is_delete', '<>', DeleteStatus::DELETED);
         // login of staff
         if(\Auth::user()->isRoleStaff()) {
             $staffId = \Auth::user()->staff ? \Auth::user()->staff->id : \Auth::id();

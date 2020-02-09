@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <title>RRPS-PHAMA | MEDECIN LIST</title>
     @include('backends.partials.head')
+    <style>
+        .display-5.font-weight-bold {
+            width: 100px;
+            height: 100px;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50px;
+            color: #0dc6d3;
+            position: absolute;
+            right: 0px;
+            z-index: 99;
+            top: -10px;
+        }
+    </style>
 </head>
+
 <body class="list-product">
     <div class="container py-5">
         <!-- For demo purpose -->
         <div class="row text-center text-white mb-5">
-          <div class="col-lg-7 mx-auto">
+          <div class="col-lg-8 mx-auto">
             <h1 class="display-4 font-weight-bold"><i class="fas fa-user-md"></i> MEDECIN LIST <i class="fas fa-user-md"></i></h1>
           </div>
         </div>
         <!-- End -->
         <div class="row">
           <div class="col-lg-8 mx-auto">
+            <p class="text-right mb-3"><a class="display-5 font-weight-bold" href="{{route('dashboard')}}"><i class="fas fa-home mr-1"></i> Home</a></p>
             <!-- List group-->
             <ul class="list-group shadow">
                 <li class="list-group-item">
