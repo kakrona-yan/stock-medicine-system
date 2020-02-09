@@ -65,6 +65,6 @@ abstract class BaseModel extends Model
         $lastest =  $model->select('id')
             ->orderBy('id', 'DESC')->first();
         $digits = $lastest ? $lastest->id + $num : $num;
-        return date('d/m') ."/".str_pad($digits, 4, '0', STR_PAD_LEFT);
+        return date('d/m') ."/A".$digits;
     }
 }
