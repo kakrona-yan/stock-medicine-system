@@ -1,5 +1,6 @@
 @extends('backends.layouts.master')
-@section('title', 'Glass care | shop')
+@section('title', 'RRPS-PHAMA
+TOTAL PRODUCTS')
 @section('content')
 <div id="dashboard">
     <!-- Page Heading -->

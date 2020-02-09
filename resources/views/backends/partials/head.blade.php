@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://RRPS-PHAMA-shop.com/" />
 <meta property="og:image" content="https://RRPS-PHAMA-shop.com/theme/img/logo.png"/>
 <meta property="og:site_name" content="RRPS-PHAMA shop" />
-<link rel="icon" href="{{ URL('theme/img/favicon.png') }}" type="image/x-icon"/>
+<link rel="icon" href="{{ URL('/images/favicon.png') }}" type="image/x-icon"/>
 <!-- Fonts -->
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
