@@ -191,17 +191,17 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3" class="text-right">Total</td>
+                    <td colspan="4" class="text-right">Total</td>
                     <td class="text-right">USA {{money_format('%.2n', $sale->total_amount)}}</td>
                 </tr>
                 <tr>
-                    <td colspan="3" class="text-right"><strong>Receive Product Amount :</strong></td>
+                    <td colspan="4" class="text-right"><strong>Receive Product Amount :</strong></td>
                     <td class="text-right" style="background:#b9b9b9">
                         <input type="text" class="form-control" name="receive_money" accept="application/pdf">
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" class="text-right"><strong>Pay Amount </strong></td>
+                    <td colspan="4" class="text-right"><strong>Pay Amount </strong></td>
                     <td class="text-right" style="background:#b9b9b9">
                         <input type="text" class="form-control" name="pay_amount" accept="application/pdf">
                     </td>

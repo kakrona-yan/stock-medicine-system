@@ -63,6 +63,7 @@
                                                 <tr>
                                                     <th class="text-primary">Product Name</th>
                                                     <th class="text-primary">Quantity</th>
+                                                    <th class="text-primary">Product Free</th>
                                                     <th class="text-primary">Rate</th>
                                                     <th class="text-primary">Amount</th>
                                                 </tr>
