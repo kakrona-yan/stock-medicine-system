@@ -29,7 +29,6 @@ class DashboardController extends Controller
         $staffCount = \App\Models\Staff::count();
         $customerCount = \App\Models\Customer::count();
         $categoryCount = \App\Models\Category::count();
-        $newsCount = \App\Models\News::count();
         $products = $this->product->where('is_delete', '<>', DeleteStatus::DELETED)
             ->orderBy('id', 'desc')
             ->paginate(6);
@@ -63,7 +62,6 @@ class DashboardController extends Controller
             'staffCount' => $staffCount,
             'customerCount' => $customerCount,
             'categoryCount' => $categoryCount,
-            'newsCount' => $newsCount,
             'sales' => $sales,
             'salesCount' => $salesCount,
             'salesCountMonthlyByUser' => $salesCountMonthlyByUser

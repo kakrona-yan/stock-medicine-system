@@ -97,28 +97,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card">
-                <div class="card-header text-white bg-warning">
-                    <div class="font-weight-bold">
-                        <span>Total News</span>
-                    </div>
-                </div>
-                <div class="card-block py-0 px-4 b-t-1">
-                    <div class="row">
-                        <div class="col-4 b-r-1 py-3">
-                            <a href="{{route('news.index')}}"><i class="fas fa-newspaper fa-1x text-warning"></i></a>
-                        </div>
-                        <div class="col-8 py-3 text-right">
-                            <div class="font-weight-bold">{{$newsCount}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer px-3 py-2">
-                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('news.index')}}">View More <i class="fa fa-angle-right float-right font-lg"></i></a>
-                </div>
-            </div>
-        </div>
         @endif
         <!-- Sale -->
         @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
