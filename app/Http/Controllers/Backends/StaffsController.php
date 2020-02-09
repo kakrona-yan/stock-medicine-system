@@ -180,7 +180,7 @@ class StaffsController extends Controller
             $email = $request->email;
             $ruleEmail = '';
             if ($email && !empty($email)) {
-                $ruleEmail = 'email|unique:staffs|unique:users,email,' . $id;
+                $ruleEmail = 'email|unique:staffs,email,' . $id;
             }
             $rules = [
                 'firstname' => 'required',
