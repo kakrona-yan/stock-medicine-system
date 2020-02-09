@@ -25,7 +25,7 @@
                                 placeholder="title"
                             >
                         </div>
-                        <div class="form-group mb-2 select-group pr-md-1 pl-md-1 d-inline-flex" style="width:180px;">
+                        <div class="form-group mb-2 select-group pr-md-1 pl-md-1 d-inline-flex" style="max-width: 280px;width: 100%;">
                             <select class="form-control w-100" id="category_id" name="category_id" >
                                 <option value="">Please select</option>
                                 @foreach($categories as $id => $name)
@@ -85,7 +85,7 @@
                     <!-- End -->
                   </li>
                 @endforeach
-                <li class="list-group-item">
+                <li class="list-group-item d-flex justify-content-center">
                     {{ $products->appends(request()->query())->links() }}
                 </li>
             </ul>
