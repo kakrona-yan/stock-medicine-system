@@ -87,7 +87,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr class="border-sale--top">
-                                                    <td colspan="3" class="text-right text-primary">Total</td>
+                                                    <td colspan="4" class="text-right text-primary">Total</td>
                                                     <td>{{$total}}</td>
                                                 </tr>
                                             </tfoot>
