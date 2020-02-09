@@ -128,3 +128,7 @@ Route::group(
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
+/**
+ * Routes for FrontEnds
+ */
+Route::get('/list_medecin', 'ProductRRPSController@pageProduct')->name('product_rrps');

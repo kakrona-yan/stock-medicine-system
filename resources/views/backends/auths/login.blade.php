@@ -59,6 +59,9 @@
                         </div>
                         <button type="submit" class="btn btn-circle btn-pink btn-cicle btn-block">Login</button>
                     </form>
+                    <div class="text-success text-right">
+                        <a href="{{route('product_rrps')}}" target="_blank"><i class="fas fa-user-md"></i> LIST PRODUCR</a>
+                    </div>
                 </div>
                 </div>
             </div>
