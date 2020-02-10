@@ -128,7 +128,7 @@
                         <tbody>
                         <tr>
                             <td style="height:98px;">
-                                <p　style="font-family: 'KhmerOSBattambang', 'Roboto', sans-serif;">
+                                <p>
                                     {{ $sale->customer ? $sale->customer->name : '' }}
                                 </p>
                                 <p>
