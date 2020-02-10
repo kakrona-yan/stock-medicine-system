@@ -28,12 +28,12 @@
             color: #333;
             text-align: left;
             line-height: 24px;
-            font-family: Roboto, serif"dejavu sans", serif !important;
+            font-family: KhmerOSBattambang, DejaVu Sans,sans-serif;
             font-size: 14px;
         }
         div,
         p{
-            font-family: "dejavu sans", serif !important;
+            font-family: KhmerOSBattambang, DejaVu Sans,sans-serif;
         }
         a {
             color: #fff;
@@ -106,7 +106,7 @@
     </style>
 
 </head>
-<body style="font-family: KhmerOSBattambang, sans-serif !important;">
+<body>
     <div class="container mt-5">
         <div class="company-info mb-3">
             <div class="company-info--name">
