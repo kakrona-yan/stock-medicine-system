@@ -165,9 +165,9 @@ class SalesController extends Controller
             if (!$sale) {
                 return response()->view('errors.404', [], 404);
             }
-            return view('backends.sales.invoiceSale', [
-                'sale' => $sale,
-            ]);
+            // return view('backends.sales.invoiceSale', [
+            //     'sale' => $sale,
+            // ]);
             $dateSale = date('Y-m-d', strtotime($sale->sale_date));
             $pdfName = "{$sale->customer->name}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
             $pdfSale = PDF::loadView('backends.sales.invoiceSale', ['sale' => $sale]);

@@ -46,8 +46,7 @@ class Product extends BaseModel
     
     public function filter($request)
     {
-        $products = $this->where('is_delete', '<>', DeleteStatus::DELETED)
-            ->orderBy('id', 'DESC');
+        $products = $this->where('is_delete', '<>', DeleteStatus::DELETED);
         // Check flash danger
         flashDanger($products->count(), __('flash.empty_data'));
         $limit = config('pagination.limit');

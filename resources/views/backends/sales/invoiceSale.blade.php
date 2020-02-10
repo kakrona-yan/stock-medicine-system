@@ -193,7 +193,7 @@
                 <tr>
                     <td colspan="4" class="text-right">Total</td>
                     <td class="text-right">
-                        USA {{money_format('%.2n', $sale->total_amount)}}
+                        USA {{currencyFormat($sale->total_amount)}}
                     </td>
                 </tr>
                 <tr>

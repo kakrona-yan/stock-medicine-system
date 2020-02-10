@@ -33,6 +33,7 @@
                     <table class="table table-striped table-bordered">
                         <thead class="bg-primary text-light">
                             <tr>
+                                <th>#</th>
                                 <th>{{ __('product.list.thumbnail') }}</th>
                                 <th>{{ __('product.list.product_title') }}</th>
                                 <th>{{ __('product.list.category') }}</th>
@@ -47,6 +48,7 @@
                         <tbody>
                         @foreach ($products as $product)
                             <tr>
+                                <td><i class="fas fa-capsules text-success"></i> {{$product->id}}</td>
                                 <td class="text-center">
                                     <div class="d-flex justify-content-center">
                                         <div class="thumbnail-cicel">
