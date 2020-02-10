@@ -189,7 +189,7 @@ class SalesController extends Controller
             }
             $dateSale = date('Y-m-d', strtotime($sale->sale_date));
             $pdfName = "{$sale->customer->name}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
-            def("DOMPDF_UNICODE_ENABLED", true);
+            
             $pdfSale = PDF::loadView('backends.sales.invoiceSale', ['sale' => $sale], 'UTF-8');
             
             $pdfSale->setPaper('a4');
@@ -198,7 +198,7 @@ class SalesController extends Controller
             return exceptionError($e, 'backends.sales.index');
         }
     }
-    
+
     public static function loadView( $view, $data = [], $mergeData = [], $encoding = null ) {
 		$html = view( $view, $data, $mergeData )->render();
 		$html = preg_replace( '/>\s+</', '><', $html );
