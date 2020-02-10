@@ -128,7 +128,7 @@
                         <tr>
                             <td style="height:98px;">
                                 <p>
-                                    {!! $sale->customer ? $sale->customer->name : '' !!}
+                                    {{ mb_convert_encoding($sale->customer ? $sale->customer->name : '' , 'HTML-ENTITIES', 'UTF-8') }}
                                 </p>
                                 <p>
                                     {{ $sale->customer ? $sale->customer->phone1 : '' }}
