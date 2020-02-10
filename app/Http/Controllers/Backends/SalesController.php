@@ -199,7 +199,7 @@ class SalesController extends Controller
         }
     }
 
-    public static function loadView( $view, $data = [], $mergeData = [], $encoding = null ) {
+    public static function loadView( $view, $data = [], $encoding = null ) {
 		$html = view( $view, $data, $mergeData )->render();
 		$html = preg_replace( '/>\s+</', '><', $html );
         dd($html);
