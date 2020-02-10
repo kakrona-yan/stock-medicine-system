@@ -192,7 +192,7 @@ class SalesController extends Controller
             
             // $pdfSale = PDF::loadView('backends.sales.invoiceSale', ['sale' => $sale]);
             // Send data to the view using loadView function of PDF facade
-            $view = view('element.pdf', ['sale' => $sale]);
+            $view = view('backends.sales.invoiceSale', ['sale' => $sale]);
             $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
             $html_decode = html_entity_decode($html);
             dd($html_decode);
