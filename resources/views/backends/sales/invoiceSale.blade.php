@@ -113,7 +113,7 @@
             </div>
             <div class="company-info--address">
                 <p style="font-family: 'Roboto', sans-serif;">Address : NO. 01, ST. 182, SANGKAT VIEL VONG, Khan 7  Makara, Phnom Penh</p>
-                <p>Tel     : 093 399 330 </p>
+                <p　style="font-family: 'Roboto', sans-serif;">Tel     : 093 399 330 </p>
             </div>
         </div>
         <table class="table">
@@ -122,13 +122,13 @@
                     <table class="table table-bordered">
                         <thead style="background:#eee">
                             <tr>
-                                <th>Customer</th>
+                                <th　style="font-family: 'Roboto', sans-serif;">Customer</th>
                             </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td style="height:98px;">
-                                <p>
+                                <p　style="font-family: 'KhmerOSBattambang', 'Roboto', sans-serif;">
                                     {{ $sale->customer ? $sale->customer->name : '' }}
                                 </p>
                                 <p>
@@ -143,8 +143,8 @@
                     <table class="table table-bordered">
                         <thead style="background:#eee">
                             <tr style="text-align: center;">
-                                <th>Date</th>
-                                <th>Invoice code #</th>
+                                <th　style="font-family: 'Roboto', sans-serif;">Date</th>
+                                <th　style="font-family: 'Roboto', sans-serif;">Invoice code #</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -153,12 +153,12 @@
                                 <td>{{ $sale->quotaion_no }}</td>
                             </tr>
                             <tr style="background:#eee; text-align: center;">
-                                <th style="text-align: center;">Staff</th>
-                                <th>Stock</th>
+                                <th style="text-align: center;"　style="font-family: 'Roboto', sans-serif;">Staff</th>
+                                <th　style="font-family: 'Roboto', sans-serif;">Stock</th>
                             </tr>
                             <tr style="text-align: center;">
-                                <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
-                                <td>RRPS PHARMA</td>
+                                <td　style="font-family: 'Roboto', sans-serif;">{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                <td　style="font-family: 'Roboto', sans-serif;">RRPS PHARMA</td>
                             </tr>
                         </tbody>
                     </table>
@@ -169,11 +169,11 @@
             <table class="table table-bordered">
             <thead style="background:#eee">
                 <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Product Free</th>
-                    <th>Rate</th>
-                    <th>Amount</th>
+                    <th　style="font-family: 'Roboto', sans-serif;">Product</th>
+                    <th　style="font-family: 'Roboto', sans-serif;">Quantity</th>
+                    <th　style="font-family: 'Roboto', sans-serif;">Product Free</th>
+                    <th　style="font-family: 'Roboto', sans-serif;">Rate</th>
+                    <th　style="font-family: 'Roboto', sans-serif;">Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -189,7 +189,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" class="text-right">Total</td>
+                    <td colspan="4" class="text-right"　style="font-family: 'Roboto', sans-serif;">Total</td>
                     <td class="text-right">
                         USA {{currencyFormat($sale->total_amount)}}
                     </td>
