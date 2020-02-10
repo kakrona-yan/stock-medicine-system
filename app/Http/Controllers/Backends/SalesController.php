@@ -189,14 +189,12 @@ class SalesController extends Controller
             }
             $dateSale = date('Y-m-d', strtotime($sale->sale_date));
             $pdfName = "{$sale->customer->name}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
-
-            // $pdfSale = PDF::loadView('backends.sales.invoiceSale', ['sale' => $sale]);
-            // $pdfSale->setPaper('a4');
-            // Send data to the view using loadView function of PDF facade
             $view = view('backends.sales.invoiceSale', ['sale' => $sale]);
-            $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
-            $pdfSale = new Dompdf();
-            $pdfSale->loadHtml($html);
+            $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-16');
+            $pdfSale = PDF::loadHTML($html)
+                ->setPaper('a4')
+                ->setWarnings(false)
+                ->setOptions(['isFontSubsettingEnabled' => true]);
             return $pdfSale->stream($pdfName);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.sales.index');
