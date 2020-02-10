@@ -188,7 +188,7 @@ class SalesController extends Controller
             }
             $dateSale = date('Y-m-d', strtotime($sale->sale_date));
             $pdfName = "{$sale->customer->name}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
-            $pdfSale = PDF::loadView('backends.sales.invoiceSale', ['sale' => $sale]);
+            $pdfSale = PDPDFViewHelperF::loadView('backends.sales.invoiceSale', ['sale' => $sale]);
             $pdfSale->setPaper('a4');
             
             return $pdfSale->stream($pdfName);
@@ -199,6 +199,7 @@ class SalesController extends Controller
     public function loadView($view, $data = array(), $mergeData = array(), $encoding = null){
         $html = $this->view->make($view, $data, $mergeData)->render();
         $html = preg_replace('/>\s+</', '><', $html);
+        dd($html);
         return $this->loadHTML($html, $encoding);
     }
 }
