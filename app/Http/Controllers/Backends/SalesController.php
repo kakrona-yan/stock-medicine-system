@@ -178,6 +178,7 @@ class SalesController extends Controller
             return exceptionError($e, 'backends.sales.index');
         }
     }
+
     function viewInvoiceSalePDF(int $id)
     {
 
@@ -188,14 +189,14 @@ class SalesController extends Controller
             }
             $dateSale = date('Y-m-d', strtotime($sale->sale_date));
             $pdfName = "{$sale->customer->name}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
-            $pdfSale = PDPDFViewHelperF::loadView('backends.sales.invoiceSale', ['sale' => $sale]);
+            $pdfSale = PDF::loadView('backends.sales.invoiceSale', ['sale' => $sale]);
             $pdfSale->setPaper('a4');
-            
             return $pdfSale->stream($pdfName);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.sales.index');
         }
     }
+
     public function loadView($view, $data = array(), $mergeData = array(), $encoding = null){
         $html = $this->view->make($view, $data, $mergeData)->render();
         $html = preg_replace('/>\s+</', '><', $html);
