@@ -22,19 +22,18 @@
 				box-sizing: border-box;
 			margin: 0px;
 			padding: 0px;
-            font-family: Roboto, serif !important;
 		}
         html, body {
             margin: 0px;
             color: #333;
             text-align: left;
             line-height: 24px;
-            font-family: Roboto, serif !important;
+            font-family: Roboto, serif"dejavu sans", serif !important;
             font-size: 14px;
         }
         div,
         p{
-            font-family: Roboto, serif !important;
+            font-family: "dejavu sans", serif !important;
         }
         a {
             color: #fff;
