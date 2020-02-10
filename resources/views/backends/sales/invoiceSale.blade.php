@@ -28,7 +28,7 @@
             color: #333;
             text-align: left;
             line-height: 24px;
-            font-family: 'KhmerOSBattambang', 'DejaVu Sans', sans-serif;
+            font-family: 'KhmerOSBattambang', 'Roboto', sans-serif;
             font-size: 14px;
             font-weight: normal;
         }
