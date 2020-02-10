@@ -190,7 +190,8 @@ class SalesController extends Controller
             $dateSale = date('Y-m-d', strtotime($sale->sale_date));
             $pdfName = "{$sale->customer->name}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
             $view = view('backends.sales.invoiceSale', ['sale' => $sale]);
-            $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-16');
+            $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
+            dd($html);
             $pdfSale = PDF::loadHTML($html)
                 ->setPaper('a4')
                 ->setWarnings(false)
