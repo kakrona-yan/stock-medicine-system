@@ -201,7 +201,7 @@ class SalesController extends Controller
             //         ->setPaper('a4')
             //         ->setWarnings(false)
             //         ->setOptions(['isFontSubsettingEnabled' => true]);
-            return $pdfSale->stream($pdfName);
+            return $pdfSale->load($pdfName);
 
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.sales.index');
