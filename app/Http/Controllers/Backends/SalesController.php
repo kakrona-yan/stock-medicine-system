@@ -195,8 +195,7 @@ class SalesController extends Controller
             $view = view('backends.sales.invoiceSale', ['sale' => $sale]);
             $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
             $html_decode = html_entity_decode($html);
-            dd($html_decode);
-            $pdfSale = \PDF::loadHTML($view)
+            $pdfSale = \PDF::loadHTML($html_decode)
                     ->setPaper('a4')
                     ->setWarnings(false)
                     ->setOptions(['isFontSubsettingEnabled' => true]);
