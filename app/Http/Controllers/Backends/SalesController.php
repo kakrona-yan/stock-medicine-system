@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Sale;
 use App\Models\SaleProduct;
 use Barryvdh\DomPDF\Facade as PDF;
+use Dompdf\Dompdf;
 
 class SalesController extends Controller
 {
@@ -188,8 +189,17 @@ class SalesController extends Controller
             }
             $dateSale = date('Y-m-d', strtotime($sale->sale_date));
             $pdfName = "{$sale->customer->name}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
-            $pdfSale = PDF::loadView('backends.sales.invoiceSale', ['sale' => $sale]);
-            $pdfSale->setPaper('a4');
+
+            // $pdfSale = PDF::loadView('backends.sales.invoiceSale', ['sale' => $sale]);
+            // $pdfSale->setPaper('a4');
+            // Send data to the view using loadView function of PDF facade
+            $view = view('backends.sales.invoiceSale', ['items' => $data]);
+            $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
+            $html_decode = html_entity_decode($html);
+            $pdfSale = new Dompdf();
+            $pdfSale->loadHtml($html_decode)
+                ->setPaper('a4')
+                ->render();;
             return $pdfSale->stream($pdfName);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.sales.index');
