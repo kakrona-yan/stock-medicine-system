@@ -7,7 +7,7 @@
     <!-- Styles -->
     <style type="text/css">
         @font-face {
-			font-family: KhmerOSBattambang;
+			font-family: 'KhmerOSBattambang';
             font-style: normal;
             font-weight: normal;
 			src: url("{{ asset('fonts/KhmerOSBattambang-Regular.ttf') }}") format('truetype');
@@ -28,12 +28,9 @@
             color: #333;
             text-align: left;
             line-height: 24px;
-            font-family: KhmerOSBattambang, DejaVu Sans,sans-serif;
+            font-family: 'KhmerOSBattambang', 'DejaVu Sans', sans-serif;
             font-size: 14px;
-        }
-        div,
-        p{
-            font-family: KhmerOSBattambang, DejaVu Sans,sans-serif;
+            font-weight: normal;
         }
         a {
             color: #fff;
@@ -48,6 +45,7 @@
         }
         tfoot tr td {
             color: #333;
+            font-weight: normal;
         }
         .container{
             padding-left: 25px;
@@ -72,6 +70,7 @@
             padding: 6px;
             vertical-align: top;
             border-top: 1px solid #e3e6f0;
+            font-weight: normal;
         }
         .table-bordered th, .table-bordered td {
             border: 1px solid #e3e6f0;
