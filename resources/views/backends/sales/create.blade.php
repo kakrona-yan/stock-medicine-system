@@ -154,7 +154,7 @@
                                             <div class="form-group row">
                                                 <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_amount">Total Amount</label>
                                                 <div class="col-12 col-sm-12 col-md-12">
-                                                    <input type="text" class="form-control" id="total_amount" name="total_amount" readonly="" value="{{ old('total_amount', $request->total_amount ? $request->total_amount : 0) }}">
+                                                    <input type="text" class="form-control" id="total_amount" name="total_amount" value="{{ old('total_amount', $request->total_amount ? $request->total_amount : 0) }}">
                                                 </div>
                                             </div>
                                              <div class="form-group row">

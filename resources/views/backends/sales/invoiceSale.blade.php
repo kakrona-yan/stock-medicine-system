@@ -3,13 +3,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Invoice - #{{ $sale->quotaion_no }}</title>
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <!-- Styles -->
     <style type="text/css">
-        /* @font-face {
+        @font-face {
 			font-family: KhmerOSBattambang;
+            font-style: normal;
+            font-weight: normal;
 			src: url("{{ asset('fonts/KhmerOSBattambang-Regular.ttf') }}") format('truetype');
-		} */
+		}
 		@page {
 			margin: 0cm 0cm;
 		}
@@ -20,13 +22,14 @@
 				box-sizing: border-box;
 			margin: 0px;
 			padding: 0px;
+            font-family: KhmerOSBattambang, Roboto, serif !important;
 		}
         html, body {
             margin: 0px;
             color: #333;
             text-align: left;
             line-height: 24px;
-            font-family: Roboto, serif !important;
+            font-family: KhmerOSBattambang, Roboto, serif !important;
             font-size: 14px;
         }
         div,
