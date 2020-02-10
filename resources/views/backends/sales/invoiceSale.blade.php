@@ -122,7 +122,7 @@
                     <table class="table table-bordered">
                         <thead style="background:#eee">
                             <tr>
-                                <th style="font-family: 'Roboto', sans-serif;">Customer</th>
+                                <th><strong>Customer</strong></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -143,8 +143,8 @@
                     <table class="table table-bordered">
                         <thead style="background:#eee">
                             <tr style="text-align: center;">
-                                <th>Date</th>
-                                <th>Invoice code #</th>
+                                <th><strong>Date</strong></th>
+                                <th><strong>Invoice code #</strong></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -153,12 +153,12 @@
                                 <td>{{ $sale->quotaion_no }}</td>
                             </tr>
                             <tr style="background:#eee; text-align: center;">
-                                <th style="text-align: center;">Staff</th>
-                                <th>Stock</th>
+                                <th style="text-align: center;"><strong>Staff</strong></th>
+                                <th><strong>Stock</strong></th>
                             </tr>
                             <tr style="text-align: center;">
                                 <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
-                                <td>RRPS PHARMA</td>
+                                <td><strong>RRPS PHARMA</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -169,11 +169,11 @@
             <table class="table table-bordered">
             <thead style="background:#eee">
                 <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Product Free</th>
-                    <th>Rate</th>
-                    <th>Amount</th>
+                    <th><strong>Product</strong></th>
+                    <th><strong>Quantity</strong></th>
+                    <th><strong>Product Free</strong></th>
+                    <th><strong>Rate</strong></th>
+                    <th><strong>Amount</strong></th>
                 </tr>
             </thead>
             <tbody>
@@ -189,7 +189,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" class="text-right">Total</td>
+                    <td colspan="4" class="text-right"><strong>Total</strong></td>
                     <td class="text-right">
                         USA {{currencyFormat($sale->total_amount)}}
                     </td>
