@@ -22,14 +22,14 @@
 				box-sizing: border-box;
 			margin: 0px;
 			padding: 0px;
-            font-family: KhmerOSBattambang, Roboto, serif !important;
+            font-family: Roboto, serif !important;
 		}
         html, body {
             margin: 0px;
             color: #333;
             text-align: left;
             line-height: 24px;
-            font-family: KhmerOSBattambang, Roboto, serif !important;
+            font-family: Roboto, serif !important;
             font-size: 14px;
         }
         div,
