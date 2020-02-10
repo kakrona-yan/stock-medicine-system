@@ -157,7 +157,7 @@
                                 <th><strong>Stock</strong></th>
                             </tr>
                             <tr style="text-align: center;">
-                                <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                <td><strong>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</strong></td>
                                 <td><strong>RRPS PHARMA</strong></td>
                             </tr>
                         </tbody>
