@@ -28,7 +28,7 @@
             color: #333;
             text-align: left;
             line-height: 24px;
-            font-family: 'KhmerOSBattambang', 'DejaVu Sans', sans-serif;
+            font-family: 'KhmerOSBattambang', 'Roboto', sans-serif;
             font-size: 14px;
             font-weight: normal;
         }
@@ -112,7 +112,7 @@
                 <h1>RRPS PHARMA CO., LTD</h1>
             </div>
             <div class="company-info--address">
-                <p>Address : NO. 01, ST. 182, SANGKAT VIEL VONG, Khan 7  Makara, Phnom Penh</p>
+                <p style="font-family: 'Roboto', sans-serif;">Address : NO. 01, ST. 182, SANGKAT VIEL VONG, Khan 7  Makara, Phnom Penh</p>
                 <p>Tel     : 093 399 330 </p>
             </div>
         </div>
