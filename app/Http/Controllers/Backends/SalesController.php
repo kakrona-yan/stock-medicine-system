@@ -194,8 +194,8 @@ class SalesController extends Controller
             // Send data to the view using loadView function of PDF facade
             $view = view('backends.sales.invoiceSale', ['sale' => $sale]);
             $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
-            $html_decode = html_entity_decode($html);
-            $pdfSale = \PDF::loadHTML($html_decode)
+    
+            $pdfSale = \PDF::loadHTML($html)
                     ->setPaper('a4')
                     ->setWarnings(false)
                     ->setOptions(['isFontSubsettingEnabled' => true]);
