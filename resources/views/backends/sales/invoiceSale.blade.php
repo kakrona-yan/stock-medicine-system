@@ -28,7 +28,7 @@
             color: #333;
             text-align: left;
             line-height: 24px;
-            font-family: 'KhmerOSBattambang', 'Roboto', sans-serif;
+            font-family: 'KhmerOSBattambang', 'DejaVu Sans', sans-serif;
             font-size: 14px;
             font-weight: normal;
         }
@@ -112,8 +112,8 @@
                 <h1>RRPS PHARMA CO., LTD</h1>
             </div>
             <div class="company-info--address">
-                <p style="font-family: 'Roboto', sans-serif;">Address : NO. 01, ST. 182, SANGKAT VIEL VONG, Khan 7  Makara, Phnom Penh</p>
-                <p style="font-family: 'Roboto', sans-serif;">Tel     : 093 399 330 </p>
+                <p>Address : NO. 01, ST. 182, SANGKAT VIEL VONG, Khan 7  Makara, Phnom Penh</p>
+                <p>Tel     : 093 399 330 </p>
             </div>
         </div>
         <table class="table">
@@ -122,7 +122,7 @@
                     <table class="table table-bordered">
                         <thead style="background:#eee">
                             <tr>
-                                <th><strong>Customer</strong></th>
+                                <th>Customer</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -143,8 +143,8 @@
                     <table class="table table-bordered">
                         <thead style="background:#eee">
                             <tr style="text-align: center;">
-                                <th><strong>Date</strong></th>
-                                <th><strong>Invoice code #</strong></th>
+                                <th>Date</th>
+                                <th>Invoice code #</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -153,12 +153,12 @@
                                 <td>{{ $sale->quotaion_no }}</td>
                             </tr>
                             <tr style="background:#eee; text-align: center;">
-                                <th style="text-align: center;"><strong>Staff</strong></th>
-                                <th><strong>Stock</strong></th>
+                                <th style="text-align: center;">Staff</th>
+                                <th>Stock</th>
                             </tr>
                             <tr style="text-align: center;">
-                                <td><strong>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</strong></td>
-                                <td><strong>RRPS PHARMA</strong></td>
+                                <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                <td>RRPS PHARMA</td>
                             </tr>
                         </tbody>
                     </table>
@@ -169,11 +169,11 @@
             <table class="table table-bordered">
             <thead style="background:#eee">
                 <tr>
-                    <th><strong>Product</strong></th>
-                    <th><strong>Quantity</strong></th>
-                    <th><strong>Product Free</strong></th>
-                    <th><strong>Rate</strong></th>
-                    <th><strong>Amount</strong></th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Product Free</th>
+                    <th>Rate</th>
+                    <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -189,7 +189,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" class="text-right"><strong>Total</strong></td>
+                    <td colspan="4" class="text-right">Total</td>
                     <td class="text-right">
                         USA {{currencyFormat($sale->total_amount)}}
                     </td>
