@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Invoice - #{{ $sale->quotaion_no }}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <!-- Styles -->
     <style type="text/css">
         @font-face {
@@ -111,8 +112,8 @@
                 <h1>RRPS PHARMA CO., LTD</h1>
             </div>
             <div class="company-info--address">
-                <p style=" font-family: 'DejaVu Sans', sans-serif;">Address : NO. 01, ST. 182, SANGKAT VIEL VONG, Khan 7  Makara, Phnom Penh</p>
-                <p　style=" font-family: 'DejaVu Sans', sans-serif;">Tel     : 093 399 330 </p>
+                <p>Address : NO. 01, ST. 182, SANGKAT VIEL VONG, Khan 7  Makara, Phnom Penh</p>
+                <p>Tel     : 093 399 330 </p>
             </div>
         </div>
         <table class="table">
@@ -128,7 +129,7 @@
                         <tr>
                             <td style="height:98px;">
                                 <p>
-                                    {{ $sale->customer ? $sale->customer->name : ''  }}
+                                    {{ $sale->customer ? $sale->customer->name : '' }}
                                 </p>
                                 <p>
                                     {{ $sale->customer ? $sale->customer->phone1 : '' }}
@@ -153,7 +154,7 @@
                             </tr>
                             <tr style="background:#eee; text-align: center;">
                                 <th style="text-align: center;">Staff</th>
-                                <th　style=" font-family: 'DejaVu Sans', sans-serif;">Stock</th>
+                                <th>Stock</th>
                             </tr>
                             <tr style="text-align: center;">
                                 <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
@@ -168,11 +169,11 @@
             <table class="table table-bordered">
             <thead style="background:#eee">
                 <tr>
-                    <th　style=" font-family: 'DejaVu Sans', sans-serif;">Product</th>
-                    <th　style=" font-family: 'DejaVu Sans', sans-serif;">Quantity</th>
-                    <th　style=" font-family: 'DejaVu Sans', sans-serif;">Product Free</th>
-                    <th　style=" font-family: 'DejaVu Sans', sans-serif;">Rate</th>
-                    <th　style=" font-family: 'DejaVu Sans', sans-serif;">Amount</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Product Free</th>
+                    <th>Rate</th>
+                    <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -188,8 +189,8 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" class="text-right"　style=" font-family: 'DejaVu Sans', sans-serif;">Total</td>
-                    <td class="text-right"　style=" font-family: 'DejaVu Sans', sans-serif;">
+                    <td colspan="4" class="text-right">Total</td>
+                    <td class="text-right">
                         USA {{currencyFormat($sale->total_amount)}}
                     </td>
                 </tr>
