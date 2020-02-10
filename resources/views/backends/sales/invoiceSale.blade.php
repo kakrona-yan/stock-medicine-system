@@ -122,7 +122,7 @@
                     <table class="table table-bordered">
                         <thead style="background:#eee">
                             <tr>
-                                <th>Customer</th>
+                                <th style="font-family: 'Roboto', sans-serif;">Customer</th>
                             </tr>
                         </thead>
                         <tbody>
