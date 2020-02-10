@@ -197,9 +197,7 @@ class SalesController extends Controller
             $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
             $html_decode = html_entity_decode($html);
             $pdfSale = new Dompdf();
-            $pdfSale->loadHtml($html_decode)
-                ->setPaper('a4')
-                ->render();;
+            $pdfSale->loadHtml($html_decode);
             return $pdfSale->stream($pdfName);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.sales.index');
