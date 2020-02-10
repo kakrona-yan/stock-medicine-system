@@ -6,10 +6,10 @@
     <!-- Styles -->
     <style type="text/css">
         @font-face {
-			font-family: 'KhmerOSBokor';
+			font-family: 'KhmerOSBattambang';
             font-style: normal;
             font-weight: normal;
-			src: url("{{ asset('fonts/KhmerOSBokor.ttf') }}") format('truetype');
+			src: url("{{ asset('fonts/KhmerOSBattambang-Regular.ttf') }}") format('truetype');
 		}
 		@page {
 			margin: 0cm 0cm;
@@ -27,7 +27,7 @@
             color: #333;
             text-align: left;
             line-height: 24px;
-            font-family: 'KhmerOSBokor', 'DejaVu Sans', sans-serif;
+            font-family: 'KhmerOSBattambang', 'DejaVu Sans', sans-serif;
             font-size: 14px;
             font-weight: normal;
         }
