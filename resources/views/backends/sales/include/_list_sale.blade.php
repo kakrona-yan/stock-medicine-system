@@ -39,6 +39,7 @@
                                     <td>{{date('Y-m-d', strtotime($sale->sale_date))}}</td>
                                     <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
                                     <td rowspan="{{$sale->productSales->count() > 0 ? 2 : 1}}">
+                                        @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                         <a class="btn btn-circle btn-circle btn-sm btn-warning btn-circle mr-1" 
                                             data-toggle="tooltip" 
                                             data-placement="top"
@@ -52,7 +53,7 @@
                                             data-original-title="Invoice #{{$sale->quotaion_no}}"
                                             href="{{route('sale.downloadPDF', $sale->id)}}"
                                         ><i class="far fa-file-pdf"></i>
-                                        
+                                        @endif
                                     </td>
                                 </tr>
                                 @if ($sale->productSales->count() > 0)
