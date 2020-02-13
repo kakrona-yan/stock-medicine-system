@@ -102,6 +102,10 @@
             background-clip: padding-box;
             border: 1px solid #ced4da;
         }
+        .d-inline{
+            display: inline-block;
+            width: 320px;
+        }
     </style>
 
 </head>
@@ -209,8 +213,15 @@
                 
             </tfoot>
         </table>
-        <div style="text-align: right; margin-top: 50px;">
-            <p>Sign ..............................................</p>
+        <div style="text-align: center; margin-top: 50px;width:100%;">
+            <div class="d-inline">
+                <p>Approve by</p>
+                <p style="margin-top: 30px;">..................................................</p>
+            </div>
+             <div class="d-inline">
+                <p>Customer sign</p>
+                <p style="margin-top: 30px;">..................................................</p>
+            </div>
         </div>
         </div>
     </div>

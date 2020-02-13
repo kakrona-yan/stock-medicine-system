@@ -41,9 +41,8 @@
                         <div id="addsupplier" class="tab-pane active">
                             <form class="form-main" action="{{route('sale.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group w-100 d-inline-flex justify-content-end">
-                                    <button type="submit" class="btn btn-circle btn-primary w-25 mr-2">Save</button>
-                                    <a href="{{route('sale.index')}}" class="btn btn-circle btn-secondary w-25">back</a>
+                                <div class="form-group w-100" style="background: #eaecf4;padding: 10px;">
+                                    <button type="submit" class="btn btn-circle btn-primary w-25 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>Sale</button>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
@@ -154,7 +153,9 @@
                                             <div class="form-group row">
                                                 <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_amount">Total Amount</label>
                                                 <div class="col-12 col-sm-12 col-md-12">
-                                                    <input type="text" class="form-control" id="total_amount" name="total_amount" value="{{ old('total_amount', $request->total_amount ? $request->total_amount : 0) }}">
+                                                    <input type="text" class="form-control" id="total_amount" name="total_amount" value="{{ old('total_amount', $request->total_amount ? $request->total_amount : 0) }}"
+                                                        {{ !Auth::user()->isRoleAdmin() ? "readonly" : '' }}
+                                                    >
                                                 </div>
                                             </div>
                                              <div class="form-group row">
@@ -191,9 +192,8 @@
                                         </fieldset>
                                     </div>
                                 </div>
-                                <div class="form-group w-100 d-inline-flex justify-content-end mt-5">
-                                    <button type="submit" class="btn btn-circle btn-primary w-25 mr-2">Save</button>
-                                    <a href="{{route('sale.index')}}" class="btn btn-circle btn-secondary w-25">back</a>
+                                <div class="form-group w-100 mt-5" style="background: #eaecf4;padding: 10px;">
+                                    <button type="submit" class="btn btn-circle btn-primary w-25 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>Sale</button>
                                 </div>
                             </form><!--/form-main-->
                         </div><!--/tab-add-category-->
@@ -234,7 +234,7 @@
         $('#customer_id').select2({
             allowClear: false
         });
-        $("input[name=total_discount], input[name=money_change], input[name=money_change]").keydown(function (e) {
+        $("input[name=total_discount], input[name=money_change], input[name=money_change], input[name=total_amount]").keydown(function (e) {
             // Deny if double dot is inputed
             if (e.keyCode == 190 && this.value.split('.').length > 1) {
                 e.preventDefault();
@@ -357,7 +357,7 @@
         // Payment
         let totalQuantityPayment = $('#quantities').val();
         let totalAmountPayment = $('input[name="total_amount"]').val();
-        let amount = quantity * rate;
+        let amount = Number(quantity) * Number(rate);
 
         totalQuantityPayment = totalQuantityPayment - Number(oldQuantity);
         totalQuantityPayment += Number(quantity);
