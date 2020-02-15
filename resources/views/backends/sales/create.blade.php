@@ -147,15 +147,15 @@
                                                     <legend class="edit-application-information-legend text-left">Payment:</legend>
                                                     <div class="form-group row">
                                                         <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_quantity">Total Quantity = Quantities + Product Frees</label>
-                                                        <div class="col-12 col-sm-12 col-md-4">
+                                                        <div class="col-4 col-md-4">
                                                             <input type="text" class="form-control" id="total_quantity" name="total_quantity" readonly="" value="{{ old('total_quantity', $request->total_quantity ? $request->total_quantity : 0) }}">
                                                             <span class="span-p">=</span>
                                                         </div>
-                                                        <div class="col-12 col-sm-12 col-md-4">
+                                                        <div class="col-4 col-md-4">
                                                             <input type="text" class="form-control" id="quantities" readonly="" value="0">
                                                             <span class="span-p">+</span>
                                                         </div>
-                                                        <div class="col-12 col-sm-12 col-md-4">
+                                                        <div class="col-4 col-md-4">
                                                             <input type="text" class="form-control" id="productFrees" readonly="" value="0">
                                                         </div>
                                                     </div>
