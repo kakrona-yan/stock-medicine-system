@@ -428,7 +428,7 @@
     }
     // format money
     function formatMoney(money) {
-        return money != '' ? parseFloat(money).toFixed(2) : 0;
+        return money != '' ? Number(money).toFixed(2) : 0;
     }
 </script>
 @endpush
