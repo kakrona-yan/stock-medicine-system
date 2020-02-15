@@ -161,7 +161,7 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td style="height:111px;">
+                                <td style="height:135px;">
                                     <p>
                                         {{ $sale->customer ? $sale->customer->name : '' }}
                                     </p>
@@ -191,7 +191,10 @@
                                     <th>ស្តុក</th>
                                 </tr>
                                 <tr style="text-align: center;">
-                                    <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                    <td>
+                                        {{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}<br/>
+                                        {{$sale->staff->phone1}} {{$sale->staff->phone2 ? '/'.$sale->staff->phone1 : ''}}
+                                    </td>
                                     <td>RRPS PHARMA</td>
                                 </tr>
                             </tbody>
