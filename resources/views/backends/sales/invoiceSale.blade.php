@@ -105,6 +105,7 @@
         .d-inline{
             display: inline-block;
             width: 320px;
+            margin: 0px 20px;
         }
     </style>
 
@@ -126,12 +127,12 @@
                     <table class="table table-bordered">
                         <thead style="background:#eee">
                             <tr>
-                                <th>អតិថិជន/Customer</th>
+                                <th>អតិថិជន</th>
                             </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td style="height:98px;">
+                            <td style="height:111px;">
                                 <p>
                                     {{ $sale->customer ? $sale->customer->name : '' }}
                                 </p>
@@ -147,8 +148,8 @@
                     <table class="table table-bordered">
                         <thead style="background:#eee">
                             <tr style="text-align: center;">
-                                <th>កាលបរិច្ឆេទ/Date</th>
-                                <th>លេខកូដវិក្កយបត្រ/Invoice code #</th>
+                                <th>កាលបរិច្ឆេទ</th>
+                                <th>#លេខកូដវិក្កយបត្រ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -157,8 +158,8 @@
                                 <td>{{ $sale->quotaion_no }}</td>
                             </tr>
                             <tr style="background:#eee; text-align: center;">
-                                <th style="text-align: center;">បុគ្គលិក/Staff</th>
-                                <th>ស្តុក/Stock</th>
+                                <th style="text-align: center;">លក់ដោយ</th>
+                                <th>ស្តុក</th>
                             </tr>
                             <tr style="text-align: center;">
                                 <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
@@ -173,11 +174,11 @@
             <table class="table table-bordered">
             <thead style="background:#eee">
                 <tr>
-                    <th>ផលិតផល/Product</th>
-                    <th>បរិមាណ/Quantity</th>
-                    <th>ឥតគិតថ្លៃ/Product Free</th>
-                    <th>អត្រា/Rate</th>
-                    <th>ចំនួនទឹកប្រាក់/Amount</th>
+                    <th>ផលិតផល</th>
+                    <th>បរិមាណ</th>
+                    <th>ឥតគិតថ្លៃ</th>
+                    <th>អត្រា</th>
+                    <th>ចំនួនទឹកប្រាក់</th>
                 </tr>
             </thead>
             <tbody>
@@ -187,25 +188,25 @@
                     <td class="text-right">{{$productSale->quantity}}</td>
                     <td class="text-right">{{$productSale->product_free}}</td>
                     <td class="text-right">{{$productSale->rate}}</td>
-                    <td class="text-right">{{$productSale->amount}}</td>
+                    <td class="text-right" style="width: 219px;">{{$productSale->amount}}</td>
                 </tr>
             @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" class="text-right">សរុប/Total</td>
+                    <td colspan="4" class="text-right">សរុប</td>
                     <td class="text-right">
                         USD {{$sale->total_amount}}
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="text-right" style="border: none;"><strong>ទទួលបានចំនួនផលិតផល<br/>Receive Product Amount :</strong></td>
+                    <td colspan="4" class="text-right" style="border: none;"><strong>ទទួលបានចំនួនផលិតផល:</strong></td>
                     <td class="text-right">
                         <input type="text" class="form-control" name="receive_money" accept="application/pdf">
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="text-right" style="border: none;"><strong>ចំនួនទឹកប្រាក់ទូទាត់/Pay Amount </strong></td>
+                    <td colspan="4" class="text-right" style="border: none;"><strong>ចំនួនទឹកប្រាក់ទូទាត់:</strong></td>
                     <td class="text-right">
                         <input type="text" class="form-control" name="pay_amount" accept="application/pdf">
                     </td>
@@ -215,12 +216,12 @@
         </table>
         <div style="text-align: center; margin-top: 50px;width:100%;">
             <div class="d-inline">
-                <p>អនុម័តដោយ/Approve by</p>
-                <p style="margin-top: 30px;">..................................................</p>
+                <p>ត្រូតពិនិត្យដោយ</p>
+                <p style="margin-top: 50px;border-bottom: 1px solid #000;"></p>
             </div>
              <div class="d-inline">
-                <p>ហត្ថលេខាអតិថិជន/Customer sign</p>
-                <p style="margin-top: 30px;">..................................................</p>
+                <p>ហត្ថលេខាអតិថិជន</p>
+                <p style="margin-top: 50px;border-bottom: 1px solid #000;"></p>
             </div>
         </div>
         </div>
