@@ -322,9 +322,9 @@ input{
       font-size: 12px;
     }
     .pro-title{
-      max-height: 120px;
-      height: 100%;
+      min-height: 35px;
       overflow: hidden;
+      font-size: 11px;
     }
   }
   input[type="checkbox"]{
