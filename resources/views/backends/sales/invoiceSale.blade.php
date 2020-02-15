@@ -116,8 +116,8 @@
                 <h1>RRPS PHARMA CO., LTD</h1>
             </div>
             <div class="company-info--address">
-                <p>Address : NO. 01, ST. 182, SANGKAT VIEL VONG, Khan 7  Makara, Phnom Penh</p>
-                <p>Tel     : 093 399 330 </p>
+                <p>អាសយដ្ឋាន : NO. 01, ST. 182, សង្កាត់វាលវង់, ខណ្ឌ ៧ មករា, រាជធានីភ្នំពេញ</p>
+                <p>ទូរស័ព្ទ     : 093 399 330 </p>
             </div>
         </div>
         <table class="table">
@@ -126,7 +126,7 @@
                     <table class="table table-bordered">
                         <thead style="background:#eee">
                             <tr>
-                                <th>Customer</th>
+                                <th>អតិថិជន/Customer</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -147,8 +147,8 @@
                     <table class="table table-bordered">
                         <thead style="background:#eee">
                             <tr style="text-align: center;">
-                                <th>Date</th>
-                                <th>Invoice code #</th>
+                                <th>កាលបរិច្ឆេទ/Date</th>
+                                <th>លេខកូដវិក្កយបត្រ/Invoice code #</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -157,8 +157,8 @@
                                 <td>{{ $sale->quotaion_no }}</td>
                             </tr>
                             <tr style="background:#eee; text-align: center;">
-                                <th style="text-align: center;">Staff</th>
-                                <th>Stock</th>
+                                <th style="text-align: center;">បុគ្គលិក/Staff</th>
+                                <th>ស្តុក/Stock</th>
                             </tr>
                             <tr style="text-align: center;">
                                 <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
@@ -173,11 +173,11 @@
             <table class="table table-bordered">
             <thead style="background:#eee">
                 <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Product Free</th>
-                    <th>Rate</th>
-                    <th>Amount</th>
+                    <th>ផលិតផល/Product</th>
+                    <th>បរិមាណ/Quantity</th>
+                    <th>ឥតគិតថ្លៃ/Product Free</th>
+                    <th>អត្រា/Rate</th>
+                    <th>ចំនួនទឹកប្រាក់/Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -193,19 +193,19 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" class="text-right">Total</td>
+                    <td colspan="4" class="text-right">សរុប/Total</td>
                     <td class="text-right">
-                        USA {{currencyFormat($sale->total_amount)}}
+                        USA {{$sale->total_amount}}
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="text-right" style="border: none;"><strong>Receive Product Amount :</strong></td>
+                    <td colspan="4" class="text-right" style="border: none;"><strong>ទទួលបានចំនួនផលិតផល<br/>Receive Product Amount :</strong></td>
                     <td class="text-right">
                         <input type="text" class="form-control" name="receive_money" accept="application/pdf">
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="text-right" style="border: none;"><strong>Pay Amount </strong></td>
+                    <td colspan="4" class="text-right" style="border: none;"><strong>ចំនួនទឹកប្រាក់ទូទាត់/Pay Amount </strong></td>
                     <td class="text-right">
                         <input type="text" class="form-control" name="pay_amount" accept="application/pdf">
                     </td>
@@ -215,11 +215,11 @@
         </table>
         <div style="text-align: center; margin-top: 50px;width:100%;">
             <div class="d-inline">
-                <p>Approve by</p>
+                <p>អនុម័តដោយ/Approve by</p>
                 <p style="margin-top: 30px;">..................................................</p>
             </div>
              <div class="d-inline">
-                <p>Customer sign</p>
+                <p>ហត្ថលេខាអតិថិជន/Customer sign</p>
                 <p style="margin-top: 30px;">..................................................</p>
             </div>
         </div>

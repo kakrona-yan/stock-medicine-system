@@ -81,13 +81,11 @@ class SalesController extends Controller
             $rules = [
                 'customer_id' => 'required',
                 'sale_date' => 'required',
-                'money_change' => 'required',
             ];
             // Set field of Validattion
             $validator = \Validator::make([
                 'customer_id' => $request->customer_id,
                 'sale_date' => $request->sale_date,
-                'money_change' => $request->money_change,
             ], $rules);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();

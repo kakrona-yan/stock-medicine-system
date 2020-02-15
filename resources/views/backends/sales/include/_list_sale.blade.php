@@ -40,13 +40,13 @@
                                     <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
                                     <td rowspan="{{$sale->productSales->count() > 0 ? 2 : 1}}">
                                         @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
-                                        <a class="btn btn-circle btn-circle btn-sm btn-warning btn-circle mr-1" 
+                                        {{-- <a class="btn btn-circle btn-circle btn-sm btn-warning btn-circle mr-1" 
                                             data-toggle="tooltip" 
                                             data-placement="top"
                                             data-original-title="Invoice #{{$sale->quotaion_no}}"
                                             href="{{route('sale.viewPDF', $sale->id)}}"
                                         ><i class="far far fa-eye"></i>
-                                        </a>
+                                        </a> --}}
                                         <a class="btn btn-circle btn-circle btn-sm btn-danger btn-circle mr-1" 
                                             data-toggle="tooltip" 
                                             data-placement="top"

@@ -137,6 +137,7 @@
                                                             >
                                                         </div>
                                                     </div>
+                                                    @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                                      <div class="form-group row">
                                                         <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_discount">Dicount</label>
                                                         <div class="col-12 col-sm-12 col-md-12">
@@ -146,14 +147,9 @@
                                                     <div class="form-group row">
                                                         <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_money_revice">Received Amount<span class="text-danger">*</span></label>
                                                         <div class="col-12 col-sm-12 col-md-12 ">
-                                                            <input type="text" class="form-control {{ $errors->has('money_change') ? ' is-invalid' : '' }}" id="total_money_revice" name="money_change" value="{{ old('money_change', $request->money_change ? $request->money_change : 0) }}"
+                                                            <input type="text" class="form-control" id="total_money_revice" name="money_change" value="{{ old('money_change', $request->money_change ? $request->money_change : 0) }}"
                                                                 oninput="calculatorMoney(this)"
                                                             >
-                                                            @if ($errors->has('money_change'))
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $errors->first('money_change') }}</strong>
-                                                                </span>
-                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -162,6 +158,7 @@
                                                             <input type="text" class="form-control" id="money_owed" value="0">
                                                         </div>
                                                     </div>
+                                                    @endif
                                                     <div class="form-group row">
                                                         <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="note">Note</label>
                                                         <div class="col-12 col-sm-12 col-md-12 col-lg-9">
@@ -428,7 +425,7 @@
     }
     // format money
     function formatMoney(money) {
-        return money != '' ? Number(Math.round(money)).toFixed(2) : 0;
+        return money != '' ? parseFloat(money).toFixed(2) : 0;
     }
 </script>
 @endpush
