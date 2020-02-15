@@ -31,6 +31,7 @@
             font-family: 'KhmerOSBattambang', 'Roboto', sans-serif;
             font-size: 14px;
             font-weight: normal;
+            position: relative;
         }
         a {
             color: #fff;
@@ -53,6 +54,7 @@
             max-width: 794px;
             width: 100%;
             margin: 0px auto;
+            position: relative;
         }
         h1{
             font-size: 25px;
@@ -107,123 +109,151 @@
             width: 320px;
             margin: 0px 20px;
         }
+        .btn-print{
+            width: 100px;
+            height: 100px;
+            background: #ffffff;
+            border-radius: 50px;
+            color: #0dc6d3;
+            position: absolute;
+            right: 30px;
+            z-index: 99;
+            top: -20px;
+            font-size: 20px;
+        }
+        @media print {
+            .btn-print {
+                display: none;
+            }
+            .con-print {
+                display: block;
+            }
+        }
     </style>
-
+    <script>
+        function printInvoice() {
+          window.print();
+        }
+    </script>
+        
 </head>
 <body>
     <div class="container mt-5">
-        <div class="company-info mb-3">
-            <div class="company-info--name">
-                <h1>RRPS PHARMA CO., LTD</h1>
+        <button type="button" class="btn-print" id="btn-print" onclick="printInvoice()">Print</button>
+        <div class="con-print">
+            <div class="company-info mb-3">
+                <div class="company-info--name">
+                    <h1>RRPS PHARMA CO., LTD</h1>
+                </div>
+                <div class="company-info--address">
+                    <p>អាសយដ្ឋាន : NO. 01, ST. 182, សង្កាត់ វាលវង់, ខណ្ឌ ៧មករា, រាជធានីភ្នំពេញ</p>
+                    <p>ទូរស័ព្ទ     : 093 399 330 </p>
+                </div>
             </div>
-            <div class="company-info--address">
-                <p>អាសយដ្ឋាន : NO. 01, ST. 182, សង្កាត់វាលវង់, ខណ្ឌ ៧ មករា, រាជធានីភ្នំពេញ</p>
-                <p>ទូរស័ព្ទ     : 093 399 330 </p>
-            </div>
-        </div>
-        <table class="table">
-            <tr>
-                <td class="pd-left" style="width: 400px;">
-                    <table class="table table-bordered">
-                        <thead style="background:#eee">
+            <table class="table">
+                <tr>
+                    <td class="pd-left" style="width: 400px;">
+                        <table class="table table-bordered">
+                            <thead style="background:#eee">
+                                <tr>
+                                    <th>អតិថិជន</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             <tr>
-                                <th>អតិថិជន</th>
+                                <td style="height:111px;">
+                                    <p>
+                                        {{ $sale->customer ? $sale->customer->name : '' }}
+                                    </p>
+                                    <p>
+                                        {{ $sale->customer ? $sale->customer->phone1 : '' }}
+                                    </p>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td style="height:111px;">
-                                <p>
-                                    {{ $sale->customer ? $sale->customer->name : '' }}
-                                </p>
-                                <p>
-                                    {{ $sale->customer ? $sale->customer->phone1 : '' }}
-                                </p>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
-                <td class="pd-right">
-                    <table class="table table-bordered">
-                        <thead style="background:#eee">
-                            <tr style="text-align: center;">
-                                <th>កាលបរិច្ឆេទ</th>
-                                <th>#លេខកូដវិក្កយបត្រ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="text-align: center;">
-                                <td>{{ date('d/m/Y', strtotime($sale->sale_date))}}</td>
-                                <td>{{ $sale->quotaion_no }}</td>
-                            </tr>
-                            <tr style="background:#eee; text-align: center;">
-                                <th style="text-align: center;">លក់ដោយ</th>
-                                <th>ស្តុក</th>
-                            </tr>
-                            <tr style="text-align: center;">
-                                <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
-                                <td>RRPS PHARMA</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        </table>
-        <div class="list-sale">
-            <table class="table table-bordered">
-            <thead style="background:#eee">
-                <tr>
-                    <th>ផលិតផល</th>
-                    <th>បរិមាណ</th>
-                    <th>ឥតគិតថ្លៃ</th>
-                    <th>អត្រា</th>
-                    <th>ចំនួនទឹកប្រាក់</th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach ($sale->productSales as $productSale)
-                <tr>
-                    <td style="width:340px;">{{$productSale->product ? $productSale->product->title : '' }}</td>
-                    <td class="text-right">{{$productSale->quantity}}</td>
-                    <td class="text-right">{{$productSale->product_free}}</td>
-                    <td class="text-right">{{$productSale->rate}}</td>
-                    <td class="text-right" style="width: 219px;">{{$productSale->amount}}</td>
-                </tr>
-            @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="4" class="text-right">សរុប</td>
-                    <td class="text-right">
-                        USD {{$sale->total_amount}}
+                            </tbody>
+                        </table>
+                    </td>
+                    <td class="pd-right">
+                        <table class="table table-bordered">
+                            <thead style="background:#eee">
+                                <tr style="text-align: center;">
+                                    <th>កាលបរិច្ឆេទ</th>
+                                    <th>#លេខកូដវិក្កយបត្រ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="text-align: center;">
+                                    <td>{{ date('d/m/Y', strtotime($sale->sale_date))}}</td>
+                                    <td>{{ $sale->quotaion_no }}</td>
+                                </tr>
+                                <tr style="background:#eee; text-align: center;">
+                                    <th style="text-align: center;">លក់ដោយ</th>
+                                    <th>ស្តុក</th>
+                                </tr>
+                                <tr style="text-align: center;">
+                                    <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                    <td>RRPS PHARMA</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="4" class="text-right" style="border: none;"><strong>ទទួលបានចំនួនផលិតផល:</strong></td>
-                    <td class="text-right">
-                        <input type="text" class="form-control" name="receive_money" accept="application/pdf">
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4" class="text-right" style="border: none;"><strong>ចំនួនទឹកប្រាក់ទូទាត់:</strong></td>
-                    <td class="text-right">
-                        <input type="text" class="form-control" name="pay_amount" accept="application/pdf">
-                    </td>
-                </tr>
-                
-            </tfoot>
-        </table>
-        <div style="text-align: center; margin-top: 50px;width:100%;">
-            <div class="d-inline">
-                <p>ត្រូតពិនិត្យដោយ</p>
-                <p style="margin-top: 50px;border-bottom: 1px solid #000;"></p>
+            </table>
+            <div class="list-sale">
+                <table class="table table-bordered">
+                <thead style="background:#eee">
+                    <tr>
+                        <th>ផលិតផល</th>
+                        <th>បរិមាណ</th>
+                        <th>ចំនួនថែម</th>
+                        <th>តម្លែ()</th>
+                        <th class="text-right">ចំនួនទឹកប្រាក់</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($sale->productSales as $productSale)
+                    <tr>
+                        <td style="width:340px;">{{$productSale->product ? $productSale->product->title : '' }}</td>
+                        <td class="text-right">{{$productSale->quantity}}</td>
+                        <td class="text-right">{{$productSale->product_free}}</td>
+                        <td class="text-right">{{$productSale->rate}}</td>
+                        <td class="text-right" style="width: 219px;">{{$productSale->amount}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-right">សរុប</td>
+                        <td class="text-right">
+                            USD {{$sale->total_amount}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-right" style="border: none;"><strong>ទទួលបានចំនួនផលិតផល:</strong></td>
+                        <td class="text-right">
+                            <input type="text" class="form-control" name="receive_money" accept="application/pdf">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-right" style="border: none;"><strong>ចំនួនទឹកប្រាក់ទូទាត់:</strong></td>
+                        <td class="text-right">
+                            <input type="text" class="form-control" name="pay_amount" accept="application/pdf">
+                        </td>
+                    </tr>
+                    
+                </tfoot>
+            </table>
+            <div style="text-align: center; margin-top: 50px;width:100%;">
+                <div class="d-inline">
+                    <p>ត្រូតពិនិត្យដោយ</p>
+                    <p style="margin-top: 50px;border-bottom: 1px solid #000;"></p>
+                </div>
+                <div class="d-inline">
+                    <p>ហត្ថលេខាអតិថិជន</p>
+                    <p style="margin-top: 50px;border-bottom: 1px solid #000;"></p>
+                </div>
             </div>
-             <div class="d-inline">
-                <p>ហត្ថលេខាអតិថិជន</p>
-                <p style="margin-top: 50px;border-bottom: 1px solid #000;"></p>
             </div>
-        </div>
         </div>
     </div>
 </body>
