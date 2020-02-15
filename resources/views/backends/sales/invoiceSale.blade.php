@@ -195,7 +195,7 @@
                 <tr>
                     <td colspan="4" class="text-right">សរុប/Total</td>
                     <td class="text-right">
-                        USA {{$sale->total_amount}}
+                        USD {{$sale->total_amount}}
                     </td>
                 </tr>
                 <tr>
