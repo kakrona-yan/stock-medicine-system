@@ -342,11 +342,12 @@
         let quantity = $('#quantity_'+id).val();
         let rate = formatMoney($('#rate_'+id).val());
         let productFree = $('#productFree_'+id).val();
-        let amount = Number(quantity) * rate;
+        let amount = Number(quantity) * Number(rate);
         
         amountQuantity += Number(quantity);
         amountProductFree += Number(productFree);
-        totalAmount += amount;
+        totalAmount += Number(amount);
+        
         $('#quantities').val(amountQuantity);
         $('#productFrees').val(amountProductFree);
         let totalQuantity = amountQuantity + amountProductFree;
@@ -370,9 +371,9 @@
 
         totalQuantityPayment = Number(totalQuantityPayment) - Number(quantity);
         totalProductFreePayment = Number(totalProductFreePayment) - Number(productFree);
-        totalAmountPayment = totalAmountPayment - amount;
+        totalAmountPayment = Number(totalAmountPayment) - Number(amount);
 
-        let totalQuantity = totalQuantityPayment + totalProductFreePayment;
+        let totalQuantity = Number(totalQuantityPayment) + Number(totalProductFreePayment);
 
         $('#quantities').val(totalQuantityPayment);
         $('#productFrees').val(totalProductFreePayment);
@@ -397,13 +398,13 @@
         // Payment
         let totalQuantityPayment = $('#quantities').val();
         let totalAmountPayment = formatMoney($('input[name="total_amount"]').val());
-        let amount = Number(quantity) * formatMoney(rate);
+        let amount = Number(quantity) * Number(rate);
 
-        totalQuantityPayment = totalQuantityPayment - Number(oldQuantity);
+        totalQuantityPayment = Number(totalQuantityPayment) - Number(oldQuantity);
         totalQuantityPayment += Number(quantity);
         totalAmountPayment = totalAmountPayment - oldAmount;
         totalAmountPayment += Number(amount);
-        let totalQuantity =  totalQuantityPayment + amountProductFree;
+        let totalQuantity =  Number(totalQuantityPayment) + Number(amountProductFree);
         // output value
         $('#quantities').val(totalQuantityPayment)
         $('input[name="total_quantity"]').val(totalQuantity);
@@ -411,7 +412,7 @@
         $('#amount_'+id).val(amount);
         $(data).attr('data-quantity', quantity);
         amountQuantity = totalQuantityPayment;
-        totalAmount = totalAmountPayment;
+        totalAmount = formatMoney(totalAmountPayment);
     }
     // update Rate 
     function updateRate(data){
@@ -423,20 +424,20 @@
         
         // Payment
         let totalAmountPayment = formatMoney($('input[name="total_amount"]').val());
-        let amount = Number(quantity) * rate;
-        totalAmountPayment = totalAmountPayment - oldAmount;
-        totalAmountPayment += amount;
+        let amount = Number(quantity) * Number(rate);
+        totalAmountPayment = Number(totalAmountPayment) - Number(oldAmount);
+        totalAmountPayment += Number(amount);
         // output value
         $('input[name="total_amount"]').val(totalAmountPayment);
         $('#amount_'+id).val(amount);
         $(data).attr('data-rate', rate);
-        totalAmount = totalAmountPayment;
+        totalAmount = formatMoney(totalAmountPayment);
     }
     // calculatorMoney
     function calculatorMoney(data) {
         let revicePrice = $(data)[0] ? $(data)[0].value : 0;
         let totalAmountPayment = formatMoney($('input[name="total_amount"]').val());
-        let moneyOwed = totalAmountPayment - revicePrice;
+        let moneyOwed = Number(totalAmountPayment)- Number(revicePrice);
         $("#money_owed").val(moneyOwed);
     }
     // updateProductFree
@@ -448,7 +449,7 @@
         let productFreePayment = $('#productFrees').val();
         productFreePayment = Number(productFreePayment) - Number(oldProductFree)
         productFreePayment += Number(productFree);
-        let totalQuantityPayment = amountQuantity + productFreePayment
+        let totalQuantityPayment = Number(amountQuantity) + Number(productFreePayment)
         // output value
         $('#productFrees').val(productFreePayment);
         $('input[name="total_quantity"]').val(totalQuantityPayment);
@@ -458,7 +459,7 @@
     }
     // format money
     function formatMoney(money) {
-        return money != '' ? parseFloat(money).toFixed(2) : 0;
+        return money != '' ? Number(money).toFixed(2) : 0;
     }
 </script>
 @endpush

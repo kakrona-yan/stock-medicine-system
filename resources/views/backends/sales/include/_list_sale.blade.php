@@ -21,7 +21,7 @@
                     <div class="form-group mb-2 mr-2">
                         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                             <input type="text" class="form-control" name="sale_date"
-                                value="{{ old('sale_date', date('Y-m-d')) }}">
+                                value="{{ old('sale_date', $request->sale_date) }}">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
                             </div>
