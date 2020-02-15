@@ -146,7 +146,7 @@
                     <h1>RRPS PHARMA CO., LTD</h1>
                 </div>
                 <div class="company-info--address">
-                    <p>អាសយដ្ឋាន : NO. 01, ST. 182, សង្កាត់ វាលវង់, ខណ្ឌ ៧មករា, រាជធានីភ្នំពេញ</p>
+                    <p>អាស័យដ្ឋាន : NO. 01, ST. 182, សង្កាត់ វាលវង់, ខណ្ឌ ៧មករា, រាជធានីភ្នំពេញ</p>
                     <p>ទូរស័ព្ទ     : 093 399 330 </p>
                 </div>
             </div>
@@ -178,7 +178,7 @@
                             <thead style="background:#eee">
                                 <tr style="text-align: center;">
                                     <th>កាលបរិច្ឆេទ</th>
-                                    <th>#លេខកូដវិក្កយបត្រ</th>
+                                    <th>លេខកូដវិក្កយបត្រ</th>
                                 </tr>
                             </thead>
                             <tbody>
