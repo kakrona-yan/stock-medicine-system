@@ -65,7 +65,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{{ $staff->firstname }} {{ $staff->lastname }}</td>
+                                    <td>{{ $staff->getFullnameAttribute() }}</td>
                                     <td>{{ $staff->email }}</td>
                                     <td>{{ $staff->password }}</td>
                                     <td>

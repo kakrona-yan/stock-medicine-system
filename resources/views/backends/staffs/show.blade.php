@@ -41,7 +41,7 @@
                                 <tbody>
                                     <tr>
                                         <th class="border-top-0 w-15">{{__('staff.list.name')}}:</th>
-                                        <td class="border-top-0">{{ $staff->lastname }} {{ $staff->firstname }}</td>
+                                        <td class="border-top-0">{{ $staff->getFullnameAttribute() }}</td>
                                     </tr>
                                     <tr>
                                         <th>{{__('staff.list.email')}}:</th>

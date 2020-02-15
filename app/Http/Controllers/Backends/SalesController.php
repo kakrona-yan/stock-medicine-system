@@ -11,6 +11,8 @@ use App\Models\Sale;
 use App\Models\SaleProduct;
 use Barryvdh\DomPDF\Facade as PDF;
 use Dompdf\Dompdf;
+use App\Models\Staff;
+use App\Http\Constants\DeleteStatus;
 
 class SalesController extends Controller
 {
@@ -57,11 +59,14 @@ class SalesController extends Controller
             $categories = $this->category->getCategoryNameByProducts();
             $customers = $this->customer->getCustomer();
             $invoiceCode =  $this->sale->incrementStringUniqueInvoiceCode();
+            $staffs = Staff::where('is_delete', '<>', DeleteStatus::DELETED)
+                ->select(['id', 'firstname', 'lastname'])->get();
             return view('backends.sales.create', [
                 'request' => $request,
                 'categories' => $categories,
                 'customers' => $customers,
-                'invoiceCode' => $invoiceCode
+                'invoiceCode' => $invoiceCode,
+                'staffs' => $staffs
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.sales.create');
@@ -91,10 +96,15 @@ class SalesController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             } else {
                 // insert to table sales
-                $staff = \Auth::user()->staff;
+                if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor()) {
+                    $staff = $request->staff_id ? $request->staff_id : \Auth::id() ;
+                }else{
+                    $staff = \Auth::user()->staff ? \Auth::user()->staff->id : \Auth::id();
+                }
+               
                 $requestSale = [];
                 if ($request->exists('sale_product') && !empty($request->sale_product)) {
-                    $requestSale['staff_id'] = $staff ? $staff->id : \Auth::id();
+                    $requestSale['staff_id'] = $staff;
                     $requestSale['customer_id'] = $request->customer_id;
                     $requestSale['quotaion_no'] = $request->quotaion_no;
                     $requestSale['money_change'] = $request->money_change;

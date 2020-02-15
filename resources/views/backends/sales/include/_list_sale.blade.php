@@ -3,8 +3,47 @@
         <!-- Circle Buttons -->
         <div class="card mb-4">
             <div class="card-body">
-                <form id="product-search" action="{{ route('sale.index') }}" method="GET" class="form form-horizontal form-search form-inline mb-2">
-                    
+                <form id="sale-search" action="{{ route('sale.index') }}" method="GET" class="form form-horizontal form-search form-inline mb-2 d-inline-flex">
+                    <div class="form-group mb-2 mr-2">
+                        <label for="title" class="mr-sm-2">Customer Name:</label>
+                        <input type="text" class="form-control mr-1" id="customer" 
+                            name="customer_name" value="{{ old('customer_name', $request->customer_name)}}"
+                            placeholder="customer name"
+                        >
+                    </div>
+                    <div class="form-group mb-2 mr-2">
+                        <label for="title" class="mr-sm-2">Staff Name:</label>
+                        <input type="text" class="form-control mr-1" id="customer" 
+                            name="staff_name" value="{{ old('staff_name', $request->staff_name)}}"
+                            placeholder="staff name"
+                        >
+                    </div>
+                    <div class="form-group mb-2 mr-2">
+                        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                            <input type="text" class="form-control" name="sale_date"
+                                value="{{ old('sale_date', date('Y-m-d')) }}">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <button type="submit" class="btn btn-circle btn-primary"><i class="fa fa-search"></i> @lang('button.search')</button>
+                    </div>
+                    <div class="form-group d-block w-100">
+                        <div class="input-group mw-btn-125" style="width: 120px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-hand-pointer"></i></span>
+                            </div>
+                            <select class="form-control" name="limit" id="limit">
+                                @for( $i=10; $i<=50; $i +=10 )
+                                    <option value="{{$i}}" 
+                                    {{ $request->limit == $i || config('pagination.limit') == $i ? 'selected' : ''}}
+                                    >{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
                 </form>
                <div class="table-responsive cus-table">
                     <table class="table table-bordered">
@@ -112,3 +151,15 @@
         </div>
     </div>
 </div><!--/row-->
+@push('footer-script')
+<script>
+    (function( $ ){
+        $("[name='limit']").select2({
+            allowClear: false
+        }).on('select2:select', function (e) {
+            $('#sale-search').submit();
+        });
+    })( jQuery );
+    
+</script>
+@endpush

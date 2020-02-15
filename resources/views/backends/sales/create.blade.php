@@ -41,11 +41,30 @@
                         <div id="addsupplier" class="tab-pane active">
                             <form class="form-main" action="{{route('sale.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="row mb-4">
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
+                                <div class="row mb-4 flex-sm-row-reverse flex-md-row-reverse flex-lg-row-reverse">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
                                         <div class="form-group" style="background: #eaecf4;padding: 10px;">
                                             <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>Sale</button>
                                         </div>
+                                        <fieldset class="edit-master-registration-fieldset">
+                                            <div class="form-group select-group row mb-4">
+                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Category</label>
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+                                                    <select class="form-control" id="category_id" name="category_id">
+                                                        <option value="">Please select</option>
+                                                        @foreach($categories as $id => $name)
+                                                            <option value="{{ $id }}" {{ $id == $request->category_id ? 'selected' : '' }}>{{ $name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <legend class="edit-application-information-legend text-left">Product List:</legend>
+                                            <div class="form-group select-group list-product">
+                                                <div id="list_product"></div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
                                         <fieldset class="edit-master-registration-fieldset">
                                             <legend class="edit-application-information-legend text-left">Sale:</legend>
                                             <div class="form-group row">
@@ -71,6 +90,19 @@
                                                     @endif
                                                 </div>
                                             </div>
+                                            @if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor())
+                                            <div class="form-group select-group row">
+                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Staff</label>
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+                                                    <select class="form-control" id="staff_id" name="staff_id">
+                                                        <option value="">Please select</option>
+                                                        @foreach($staffs as  $staff)
+                                                            <option value="{{ $staff->id }}" {{ $staff->id  == $request->staff_id ? 'selected' : '' }}>{{ $staff->getFullnameAttribute() }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @endif
                                             <div class="form-group select-group row">
                                                 <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Date Sale <span class="text-danger">*</span></label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
@@ -169,28 +201,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
-                                        <fieldset class="edit-master-registration-fieldset">
-                                            <div class="form-group select-group row mb-4">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Category</label>
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-                                                    <select class="form-control" id="category_id" name="category_id">
-                                                        <option value="">Please select</option>
-                                                        @foreach($categories as $id => $name)
-                                                            <option value="{{ $id }}" {{ $id == $request->category_id ? 'selected' : '' }}>{{ $name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <legend class="edit-application-information-legend text-left">Product List:</legend>
-                                            <div class="form-group select-group list-product">
-                                                <div id="list_product"></div>
-                                            </div>
-                                        </fieldset>
-                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 col-md-7">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-7">
                                         <div class="form-group mt-2" style="background: #eaecf4;padding: 10px;">
                                             <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>Sale</button>
                                         </div>
@@ -232,7 +245,7 @@
                 }
             });
         });
-        $('#customer_id').select2({
+        $('#customer_id, #staff_id').select2({
             allowClear: false
         });
         $("input[name=total_discount], input[name=money_change], input[name=money_change], input[name=total_amount]").keydown(function (e) {

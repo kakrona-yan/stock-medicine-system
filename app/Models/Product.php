@@ -53,6 +53,9 @@ class Product extends BaseModel
         if ($request->exists('limit') && !is_null($request->limit)) {
             $limit = $request->limit;
         }
+        if ($request->exists('title') && !empty($request->title)) {
+            $customer->where('title', 'like', '%' . $request->title . '%');
+        }
         return $products->paginate($limit);
     }
 
