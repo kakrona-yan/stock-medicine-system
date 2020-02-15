@@ -244,7 +244,7 @@
     });
     function allowNumber(e) {
         // Deny if double dot is inputed
-        if (e.keyCode == 190 && this.value.split('.').length > 1) {
+        if (e.keyCode == 190) {
                 e.preventDefault();
                 return;
             }
@@ -312,9 +312,9 @@
         let quantity = $('#quantity_'+id).val();
         let rate = formatMoney($('#rate_'+id).val());
         let productFree = $('#productFree_'+id).val();
-        let amount = Number(quantity) * formatMoney(rate);
+        let amount = Number(quantity) * rate;
         
-        amountQuantity +=Number(quantity);
+        amountQuantity += Number(quantity);
         amountProductFree += Number(productFree);
         totalAmount += amount;
         $('#quantities').val(amountQuantity);
