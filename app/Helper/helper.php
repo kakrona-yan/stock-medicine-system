@@ -146,3 +146,15 @@ if (!function_exists('checkImageSize')) {
         return ($size_mb > 10);
     }
 }
+if (!function_exists('responseSuccess')) {
+    function responseSuccess($putFlash, $forgetFlash = array())
+    {
+        Session::forget($forgetFlash);
+        return response()
+            ->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => $putFlash
+            ]);
+    }
+}

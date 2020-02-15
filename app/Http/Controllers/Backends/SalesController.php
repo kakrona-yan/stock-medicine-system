@@ -93,7 +93,7 @@ class SalesController extends Controller
                 'sale_date' => $request->sale_date,
             ], $rules);
             if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
+                return response()->json(["errors" => $validator->errors()], 422);;
             } else {
                 // insert to table sales
                 if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor()) {
@@ -129,11 +129,15 @@ class SalesController extends Controller
                             ]);
                         }
                     }
-                    return \Redirect::route('sale.index')
-                        ->with('success', __('flash.store'));
+                    return responseSuccess(
+                        \Session::flash('success', __('flash.store')),
+                            ['danger', 'danger']
+                        );
                 } else {
-                    return \Redirect::route('sale.create')
-                    ->with('danger', __('flash.empty_data'));
+                    return responseSuccess(
+                        \Session::flash('danger', __('flash.empty_data')),
+                        ['success', 'danger']
+                    );
                 }
             }
         } catch (\ValidationException $e) {

@@ -39,7 +39,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div id="addsupplier" class="tab-pane active">
-                            <form class="form-main" action="{{route('sale.store')}}" method="POST" enctype="multipart/form-data">
+                            <form id="form_sale_stock" class="form-main" action="{{route('sale.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mb-4 flex-sm-row-reverse flex-md-row-reverse flex-lg-row-reverse">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
@@ -83,11 +83,9 @@
                                                             <option value="{{ $id }}" {{ $id == $request->customer_id ? 'selected' : '' }}>{{ $name }}</option>
                                                         @endforeach
                                                     </select>
-                                                    @if ($errors->has('customer_id'))
-                                                        <span class="text-danger">
-                                                            <strong>{{ $errors->first('customer_id') }}</strong>
-                                                        </span>
-                                                    @endif
+                                                    <span class="text-danger">
+                                                        <strong id="customer_id_error">{{ $errors->first('customer_id') }}</strong>
+                                                    </span>
                                                 </div>
                                             </div>
                                             @if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor())
@@ -224,7 +222,29 @@
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+    }); 
+    $(function(){
+        const formSale = $('#form_sale_stock');
+        formSale.submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url     : formSale.attr('action'),
+                type    : formSale.attr('method'),
+                data    : formSale.serialize(),
+                dataType: 'json',
+                success : function (json) {
+                    location.href = '{{ route("sale.index") }}';
+                },
+                error: function(json){
+                    $.each(json.responseJSON.errors, function (key, value) {
+                        $(`#${key}_error`).text(value);
+                    });
+                    $("html, body").animate({ scrollTop: 0 }, 500);
+                }
+            });
+        });
     });
+    // filter product
     $(function(){
         $("#category_id").select2({
             allowClear: false
