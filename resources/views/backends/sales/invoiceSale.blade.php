@@ -120,6 +120,7 @@
             z-index: 99;
             top: -20px;
             font-size: 20px;
+            cursor: pointer;
         }
         @media print {
             .btn-print {
@@ -135,7 +136,6 @@
           window.print();
         }
     </script>
-        
 </head>
 <body>
     <div class="container mt-5">
