@@ -41,24 +41,13 @@
                         <div id="addsupplier" class="tab-pane active">
                             <form class="form-main" action="{{route('sale.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group w-100" style="background: #eaecf4;padding: 10px;">
-                                    <button type="submit" class="btn btn-circle btn-primary w-25 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>Sale</button>
-                                </div>
                                 <div class="row mb-4">
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
+                                        <div class="form-group" style="background: #eaecf4;padding: 10px;">
+                                            <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>Sale</button>
+                                        </div>
                                         <fieldset class="edit-master-registration-fieldset">
                                             <legend class="edit-application-information-legend text-left">Sale:</legend>
-                                            <div class="form-group select-group row mb-4">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Category</label>
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-                                                    <select class="form-control" id="category_id" name="category_id">
-                                                        <option value="">Please select</option>
-                                                        @foreach($categories as $id => $name)
-                                                            <option value="{{ $id }}" {{ $id == $request->category_id ? 'selected' : '' }}>{{ $name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
                                             <div class="form-group row">
                                                 <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Invoice Code</label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
@@ -100,9 +89,102 @@
                                                 </div>
                                             </div>
                                         </fieldset>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-12 mb-3 mt-md-2">
+                                                <fieldset class="edit-master-registration-fieldset">
+                                                    <legend class="edit-application-information-legend text-left">Sale Product:</legend>
+                                                    <div class="table-responsive cus-table">
+                                                    <table class="table table-striped table-bordered">
+                                                        <thead class="bg-primary text-light">
+                                                            <tr>
+                                                                <th style="width: 50px;">#</th>
+                                                                <th>Product Name</th>
+                                                                <th>Quantity</th>
+                                                                <th>Product Free</th>
+                                                                <th>Unit Price</th>
+                                                                <th>Total</th>
+                                                                <th style="width: 20px;">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="dynamic_sale_product">
+        
+                                                        </tbody>
+                                                    </table>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12">
+                                                <fieldset class="edit-master-registration-fieldset">
+                                                    <legend class="edit-application-information-legend text-left">Payment:</legend>
+                                                    <div class="form-group row">
+                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_quantity">Total Quantity = Quantities + Product Frees</label>
+                                                        <div class="col-12 col-sm-12 col-md-4">
+                                                            <input type="text" class="form-control" id="total_quantity" name="total_quantity" readonly="" value="{{ old('total_quantity', $request->total_quantity ? $request->total_quantity : 0) }}">
+                                                            <span class="span-p">=</span>
+                                                        </div>
+                                                        <div class="col-12 col-sm-12 col-md-4">
+                                                            <input type="text" class="form-control" id="quantities" readonly="" value="0">
+                                                            <span class="span-p">+</span>
+                                                        </div>
+                                                        <div class="col-12 col-sm-12 col-md-4">
+                                                            <input type="text" class="form-control" id="productFrees" readonly="" value="0">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_amount">Total Amount</label>
+                                                        <div class="col-12 col-sm-12 col-md-12">
+                                                            <input type="text" class="form-control" id="total_amount" name="total_amount" value="{{ old('total_amount', $request->total_amount ? $request->total_amount : 0) }}"
+                                                                {{ !Auth::user()->isRoleAdmin() ? "readonly" : '' }}
+                                                            >
+                                                        </div>
+                                                    </div>
+                                                     <div class="form-group row">
+                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_discount">Dicount</label>
+                                                        <div class="col-12 col-sm-12 col-md-12">
+                                                            <input type="text" class="form-control" id="total_discount" name="total_discount" value="{{ old('dototal_discountb', $request->total_discount ? $request->total_discount : 0) }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_money_revice">Received Amount<span class="text-danger">*</span></label>
+                                                        <div class="col-12 col-sm-12 col-md-12 ">
+                                                            <input type="text" class="form-control {{ $errors->has('money_change') ? ' is-invalid' : '' }}" id="total_money_revice" name="money_change" value="{{ old('money_change', $request->money_change ? $request->money_change : 0) }}"
+                                                                oninput="calculatorMoney(this)"
+                                                            >
+                                                            @if ($errors->has('money_change'))
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $errors->first('money_change') }}</strong>
+                                                                </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="money_owed">Owed</label>
+                                                        <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+                                                            <input type="text" class="form-control" id="money_owed" value="0">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="note">Note</label>
+                                                        <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+                                                            <textarea class="form-control" name="note">{{ old('note', $request->note) }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
                                         <fieldset class="edit-master-registration-fieldset">
+                                            <div class="form-group select-group row mb-4">
+                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Category</label>
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+                                                    <select class="form-control" id="category_id" name="category_id">
+                                                        <option value="">Please select</option>
+                                                        @foreach($categories as $id => $name)
+                                                            <option value="{{ $id }}" {{ $id == $request->category_id ? 'selected' : '' }}>{{ $name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <legend class="edit-application-information-legend text-left">Product List:</legend>
                                             <div class="form-group select-group list-product">
                                                 <div id="list_product"></div>
@@ -111,89 +193,11 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-8 mb-3 mt-md-2">
-                                        <fieldset class="edit-master-registration-fieldset">
-                                            <legend class="edit-application-information-legend text-left">Sale Product:</legend>
-                                            <div class="table-responsive cus-table">
-                                            <table class="table table-striped table-bordered">
-                                                <thead class="bg-primary text-light">
-                                                    <tr>
-                                                        <th style="width: 50px;">#</th>
-                                                        <th>Product Name</th>
-                                                        <th>Quantity</th>
-                                                        <th>Product Free</th>
-                                                        <th>Unit Price</th>
-                                                        <th>Total</th>
-                                                        <th style="width: 20px;">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="dynamic_sale_product">
-
-                                                </tbody>
-                                            </table>
-                                        </fieldset>
+                                    <div class="col-12 col-md-7">
+                                        <div class="form-group mt-2" style="background: #eaecf4;padding: 10px;">
+                                            <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>Sale</button>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-4">
-                                        <fieldset class="edit-master-registration-fieldset">
-                                            <legend class="edit-application-information-legend text-left">Payment:</legend>
-                                            <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_quantity">Total Quantity = Quantities + Product Frees</label>
-                                                <div class="col-12 col-sm-12 col-md-4">
-                                                    <input type="text" class="form-control" id="total_quantity" name="total_quantity" readonly="" value="{{ old('total_quantity', $request->total_quantity ? $request->total_quantity : 0) }}">
-                                                    <span class="span-p">=</span>
-                                                </div>
-                                                <div class="col-12 col-sm-12 col-md-4">
-                                                    <input type="text" class="form-control" id="quantities" readonly="" value="0">
-                                                    <span class="span-p">+</span>
-                                                </div>
-                                                <div class="col-12 col-sm-12 col-md-4">
-                                                    <input type="text" class="form-control" id="productFrees" readonly="" value="0">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_amount">Total Amount</label>
-                                                <div class="col-12 col-sm-12 col-md-12">
-                                                    <input type="text" class="form-control" id="total_amount" name="total_amount" value="{{ old('total_amount', $request->total_amount ? $request->total_amount : 0) }}"
-                                                        {{ !Auth::user()->isRoleAdmin() ? "readonly" : '' }}
-                                                    >
-                                                </div>
-                                            </div>
-                                             <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_discount">Dicount</label>
-                                                <div class="col-12 col-sm-12 col-md-12">
-                                                    <input type="text" class="form-control" id="total_discount" name="total_discount" value="{{ old('dototal_discountb', $request->total_discount ? $request->total_discount : 0) }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_money_revice">Received Amount<span class="text-danger">*</span></label>
-                                                <div class="col-12 col-sm-12 col-md-12 ">
-                                                    <input type="text" class="form-control {{ $errors->has('money_change') ? ' is-invalid' : '' }}" id="total_money_revice" name="money_change" value="{{ old('money_change', $request->money_change ? $request->money_change : 0) }}"
-                                                        oninput="calculatorMoney(this)"
-                                                    >
-                                                    @if ($errors->has('money_change'))
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $errors->first('money_change') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="money_owed">Owed</label>
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-                                                    <input type="text" class="form-control" id="money_owed" value="0">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="note">Note</label>
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-                                                    <textarea class="form-control" name="note">{{ old('note', $request->note) }}</textarea>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </div>
-                                </div>
-                                <div class="form-group w-100 mt-5" style="background: #eaecf4;padding: 10px;">
-                                    <button type="submit" class="btn btn-circle btn-primary w-25 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>Sale</button>
                                 </div>
                             </form><!--/form-main-->
                         </div><!--/tab-add-category-->
@@ -303,13 +307,13 @@
         $('#product_'+id).prop('disabled', true);
         // calculator
         let quantity = $('#quantity_'+id).val();
-        let rate = $('#rate_'+id).val();
+        let rate = formatMoney($('#rate_'+id).val());
         let productFree = $('#productFree_'+id).val();
-        let amount = quantity * rate;
+        let amount = Number(quantity) * formatMoney(rate);
         
         amountQuantity +=Number(quantity);
         amountProductFree += Number(productFree);
-        totalAmount += Number(amount);
+        totalAmount += formatMoney(amount);
         $('#quantities').val(amountQuantity);
         $('#productFrees').val(amountProductFree);
         let totalQuantity = amountQuantity + amountProductFree;
@@ -322,15 +326,15 @@
         e.preventDefault();
         let id = $(this).attr("data-id");
         let quantity = $('#quantity_'+id).val();
-        let amount = $('#amount_'+id).val();
+        let amount = formatMoney($('#amount_'+id).val());
         let productFree = $('#productFree_'+id).val();
         let totalQuantityPayment = $('#quantities').val();
         let totalProductFreePayment = $('#productFrees').val();
-        let totalAmountPayment = $('input[name="total_amount"]').val();
+        let totalAmountPayment = formatMoney($('input[name="total_amount"]').val());
 
         totalQuantityPayment = Number(totalQuantityPayment) - Number(quantity);
         totalProductFreePayment = Number(totalProductFreePayment) - Number(productFree);
-        totalAmountPayment = Number(totalAmountPayment) - Number(amount);
+        totalAmountPayment = formatMoney(totalAmountPayment) - formatMoney(amount);
 
         let totalQuantity = totalQuantityPayment + totalProductFreePayment;
 
@@ -352,16 +356,16 @@
         let id = $(data).attr("data-id");
         let quantity = $('#quantity_'+id).val();
         let oldQuantity = $(data).attr("data-quantity");
-        let rate = $('#rate_'+id).val();
-        let oldAmount =$('#amount_'+id).val();
+        let rate = formatMoney($('#rate_'+id).val());
+        let oldAmount = formatMoney($('#amount_'+id).val());
         // Payment
         let totalQuantityPayment = $('#quantities').val();
-        let totalAmountPayment = $('input[name="total_amount"]').val();
-        let amount = Number(quantity) * Number(rate);
+        let totalAmountPayment = formatMoney($('input[name="total_amount"]').val());
+        let amount = Number(quantity) * formatMoney(rate);
 
         totalQuantityPayment = totalQuantityPayment - Number(oldQuantity);
         totalQuantityPayment += Number(quantity);
-        totalAmountPayment = totalAmountPayment - Number(oldAmount);
+        totalAmountPayment = formatMoney(totalAmountPayment) - formatMoney(oldAmount);
         totalAmountPayment += Number(amount);
         let totalQuantity =  totalQuantityPayment + amountProductFree;
         // output value
@@ -377,14 +381,16 @@
     function updateRate(data){
         let id = $(data).attr("data-id");
         let quantity = $('#quantity_'+id).val();
-        let rate = $('#rate_'+id).val();
-        let oldRate = $(data).attr("data-rate");
-        let oldAmount = $('#amount_'+id).val();
+        let rate = formatMoney($('#rate_'+id).val());
+        let oldRate = formatMoney($(data).attr("data-rate"));
+        let oldAmount = formatMoney($('#amount_'+id).val());
+        console.log(rate);
+        
         // Payment
-        let totalAmountPayment = $('input[name="total_amount"]').val();
-        let amount = quantity * rate;
-        totalAmountPayment = totalAmountPayment - Number(oldAmount);
-        totalAmountPayment += Number(amount);
+        let totalAmountPayment = formatMoney($('input[name="total_amount"]').val());
+        let amount = Number(quantity) * formatMoney(rate);
+        totalAmountPayment = formatMoney(totalAmountPayment) - formatMoney(oldAmount);
+        totalAmountPayment += formatMoney(amount);
         // output value
         $('input[name="total_amount"]').val(totalAmountPayment);
         $('#amount_'+id).val(amount);
@@ -395,7 +401,7 @@
     function calculatorMoney(data) {
         let revicePrice = $(data)[0] ? $(data)[0].value : 0;
         let totalAmountPayment = $('input[name="total_amount"]').val();
-        let moneyOwed = Number(totalAmountPayment) - Number(revicePrice);
+        let moneyOwed = formatMoney(totalAmountPayment) - formatMoney(revicePrice);
         $("#money_owed").val(moneyOwed);
     }
     // updateProductFree
@@ -414,6 +420,10 @@
         $(data).attr('data-productFree', productFree);
         amountProductFree = productFreePayment;
         
+    }
+    // format money
+    function formatMoney(money) {
+        return money != '' ? parseFloat(money).toFixed(2) : 0;
     }
 </script>
 @endpush
