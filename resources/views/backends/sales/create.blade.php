@@ -276,7 +276,7 @@
             html +=`<input type="checkbox" id="product_${productOrder.id}" onclick="checkSaleProduct(${productOrder.id}, '${productOrder.title}', '${productOrder.price}')"/>`;
             html +=`<label for="product_${productOrder.id}">`;
             html +=`<img src="${img}" />`;
-            html +=`<div class="py-1 text-center">${productOrder.title.slice(0, 12)+'...'}</div>`;
+            html +=`<div class="py-1 text-center pro-title">${productOrder.title}</div>`;
             html +=`<div class="py-1 text-center text-danger">${productOrder.price}$</div>`;
             html +='</label>';
             html +='</li>';

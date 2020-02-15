@@ -321,6 +321,11 @@ input{
     .text-center{
       font-size: 12px;
     }
+    .pro-title{
+      max-height: 120px;
+      height: 100%;
+      overflow: hidden;
+    }
   }
   input[type="checkbox"]{
     display: none;
