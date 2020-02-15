@@ -272,9 +272,10 @@
             allowNumber(e)
         });
     });
+   
     function allowNumber(e) {
-        // Deny if double dot is inputed
-        if (e.keyCode == 190) {
+            // Deny if double dot is inputed
+            if (e.keyCode == 190) {
                 e.preventDefault();
                 return;
             }
@@ -352,11 +353,14 @@
         $('#productFrees').val(amountProductFree);
         let totalQuantity = amountQuantity + amountProductFree;
         $('input[name="total_quantity"]').val(totalQuantity);
-        $('input[name="total_amount"]').val(totalAmount);
+        $('input[name="total_amount"]').val(totalAmount.toFixed(2));
         i++;
-        $(".sale_rate").keydown(function (e) {
-            allowNumber(e)
-        });
+
+        $('.sale_rate').keypress(function(event) {
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
     }
     // remove product
     $(document).on('click', '.remove_product', function(e){
@@ -378,7 +382,7 @@
         $('#quantities').val(totalQuantityPayment);
         $('#productFrees').val(totalProductFreePayment);
         $('input[name="total_quantity"]').val(totalQuantity);
-        $('input[name="total_amount"]').val(totalAmountPayment);
+        $('input[name="total_amount"]').val(totalAmountPayment.toFixed(2));
 
         amountQuantity = totalQuantityPayment;
         amountProductFree = totalProductFreePayment;
@@ -408,7 +412,7 @@
         // output value
         $('#quantities').val(totalQuantityPayment)
         $('input[name="total_quantity"]').val(totalQuantity);
-        $('input[name="total_amount"]').val(totalAmountPayment);
+        $('input[name="total_amount"]').val(totalAmountPayment.toFixed(2));
         $('#amount_'+id).val(amount);
         $(data).attr('data-quantity', quantity);
         amountQuantity = totalQuantityPayment;
@@ -428,7 +432,7 @@
         totalAmountPayment = Number(totalAmountPayment) - Number(oldAmount);
         totalAmountPayment += Number(amount);
         // output value
-        $('input[name="total_amount"]').val(totalAmountPayment);
+        $('input[name="total_amount"]').val(totalAmountPayment.toFixed(2));
         $('#amount_'+id).val(amount);
         $(data).attr('data-rate', rate);
         totalAmount = formatMoney(totalAmountPayment);
