@@ -193,7 +193,7 @@
                                 <tr style="text-align: center;">
                                     <td>
                                         {{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}<br/>
-                                        {{$sale->staff->phone1}} {{$sale->staff->phone2 ? '/'.$sale->staff->phone1 : ''}}
+                                        {{$sale->staff->phone1}} {{$sale->staff->phone2 ? '/'.$sale->staff->phone2 : ''}}
                                     </td>
                                     <td>RRPS PHARMA</td>
                                 </tr>
