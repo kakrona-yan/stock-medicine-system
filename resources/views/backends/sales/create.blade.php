@@ -321,7 +321,6 @@
         $('#productFrees').val(amountProductFree);
         let totalQuantity = amountQuantity + amountProductFree;
         $('input[name="total_quantity"]').val(totalQuantity);
-        totalAmount = formatMoney(totalAmount)
         $('input[name="total_amount"]').val(totalAmount);
         i++;
         $(".sale_rate").keydown(function (e) {
@@ -348,7 +347,6 @@
         $('#quantities').val(totalQuantityPayment);
         $('#productFrees').val(totalProductFreePayment);
         $('input[name="total_quantity"]').val(totalQuantity);
-        totalAmountPayment = formatMoney(totalAmountPayment)
         $('input[name="total_amount"]').val(totalAmountPayment);
 
         amountQuantity = totalQuantityPayment;
@@ -379,7 +377,6 @@
         // output value
         $('#quantities').val(totalQuantityPayment)
         $('input[name="total_quantity"]').val(totalQuantity);
-        totalAmountPayment = formatMoney(totalAmountPayment);
         $('input[name="total_amount"]').val(totalAmountPayment);
         $('#amount_'+id).val(amount);
         $(data).attr('data-quantity', quantity);
@@ -400,7 +397,6 @@
         totalAmountPayment = totalAmountPayment - oldAmount;
         totalAmountPayment += amount;
         // output value
-        totalAmountPayment = formatMoney(totalAmountPayment)
         $('input[name="total_amount"]').val(totalAmountPayment);
         $('#amount_'+id).val(amount);
         $(data).attr('data-rate', rate);
