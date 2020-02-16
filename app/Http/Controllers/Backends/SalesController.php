@@ -213,4 +213,149 @@ class SalesController extends Controller
             return exceptionError($e, 'backends.sales.index');
         }
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request, int $id)
+    {
+        try {
+            $sale = $this->sale->available($id);
+            if (!$sale) {
+                return response()->view('errors.404', [], 404);
+            }
+
+            $categories = $this->category->getCategoryNameByProducts();
+            $customers = $this->customer->getCustomer();
+            $invoiceCode =  $this->sale->incrementStringUniqueInvoiceCode();
+            $staffs = Staff::where('is_delete', '<>', DeleteStatus::DELETED)
+                ->select(['id', 'firstname', 'lastname'])
+                ->get();
+
+            return view('backends.sales.edit', [
+                'sale' => $sale,
+                'request' => $request,
+                'categories' => $categories,
+                'customers' => $customers,
+                'invoiceCode' => $invoiceCode,
+                'staffs' => $staffs
+            ]);
+        } catch (\ValidationException $e) {
+            return exceptionError($e, 'backends.products.edit');
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        try {
+            // Rules of field
+            $rules = [
+                'customer_id' => 'required',
+                'sale_date' => 'required',
+            ];
+            // Set field of Validattion
+            $validator = \Validator::make([
+                'customer_id' => $request->customer_id,
+                'sale_date' => $request->sale_date,
+            ], $rules);
+            if ($validator->fails()) {
+                return response()->json(["errors" => $validator->errors()], 422);;
+            } else {
+                $sale = $this->sale->available($id);
+                if (!$sale) {
+                    return response()->view('errors.404', [], 404);
+                }
+                // insert to table sales
+                if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor()) {
+                    $staff = $request->staff_id ? $request->staff_id : \Auth::id() ;
+                }else{
+                    $staff = \Auth::user()->staff ? \Auth::user()->staff->id : \Auth::id();
+                }
+               
+                $requestSale = [];
+                if ($request->exists('sale_product') && !empty($request->sale_product)) {
+                    $requestSale['staff_id'] = $staff;
+                    $requestSale['customer_id'] = $request->customer_id;
+                    $requestSale['quotaion_no'] = $request->quotaion_no;
+                    $requestSale['money_change'] = $request->money_change;
+                    $requestSale['total_quantity'] = $request->total_quantity;
+                    $requestSale['total_discount'] = $request->total_discount;
+                    $requestSale['total_amount'] = $request->total_amount;
+                    $requestSale['sale_date'] = date('Y-m-d', strtotime($request->sale_date));
+                    $requestSale['note'] = $request->note;
+                    $sale->update($requestSale);
+                    // insert to table salesProduct
+                    if($sale) {
+                        $saleProducts = [];
+                        $saleProducts = $request->sale_product;
+                        foreach ($saleProducts as $key => $saleProduct) {
+                            $sale->productSales()->updateOrCreate([
+                                'sale_id'       => $sale->id,
+                                'product_id'    => $saleProduct['product_id'],
+                                'rate'          => $saleProduct['rate'],
+                                'quantity'      => $saleProduct['quantity'],
+                                'product_free'  => $saleProduct['product_free'],
+                                'amount'        => $saleProduct['amount']
+                            ]);
+                        }
+                        // update and delete table 
+                        if (isset($request->sale_ids)) {
+                            $saleIds = preg_split("/,/", $request->sale_ids);
+                            foreach ($saleIds as $key => $saleId) {
+                                $saleProductFind = $this->saleProduct->where('sale_id', $sale->id)
+                                    ->where('id', $saleId)
+                                    ->first();
+                                if ($saleProductFind) {
+                                    $saleProductFind->delete();
+                                }
+                            }
+                        }
+                    }
+                    return responseSuccess(
+                        \Session::flash('warning', __('flash.update')),
+                            ['danger', 'danger']
+                        );
+                } else {
+                    return responseSuccess(
+                        \Session::flash('danger', __('flash.empty_data')),
+                        ['warning', 'danger']
+                    );
+                }
+            }
+        } catch (\ValidationException $e) {
+            return exceptionError($e, 'customers.create');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        try {
+            $id = $request->product_id;
+            $product = $this->product->available($id);
+            if (!$product) {
+                return response()->view('errors.404', [], 404);
+            }
+            $product->remove();
+            return redirect()->route('product.index')
+                ->with('danger', __('flash.destroy'));
+        } catch (\ValidationException $e) {
+            return exceptionError($e, 'backends.products.index');
+        }
+    }
 }

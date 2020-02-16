@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SaleProduct extends Model
+class SaleProduct extends BaseModel
 {
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'sale_id',
         'product_id',

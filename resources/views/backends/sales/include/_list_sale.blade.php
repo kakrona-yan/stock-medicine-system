@@ -78,6 +78,13 @@
                                     <td>{{date('Y-m-d', strtotime($sale->sale_date))}}</td>
                                     <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
                                     <td rowspan="{{$sale->productSales->count() > 0 ? 2 : 1}}">
+                                        <a class="btn btn-circle btn-sm btn-warning btn-circle" 
+                                            data-toggle="tooltip" 
+                                            data-placement="top"
+                                            data-original-title="{{__('button.edit')}}"
+                                            href="{{route('sale.edit', $sale->id)}}"
+                                            ><i class="far fa-edit"></i>
+                                        </a>
                                         @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                         {{-- <a class="btn btn-circle btn-circle btn-sm btn-warning btn-circle mr-1" 
                                             data-toggle="tooltip" 
@@ -86,13 +93,24 @@
                                             href="{{route('sale.viewPDF', $sale->id)}}"
                                         ><i class="far far fa-eye"></i>
                                         </a> --}}
+                                        <button type="button"
+                                            id="btn-deleted"
+                                            class="btn btn-circle btn-sm btn-danger btn-circle"
+                                            onclick="deletePopup(this)"
+                                            data-id="{{ $sale->id }}"
+                                            data-toggle="modal" data-target="#deleteSale"
+                                            title="{{__('button.delete')}}"
+                                            ><i class="fa fa-trash"></i>
+                                        </button>
                                         <a class="btn btn-circle btn-circle btn-sm btn-danger btn-circle mr-1" 
                                             data-toggle="tooltip" 
                                             data-placement="top"
                                             data-original-title="Invoice #{{$sale->quotaion_no}}"
                                             href="{{route('sale.downloadPDF', $sale->id)}}"
-                                        ><i class="far fa-file-pdf"></i>
+                                            ><i class="far fa-file-pdf"></i>
+                                        </a>
                                         @endif
+                                        
                                     </td>
                                 </tr>
                                 @if ($sale->productSales->count() > 0)
