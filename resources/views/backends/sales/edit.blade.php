@@ -471,7 +471,7 @@
         $('#quantities').val(totalQuantityPayment)
         $('input[name="total_quantity"]').val(totalQuantity);
         $('input[name="total_amount"]').val(totalAmountPayment.toFixed(2));
-        $('#amount_'+id).val(amount);
+        $('#amount_'+id).val(amount.toFixed(2));
         $(data).attr('data-quantity', quantity);
         amountQuantity = totalQuantityPayment;
         totalAmount = formatMoney(totalAmountPayment);
@@ -491,7 +491,7 @@
         totalAmountPayment += Number(amount);
         // output value
         $('input[name="total_amount"]').val(totalAmountPayment.toFixed(2));
-        $('#amount_'+id).val(amount);
+        $('#amount_'+id).val(amount.toFixed(2));
         $(data).attr('data-rate', rate);
         totalAmount = formatMoney(totalAmountPayment);
     }
@@ -500,7 +500,7 @@
         let revicePrice = $(data)[0] ? $(data)[0].value : 0;
         let totalAmountPayment = formatMoney($('input[name="total_amount"]').val());
         let moneyOwed = Number(totalAmountPayment)- Number(revicePrice);
-        $("#money_owed").val(moneyOwed);
+        $("#money_owed").val(moneyOwed.toFixed(2));
     }
     // updateProductFree
     function updateProductFree(data) {
