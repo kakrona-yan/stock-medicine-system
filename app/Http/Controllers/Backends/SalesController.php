@@ -230,7 +230,6 @@ class SalesController extends Controller
 
             $categories = $this->category->getCategoryNameByProducts();
             $customers = $this->customer->getCustomer();
-            $invoiceCode =  $this->sale->incrementStringUniqueInvoiceCode();
             $staffs = Staff::where('is_delete', '<>', DeleteStatus::DELETED)
                 ->select(['id', 'firstname', 'lastname'])
                 ->get();
@@ -240,7 +239,6 @@ class SalesController extends Controller
                 'request' => $request,
                 'categories' => $categories,
                 'customers' => $customers,
-                'invoiceCode' => $invoiceCode,
                 'staffs' => $staffs
             ]);
         } catch (\ValidationException $e) {

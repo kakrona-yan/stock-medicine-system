@@ -71,7 +71,7 @@
                                                 <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Invoice Code</label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
                                                     <input type="text" class="form-control" id="invoiceCode" name="quotaion_no" readonly="" 
-                                                    value="{{old('quotaion_no', $invoiceCode)}}">
+                                                    value="{{old('quotaion_no', $sale->quotaion_no)}}">
                                                 </div>
                                             </div>
                                             <div class="form-group select-group row">
@@ -106,7 +106,7 @@
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
                                                     <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                                                         <input type="text" class="form-control" name="sale_date"
-                                                            value="{{ old('sale_date', date('Y-m-d')) }}">
+                                                            value="{{ old('sale_date', date('Y-m-d', strtotime($sale->sale_date))) }}">
                                                         <div class="input-group-append">
                                                             <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
                                                         </div>
