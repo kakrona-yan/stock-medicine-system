@@ -52,7 +52,9 @@
                                     <th>{{ __('staff.list.password') }}</th>
                                     <th>{{ __('staff.list.phone') }}</th>
                                     <th>{{ __('staff.list.address') }}</th>
+                                    @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                     <th class="w-10">{{ __('staff.list.action') }}</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -78,6 +80,7 @@
                                         </div>
                                     </td>
                                     <td>{{ str_limit($staff->address, 30) }}</td>
+                                    @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                     <td>
                                         <a class="btn btn-circle btn-sm btn-info btn-circle" 
                                             data-toggle="tooltip" 
@@ -104,6 +107,7 @@
                                             ><i class="fa fa-trash"></i>
                                         </button>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>

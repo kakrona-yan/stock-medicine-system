@@ -117,7 +117,7 @@ if (!function_exists('uploadThumbnail')) {
 if (!function_exists('currencyFormat')) {
     function currencyFormat($price)
     {
-        return $price > 0 ? number_format((double)$price, 0, ',', ',') : '';
+        return number_format(abs($price),2);
     }
 }
 

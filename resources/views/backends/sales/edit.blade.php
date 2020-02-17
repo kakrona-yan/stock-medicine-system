@@ -218,9 +218,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
+                                                        @php
+                                                            $owed = ($sale->total_amount - $sale->money_change);
+                                                        @endphp
                                                         <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="money_owed">Owed</label>
                                                         <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-                                                            <input type="text" class="form-control" id="money_owed" value="0">
+                                                            <input type="text" class="form-control" id="money_owed" value="{{currencyFormat($owed)}}">
                                                         </div>
                                                     </div>
                                                     @endif
@@ -259,6 +262,11 @@
         }
     }); 
     $(function(){
+        $('.sale_rate').keypress(function(event) {
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
         const formSale = $('#form_sale_stock');
         formSale.submit(function(e) {
             e.preventDefault();
@@ -320,31 +328,13 @@
         $('#customer_id, #staff_id').select2({
             allowClear: false
         });
-        $("input[name=total_discount], input[name=money_change], input[name=money_change], input[name=total_amount]").keydown(function (e) {
-            allowNumber(e)
+        $('input[name=total_discount], input[name=money_change], input[name=money_change], input[name=total_amount]').keypress(function(event) {
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
         });
     });
    
-    function allowNumber(e) {
-            // Deny if double dot is inputed
-            if (e.keyCode == 190) {
-                e.preventDefault();
-                return;
-            }
-            // Allow: backspace, delete, tab, escape, enter
-            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
-                // Allow: Ctrl+A, Command+A
-                (e.keyCode === 190 || e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-                // Allow: home, end, left, right, down, up
-                (e.keyCode >= 35 && e.keyCode <= 40)) {
-                    // let it happen, don't do anything
-                    return;
-            }
-            // Ensure that it is a number and stop the keypress
-            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                e.preventDefault();
-            }
-    }
     /**
     * Render is html
     * @param productOrders
@@ -370,8 +360,8 @@
         html +='</ul></div>';
         return html;
     }
-    var index = {{$i}};
-    var i = index;
+    
+    var i = {{$i}};
     // var totalQuantity = 0;
     var totalAmount = {{$sale->total_amount}};
     var amountProductFree = {{$saleProductFree}};
@@ -393,7 +383,7 @@
         $('#product_'+id).prop('disabled', true);
         // calculator
         let quantity = $('#quantity_'+i).val();
-        let rate = formatMoney($('#rate_'+i).val());
+        let rate = $('#rate_'+i).val();
         let productFree = $('#productFree_'+i).val();
         let amount = Number(quantity) * Number(rate);
         
@@ -409,10 +399,10 @@
         i++;
 
         $('.sale_rate').keypress(function(event) {
-        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-            event.preventDefault();
-        }
-    });
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
     }
     // remove product
     var element = [];
@@ -420,11 +410,11 @@
         e.preventDefault();
         let id = $(this).attr("data-id");
         let quantity = $('#quantity_'+id).val();
-        let amount = formatMoney($('#amount_'+id).val());
+        let amount = $('#amount_'+id).val();
         let productFree = $('#productFree_'+id).val();
         let totalQuantityPayment = $('#quantities').val();
         let totalProductFreePayment = $('#productFrees').val();
-        let totalAmountPayment = formatMoney($('input[name="total_amount"]').val());
+        let totalAmountPayment = $('input[name="total_amount"]').val();
 
         totalQuantityPayment = Number(totalQuantityPayment) - Number(quantity);
         totalProductFreePayment = Number(totalProductFreePayment) - Number(productFree);
@@ -435,7 +425,7 @@
         $('#quantities').val(totalQuantityPayment);
         $('#productFrees').val(totalProductFreePayment);
         $('input[name="total_quantity"]').val(totalQuantity);
-        $('input[name="total_amount"]').val(totalAmountPayment.toFixed(2));
+        $('input[name="total_amount"]').val(totalAmountPayment);
 
         amountQuantity = totalQuantityPayment;
         amountProductFree = totalProductFreePayment;
@@ -444,8 +434,7 @@
         $('#product_'+id).prop('checked', false);
         $('#product_'+id).prop('disabled', false);
         var saleId = $(this).attr('data-sale-id');
-        console.log(saleId);
-        
+   
 		element.push(saleId);
         $('#sale_ids').val(element);
         i--;
@@ -455,11 +444,11 @@
         let id = $(data).attr("data-id");
         let quantity = $('#quantity_'+id).val();
         let oldQuantity = $(data).attr("data-quantity");
-        let rate = formatMoney($('#rate_'+id).val());
-        let oldAmount = formatMoney($('#amount_'+id).val());
+        let rate = $('#rate_'+id).val();
+        let oldAmount = $('#amount_'+id).val();
         // Payment
         let totalQuantityPayment = $('#quantities').val();
-        let totalAmountPayment = formatMoney($('input[name="total_amount"]').val());
+        let totalAmountPayment = $('input[name="total_amount"]').val();
         let amount = Number(quantity) * Number(rate);
 
         totalQuantityPayment = Number(totalQuantityPayment) - Number(oldQuantity);
@@ -474,18 +463,18 @@
         $('#amount_'+id).val(amount.toFixed(2));
         $(data).attr('data-quantity', quantity);
         amountQuantity = totalQuantityPayment;
-        totalAmount = formatMoney(totalAmountPayment);
+        totalAmount = totalAmountPayment.toFixed(2);
     }
     // update Rate 
     function updateRate(data){
         let id = $(data).attr("data-id");
         let quantity = $('#quantity_'+id).val();
-        let rate = formatMoney($('#rate_'+id).val());
-        let oldRate = formatMoney($(data).attr("data-rate"));
-        let oldAmount = formatMoney($('#amount_'+id).val());
+        let rate = $('#rate_'+id).val();
+        let oldRate = $(data).attr("data-rate");
+        let oldAmount = $('#amount_'+id).val();
         
         // Payment
-        let totalAmountPayment = formatMoney($('input[name="total_amount"]').val());
+        let totalAmountPayment = $('input[name="total_amount"]').val();
         let amount = Number(quantity) * Number(rate);
         totalAmountPayment = Number(totalAmountPayment) - Number(oldAmount);
         totalAmountPayment += Number(amount);
@@ -493,12 +482,12 @@
         $('input[name="total_amount"]').val(totalAmountPayment.toFixed(2));
         $('#amount_'+id).val(amount.toFixed(2));
         $(data).attr('data-rate', rate);
-        totalAmount = formatMoney(totalAmountPayment);
+        totalAmount = totalAmountPayment.toFixed(2);
     }
     // calculatorMoney
     function calculatorMoney(data) {
         let revicePrice = $(data)[0] ? $(data)[0].value : 0;
-        let totalAmountPayment = formatMoney($('input[name="total_amount"]').val());
+        let totalAmountPayment = $('input[name="total_amount"]').val();
         let moneyOwed = Number(totalAmountPayment)- Number(revicePrice);
         $("#money_owed").val(moneyOwed.toFixed(2));
     }
@@ -509,9 +498,9 @@
         let oldProductFree = $(data).attr("data-productFree");
         // Payment
         let productFreePayment = $('#productFrees').val();
-        productFreePayment = Number(productFreePayment) - Number(oldProductFree)
+        productFreePayment = (Number(productFreePayment) - Number(oldProductFree))
         productFreePayment += Number(productFree);
-        let totalQuantityPayment = Number(amountQuantity) + Number(productFreePayment)
+        let totalQuantityPayment = (Number(amountQuantity) + Number(productFreePayment))
         // output value
         $('#productFrees').val(productFreePayment);
         $('input[name="total_quantity"]').val(totalQuantityPayment);

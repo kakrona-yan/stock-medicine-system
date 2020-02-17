@@ -219,8 +219,8 @@
                         <td style="width:340px;">{{$productSale->product ? $productSale->product->title : '' }}</td>
                         <td class="text-right">{{$productSale->quantity}}</td>
                         <td class="text-right">{{$productSale->product_free}}</td>
-                        <td class="text-right">{{$productSale->rate}}</td>
-                        <td class="text-right" style="width: 219px;">{{$productSale->amount}}</td>
+                        <td class="text-right">{{currencyFormat($productSale->rate)}}</td>
+                        <td class="text-right" style="width: 219px;">{{currencyFormat($productSale->amount)}}</td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -228,7 +228,7 @@
                     <tr>
                         <td colspan="4" class="text-right">សរុប</td>
                         <td class="text-right">
-                            USD {{$sale->total_amount}}
+                            USD {{currencyFormat($sale->total_amount)}}
                         </td>
                     </tr>
                     <tr>

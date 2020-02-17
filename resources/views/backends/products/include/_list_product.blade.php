@@ -42,7 +42,9 @@
                                 <th>{{ __('product.list.price') }}</th>
                                 <th>{{ __('product.list.price_discount') }}</th>
                                 <th class="text-center">{{ __('product.list.active') }}</th>
+                                @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                 <th class="w-action text-center">{{__('product.list.action')}}</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -70,9 +72,9 @@
                                         <span class="slider"><span class="on">ON</span><span class="off">OFF</span>
                                         </span>
                                     </label>
-                                </td>                           
+                                </td>
+                                @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())           
                                 <td>
-                                    @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                     <div class="w-action">
                                     <a class="btn btn-sm btn-info btn-circle" 
                                         data-toggle="tooltip" 
@@ -99,8 +101,8 @@
                                         ><i class="fa fa-trash"></i>
                                     </button>
                                     </div>
-                                    @endif
                                 </td>
+                                @endif
                             </tr>
                         @endforeach 
                         </tbody>

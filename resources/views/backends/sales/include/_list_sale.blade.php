@@ -58,11 +58,16 @@
                                 <th>Owed</th>
                                 <th>Sale Date</th>
                                 <th>Staff</th>
+                                @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                 <th>Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
                             @foreach( $sales as $sale)
+                                @php
+                                   $owed = ($sale->total_amount - $sale->money_change);
+                                @endphp
                                 <tr>
                                     <td class="text-center">
                                         @if ($sale->productSales->count() > 0)
@@ -72,13 +77,13 @@
                                     <td>{{$sale->quotaion_no}}</td>
                                     <td>{{$sale->customer ? $sale->customer->name : ''}}</td>
                                     <td>{{$sale->total_quantity}}</td>
-                                    <td>{{$sale->total_amount}}</td>
-                                    <td>{{$sale->money_change}}</td>
-                                     <td>{{$sale->total_amount - $sale->money_change}}</td>
+                                    <td>{{currencyFormat($sale->total_amount)}}</td>
+                                    <td>{{currencyFormat($sale->money_change)}}</td>
+                                     <td>{{currencyFormat($owed)}}</td>
                                     <td>{{date('Y-m-d', strtotime($sale->sale_date))}}</td>
                                     <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
-                                    <td rowspan="{{$sale->productSales->count() > 0 ? 2 : 1}}">
-                                        @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
+                                    @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
+                                    <td rowspan="{{$sale->productSales->count() > 0 ? 2 : 1}}">   
                                         {{-- <a class="btn btn-circle btn-circle btn-sm btn-warning btn-circle mr-1" 
                                             data-toggle="tooltip" 
                                             data-placement="top"
@@ -109,9 +114,8 @@
                                             href="{{route('sale.downloadPDF', $sale->id)}}"
                                             ><i class="far fa-file-pdf"></i>
                                         </a>
-                                        @endif
-                                        
                                     </td>
+                                    @endif
                                 </tr>
                                 @if ($sale->productSales->count() > 0)
                                 <tr>
