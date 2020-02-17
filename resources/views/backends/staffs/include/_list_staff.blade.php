@@ -53,7 +53,7 @@
                                     <th>{{ __('staff.list.phone') }}</th>
                                     <th>{{ __('staff.list.address') }}</th>
                                     @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
-                                    <th class="w-10">{{ __('staff.list.action') }}</th>
+                                    <th >{{ __('staff.list.action') }}</th>
                                     @endif
                                 </tr>
                             </thead>
