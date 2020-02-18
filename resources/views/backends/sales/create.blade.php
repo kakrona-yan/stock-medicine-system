@@ -314,7 +314,7 @@
             html += '<td><input type="hidden" class="form-control" name="sale_product['+i+'][product_id]" value="'+id+'"/>'+id+'</td>';
             html += '<td><input type="text" class="form-control" value="'+title+'" readonly/></td>';
             html += '<td><input type="number" min="0" id="quantity_'+id+'" data-id="'+id+'" data-quantity="1" class="form-control" name="sale_product['+i+'][quantity]" value="1" oninput="updateQuantity(this)"/></td>';
-            html += '<td><input type="number" min="0" id="productFree_'+id+'" data-id="'+id+'" data-productFree="0" class="form-control" name="sale_product['+i+'][product_free]" value="0" oninput="updateProductFree(this)"/></td>';
+            html += '<td><input type="text" id="productFree_'+id+'" data-id="'+id+'" data-productFree="0" class="form-control sale_rate" name="sale_product['+i+'][product_free]" value="0" oninput="updateProductFree(this)"/></td>';
             html += '<td><input type="text" min="0" id="rate_'+id+'" data-id="'+id+'" data-rate="'+price+'" class="form-control sale_rate" name="sale_product['+i+'][rate]" value="'+price+'" oninput="updateRate(this)"/></td>';
             html += '<td><input type="text" id="amount_'+id+'" class="form-control" name="sale_product['+i+'][amount]" value="'+price+'" readonly /></td>';
             html += '<td class="text-center">';

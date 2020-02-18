@@ -14,7 +14,7 @@ class AddProductToSaleProducts extends Migration
     public function up()
     {
         Schema::table('sale_products', function (Blueprint $table) {
-            $table->integer('product_free')->length(11)->default(0)->nullable()->after('quantity');
+            $table->decimal('product_free', 10, 2)->default(0)->nullable()->after('quantity');
         });
     }
 

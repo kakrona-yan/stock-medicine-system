@@ -155,7 +155,7 @@
                                                                     <input type="number" min="0" id="quantity_{{$i}}" data-id="{{$i}}" data-quantity="{{$productSale->quantity}}" class="form-control" name="sale_product[{{$i}}][quantity]" value="{{$productSale->quantity}}" oninput="updateQuantity(this)">
                                                                 </td>
                                                                 <td>
-                                                                    <input type="number" min="0" id="productFree_{{$i}}" data-id="{{$i}}" data-productfree="{{$productSale->product_free}}" class="form-control" name="sale_product[{{$i}}][product_free]" value="{{$productSale->product_free}}" oninput="updateProductFree(this)">
+                                                                    <input type="text" id="productFree_{{$i}}" data-id="{{$i}}" data-productfree="{{$productSale->product_free}}" class="form-control sale_rate" name="sale_product[{{$i}}][product_free]" value="{{$productSale->product_free}}" oninput="updateProductFree(this)">
                                                                 </td>
                                                                 <td>
                                                                     <input type="text" min="0" id="rate_{{$i}}" data-id="{{$i}}" data-rate="{{$productSale->rate}}" class="form-control sale_rate" name="sale_product[{{$i}}][rate]" value="{{$productSale->rate}}" oninput="updateRate(this)">
@@ -372,7 +372,7 @@
             html += '<td><input type="hidden" class="form-control" name="sale_product['+i+'][product_id]" value="'+id+'"/>'+id+'</td>';
             html += '<td><input type="text" class="form-control" value="'+title+'" readonly/></td>';
             html += '<td><input type="number" min="0" id="quantity_'+i+'" data-id="'+i+'" data-quantity="1" class="form-control" name="sale_product['+i+'][quantity]" value="1" oninput="updateQuantity(this)"/></td>';
-            html += '<td><input type="number" min="0" id="productFree_'+i+'" data-id="'+i+'" data-productFree="0" class="form-control" name="sale_product['+i+'][product_free]" value="0" oninput="updateProductFree(this)"/></td>';
+            html += '<td><input type="tect" id="productFree_'+i+'" data-id="'+i+'" data-productFree="0" class="form-control sale_rate" name="sale_product['+i+'][product_free]" value="0" oninput="updateProductFree(this)"/></td>';
             html += '<td><input type="text" min="0" id="rate_'+i+'" data-id="'+i+'" data-rate="'+price+'" class="form-control sale_rate" name="sale_product['+i+'][rate]" value="'+price+'" oninput="updateRate(this)"/></td>';
             html += '<td><input type="text" id="amount_'+i+'" class="form-control" name="sale_product['+i+'][amount]" value="'+price+'" readonly /></td>';
             html += '<td class="text-center">';
