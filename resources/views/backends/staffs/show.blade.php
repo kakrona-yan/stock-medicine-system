@@ -74,8 +74,8 @@
                                 </tbody>
                               </table>
                             <div class="form-group w-50 d-inline-flex">
-                                <a href="{{route('staff.edit', $staff->id)}}" class="btn btn-circle btn-primary w-25 mr-2">{{__('button.edit')}}</a>
-                                <a href="{{route('staff.index')}}" class="btn btn-circle btn-secondary w-25">{{__('button.return')}}</a>
+                                <a href="{{route('staff.edit', $staff->id)}}" class="btn btn-circle btn-primary w-50 mw-100 mr-2">{{__('button.edit')}}</a>
+                                <a href="{{route('staff.index')}}" class="btn btn-circle btn-secondary w-50 mw-100">{{__('button.return')}}</a>
                             </div>
                         </div><!--/tab-add-staff-->
                     </div>

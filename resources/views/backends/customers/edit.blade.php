@@ -114,8 +114,8 @@
                                     </div>
                                 </div><!--/row-->
                                 <div class="form-group w-50 d-inline-flex">
-                                    <button type="submit" class="btn btn-circle btn-primary w-25 mr-2">{{__('button.add')}}</button>
-                                    <a href="{{route('customer.index')}}" class="btn btn-circle btn-secondary w-25">{{__('button.return')}}</a>
+                                    <button type="submit" class="btn btn-circle btn-primary w-50 mw-100 mr-2">{{__('button.add')}}</button>
+                                    <a href="{{route('customer.index')}}" class="btn btn-circle btn-secondary w-50 mw-100">{{__('button.return')}}</a>
                                 </div>
                             </form><!--/form-main-->
                         </div><!--/tab-add-customer-->
