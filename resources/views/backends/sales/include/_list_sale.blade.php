@@ -80,7 +80,7 @@
                                     <td>{{currencyFormat($sale->total_amount)}}</td>
                                     <td>{{currencyFormat($sale->money_change)}}</td>
                                      <td>{{currencyFormat($owed)}}</td>
-                                    <td>{{date('Y-m-d', strtotime($sale->sale_date))}}</td>
+                                    <td>{{date('Y-m-d h:i', strtotime($sale->sale_date))}}</td>
                                     <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
                                     @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                     <td rowspan="{{$sale->productSales->count() > 0 ? 2 : 1}}">   
