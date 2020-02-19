@@ -124,15 +124,15 @@
                                                 <fieldset class="edit-master-registration-fieldset">
                                                     <legend class="edit-application-information-legend text-left">Sale Product:</legend>
                                                     <div class="table-responsive cus-table">
-                                                    <table class="table table-striped table-bordered">
+                                                    <table class="table table-striped table-bordered" style="width:1000px">
                                                         <thead class="bg-primary text-light">
                                                             <tr>
                                                                 <th style="width: 50px;">#</th>
-                                                                <th>Product Name</th>
-                                                                <th>Quantity</th>
-                                                                <th>Product Free</th>
-                                                                <th>Unit Price</th>
-                                                                <th>Total</th>
+                                                                <th style="width: 300px;">Pro.Name</th>
+                                                                <th style="width: 90px;">Q.T</th>
+                                                                <th style="width: 90px;">Pro.Free</th>
+                                                                <th style="width: 210px;">Rate</th>
+                                                                <th style="width: 210px;">Amount</th>
                                                                 <th style="width: 20px;">Action</th>
                                                             </tr>
                                                         </thead>
