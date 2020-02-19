@@ -150,7 +150,7 @@
                                             <tfoot>
                                                 <tr class="border-sale--top">
                                                     <td colspan="4" class="text-right text-primary">Total</td>
-                                                    <td>{{$total}}</td>
+                                                    <td>{{currencyFormat($sale->total_amount)}}</td>
                                                 </tr>
                                             </tfoot>
                                         </table>

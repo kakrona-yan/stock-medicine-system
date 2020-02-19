@@ -111,7 +111,8 @@ class SalesController extends Controller
                     $requestSale['total_quantity'] = $request->total_quantity;
                     $requestSale['total_discount'] = $request->total_discount;
                     $requestSale['total_amount'] = $request->total_amount;
-                    $requestSale['sale_date'] = date('Y-m-d h:i:s', strtotime($request->sale_date));
+                    $saleDate = $request->sale_date . ' ' . date('h:i:s');
+                    $requestSale['sale_date'] = date('Y-m-d h:i:s', strtotime($saleDate));
                     $requestSale['note'] = $request->note;
                     $sale = $this->sale->create($requestSale);
                     // insert to table salesProduct
@@ -289,7 +290,8 @@ class SalesController extends Controller
                     $requestSale['total_quantity'] = $request->total_quantity;
                     $requestSale['total_discount'] = $request->total_discount;
                     $requestSale['total_amount'] = $request->total_amount;
-                    $requestSale['sale_date'] = date('Y-m-d h:i:s', strtotime($request->sale_date));
+                    $saleDate = $request->sale_date.' '. date('h:i:s');
+                    $requestSale['sale_date'] = date('Y-m-d h:i:s', strtotime($saleDate));
                     $requestSale['note'] = $request->note;
                     $sale->update($requestSale);
                     // insert to table salesProduct
