@@ -27,7 +27,13 @@ class Product extends BaseModel
         'in_store',
         'out_store',
         'is_active',
-        'is_delete'
+        'is_delete',
+        'terms',
+        'expird_date'
+    ];
+
+    protected $dates = [
+        'expird_date',
     ];
 
     public function productImages()

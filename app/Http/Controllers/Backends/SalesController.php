@@ -346,16 +346,21 @@ class SalesController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $id = $request->product_id;
-            $product = $this->product->available($id);
-            if (!$product) {
+            $id = $request->sale_id;
+            $sale = $this->sale->available($id);
+            if (!$sale) {
                 return response()->view('errors.404', [], 404);
             }
-            $product->remove();
-            return redirect()->route('product.index')
+            $saleProduct = $this->saleProduct->where('sale_id', $id)
+                            ->first();
+            if ($saleProduct) {
+                $saleProduct->delete();
+            }
+            $sale->remove();
+            return redirect()->route('sale.index')
                 ->with('danger', __('flash.destroy'));
         } catch (\ValidationException $e) {
-            return exceptionError($e, 'backends.products.index');
+            return exceptionError($e, 'backends.sale.index');
         }
     }
 }

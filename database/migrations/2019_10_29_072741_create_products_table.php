@@ -27,7 +27,7 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('in_store')->length(11)->default(0)->nullable();
             $table->integer('out_store')->length(11)->default(0)->nullable();
-            $table->integer('product_free')->length(11)->default(0)->nullable();
+            $table->string('product_free', 100)->length(11)->default(0)->nullable();
             $table->boolean('is_active')->default(1)->comment('0：in-active、1：active');
             $table->boolean('is_delete')->default(1)->comment('0：delete、1：no delete');
             $table->timestamps();

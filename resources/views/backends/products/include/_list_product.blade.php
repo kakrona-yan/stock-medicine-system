@@ -41,6 +41,8 @@
                                 <th>{{ __('product.list.product_import') }}</th>
                                 <th>{{ __('product.list.price') }}</th>
                                 <th>{{ __('product.list.price_discount') }}</th>
+                                <th>Terms</th>
+                                <th>Expird date</th>
                                 <th class="text-center">{{ __('product.list.active') }}</th>
                                 @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                 <th class="w-action text-center">{{__('product.list.action')}}</th>
@@ -64,6 +66,8 @@
                                 <td>{{$product->product_import}}</td>
                                 <td class="text-right">{{$product->price}}</td>
                                 <td class="text-right">{{$product->price_discount}}</td>
+                                <td>{{$product->terms}}</td>
+                                <td>{{$product->expird_date ? date('Y-m-d h:i', strtotime($product->expird_date)) : "-"}}</td>
                                 <td class="text-center">
                                     <label class="switch">
                                         <input type="checkbox" data-toggle="toggle" data-onstyle="success" name="active"

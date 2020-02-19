@@ -91,6 +91,13 @@
                                             href="{{route('sale.viewPDF', $sale->id)}}"
                                         ><i class="far far fa-eye"></i>
                                         </a> --}}
+                                        <a class="btn btn-circle btn-circle btn-sm btn-success btn-circle mr-1" 
+                                            data-toggle="tooltip" 
+                                            data-placement="top"
+                                            data-original-title="Invoice #{{$sale->quotaion_no}}"
+                                            href="{{route('sale.downloadPDF', $sale->id)}}"
+                                            ><i class="far fa-file-pdf"></i>
+                                        </a>
                                         <a class="btn btn-circle btn-sm btn-warning btn-circle" 
                                             data-toggle="tooltip" 
                                             data-placement="top"
@@ -107,13 +114,6 @@
                                             title="{{__('button.delete')}}"
                                             ><i class="fa fa-trash"></i>
                                         </button>
-                                        <a class="btn btn-circle btn-circle btn-sm btn-danger btn-circle mr-1" 
-                                            data-toggle="tooltip" 
-                                            data-placement="top"
-                                            data-original-title="Invoice #{{$sale->quotaion_no}}"
-                                            href="{{route('sale.downloadPDF', $sale->id)}}"
-                                            ><i class="far fa-file-pdf"></i>
-                                        </a>
                                     </td>
                                     @endif
                                 </tr>
@@ -173,6 +173,34 @@
         </div>
     </div>
 </div><!--/row-->
+<!--Modal delete product-->
+<div class="modal fade" id="deleteSale">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">       
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h5 class="modal-title"><i class="fa fa-trash"></i> {{__('product.confirm_delete')}}</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div> 
+        <!-- Modal body -->
+        <div class="modal-body text-center">
+            <div class="message">{{__('product.confirm_msg') }}</div>
+            <div id="modal-name"></div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer d-flex justify-content-center">
+            <form id="delete_product_form" action="{{route('sale.destroy')}}" method="POST">
+                @csrf
+                <input type="hidden" type="form-control" name="sale_id">
+                <button type="submit" class="btn btn-circle btn-primary px-4">{{__('button.ok')}}</button>
+                <button type="button" class="btn btn-circle btn-danger px-4" data-dismiss="modal"
+                    onclick="clearData()"
+                >{{__('button.close')}}</button>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
 @push('footer-script')
 <script>
     (function( $ ){
@@ -182,6 +210,14 @@
             $('#sale-search').submit();
         });
     })( jQuery );
-    
+    function deletePopup(obj) {
+        $('input[name="sale_id"]').val($(obj).attr("data-id"));
+        $("#modal-name" ).html($(obj).attr("data-name"));
+    }
+
+    function clearData() {
+        $('input[name="sale_id"]').val('');
+        $("#modal-name" ).html('');
+    }
 </script>
 @endpush

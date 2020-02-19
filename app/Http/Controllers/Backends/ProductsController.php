@@ -72,6 +72,8 @@ class ProductsController extends Controller
             $product['slug'] = strSlug($product['title']);
             $product['thumbnail'] = isset($product['thumbnail']) ? uploadFile($product['thumbnail'], config('upload.product')) : '';
             // $product['promotion_banner'] = isset($product['promotion_banner']) ? uploadFile($product['promotion_banner'], config('upload.promotion_banner')) : '';
+            $expirdDate = $request->expird_date.' '. date('h:i:s');
+            $product['expird_date'] = date('Y-m-d h:i:s', strtotime($expirdDate));
             $productStore = $this->product->create($product);
            
             if ($productStore) {
@@ -171,6 +173,8 @@ class ProductsController extends Controller
             } else {
                 unset($requestProduct['promotion_banner']);
             }
+            $expirdDate = $request->expird_date.' '. date('h:i:s');
+            $requestProduct['expird_date'] = date('Y-m-d h:i:s', strtotime($expirdDate));
             $product->update($requestProduct);
             if ($product) {
                 // update and delete table product_gallery

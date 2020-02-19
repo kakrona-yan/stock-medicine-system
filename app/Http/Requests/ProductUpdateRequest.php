@@ -25,14 +25,12 @@ class ProductUpdateRequest extends FormRequest
     public function rules(Request $request)
     {
         $priceDiscount = $request->get('price_discount');
-        $productFree = $request->get('product_free');
         return [
             'title' => 'required|max:200|unique:products,title, ' . $this->id,
             'category_id' => 'required',
             'price' => 'required|numeric',
             'price_discount' => $priceDiscount && !empty($priceDiscount) ? 'numeric' : '',
             'in_store' => 'required|numeric',
-            'product_free' => $productFree && !empty($productFree) ? 'numeric' : '',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10240'
         ];
     }

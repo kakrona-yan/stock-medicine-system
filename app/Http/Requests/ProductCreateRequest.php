@@ -25,14 +25,12 @@ class ProductCreateRequest extends FormRequest
     public function rules(Request $request)
     {
         $priceDiscount = $request->get('price_discount');
-        $productFree = $request->get('product_free');
         return [
             'title' => 'required|max:200|unique:products,title',
             'category_id' => 'required',
             'price' => 'required|numeric',
             'price_discount' => $priceDiscount && !empty($priceDiscount)? 'numeric' : '',
             'in_store' => 'required|numeric',
-            'product_free' => $productFree && !empty($productFree) ? 'numeric' : '',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10240'
         ];
     }
@@ -52,7 +50,6 @@ class ProductCreateRequest extends FormRequest
             'price.required' => __('validation.required'),
             'price.numeric' => __('validation.numeric'),
             'price_discount.numeric' => __('validation.numeric'),
-            'product_free.numeric' => __('validation.numeric'),
             'in_store.required' => __('validation.numeric'),
             'in_store.numeric' => __('validation.numeric')
         ];
