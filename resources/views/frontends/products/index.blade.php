@@ -85,11 +85,11 @@
                             <span>{{$product->category ? $product->category->name : ''}}</span>
                         </p> 
                         <p class="font-italic text-muted mb-0 small">
-                            {!! Str::limit(nl2br($product->description), 145) !!}
+                            {!! nl2br($product->description) !!}
                         </p>
                         <div class="d-flex align-items-center justify-content-between mt-1">
                             
-                            <div class="prince text-danger font-weight-bold">USA {{$product->price}}</div>
+                            <div class="prince text-danger font-weight-bold"><i class="fa fa-phone"></i> <a href="tel:+85593399330">(+855) 093 399 330</a></div>
                             <ul class="list-inline small">
                                 <li class="list-inline-item m-0"><i class="fa fa-star text-warning"></i></li>
                                 <li class="list-inline-item m-0"><i class="fa fa-star text-warning"></i></li>
