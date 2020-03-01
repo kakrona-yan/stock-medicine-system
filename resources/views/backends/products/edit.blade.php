@@ -50,21 +50,6 @@
                                 <div class="row mb-3">
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
-                                            <label for="product_code">{{__('product.list.product_code')}}:</label>
-                                            <input type="text" class="form-control {{ $errors->has('product_code') ? ' is-invalid' : '' }}" 
-                                                placeholder="product code"
-                                                name="product_code"
-                                                value="{{ old('product_code', $product->product_code) }}"
-                                            >
-                                            @if ($errors->has('product_code'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('product_code') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
                                             <label for="product_import">{{__('product.list.product_import')}}:</label>
                                             <input type="text" class="form-control {{ $errors->has('product_import') ? ' is-invalid' : '' }}" 
                                                 placeholder="product import"
@@ -74,6 +59,21 @@
                                             @if ($errors->has('product_import'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('product_import') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="in_store">{{__('product.list.in_store')}}:</label>
+                                            <input type="text" class="form-control {{ $errors->has('in_store') ? ' is-invalid' : '' }}" 
+                                                placeholder="in-store"
+                                                name="in_store"
+                                                value="{{ old('in_store', $product->in_store) }}"
+                                            >
+                                            @if ($errors->has('in_store'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('in_store') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -91,38 +91,6 @@
                                             @if ($errors->has('price'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('price') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="price_discount">{{__('product.list.price_discount')}}:</label>
-                                            <input type="text" class="form-control {{ $errors->has('price_discount') ? ' is-invalid' : '' }}" 
-                                                placeholder="discount"
-                                                name="price_discount"
-                                                value="{{ old('price discount', $product->price_discount) }}"
-                                            >
-                                            @if ($errors->has('price_discount'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('price_discount') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="in_store">{{__('product.list.in_store')}}:</label>
-                                            <input type="text" class="form-control {{ $errors->has('in_store') ? ' is-invalid' : '' }}" 
-                                                placeholder="in-store"
-                                                name="in_store"
-                                                value="{{ old('in_store', $product->in_store) }}"
-                                            >
-                                            @if ($errors->has('in_store'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('in_store') }}</strong>
                                                 </span>
                                             @endif
                                         </div>

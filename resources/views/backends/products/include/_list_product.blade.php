@@ -37,10 +37,8 @@
                                 <th>{{ __('product.list.thumbnail') }}</th>
                                 <th>{{ __('product.list.product_title') }}</th>
                                 <th>{{ __('product.list.category') }}</th>
-                                <th>{{ __('product.list.product_code') }}</th>
                                 <th>{{ __('product.list.product_import') }}</th>
                                 <th>{{ __('product.list.price') }}</th>
-                                <th>{{ __('product.list.price_discount') }}</th>
                                 <th>Terms</th>
                                 <th>Expird date</th>
                                 <th class="text-center">{{ __('product.list.active') }}</th>
@@ -62,12 +60,10 @@
                                 </td>
                                 <td>{{$product->title}}</td>
                                 <td>{{$product->category ? $product->category->name : ""}}</td>
-                                <td>{{$product->product_code}}</td>
                                 <td>{{$product->product_import}}</td>
                                 <td class="text-right">{{$product->price}}</td>
-                                <td class="text-right">{{$product->price_discount}}</td>
                                 <td>{{$product->terms}}</td>
-                                <td>{{$product->expird_date ? date('Y-m-d h:i', strtotime($product->expird_date)) : "-"}}</td>
+                                <td>{{$product->expird_date ? date('Y-m-d', strtotime($product->expird_date)) : "-"}}</td>
                                 <td class="text-center">
                                     <label class="switch">
                                         <input type="checkbox" data-toggle="toggle" data-onstyle="success" name="active"

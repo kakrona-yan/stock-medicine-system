@@ -54,20 +54,12 @@
                                     <td>{{$product->category ? $product->category->name : ''}}</td>
                                 </tr>
                                 <tr>
-                                    <th>{{ __('product.list.product_code') }}</th>
-                                    <td>{{$product->product_code}}</td>
-                                </tr>
-                                <tr>
                                     <th>{{ __('product.list.product_import') }}</th>
                                     <td>{{$product->product_import}}</td>
                                 </tr>
                                 <tr>
                                     <th>{{ __('product.list.price') }}</th>
                                     <td>{{$product->price}}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ __('product.list.price_discount') }}</th>
-                                    <td>{{$product->price_discount}}</td>
                                 </tr>
                                 <tr>
                                     <th>{{ __('product.list.in_store') }}</th>

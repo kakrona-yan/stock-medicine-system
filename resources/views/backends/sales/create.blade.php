@@ -128,11 +128,11 @@
                                                         <thead class="bg-primary text-light">
                                                             <tr>
                                                                 <th style="width: 50px;">#</th>
-                                                                <th style="width: 300px;">Pro.Name</th>
-                                                                <th style="width: 90px;">Q.T</th>
-                                                                <th style="width: 90px;">Pro.Free</th>
-                                                                <th style="width: 210px;">Rate</th>
-                                                                <th style="width: 210px;">Amount</th>
+                                                                <th style="width: 280px;">Pro.Name</th>
+                                                                <th style="width: 100px;">Q.T</th>
+                                                                <th style="width: 100px;">Pro.Free</th>
+                                                                <th style="width: 200px;">Rate</th>
+                                                                <th style="width: 200px;">Amount</th>
                                                                 <th style="width: 20px;">Action</th>
                                                             </tr>
                                                         </thead>
