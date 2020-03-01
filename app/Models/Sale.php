@@ -50,6 +50,9 @@ class Sale extends BaseModel
                 ->whereYear('sale_date', date('Y'))
                 ->whereMonth('sale_date', date('m'));
         }
+        if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
+            $sales->where('quotaion_no', 'like', '%' . $request->quotaion_no . '%');
+        }
         if ($request->exists('customer_name') && !empty($request->customer_name)) {
             $customerName = $request->customer_name;
             $sales->whereHas('customer', function($customer) use ($customerName){

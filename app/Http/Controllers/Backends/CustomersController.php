@@ -67,7 +67,7 @@ class CustomersController extends Controller
         try {
             // Rules of field
             $rules = [
-                'name' => 'required',
+                'name' => 'required|unique:customers,name',
                 'phone1' => 'required',
                 'address' => 'required',
                 'thumbnail'         => 'nullable|mimes:jpeg,jpg,png|max:10240',
@@ -148,7 +148,7 @@ class CustomersController extends Controller
         try {
             // Rules of field
             $rules = [
-                'name' => 'required',
+                'name' => 'required|unique:customers,name, ' . $id,
                 'phone1' => 'required',
                 'address' => 'required',
                 'thumbnail'         => 'nullable|mimes:jpeg,jpg,png|max:10240',
