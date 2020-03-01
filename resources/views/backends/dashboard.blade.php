@@ -146,6 +146,28 @@
                 </div>
             </div>
         </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header text-white bg-success">
+                    <div class="font-weight-bold">
+                        <span>Products list for Sale</span>
+                    </div>
+                </div>
+                <div class="card-block py-0 px-4 b-t-1">
+                    <div class="row">
+                        <div class="col-4 b-r-1 py-3">
+                            <div class="font-weight-bold">Total</div>
+                        </div>
+                        <div class="col-8 py-3 text-right">
+                            <div class="font-weight-bold">{{ $products->count() }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer px-3 py-2">
+                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('product_rrps')}}">View Product list<i class="fa fa-angle-right float-right font-lg"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-12 col-md-12 mb-2">
