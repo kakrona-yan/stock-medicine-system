@@ -60,7 +60,7 @@ class SalesController extends Controller
             $customers = $this->customer->getCustomer();
             $invoiceCode =  $this->sale->incrementStringUniqueInvoiceCode();
             $staffs = Staff::where('is_delete', '<>', DeleteStatus::DELETED)
-                ->select(['id', 'firstname', 'lastname'])->get();
+                ->select(['id', 'name'])->get();
             return view('backends.sales.create', [
                 'request' => $request,
                 'categories' => $categories,
@@ -232,7 +232,7 @@ class SalesController extends Controller
             $categories = $this->category->getCategoryNameByProducts();
             $customers = $this->customer->getCustomer();
             $staffs = Staff::where('is_delete', '<>', DeleteStatus::DELETED)
-                ->select(['id', 'firstname', 'lastname'])
+                ->select(['id', 'name'])
                 ->get();
 
             return view('backends.sales.edit', [

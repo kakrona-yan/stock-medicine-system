@@ -7,18 +7,10 @@
                         <div class="row">
                             <div class="col-12 col-md-10">
                                 <div class="row">
-                                    <div class="col-6 col-md-6 mb-1">
+                                    <div class="col-6 col-md-4 mb-1">
                                         <div class="form-group">
                                             <label class="font-weight-bold">@lang('staff.list.name')</label>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <input type="text" class="form-control d-inline-flex" name="firstname"  value="{{ old('firstname', $request->firstname) }}">
-                                                </div>
-                                                <div class="col-6">
-                                                    <input type="text" class="form-control d-inline-flex" name="lastname"  value="{{ old('lastname', $request->lastname) }}">
-                                                </div>
-                                            </div>
-                                            
+                                            <input type="text" class="form-control d-inline-flex" name="name"  value="{{ old('name', $request->name) }}"> 
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3 mb-1">
@@ -27,7 +19,7 @@
                                             <input type="text" class="form-control" name="phone_number"  value="{{ old('phone_number', $request->phone_number) }}">
                                         </div>
                                     </div>
-                                    <div class="col-6 col-md-6 mb-1">
+                                    <div class="col-6 col-md-4 mb-1">
                                         <div class="form-group">
                                             <label class="font-weight-bold">@lang('staff.list.email')</label>
                                             <input type="text" class="form-control" name="email"  value="{{ old('email', $request->email) }}">

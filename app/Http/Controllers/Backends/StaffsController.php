@@ -70,8 +70,7 @@ class StaffsController extends Controller
                 $ruleEmail = 'email|unique:staffs|unique:users,email';
             }
             $rules = [
-                'firstname' => 'required',
-                'lastname' => 'required',
+                'name' => 'required',
                 'email' => $ruleEmail,
                 'phone1' => 'required',
                 'address' => 'required',
@@ -85,8 +84,7 @@ class StaffsController extends Controller
             ];
             // Set field of Validattion
             $validator = \Validator::make([
-                'firstname' => $request->firstname,
-                'lastname' => $request->lastname,
+                'name' => $request->name,
                 'email' => $request->email,
                 'phone1' => $request->phone1,
                 'phone2' => $request->phone2,
@@ -100,7 +98,7 @@ class StaffsController extends Controller
                 $staffRequest = $request->all();
                 $user = [];
                 // insert user
-                $user['name'] = ucfirst($request->firstname) . ' ' . ucfirst($request->lastname);
+                $user['name'] = ucfirst($request->name);
                 $user['role'] = 2;
                 $user['email_verified_at'] = now();
                 $user['email'] = $staffRequest['email'];
@@ -183,8 +181,7 @@ class StaffsController extends Controller
                 $ruleEmail = 'email|unique:staffs,email,' . $id;
             }
             $rules = [
-                'firstname' => 'required',
-                'lastname' => 'required',
+                'name' => 'required',
                 'email' => $ruleEmail,
                 'phone1' => 'required',
                 'address' => 'required',
@@ -198,8 +195,7 @@ class StaffsController extends Controller
             ];
             // Set field of Validattion
             $validator = \Validator::make([
-                'firstname' => $request->firstname,
-                'lastname' => $request->lastname,
+                'name' => $request->name,
                 'email' => $request->email,
                 'phone1' => $request->phone1,
                 'phone2' => $request->phone2,
@@ -228,7 +224,7 @@ class StaffsController extends Controller
                     if (!empty($request->thumbnail)) {
                         $user['thumbnail'] = uploadFile($request->thumbnail, config('upload.user'));
                     } 
-                    $user['name'] = ucfirst($request->firstname) . ' ' . ucfirst($request->lastname);
+                    $user['name'] = ucfirst($request->name);
                     $user['role'] = 2;
                     $user['email'] = $staffRequest['email'];
                     $staff->user()->update($user);

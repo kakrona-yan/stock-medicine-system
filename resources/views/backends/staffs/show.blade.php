@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <span class="sub-title">{{  $staff->lastname }} {{  $staff->firstname }}</span>
+                    <span class="sub-title">{{  $staff->name }}</span>
                 </li>
             </ol>
         </nav>

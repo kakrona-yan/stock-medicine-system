@@ -37,28 +37,16 @@
                                 <div class="row">
                                     <div class="col-12 col-md-6 mb-2">
                                         <div class="form-group">
-                                            <div class="row">
+                                            <div class="row">z
                                                 <div class="col-6">
-                                                    <label for="lastname">{{__('staff.list.lastname')}}:</label>
-                                                    <input type="text" class="form-control {{ $errors->has('lastname') ? ' is-invalid' : '' }}" 
-                                                        placeholder="{{__('staff.list.lastname')}}"
-                                                        name="lastname"
-                                                        value="{{ old('lastname', $request->lastname) }}">
-                                                    @if ($errors->has('lastname'))
+                                                    <label for="name">{{__('staff.list.name')}}:</label>
+                                                    <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" 
+                                                        placeholder="{{__('staff.list.name')}}"
+                                                        name="name"
+                                                        value="{{ old('name', $request->name) }}">
+                                                    @if ($errors->has('name'))
                                                     <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('lastname') }}</strong>
-                                                    </span>
-                                                    @endif
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="lastname">{{__('staff.list.firstname')}}:</label>
-                                                    <input type="text" class="form-control {{ $errors->has('firstname') ? ' is-invalid' : '' }}" 
-                                                        placeholder="{{__('staff.list.firstname')}}"
-                                                        name="firstname"
-                                                        value="{{ old('firstname', $request->firstname) }}">
-                                                    @if ($errors->has('firstname'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                                        <strong>{{ $errors->first('name') }}</strong>
                                                     </span>
                                                     @endif
                                                 </div>

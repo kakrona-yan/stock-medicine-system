@@ -77,7 +77,7 @@ class UsersController extends Controller
                     $user['thumbnail'] = uploadFile($user['thumbnail'], config('upload.staff'));
                 }
                 $staffRequest['user_id'] = $saveUser->id;
-                $staffRequest['firstname'] = $saveUser->name;
+                $staffRequest['name'] = $saveUser->name;
                 $staffRequest['email'] = $user['email'];
                 $staffRequest['password'] = $request->password;
                 $staffRequest['is_delete'] = $saveUser->role == 1 || $saveUser->role == 3 || $saveUser->role == 4 ? 0 : 1;
@@ -164,7 +164,7 @@ class UsersController extends Controller
                     $user['thumbnail'] = uploadFile($user['thumbnail'], config('upload.staff'));
                 }
                 $staffRequest['user_id'] = $user->id;
-                $staffRequest['firstname'] = $user->name;
+                $staffRequest['name'] = $user->name;
                 $staffRequest['email'] = $requestUser['email'];
                 if ($request->password && !empty($request->password)) {
                     $staffRequest['password'] = $request->password;

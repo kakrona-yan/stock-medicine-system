@@ -4,8 +4,6 @@ return [
     'title' => 'RRPS-PHAMA | List Staff',
     'list' => [
         'name' => 'Name',
-        'firstname' => 'Firstname',
-        'lastname' => 'Lastname',
         'gender' => 'Gender',
         'dob' => 'Date of birth',
         'phone' => 'Phone',

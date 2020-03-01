@@ -58,12 +58,8 @@ class Sale extends BaseModel
         }
         if ($request->exists('staff_name') && !empty($request->staff_name)) {
             $staffName = $request->staff_name;
-            $arrName = explode(' ', trim($staffName));
-            $lastName = isset($arrName[0]) ? $arrName[0] : '';
-            $fristName = isset($arrName[1]) ? $arrName[1] : '';
-            $sales->whereHas('staff', function($staff) use ($fristName, $lastName){
-                $staff->where('firstname', 'like', '%' . $fristName . '%')
-                    ->where('lastname', 'like', '%' . $lastName . '%');
+            $sales->whereHas('staff', function($staff) use ($staffName){
+                $staff->where('name', 'like', '%' . $staffName . '%');
             });
         }
         if ($request->exists('sale_date') && !empty($request->sale_date)) {

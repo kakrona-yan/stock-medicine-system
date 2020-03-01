@@ -5,6 +5,13 @@
             <div class="card-body">
                 <form id="sale-search" action="{{ route('sale.index') }}" method="GET" class="form form-horizontal form-search form-inline mb-2 d-inline-flex">
                     <div class="form-group mb-2 mr-2">
+                        <label for="title" class="mr-sm-2">Invoice Code:</label>
+                        <input type="text" class="form-control mr-1" id="quotaion_no" 
+                            name="quotaion_no" value="{{ old('quotaion_no', $request->quotaion_no)}}"
+                            placeholder="invoice Code"
+                        >
+                    </div>
+                    <div class="form-group mb-2 mr-2">
                         <label for="title" class="mr-sm-2">Customer Name:</label>
                         <input type="text" class="form-control mr-1" id="customer" 
                             name="customer_name" value="{{ old('customer_name', $request->customer_name)}}"
@@ -19,6 +26,7 @@
                         >
                     </div>
                     <div class="form-group mb-2 mr-2">
+                        <label for="sale_date" class="mr-sm-2">Sale Date:</label>
                         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                             <input type="text" class="form-control" name="sale_date"
                                 value="{{ old('sale_date', $request->sale_date) }}">

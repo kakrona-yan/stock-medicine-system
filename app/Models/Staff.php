@@ -12,8 +12,7 @@ class Staff extends BaseModel
     
     protected $fillable = [
         'user_id',
-        'firstname',
-        'lastname',
+        'name',
         'email',
         'phone1',
         'phone2',
@@ -34,12 +33,8 @@ class Staff extends BaseModel
         $suppliers = $this->where('is_delete', '<>', DeleteStatus::DELETED)
                     ->orderBy('created_at', 'DESC');
         // filter by first name
-        if ($request->exists('firstname') && !empty($request->firstname)) {
-            $suppliers->where('firstname', 'like', '%' . $request->firstname . '%');
-        }
-        // filter by last name
-        if ($request->exists('lastname') && !empty($request->lastname)) {
-            $suppliers->where('lastname', 'like', '%' . $request->lastname . '%');
+        if ($request->exists('name') && !empty($request->name)) {
+            $suppliers->where('name', 'like', '%' . $request->name . '%');
         }
         // filter by last gender
         if ($request->exists('gender') && !empty($request->gender)) {
@@ -78,13 +73,13 @@ class Staff extends BaseModel
     }
 
     public function getFullnameAttribute() {
-        return ucfirst($this->lastname) . ' ' . ucfirst($this->firstname);
+        return ucfirst($this->name);
     }
 
     public function getStaffName()
     {
         return $this->where('is_delete', '<>', DeleteStatus::DELETED)
-            ->select(['id', 'firstname', 'lastname'])
+            ->select(['id', 'name'])
             ->get();
     }
     
