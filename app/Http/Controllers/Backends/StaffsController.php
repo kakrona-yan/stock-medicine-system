@@ -178,7 +178,9 @@ class StaffsController extends Controller
             $email = $request->email;
             $ruleEmail = '';
             if ($email && !empty($email)) {
-                $ruleEmail = 'email|unique:staffs,email,' . $id .'|unique:users,email,' . $id;
+                $staff = $this->staff->available($id);
+                $userId = $staff->user ? $staff->user->id : $id;
+                $ruleEmail = 'email|unique:staffs,email,' . $id .'|unique:users,email,' . $userId;
             }
             $rules = [
                 'name' => 'required',
@@ -207,7 +209,6 @@ class StaffsController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             } else {
                 $staffRequest = $request->all();
-                $staff = $this->staff->available($id);
                 if (!$staff) {
                     return response()->view('errors.404', [], 404);
                 }
