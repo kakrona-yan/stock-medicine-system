@@ -178,7 +178,7 @@ class StaffsController extends Controller
             $email = $request->email;
             $ruleEmail = '';
             if ($email && !empty($email)) {
-                $ruleEmail = 'email|unique:staffs,email,' . $id;
+                $ruleEmail = 'email|unique:staffs,email,' . $id .'|unique:users,email,' . $id;
             }
             $rules = [
                 'name' => 'required',
