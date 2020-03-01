@@ -252,7 +252,7 @@ class StaffsController extends Controller
             if (!$staff) {
                 return response()->view('errors.404', [], 404);
             }
-            $staff->user()->remove();
+            $staff->user->remove();
             $staff->remove();
             return redirect()->route('staff.index')
                 ->with('danger',__('flash.destroy'));
