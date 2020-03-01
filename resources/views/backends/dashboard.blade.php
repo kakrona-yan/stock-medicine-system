@@ -164,7 +164,7 @@
                     </div>
                 </div>
                 <div class="card-footer px-3 py-2">
-                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('product_rrps')}}">View Product list<i class="fa fa-angle-right float-right font-lg"></i></a>
+                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('product_rrps')}}" target="_blank">View Product list<i class="fa fa-angle-right float-right font-lg"></i></a>
                 </div>
             </div>
         </div>
