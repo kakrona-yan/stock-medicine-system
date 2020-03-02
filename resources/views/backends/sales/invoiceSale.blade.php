@@ -49,8 +49,8 @@
             font-weight: normal;
         }
         .container{
-            padding-left: 25px;
-            padding-right: 25px;
+            padding-left: 60px;
+            padding-right: 60px;
             max-width: 794px;
             width: 100%;
             margin: 0px auto;
