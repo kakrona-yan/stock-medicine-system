@@ -106,7 +106,7 @@
         }
         .d-inline{
             display: inline-block;
-            width: 320px;
+            width: 290px;
             margin: 0px 20px;
         }
         .btn-print{
