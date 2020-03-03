@@ -2,7 +2,12 @@
 @section('title', 'RRPS-PHAMA | login')
 @section('content')
 <div class="swipe-load">
-    <div class="loading-swipe"></div>
+    <div class="loading-swipe">
+        <div class="item item-1"></div>
+        <div class="item item-2"></div>
+        <div class="item item-3"></div>
+        <div class="item item-4"></div>
+    </div>
     <h2 class="h-s-1 mb-4 font-national-cartoon" style="margin-top: 21%;
     z-index: 9999; color:#0fc7d3;">Welcome to RRPS PHAMA</h2>
 </div>
