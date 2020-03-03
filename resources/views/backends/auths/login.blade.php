@@ -9,7 +9,7 @@
         <div class="item item-4"></div>
     </div>
     <h2 class="h-s-1 mb-4 font-national-cartoon" style="margin-top: 21%;
-    z-index: 9999; color:#FA5667;">Welcome to RRPS PHAMA</h2>
+    z-index: 9999; color:#FFF;">Welcome to RRPS PHAMA</h2>
 </div>
 <div class="container">
     <!-- Row -->
