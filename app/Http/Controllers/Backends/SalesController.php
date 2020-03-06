@@ -299,14 +299,41 @@ class SalesController extends Controller
                         $saleProducts = [];
                         $saleProducts = $request->sale_product;
                         foreach ($saleProducts as $key => $saleProduct) {
-                            $sale->productSales()->updateOrCreate([
-                                'sale_id'       => $sale->id,
-                                'product_id'    => $saleProduct['product_id'],
-                                'rate'          => $saleProduct['rate'],
-                                'quantity'      => $saleProduct['quantity'],
-                                'product_free'  => $saleProduct['product_free'],
-                                'amount'        => $saleProduct['amount']
-                            ]);
+                            if (isset($saleProduct['sale_id']) && $saleProduct['sale_id'] != null) {
+                                $findProductSales = $this->saleProduct
+                                    ->where('id', $saleProduct['sale_id'])
+                                    ->where('sale_id', $sale->id)
+                                    ->where('product_id', $saleProduct['product_id'])
+                                    ->first();
+                                if ($findProductSales) {
+                                    $findProductSales->update([
+                                        'sale_id'       => $sale->id,
+                                        'product_id'    => $saleProduct['product_id'],
+                                        'rate'          => $saleProduct['rate'],
+                                        'quantity'      => $saleProduct['quantity'],
+                                        'product_free'  => $saleProduct['product_free'],
+                                        'amount'        => $saleProduct['amount']
+                                    ]);
+                                } else {
+                                    $this->saleProduct->create([
+                                        'sale_id'       => $sale->id,
+                                        'product_id'    => $saleProduct['product_id'],
+                                        'rate'          => $saleProduct['rate'],
+                                        'quantity'      => $saleProduct['quantity'],
+                                        'product_free'  => $saleProduct['product_free'],
+                                        'amount'        => $saleProduct['amount']
+                                    ]);
+                                }
+                            } else {
+                                $this->saleProduct->create([
+                                    'sale_id'       => $sale->id,
+                                    'product_id'    => $saleProduct['product_id'],
+                                    'rate'          => $saleProduct['rate'],
+                                    'quantity'      => $saleProduct['quantity'],
+                                    'product_free'  => $saleProduct['product_free'],
+                                    'amount'        => $saleProduct['amount']
+                                ]);
+                            }
                         }
                         // update and delete table 
                         if (isset($request->sale_ids)) {

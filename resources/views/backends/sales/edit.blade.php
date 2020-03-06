@@ -146,6 +146,7 @@
                                                             @foreach ($sale->productSales as $productSale)
                                                             <tr id="sale_product_{{$i}}">
                                                                 <td>
+                                                                <input type="hidden" class="form-control" name="sale_product[{{$i }}][sale_id]" value="{{$productSale->id}}">{{$productSale->id}}
                                                                 <input type="hidden" class="form-control" name="sale_product[{{$i }}][product_id]" value="{{$productSale->product_id}}">{{$productSale->product_id}}
                                                                 </td>
                                                                 <td>
