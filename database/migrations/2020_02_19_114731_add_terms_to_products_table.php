@@ -26,9 +26,6 @@ class AddTermsToProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->string('terms', 100)->nullable();
-            $table->dateTime('expird_date')->nullable();
-        });
+        Schema::dropIfExists('products');
     }
 }
