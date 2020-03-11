@@ -88,7 +88,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            @if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor())
+                                            @if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor() || \Auth::user()->isRoleView())
                                             <div class="form-group select-group row">
                                                 <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Staff</label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">

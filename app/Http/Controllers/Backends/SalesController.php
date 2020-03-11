@@ -96,7 +96,7 @@ class SalesController extends Controller
                 return response()->json(["errors" => $validator->errors()], 422);;
             } else {
                 // insert to table sales
-                if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor()) {
+                if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor() || \Auth::user()->isRoleView()) {
                     $staff = $request->staff_id ? $request->staff_id : \Auth::id() ;
                 }else{
                     $staff = \Auth::user()->staff ? \Auth::user()->staff->id : \Auth::id();
@@ -275,7 +275,7 @@ class SalesController extends Controller
                     return response()->view('errors.404', [], 404);
                 }
                 // insert to table sales
-                if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor()) {
+                if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor() || \Auth::user()->isRoleView()) {
                     $staff = $request->staff_id ? $request->staff_id : \Auth::id() ;
                 }else{
                     $staff = \Auth::user()->staff ? \Auth::user()->staff->id : \Auth::id();
