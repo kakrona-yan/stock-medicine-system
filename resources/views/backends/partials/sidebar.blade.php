@@ -5,7 +5,7 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex"
             href="{{ \Auth::user()->isRoleAdmin() ? route('dashboard') : '#'}}">
-            <div class="sidebar-brand-text mx-3">{{ __('menu.shop_name') }}</div>
+            <div class="sidebar-brand-text text-center">{{ __('menu.shop_name') }}</div>
         </a>
         @foreach ($menus as $key => $menu)
             @if($menu['role_type'])
