@@ -15,6 +15,7 @@ class AddCustomerTypeIdToCustomersTable extends Migration
     {
         Schema::table('customers', function (Blueprint $table) {
             $table->integer('customer_type_id')->length(11)->default(0)->after('id');
+            $table->text('map_address')->nullable();
         });
     }
 

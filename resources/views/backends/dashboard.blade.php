@@ -250,7 +250,7 @@
                                         @endif
                                     </td>
                                     <td>{{$sale->quotaion_no}}</td>
-                                    <td>{{$sale->customer ? $sale->customer->name : ''}}</td>
+                                    <td>{{$sale->customer ? $sale->customer->customerFullName() : ''}}</td>
                                     <td>{{$sale->total_quantity}}</td>
                                     <td>{{$sale->total_amount}}</td>
                                     <td>{{date('Y-m-d', strtotime($sale->sale_date))}}</td>

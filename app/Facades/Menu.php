@@ -53,6 +53,14 @@ class Menu
             ],
             [
                 // customer management
+                'route' => 'customer_type.index',
+                'icon' => 'fas fa-user',
+                'label' => __('menu.customer_type'),
+                'role_type' => $this->RoleType('customer_type.index'),
+                'sub_menu' => null
+            ],
+            [
+                // customer management
                 'route' => 'customer.index',
                 'icon' => 'fas fa-user',
                 'label' => __('menu.customer'),

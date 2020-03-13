@@ -183,7 +183,7 @@ class SalesController extends Controller
                 'sale' => $sale,
             ]);
             $dateSale = date('Y-m-d', strtotime($sale->sale_date));
-            $pdfName = "{$sale->customer->name}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
+            $pdfName = "{$sale->customer->customerFullName()}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
             $pdfSale = PDF::loadView('backends.sales.invoiceSale', ['sale' => $sale]);
             $pdfSale->setPaper('a4');
             return $pdfSale->download($pdfName);
@@ -201,7 +201,7 @@ class SalesController extends Controller
                 return response()->view('errors.404', [], 404);
             }
             $dateSale = date('Y-m-d', strtotime($sale->sale_date));
-            $pdfName = "{$sale->customer->name}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
+            $pdfName = "{$sale->customer->customerFullName()}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
             $view = view('backends.sales.invoiceSale', ['sale' => $sale]);
             $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
             

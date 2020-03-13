@@ -41,7 +41,7 @@
                                 <tbody>
                                     <tr>
                                         <th class="border-top-0 w-15">{{__('customer.list.name')}}:</th>
-                                        <td class="border-top-0">{{ $customer->name }}</td>
+                                        <td class="border-top-0">{{ $customer->customerFullName() }}</td>
                                     </tr>
                                     <tr>
                                         <th>{{__('customer.list.phone')}}:</th>

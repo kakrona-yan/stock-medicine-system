@@ -36,19 +36,32 @@
                                 @csrf
                                 <div class="row">
                                     <div class="col-12 col-md-6 mb-2">
-                                        <div class="form-group">
-                                            <label for="name">{{__('customer.list.name')}}:</label>
-                                            <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" 
-                                                placeholder="{{__('customer.list.name')}}"
-                                                name="name"
-                                                value="{{ old('name', $request->name) }}"
-                                            >
-                                            @if ($errors->has('name'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('name') }}</strong>
+                                        <div class="row">
+                                            <div class="form-group col-12 col-md-6">
+                                                <label for="name">{{__('customer.list.name')}}:</label>
+                                                <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" 
+                                                    placeholder="{{__('customer.list.name')}}"
+                                                    name="name"
+                                                    value="{{ old('name', $request->name) }}"
+                                                >
+                                                @if ($errors->has('name'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $errors->first('name') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                            <div class="select-group form-group col-12 col-md-6">
+                                                <label for="name">{{__('customer.customer_type')}}:</label>
+                                                <select class="form-control" id="customer_type_id" name="customer_type_id">
+                                                    @foreach($customerTypes as $id => $name)
+                                                        <option value="{{ $id }}" {{ $id == $request->customer_type_id ? 'selected' : '' }}>{{ $name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="text-danger">
+                                                    <strong id="customer_id_error">{{ $errors->first('customer_type_id') }}</strong>
                                                 </span>
-                                            @endif
-                                        </div>
+                                            </div>
+                                        </div><!--/row-->
                                         <div class="form-group">
                                             <label for="address">{{__('customer.list.address')}}:</label>
                                             <textarea name="address" class="form-control {{ $errors->has('address') ? ' is-invalid' : '' }}" id="address" rows="5">{{old('address', $request->address)}}</textarea>
@@ -57,6 +70,10 @@
                                                     <strong>{{ $errors->first('address') }}</strong>
                                                 </span>
                                             @endif
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">{{__('customer.list.map_link')}}:</label>
+                                            <textarea name="map_address" class="form-control" id="map_address" rows="5">{{old('map_address', $request->map_address)}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
@@ -125,5 +142,8 @@
 <script>
     // script for upload image
     $('.img-upload').imgUpload();
+    $('#customer_type_id').select2({
+        allowClear: false
+    });
 </script>
 @endpush

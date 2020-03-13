@@ -10,15 +10,18 @@ use Auth;
 use App\Http\Requests\CustomerCreateRequest;
 use App\Http\Requests\CustomerUpdateRequest;
 use App\Http\Constants\UserRole;
+use App\Models\CustomerType;
 
 class CustomersController extends Controller
 {
     public function __construct(
         User $user,
-        Customer $customer
+        Customer $customer,
+        CustomerType $customerType
     ) {
         $this->user = $user;
         $this->customer = $customer;
+        $this->customerType = $customerType;
     }
     /**
      * Display a listing of the resource.
@@ -48,8 +51,10 @@ class CustomersController extends Controller
     public function create(Request $request)
     {
         try {
+            $customerTypes = $this->customerType->getCustomerTypeName();
             return view('backends.customers.create', [
                 'request' => $request,
+                'customerTypes' => $customerTypes
             ]);
         }catch (\ValidationException $e) {
             return exceptionError($e, 'customers.create');
@@ -68,6 +73,7 @@ class CustomersController extends Controller
             // Rules of field
             $rules = [
                 'name' => 'required|unique:customers,name',
+                'customer_type_id' => 'required',
                 'phone1' => 'required',
                 'address' => 'required',
                 'thumbnail'         => 'nullable|mimes:jpeg,jpg,png|max:10240',
@@ -75,6 +81,7 @@ class CustomersController extends Controller
             // Set field of Validattion
             $validator = \Validator::make([
                 'name' => $request->name,
+                'customer_type_id' => $request->customer_type_id,
                 'phone1' => $request->phone1,
                 'address' => $request->address,
                 'thumbnail' => $request->thumbnail,
@@ -123,13 +130,16 @@ class CustomersController extends Controller
     public function edit(Request $request, int $id)
     {
         try {
+            $customerName = $this->customerType->getCustomerTypeName();
             $customer = $this->customer->available($id);
             if (!$customer) {
                 return response()->view('errors.404', [], 404);
             }
             return view('backends.customers.edit', [
                 'request' => $request,
+                'customerName' => $customerName,
                 'customer' => $customer,
+                
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'customers.edit');
@@ -149,6 +159,7 @@ class CustomersController extends Controller
             // Rules of field
             $rules = [
                 'name' => 'required|unique:customers,name, ' . $id,
+                'customer_type_id' => 'required',
                 'phone1' => 'required',
                 'address' => 'required',
                 'thumbnail'         => 'nullable|mimes:jpeg,jpg,png|max:10240',
@@ -156,6 +167,7 @@ class CustomersController extends Controller
             // Set field of Validattion
             $validator = \Validator::make([
                 'name' => $request->name,
+                'customer_type_id' => $request->customer_type_id,
                 'phone1' => $request->phone1,
                 'address' => $request->address,
                 'thumbnail' => $request->thumbnail,

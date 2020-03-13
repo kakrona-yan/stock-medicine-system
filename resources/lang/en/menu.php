@@ -10,5 +10,6 @@ return [
     'staff' => 'Staffs',
     'sale' => 'Manage Sales',
     'setting' => 'Setting',
-    'view_site' => 'View Site'
+    'view_site' => 'View Site',
+    'customer_type' => 'CustomerTypes'
 ];

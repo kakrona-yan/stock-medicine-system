@@ -121,6 +121,23 @@ Route::group(
                 Route::post('/storeOrUpdate', 'SettingsController@storeOrUpdate')
                     ->name('storeOrUpdate');
             });
+            // customer type Route
+            Route::group(['prefix' => 'customer_types', 'as' => 'customer_type.'], function () {
+                Route::get('/', 'CustomerTypesController@index')
+                    ->name('index');
+                Route::get('/create', 'CustomerTypesController@create')
+                    ->name('create');
+                Route::post('/store', 'CustomerTypesController@store')
+                    ->name('store');
+                Route::get('/show/{id}', 'CustomerTypesController@show')
+                    ->name('show');
+                Route::get('/edit/{id}', 'CustomerTypesController@edit')
+                    ->name('edit');
+                Route::post('/update/{id}', 'CustomerTypesController@update')
+                    ->name('update');
+                Route::post('/destroy', 'CustomerTypesController@destroy')
+                    ->name('destroy');
+            });
         });
     }
 );

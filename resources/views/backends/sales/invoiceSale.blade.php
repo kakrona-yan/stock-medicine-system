@@ -163,7 +163,7 @@
                             <tr>
                                 <td style="height:135px;">
                                     <p>
-                                        {{ $sale->customer ? $sale->customer->name : '' }}
+                                        {{ $sale->customer ? $sale->customer->customerFullName() : '' }}
                                     </p>
                                     <p>
                                         {{ $sale->customer ? $sale->customer->phone1 : '' }}

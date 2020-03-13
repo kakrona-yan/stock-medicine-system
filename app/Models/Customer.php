@@ -12,6 +12,7 @@ class Customer extends BaseModel
     protected $table = 'customers';
     
     protected $fillable = [
+        'customer_type_id',
         'name',
         'gender',
         'dob',
@@ -19,9 +20,10 @@ class Customer extends BaseModel
         'phone1',
         'phone2',
         'address',
+        'map_address',
         'thumbnail',
         'is_active',
-        'is_delete',
+        'is_delete'
     ];
 
     public function filter($request)
@@ -72,5 +74,15 @@ class Customer extends BaseModel
         return $this->where('is_delete', '<>', DeleteStatus::DELETED)
             ->pluck('name', 'id')
             ->all();
+    }
+
+    public function customerType()
+    {
+        return $this->belongsTo('App\Models\CustomerType', 'customer_type_id');
+    }
+
+    public function customerFullName()
+    {
+        return $this->customerType()->exists() ? $this->customerType->name .".". $this->name : $this->name;
     }
 }

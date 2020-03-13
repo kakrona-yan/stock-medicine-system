@@ -65,16 +65,22 @@ class AuthServiceProvider extends ServiceProvider
                 $userRole->role === UserRole::ROLE_VIEW || 
                 $userRole->role === UserRole::ROLE_EDITOR;
         });
+
         Gate::define('staff.index', function ($userRole) {
             return $userRole->role === UserRole::ROLE_ADMIN ||   // admin = 1
                 $userRole->role === UserRole::ROLE_VIEW || 
                 $userRole->role === UserRole::ROLE_EDITOR;
         });
+
         Gate::define('sale.index', function ($userRole) {
             return $userRole->role === UserRole::ROLE_ADMIN ||   // admin = 1
             $userRole->role === UserRole::ROLE_STAFF || 
             $userRole->role === UserRole::ROLE_VIEW || 
             $userRole->role === UserRole::ROLE_EDITOR;
+        });
+        
+        Gate::define('customer_type.index', function ($userRole) {
+            return $userRole->role === UserRole::ROLE_ADMIN;   // admin = 1
         });
     }
 }
