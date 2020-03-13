@@ -19,11 +19,11 @@
                                         <input type="text" class="form-control" name="phone_number"  value="{{ old('phone_number', $request->phone_number) }}">
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-2 d-flex align-items-end mb-1">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-circle btn-circlebtn-primary"><i class="fa fa-search"></i> @lang('button.search')</button>
+                                <div class="col-12 col-md-2 d-flex align-items-end mb-1">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-circle btn-circlebtn-primary"><i class="fa fa-search"></i> @lang('button.search')</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
