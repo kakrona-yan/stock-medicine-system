@@ -36,7 +36,8 @@ class CustomerType extends BaseModel
 
     public function getCustomerTypeName()
     {
-        return $this->pluck('name', 'id')
+        return $this->where('is_delete', '<>', DeleteStatus::DELETED)
+            ->pluck('name', 'id')
             ->all();
     }
     

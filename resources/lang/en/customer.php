@@ -11,6 +11,7 @@ return [
         'gender' => 'Gender',
         'email' => 'E-mail',
         'dob' => 'Date of birht',
+        'created_at' => 'Date',
         'action' => 'action',
     ],
     'sub_title' => 'List customer',

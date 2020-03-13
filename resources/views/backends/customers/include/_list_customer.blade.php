@@ -37,6 +37,7 @@
                                 <th>{{ __('customer.list.phone') }}</th>
                                 <th>{{ __('customer.list.address') }}</th>
                                 <th class="text-center">{{ __('customer.list.map_link') }}</th>
+                                <th class="text-center">{{ __('customer.list.created_at') }}</th>
                                 <th class="text-center">{{ __('customer.list.action') }}</th>
                             </tr>
                         </thead>
@@ -70,6 +71,7 @@
                                     @endif
                                     
                                 </td>
+                                <td class="text-center">{{ date('Y-m-d', strtotime($customer->created_at)) }}</td>
                                 <td class="text-center">
                                     <a class="btn btn-circle btn-circle btn-sm btn-info btn-circle" 
                                         data-toggle="tooltip" 

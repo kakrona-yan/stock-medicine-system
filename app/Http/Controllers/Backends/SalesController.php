@@ -192,6 +192,7 @@ class SalesController extends Controller
             return exceptionError($e, 'backends.sales.index');
         }
     }
+    
     function viewInvoiceSalePDF(int $id)
     {
 

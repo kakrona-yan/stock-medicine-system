@@ -79,6 +79,7 @@ class Staff extends BaseModel
     public function getStaffName()
     {
         return $this->where('is_delete', '<>', DeleteStatus::DELETED)
+            ->orderBy('id', 'DESC')
             ->select(['id', 'name'])
             ->get();
     }

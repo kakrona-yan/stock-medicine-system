@@ -40,8 +40,8 @@ class Customer extends BaseModel
         }
         // filter by phone number
         if ($request->exists('phone_number') && !empty($request->phone_number)) {
-            $customer->where('phone1', $request->phone_number)
-                    ->orWhere('phone2', $request->phone_number);
+            $customer->where('phone1', 'like', '%' . $request->phone_number . '%')
+                    ->orWhere('phone2', 'like', '%' . $request->phone_number . '%');
         }
         // filter by email
         if ($request->exists('email') && !empty($request->email)) {
@@ -72,6 +72,7 @@ class Customer extends BaseModel
     public function getCustomer()
     {
         return $this->where('is_delete', '<>', DeleteStatus::DELETED)
+            ->orderBy('id', 'DESC')   
             ->pluck('name', 'id')
             ->all();
     }
@@ -83,6 +84,6 @@ class Customer extends BaseModel
 
     public function customerFullName()
     {
-        return $this->customerType()->exists() ? $this->customerType->name .".". $this->name : $this->name;
+        return $this->customerType()->exists() ? $this->customerType->name ." ". $this->name : $this->name;
     }
 }
