@@ -64,7 +64,7 @@
                     {{ $customerTypes->appends(request()->query())->links() }}
                 </div>
                 @if( Session::has('flash_danger') )
-                    <p class="alert text-center {{ Session::get('alert-class', 'alert-danger') }}">
+                    <p class="alert text-center w-50 {{ Session::get('alert-class', 'alert-danger') }}">
                         <span class="spinner-border spinner-border-sm text-darktext-danger align-middle"></span> {{ Session::get('flash_danger') }}
                     </p>
                 @endif
