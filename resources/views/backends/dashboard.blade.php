@@ -232,12 +232,12 @@
                         <thead class="bg-primary text-light">
                             <tr>
                                 <th class="text-center">#</th>
-                                <th>Invoice Code</th>
-                                <th>Customer Name</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Sale Date</th>
-                                <th>Staff</th>
+                                 <th>{{__('sale.list.invoice_code')}}</th>
+                                <th>{{__('sale.list.customer_name')}}</th>
+                                <th>{{__('sale.list.quantity')}}</th>
+                                <th>{{__('sale.list.price')}}</th>
+                                <th>{{__('sale.list.sale_date')}}</th>
+                                <th>{{__('sale.list.staff_name')}}</th>
                             </tr>
                         </thead>
                         <tbody>
