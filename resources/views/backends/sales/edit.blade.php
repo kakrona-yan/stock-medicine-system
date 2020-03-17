@@ -20,7 +20,7 @@
                     </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <span class="sub-title"> Sale Product</span>
+                    <span class="sub-title"> {{__('sale.sub_title')}}</span>
                 </li>
             </ol>
         </nav>
@@ -29,7 +29,7 @@
             data-toggle="tooltip" 
             data-placement="left" title="" 
             data-original-title="Sale Product"
-        ><i class="fas fa-list mr-1"></i> Sale Product</a>
+        ><i class="fas fa-list mr-1"></i> {{__('sale.sub_title')}}</a>
     </div>
     <div class="row mb-2">
         <div class="col-12 col-sm-12 tab-card">
@@ -44,11 +44,11 @@
                                 <div class="row mb-4 flex-sm-row-reverse flex-md-row-reverse flex-lg-row-reverse">
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
                                         <div class="form-group" style="background: #eaecf4;padding: 10px;">
-                                            <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>Sale</button>
+                                            <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>{{__('button.save')}}</button>
                                         </div>
                                         <fieldset class="edit-master-registration-fieldset">
                                             <div class="form-group select-group row mb-4">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Category</label>
+                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">{{__('sale.form.category')}}</label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
                                                     <select class="form-control" id="category_id" name="category_id">
                                                         <option value="">Please select</option>
@@ -58,7 +58,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <legend class="edit-application-information-legend text-left">Product List:</legend>
+                                            <legend class="edit-application-information-legend text-left">{{__('sale.form.product_list')}}:</legend>
                                             <div class="form-group select-group list-product">
                                                 <div id="list_product"></div>
                                             </div>
@@ -66,16 +66,16 @@
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
                                         <fieldset class="edit-master-registration-fieldset">
-                                            <legend class="edit-application-information-legend text-left">Sale:</legend>
+                                            <legend class="edit-application-information-legend text-left">{{__('sale.form.sale')}}:</legend>
                                             <div class="form-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Invoice Code</label>
+                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="quotaion_no">{{__('sale.form.invoice_code')}}</label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
                                                     <input type="text" class="form-control" id="invoiceCode" name="quotaion_no" readonly="" 
                                                     value="{{old('quotaion_no', $sale->quotaion_no)}}">
                                                 </div>
                                             </div>
                                             <div class="form-group select-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Customer <span class="text-danger">*</span></label>
+                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="customer_id">{{__('sale.list.customer_name')}} <span class="text-danger">*</span></label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
                                                     <select class="form-control" id="customer_id" name="customer_id">
                                                         <option value="">Please select</option>
@@ -90,7 +90,7 @@
                                             </div>
                                             @if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor() || \Auth::user()->isRoleView())
                                             <div class="form-group select-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Staff</label>
+                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="staff_id">{{__('sale.list.staff_name')}}</label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
                                                     <select class="form-control" id="staff_id" name="staff_id">
                                                         <option value="">Please select</option>
@@ -102,7 +102,7 @@
                                             </div>
                                             @endif
                                             <div class="form-group select-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">Date Sale <span class="text-danger">*</span></label>
+                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="sale_date">{{__('sale.form.date_sale')}} <span class="text-danger">*</span></label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
                                                     <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                                                         <input type="text" class="form-control" name="sale_date"
@@ -122,18 +122,18 @@
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-md-12 mb-3 mt-md-2">
                                                 <fieldset class="edit-master-registration-fieldset">
-                                                    <legend class="edit-application-information-legend text-left">Sale Product:</legend>
+                                                    <legend class="edit-application-information-legend text-left">{{__('sale.sub_title')}}:</legend>
                                                     <div class="table-responsive cus-table">
                                                         <table class="table table-striped table-bordered" style="width:1000px">
                                                             <thead class="bg-primary text-light">
                                                                 <tr>
                                                                     <th style="width: 50px;">#</th>
-                                                                    <th style="width: 300px;">Pro.Name</th>
-                                                                    <th style="width: 90px;">Q.T</th>
-                                                                    <th style="width: 90px;">Pro.Free</th>
-                                                                    <th style="width: 210px;">Rate</th>
-                                                                    <th style="width: 210px;">Amount</th>
-                                                                    <th style="width: 20px;">Action</th>
+                                                                    <th style="width: 280px;">{{__('sale.form.pro_name')}}</th>
+                                                                    <th style="width: 100px;">{{__('sale.form.q_t')}}</th>
+                                                                    <th style="width: 100px;">{{__('sale.form.pro_free')}}</th>
+                                                                    <th style="width: 200px;">{{__('sale.form.rate')}}</th>
+                                                                    <th style="width: 200px;">{{__('sale.list.amount')}}</th>
+                                                                    <th style="width: 20px;">{{__('sale.form.action')}}</th>
                                                                 </tr>
                                                             </thead>
                                                         <tbody id="dynamic_sale_product">
@@ -180,9 +180,9 @@
                                             </div>
                                             <div class="col-12 col-sm-12 col-md-12">
                                                 <fieldset class="edit-master-registration-fieldset">
-                                                    <legend class="edit-application-information-legend text-left">Payment:</legend>
+                                                    <legend class="edit-application-information-legend text-left">{{__('sale.form.payment')}}:</legend>
                                                     <div class="form-group row">
-                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_quantity">Total Quantity = Quantities + Product Frees</label>
+                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_quantity">{{__('sale.form.sum')}}</label>
                                                         <div class="col-4 col-md-4">
                                                             <input type="text" class="form-control" id="total_quantity" name="total_quantity" readonly="" value="{{ old('total_quantity', $sale->total_quantity ? $sale->total_quantity : 0) }}">
                                                             <span class="span-p">=</span>
@@ -196,7 +196,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_amount">Total Amount</label>
+                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_amount">{{__('sale.form.total_amount')}}</label>
                                                         <div class="col-12 col-sm-12 col-md-12">
                                                             <input type="text" class="form-control" id="total_amount" name="total_amount" value="{{ old('total_amount', $sale->total_amount ? $sale->total_amount : 0) }}"
                                                                 {{ !Auth::user()->isRoleAdmin() ? "readonly" : '' }}
@@ -205,13 +205,13 @@
                                                     </div>
                                                     @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                                      <div class="form-group row">
-                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_discount">Dicount</label>
+                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_discount">{{__('sale.form.dicount')}}</label>
                                                         <div class="col-12 col-sm-12 col-md-12">
                                                             <input type="text" class="form-control" id="total_discount" name="total_discount" value="{{ old('dototal_discountb', $sale->total_discount ? $sale->total_discount : 0) }}">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_money_revice">Received Amount<span class="text-danger">*</span></label>
+                                                        <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_money_revice">{{__('sale.form.received_amount')}}<span class="text-danger">*</span></label>
                                                         <div class="col-12 col-sm-12 col-md-12 ">
                                                             <input type="text" class="form-control" id="total_money_revice" name="money_change" value="{{ old('money_change', $sale->money_change ? $sale->money_change : 0) }}"
                                                                 oninput="calculatorMoney(this)"
@@ -222,14 +222,14 @@
                                                         @php
                                                             $owed = ($sale->total_amount - $sale->money_change);
                                                         @endphp
-                                                        <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="money_owed">Owed</label>
+                                                        <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="money_owed">{{__('sale.form.owed')}}</label>
                                                         <div class="col-12 col-sm-12 col-md-12 col-lg-9">
                                                             <input type="text" class="form-control" id="money_owed" value="{{currencyFormat($owed)}}">
                                                         </div>
                                                     </div>
                                                     @endif
                                                     <div class="form-group row">
-                                                        <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="note">Note</label>
+                                                        <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="note">{{__('sale.form.note')}}</label>
                                                         <div class="col-12 col-sm-12 col-md-12 col-lg-9">
                                                             <textarea class="form-control" name="note">{{ old('note', $sale->note) }}</textarea>
                                                         </div>

@@ -1,5 +1,5 @@
 @extends('backends.layouts.master')
-@section('title', 'Sale Management')
+@section('title', __('sale.sub_title'))
 @section('content')
 <div id="category-list">
     <!-- Page Heading -->
@@ -13,7 +13,7 @@
                     </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <span class="sub-title">Sale Product</span>
+                    <span class="sub-title">{{__('sale.sub_title')}}</span>
                 </li>
             </ol>
         </nav>

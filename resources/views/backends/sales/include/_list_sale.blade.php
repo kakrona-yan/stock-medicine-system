@@ -5,28 +5,28 @@
             <div class="card-body">
                 <form id="sale-search" action="{{ route('sale.index') }}" method="GET" class="form form-horizontal form-search form-inline mb-2 d-inline-flex">
                     <div class="form-group mb-2 mr-2">
-                        <label for="title" class="mr-sm-2">Invoice Code:</label>
+                        <label for="title" class="mr-sm-2">{{__('sale.list.invoice_code')}}:</label>
                         <input type="text" class="form-control mr-1" id="quotaion_no" 
                             name="quotaion_no" value="{{ old('quotaion_no', $request->quotaion_no)}}"
-                            placeholder="invoice Code"
+                            placeholder="{{__('sale.list.invoice_code')}}"
                         >
                     </div>
                     <div class="form-group mb-2 mr-2">
-                        <label for="title" class="mr-sm-2">Customer Name:</label>
+                        <label for="title" class="mr-sm-2">{{__('sale.list.customer_name')}}:</label>
                         <input type="text" class="form-control mr-1" id="customer" 
                             name="customer_name" value="{{ old('customer_name', $request->customer_name)}}"
-                            placeholder="customer name"
+                            placeholder="{{__('sale.list.customer_name')}}"
                         >
                     </div>
                     <div class="form-group mb-2 mr-2">
-                        <label for="title" class="mr-sm-2">Staff Name:</label>
-                        <input type="text" class="form-control mr-1" id="customer" 
+                        <label for="title" class="mr-sm-2">{{__('sale.list.staff_name')}}:</label>
+                        <input type="text" class="form-control mr-1" id="staff_name" 
                             name="staff_name" value="{{ old('staff_name', $request->staff_name)}}"
-                            placeholder="staff name"
+                            placeholder="{{__('sale.list.staff_name')}}"
                         >
                     </div>
                     <div class="form-group mb-2 mr-2">
-                        <label for="sale_date" class="mr-sm-2">Sale Date:</label>
+                        <label for="sale_date" class="mr-sm-2">{{__('sale.list.sale_date')}}:</label>
                         <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                             <input type="text" class="form-control" name="sale_date"
                                 value="{{ old('sale_date', $request->sale_date) }}">
@@ -58,16 +58,16 @@
                         <thead class="bg-primary text-light">
                             <tr>
                                 <th class="text-center">#</th>
-                                <th>Invoice Code</th>
-                                <th>Customer Name</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Received Price</th>
-                                <th>Owed</th>
-                                <th>Sale Date</th>
-                                <th>Staff</th>
+                                <th>{{__('sale.list.invoice_code')}}</th>
+                                <th>{{__('sale.list.customer_name')}}</th>
+                                <th>{{__('sale.list.quantity')}}</th>
+                                <th>{{__('sale.list.price')}}</th>
+                                <th>{{__('sale.list.received_price')}}</th>
+                                <th>{{__('sale.list.owed')}}</th>
+                                <th>{{__('sale.list.sale_date')}}</th>
+                                <th>{{__('sale.list.staff_name')}}</th>
                                 @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
-                                <th>Action</th>
+                                <th>{{__('sale.list.action')}}</th>
                                 @endif
                             </tr>
                         </thead>
@@ -131,11 +131,11 @@
                                         <table class="table table-borderless mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-primary">Product Name</th>
-                                                    <th class="text-primary">Quantity</th>
-                                                    <th class="text-primary">Product Free</th>
-                                                    <th class="text-primary">Rate</th>
-                                                    <th class="text-primary">Amount</th>
+                                                    <th class="text-primary">{{__('sale.list.product_name')}}</th>
+                                                    <th class="text-primary">{{__('sale.list.quantity')}}</th>
+                                                    <th class="text-primary">{{__('sale.list.product_free')}}</th>
+                                                    <th class="text-primary">{{__('sale.list.Rate')}}</th>
+                                                    <th class="text-primary">{{__('sale.list.amount')}}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -157,7 +157,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr class="border-sale--top">
-                                                    <td colspan="4" class="text-right text-primary">Total</td>
+                                                    <td colspan="4" class="text-right text-primary">{{__('sale.list.total')}}</td>
                                                     <td>{{currencyFormat($sale->total_amount)}}</td>
                                                 </tr>
                                             </tfoot>

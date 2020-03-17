@@ -1,5 +1,5 @@
 @extends('backends.layouts.master')
-@section('title', 'RRPS-PHAMA | shop')
+@section('title', 'RRPS-PHAMA | '.__('dashboard.title'))
 @section('content')
 <div id="dashboard">
     <!-- Page Heading -->
@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                        <div class="fa-1x font-weight-bold text-primary text-uppercase mb-1"><a href="{{route('product.index')}}">Total Products</a></div>
+                        <div class="fa-1x font-weight-bold text-primary text-uppercase mb-1"><a href="{{route('product.index')}}">{{__('dashboard.total_products')}}</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{$productCount}}</div>
                         </div>
                         <div class="col-auto">
@@ -34,7 +34,7 @@
                 <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="fa-1x font-weight-bold text-danger text-uppercase mb-1"><a href="{{route('user.index')}}">Total Users</a></div>
+                        <div class="fa-1x font-weight-bold text-danger text-uppercase mb-1"><a href="{{route('user.index')}}">{{__('dashboard.total_users')}}</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{$userCount}}</div>
                     </div>
                     <div class="col-auto">
@@ -50,7 +50,7 @@
                 <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="fa-1x font-weight-bold text-info text-uppercase mb-1"><a href="{{route('customer.index')}}">Total Customers</a></div>
+                        <div class="fa-1x font-weight-bold text-info text-uppercase mb-1"><a href="{{route('customer.index')}}">{{__('dashboard.total_customers')}}</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{$customerCount}}</div>
                     </div>
                     <div class="col-auto">
@@ -65,7 +65,7 @@
                 <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="fa-1x font-weight-bold text-warning text-uppercase mb-1"><a href="{{route('staff.index')}}">Total Staffs</a></div>
+                        <div class="fa-1x font-weight-bold text-warning text-uppercase mb-1"><a href="{{route('staff.index')}}">{{__('dashboard.total_staffs')}}</a></div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{$staffCount}}</div>
                     </div>
                     <div class="col-auto">
@@ -79,7 +79,7 @@
             <div class="card">
                 <div class="card-header text-white bg-danger">
                     <div class="font-weight-bold">
-                        <span>Total Category</span>
+                        <span>{{__('dashboard.total_category')}}</span>
                     </div>
                 </div>
                 <div class="card-block py-0 px-4 b-t-1">
@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div class="card-footer px-3 py-2">
-                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('category.index')}}">View More <i class="fa fa-angle-right float-right font-lg"></i></a>
+                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('category.index')}}">{{__('dashboard.view_more')}} <i class="fa fa-angle-right float-right font-lg"></i></a>
                 </div>
             </div>
         </div>
@@ -104,13 +104,13 @@
             <div class="card">
                 <div class="card-header text-white bg-success">
                     <div class="font-weight-bold">
-                        <span>Total Sales</span>
+                         {{__('dashboard.total_sales')}}
                     </div>
                 </div>
                 <div class="card-block py-0 px-4 b-t-1">
                     <div class="row">
                         <div class="col-4 b-r-1 py-3">
-                            <div class="font-weight-bold">Total</div>
+                            <div class="font-weight-bold">{{__('dashboard.total')}}</div>
                         </div>
                         <div class="col-8 py-3 text-right">
                             <div class="font-weight-bold">{{$salesCount}}</div>
@@ -118,7 +118,7 @@
                     </div>
                 </div>
                 <div class="card-footer px-3 py-2">
-                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('sale.index')}}">View More <i class="fa fa-angle-right float-right font-lg"></i></a>
+                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('sale.index')}}">{{__('dashboard.view_more')}} <i class="fa fa-angle-right float-right font-lg"></i></a>
                 </div>
             </div>
         </div>
@@ -127,14 +127,13 @@
             <div class="card">
                 <div class="card-header text-white bg-info">
                     <div class="font-weight-bold">
-                        <span>Sales</span>
-                        <span class="label pull-right">Monthly</span>
+                        {{__('dashboard.total_sale_monthy')}}
                     </div>
                 </div>
                 <div class="card-block py-0 px-4 b-t-1">
                     <div class="row">
                         <div class="col-4 b-r-1 py-3">
-                            <div class="font-weight-bold">Total</div>
+                            <div class="font-weight-bold">{{__('dashboard.view_more')}}</div>
                         </div>
                         <div class="col-8 py-3 text-right">
                             <div class="font-weight-bold">{{ $salesCountMonthlyByUser}}</div>
@@ -142,7 +141,7 @@
                     </div>
                 </div>
                 <div class="card-footer px-3 py-2">
-                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('sale.index')}}">View More <i class="fa fa-angle-right float-right font-lg"></i></a>
+                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('sale.index')}}">{{__('dashboard.view_more')}}<i class="fa fa-angle-right float-right font-lg"></i></a>
                 </div>
             </div>
         </div>
@@ -150,21 +149,21 @@
             <div class="card">
                 <div class="card-header text-white bg-success">
                     <div class="font-weight-bold">
-                        <span>Products list for Sale</span>
+                        <span>{{__('dashboard.product_list_for_sale')}}</span>
                     </div>
                 </div>
                 <div class="card-block py-0 px-4 b-t-1">
                     <div class="row">
                         <div class="col-4 b-r-1 py-3">
-                            <div class="font-weight-bold">Total</div>
+                            <div class="font-weight-bold">{{__('dashboard.total')}}</div>
                         </div>
                         <div class="col-8 py-3 text-right">
-                            <div class="font-weight-bold">{{ $products->count() }}</div>
+                            <div class="font-weight-bold">{{ $productCount }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer px-3 py-2">
-                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('product_rrps')}}" target="_blank">View Product list<i class="fa fa-angle-right float-right font-lg"></i></a>
+                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('product_rrps')}}" target="_blank">{{__('dashboard.view_more')}}<i class="fa fa-angle-right float-right font-lg"></i></a>
                 </div>
             </div>
         </div>
@@ -174,7 +173,7 @@
             <div class="card shadow mb-2">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Products</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">{{__('dashboard.product')}}</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive cus-table">

@@ -39,7 +39,7 @@
                                 </div>
                                 <input type="email" name="email" class="form-control form-control-user {{ $errors->has('email') ? ' is-invalid' : '' }}"
                                 value="{{ old('email', $request->email) }}" 
-                                placeholder="email"/>
+                                placeholder="{{__('user.list.email')}}"/>
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -53,7 +53,7 @@
                                     <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
                                 </div>
                                 <input type="password" name="password" class="form-control form-control-user {{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                    placeholder="password"
+                                    placeholder="{{__('user.list.password')}}"
                                 />
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
