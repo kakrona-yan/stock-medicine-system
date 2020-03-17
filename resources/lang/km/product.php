@@ -8,7 +8,7 @@ return [
         'title' => 'បញ្ជីផលិតផល',
         'filter' => 'Filter',
         'category' => 'ប្រភេទផលិតផល',
-        'product_title' => 'ចំណងជើង',
+        'product_title' => 'ផលិតផល',
         'product_code' => 'លេខកូដផលិតផល',
         'product_import' => 'ការនាំចូលផលិតផល',
         'price' => 'តម្លៃ',
