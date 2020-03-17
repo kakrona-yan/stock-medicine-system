@@ -11,5 +11,7 @@ return [
     'product_list_for_sale' => 'បញ្ជីផលិតផលសំរាប់លក់',
     'total' => 'សរុប',
     'view_more' => 'មើល​ច្រើន​ទៀត',
-    'view_product' => 'មើលបញ្ជីផលិតផល'
+    'view_product' => 'មើលបញ្ជីផលិតផល',
+    'product' => 'បញ្ជីផលិតផល',
+    'sale' => 'បញ្ជីផលិតផល'
 ];
