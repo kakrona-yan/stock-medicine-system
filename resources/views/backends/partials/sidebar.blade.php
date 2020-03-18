@@ -3,7 +3,7 @@
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex"
+        <a class="sidebar-brand d-flex justify-content-center align-items-center"
             href="{{ \Auth::user()->isRoleAdmin() ? route('dashboard') : '#'}}">
             <div class="sidebar-brand-text text-center">{{ __('menu.shop_name') }}</div>
         </a>
