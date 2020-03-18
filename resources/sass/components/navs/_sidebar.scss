@@ -329,16 +329,16 @@
     }
     .nav-item {
       .nav-link {
-        color: fade-out($black, 0.2);
+        color: fade-out($gray-333, 0.2);
         i {
-          color: $black;
+          color: $gray-333;
         }
         &:active,
         &:focus,
         &:hover {
           color: $white;
           i {
-            color: $black;
+            color: $gray-333;
           }
         }
         // Accordion

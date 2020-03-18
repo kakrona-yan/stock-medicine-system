@@ -24,7 +24,7 @@ html, body {
   font-family: "KhmerOSBattambang-Regular", Helvetica, Arial, sans-serif !important;
   font-size: 16px;
   line-height: 1.5;
-  color: #545454;
+  color: $gray-333;
 }
 body {
   font-size: 16px;
@@ -505,7 +505,9 @@ body.list-product {
     content: "\f055";
   }
 }
-
+.table{
+  color: $gray-333;
+}
 @media (max-width: 767px) {
   h2.h-s-1.mb-4.font-national-cartoon{
     margin-top: 70% !important;
