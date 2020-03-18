@@ -79,7 +79,7 @@
                                 <tr>
                                     <td class="text-center">
                                         @if ($sale->productSales->count() > 0)
-                                        <a href="#slae_{{$sale->id}}" data-toggle="collapse" style="text-decoration: none !important;"><i class="fas fa-plus-circle"></i></a>
+                                        <a href="#slae_{{$sale->id}}" data-toggle="collapse" style="text-decoration: none !important;" class="collapsed"><i class="fas fa-minus-circle"></i></a>
                                         @endif
                                     </td>
                                     <td>{{$sale->quotaion_no}}</td>

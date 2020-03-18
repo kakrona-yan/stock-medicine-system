@@ -500,6 +500,11 @@ body.list-product {
 .text-gray {
   color: #aaa;
 }
+.collapsed{
+  .fa-minus-circle::before{
+    content: "\f055";
+  }
+}
 
 @media (max-width: 767px) {
   h2.h-s-1.mb-4.font-national-cartoon{
