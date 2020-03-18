@@ -134,7 +134,7 @@
                                                     <th class="text-primary">{{__('sale.list.product_name')}}</th>
                                                     <th class="text-primary">{{__('sale.list.quantity')}}</th>
                                                     <th class="text-primary">{{__('sale.list.product_free')}}</th>
-                                                    <th class="text-primary">{{__('sale.list.Rate')}}</th>
+                                                    <th class="text-primary">{{__('sale.list.rate')}}</th>
                                                     <th class="text-primary">{{__('sale.list.amount')}}</th>
                                                 </tr>
                                             </thead>
