@@ -1,7 +1,7 @@
 <?php
 return [
-    'title' => 'RRPS-PHAMA',
-    'website' => 'About RRPS-PHAMA',
+    'title' => 'RRPS-PHARMA',
+    'website' => 'About RRPS-PHARMA',
     'home' => 'Home',
     'about' => 'About',
     'collection' => 'Shop',
@@ -14,8 +14,8 @@ return [
         'for_customer' => 'FOR CUSTOMER',
         'follow_us' => 'FOLLOW US',
         'copy_right' => 'Copyright',
-        'power_by' => '2019 By RRPS-PHAMA',
-        'mail' => 'RRPS-PHAMA1shop@gmail.com',
+        'power_by' => '2019 By RRPS-PHARMA',
+        'mail' => 'RRPS-PHARMA1shop@gmail.com',
         'tel' => '(+855) 093 399 330',
     ]
 ];

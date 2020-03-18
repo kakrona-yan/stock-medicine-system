@@ -279,7 +279,7 @@
       .nav-link {
         color: $gray-600;
         i {
-          color: $gray-333
+          color: $gray-333;
         }
         &:active,
         &:focus,
@@ -318,7 +318,7 @@
   // Sidebar Dark
   .sidebar-dark {
     .sidebar-brand {
-      color: $white;
+      color: $indigo;
       border-bottom: 1px solid $white;
     }
     hr.sidebar-divider {
@@ -329,16 +329,16 @@
     }
     .nav-item {
       .nav-link {
-        color: fade-out($white, 0.2);
+        color: fade-out($black, 0.2);
         i {
-          color: $yellow
+          color: $black;
         }
         &:active,
         &:focus,
         &:hover {
           color: $white;
           i {
-            color: $red;
+            color: $black;
           }
         }
         // Accordion
@@ -348,9 +348,9 @@
       }
       &.active {
         .nav-link {
-          color: $yellow;
+          color: $indigo;
           i {
-            color: $yellow;
+            color: $indigo;
           }
         }
       }

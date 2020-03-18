@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <title>RRPS-PHAMA | MEDECIN LIST</title>
+    <title>RRPS-PHARMA | MEDECIN LIST</title>
     @include('backends.partials.head')
     <style>
         .display-5.font-weight-bold {

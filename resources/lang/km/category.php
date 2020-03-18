@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'RRPS-PHAMA | ប្រភេទផលិតផល',
+    'title' => 'RRPS-PHARMA | ប្រភេទផលិតផល',
     'sub_title' => 'ប្រភេទផលិតផល',
     'confirm_delete' => 'បញ្ជាក់ការលុប',
     'list' => [

@@ -1,12 +1,12 @@
 @extends('backends.layouts.master')
-@section('title', 'RRPS-PHAMA | '.__('dashboard.title'))
+@section('title', 'RRPS-PHARMA | '.__('dashboard.title'))
 @section('content')
 <div id="dashboard">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h5 class="mb-0 text-gray-800">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            RRPS-PHAMA
+            RRPS-PHARMA
         </h5>
     </div>
     <!-- Content Row -->

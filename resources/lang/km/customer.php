@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'RRPS-PHAMA | អតិថិជន',
+    'title' => 'RRPS-PHARMA | អតិថិជន',
     'list' => [
         'name' => 'ឈ្មោះ',
         'phone' => 'ទូរស័ព្ទ',

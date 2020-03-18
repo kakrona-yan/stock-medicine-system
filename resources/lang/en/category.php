@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'RRPS-PHAMA | Categories',
+    'title' => 'RRPS-PHARMA | Categories',
     'sub_title' => 'Categories',
     'confirm_delete' => 'confirm delete',
     'list' => [

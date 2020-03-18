@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'RRPS-PHAMA | អ្នកប្រើប្រាស់',
+    'title' => 'RRPS-PHARMA | អ្នកប្រើប្រាស់',
     'sub_title' => 'អ្នកប្រើប្រាស់',
     'confirm_delete' => 'បញ្ជាក់ការលុប',
     'list' => [

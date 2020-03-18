@@ -1,6 +1,6 @@
 <?php
 return [
-    'shop_name' => 'RRPS-PHAMA',
+    'shop_name' => 'RRPS-PHARMA',
     'dashboard' => 'ផ្ទាំងគ្រប់គ្រង',
     'user' => 'អ្នកប្រើប្រាស់',
     'category' => 'ប្រភេទផលិតផល',

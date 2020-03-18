@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'RRPS-PHAMA | List Staff',
+    'title' => 'RRPS-PHARMA | List Staff',
     'list' => [
         'name' => 'Name',
         'gender' => 'Gender',

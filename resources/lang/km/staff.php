@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'RRPS-PHAMA | បញ្ជីបុគ្គលិក',
+    'title' => 'RRPS-PHARMA | បញ្ជីបុគ្គលិក',
     'list' => [
         'name' => 'ឈ្មោះ',
         'gender' => 'ភេទ',
