@@ -133,7 +133,7 @@
                 <div class="card-block py-0 px-4 b-t-1">
                     <div class="row">
                         <div class="col-4 b-r-1 py-3">
-                            <div class="font-weight-bold">{{__('dashboard.view_more')}}</div>
+                            <div class="font-weight-bold">{{__('dashboard.total')}}</div>
                         </div>
                         <div class="col-8 py-3 text-right">
                             <div class="font-weight-bold">{{ $salesCountMonthlyByUser}}</div>
