@@ -52,7 +52,7 @@ class Menu
                 'sub_menu' => null
             ],
             [
-                // customer management
+                // customer type management
                 'route' => 'customer_type.index',
                 'icon' => 'fas fa-user',
                 'label' => __('menu.customer_type'),
@@ -65,6 +65,14 @@ class Menu
                 'icon' => 'fas fa-user',
                 'label' => __('menu.customer'),
                 'role_type' => $this->RoleType('customer.index'),
+                'sub_menu' => null
+            ],
+            [
+                // customer owed management
+                'route' => 'customer_owed.index',
+                'icon' => 'fas fa-hand-holding-usd',
+                'label' => __('menu.customer_owed'),
+                'role_type' => $this->RoleType('customer_owed.index'),
                 'sub_menu' => null
             ],
             [

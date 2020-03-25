@@ -138,6 +138,25 @@ Route::group(
                 Route::post('/destroy', 'CustomerTypesController@destroy')
                     ->name('destroy');
             });
+            // customer owed Route
+            Route::group(['prefix' => 'customer_oweds', 'as' => 'customer_owed.'], function () {
+                Route::get('/', 'CustomerOwedsController@index')
+                    ->name('index');
+                Route::get('/create', 'CustomerOwedsController@create')
+                    ->name('create');
+                Route::post('/store', 'CustomerOwedsController@store')
+                    ->name('store');
+                Route::get('/show/{id}', 'CustomerOwedsController@show')
+                    ->name('show');
+                Route::get('/edit/{id}', 'CustomerOwedsController@edit')
+                    ->name('edit');
+                Route::post('/update/{id}', 'CustomerOwedsController@update')
+                    ->name('update');
+                Route::post('/destroy', 'CustomerOwedsController@destroy')
+                    ->name('destroy');
+                Route::get('/sale', 'CustomerOwedsController@getSaleByCustomer')
+                    ->name('sale');
+            });
         });
     }
 );
