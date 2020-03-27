@@ -3,6 +3,7 @@
         <!-- Circle Buttons -->
         <div class="card mb-4">
             <div class="card-body">
+                @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
                 <form id="customer-search" action="{{ route('customer.index') }}" method="GET" class="form form-horizontal form-search">
                     <div class="row">
                         <div class="col-12 col-md-10">
@@ -10,13 +11,13 @@
                                 <div class="col-6 col-md-3 mb-1">
                                     <div class="form-group">
                                         <label class="font-weight-bold">@lang('customer.list.name')</label>
-                                        <input type="text" class="form-control" name="name"  value="{{ old('name', $request->name) }}">
+                                        <input type="text" class="form-control" name="name"  value="{{ old('name', $request->name) }}" placeholder="{{__('customer.list.name')}}">
                                     </div>
                                 </div>
                                 <div class="col-6 col-md-3 mb-1">
                                     <div class="form-group">
                                         <label class="font-weight-bold">@lang('customer.list.phone')</label>
-                                        <input type="text" class="form-control" name="phone_number"  value="{{ old('phone_number', $request->phone_number) }}">
+                                        <input type="text" class="form-control" name="phone_number"  value="{{ old('phone_number', $request->phone_number) }}" placeholder="{{__('customer.list.phone')}}">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-2 d-flex align-items-end mb-1">
@@ -28,6 +29,7 @@
                         </div>
                     </div>
                 </form>
+                @endif
                 <div class="table-responsive cus-table">
                     <table class="table table-striped table-bordered">
                         <thead class="bg-primary text-light">

@@ -122,7 +122,6 @@
                 </div>
             </div>
         </div>
-        @endif
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card">
                 <div class="card-header text-white bg-info">
@@ -145,6 +144,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card">
                 <div class="card-header text-white bg-success">
@@ -168,6 +168,7 @@
             </div>
         </div>
     </div>
+    @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
     <div class="row">
         <div class="col-12 col-md-12 mb-2">
             <div class="card shadow mb-2">
@@ -309,5 +310,6 @@
             </div>
         </div><!--/col-12-->
     </div>
+    @endif
 </div>
 @endsection
