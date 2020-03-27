@@ -3,7 +3,7 @@
 @section('content')
 <div id="customer_owed-list">
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between border-bottom mb-5 pb-3">
+    <div class="d-sm-flex align-items-center justify-content-between border-bottom mb-3 mb-md-5 pb-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent p-0 mb-0">
                 <li class="breadcrumb-item">
