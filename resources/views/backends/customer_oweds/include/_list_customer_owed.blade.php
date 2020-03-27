@@ -43,10 +43,8 @@
                                                         <tr>
                                                             <th>{{__('sale.list.invoice_code')}}</th>
                                                             <th>{{ __('customer_owed.list.amount') }}</th>
-                                                            <th>{{ __('customer_owed.list.receive_amount') }}</th>
                                                             <th>{{ __('customer_owed.list.owed_amount') }}</th>
                                                             <th class="text-center">{{ __('customer_owed.list.receive_date') }}</th>
-                                                            <th class="text-center">{{__('sale.list.sale_date')}}</th>
                                                             <th>{{__('sale.list.staff_name')}}</th>
                                                             <th class="text-center">{{ __('customer_owed.list.action') }}</th>
                                                         </tr>
@@ -62,10 +60,8 @@
                                                             <tr>
                                                                 <td>{{ $sale->quotaion_no }}</td>
                                                                 <td class="text-right">{{ $sale->customerOwed ? $sale->customerOwed->amount : $sale->total_amount }}</td>
-                                                                <td class="text-right">{{ $sale->customerOwed ? $sale->customerOwed->receive_amount : 0 }}</td>
                                                                 <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
                                                                 <td class="text-center">{{ $sale->customerOwed ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
-                                                                <td class="text-center">{{date('Y-m-d h:i', strtotime($sale->sale_date))}}</td>
                                                                 <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
                                                                 <td>
                                                                     <a class="btn btn-circle btn-circle btn-sm btn-success btn-circle mr-1" 
