@@ -3,6 +3,7 @@
         <!-- Circle Buttons -->
         <div class="card mb-4">
             <div class="card-body">
+                @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
                 <form id="sale-search" action="{{ route('sale.index') }}" method="GET" class="form form-horizontal form-search form-inline mb-2 d-inline-flex">
                     <div class="form-group mb-2 mr-2">
                         <label for="title" class="mr-sm-2">{{__('sale.list.invoice_code')}}:</label>
@@ -53,6 +54,7 @@
                         </div>
                     </div>
                 </form>
+                @endif
                <div class="table-responsive cus-table">
                     <table class="table table-bordered">
                         <thead class="bg-primary text-light">
