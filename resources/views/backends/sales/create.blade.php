@@ -41,52 +41,11 @@
                         <div id="addsupplier" class="tab-pane active">
                             <form id="form_sale_stock" class="form-main" action="{{route('sale.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                <div class="form-group" style="background: #eaecf4;padding: 10px;">
+                                    <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>{{__('button.save')}}</button>
+                                </div>
                                 <div class="row mb-4 flex-sm-row-reverse flex-md-row-reverse flex-lg-row-reverse">
                                     <div class="col-12 col-sm-12 col-md-12 mb-3 mt-md-2">
-                                        <fieldset class="edit-master-registration-fieldset">
-                                            <legend class="edit-application-information-legend text-left">{{__('sale.sub_title')}}:</legend>
-                                            <div class="table-responsive cus-table">
-                                            <table class="table table-striped table-bordered">
-                                                <thead class="bg-primary text-light">
-                                                    <tr>
-                                                        <th style="width: 50px;">#</th>
-                                                        <th style="width: 280px;">{{__('sale.form.pro_name')}}</th>
-                                                        <th style="width: 100px;">{{__('sale.form.q_t')}}</th>
-                                                        <th style="width: 100px;">{{__('sale.form.pro_free')}}</th>
-                                                        <th style="width: 200px;">{{__('sale.form.rate')}}</th>
-                                                        <th style="width: 200px;">{{__('sale.list.amount')}}</th>
-                                                        <th style="width: 20px;">{{__('sale.form.action')}}</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="dynamic_sale_product">
-
-                                                </tbody>
-                                            </table>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
-                                        <div class="form-group" style="background: #eaecf4;padding: 10px;">
-                                            <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>{{__('button.save')}}</button>
-                                        </div>
-                                        <fieldset class="edit-master-registration-fieldset">
-                                            <div class="form-group select-group row mb-4">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">{{__('sale.form.category')}}</label>
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-                                                    <select class="form-control" id="category_id" name="category_id">
-                                                        <option value="">{{__('sale.select')}}</option>
-                                                        @foreach($categories as $id => $name)
-                                                            <option value="{{ $id }}" {{ $id == $request->category_id ? 'selected' : '' }}>{{ $name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <legend class="edit-application-information-legend text-left">{{__('sale.form.product_list')}}:</legend>
-                                            <div class="form-group select-group list-product">
-                                                <div id="list_product"></div>
-                                            </div>
-                                        </fieldset>
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
                                         <fieldset class="edit-master-registration-fieldset">
                                             <legend class="edit-application-information-legend text-left">{{__('sale.form.sale')}}:</legend>
                                             <div class="form-group row">
@@ -141,7 +100,50 @@
                                                 </div>
                                             </div>
                                         </fieldset>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
+                                        <fieldset class="edit-master-registration-fieldset">
+                                            <div class="form-group select-group row mb-4">
+                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">{{__('sale.form.category')}}</label>
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+                                                    <select class="form-control" id="category_id" name="category_id">
+                                                        <option value="">{{__('sale.select')}}</option>
+                                                        @foreach($categories as $id => $name)
+                                                            <option value="{{ $id }}" {{ $id == $request->category_id ? 'selected' : '' }}>{{ $name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <legend class="edit-application-information-legend text-left">{{__('sale.form.product_list')}}:</legend>
+                                            <div class="form-group select-group list-product">
+                                                <div id="list_product"></div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
                                         <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-12 mb-3 mt-md-2">
+                                                <fieldset class="edit-master-registration-fieldset">
+                                                    <legend class="edit-application-information-legend text-left">{{__('sale.sub_title')}}:</legend>
+                                                    <div class="table-responsive cus-table">
+                                                    <table class="table table-striped table-bordered" style="width:1000px;">
+                                                        <thead class="bg-primary text-light">
+                                                            <tr>
+                                                                <th style="width: 50px;">#</th>
+                                                                <th style="width: 280px;">{{__('sale.form.pro_name')}}</th>
+                                                                <th style="width: 100px;">{{__('sale.form.q_t')}}</th>
+                                                                <th style="width: 100px;">{{__('sale.form.pro_free')}}</th>
+                                                                <th style="width: 200px;">{{__('sale.form.rate')}}</th>
+                                                                <th style="width: 200px;">{{__('sale.list.amount')}}</th>
+                                                                <th style="width: 20px;">{{__('sale.form.action')}}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="dynamic_sale_product">
+        
+                                                        </tbody>
+                                                    </table>
+                                                </fieldset>
+                                            </div>
                                             <div class="col-12 col-sm-12 col-md-12 mt-3">
                                                 <fieldset class="edit-master-registration-fieldset">
                                                     <legend class="edit-application-information-legend text-left">{{__('sale.form.payment')}}:</legend>
