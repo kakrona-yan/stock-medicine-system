@@ -41,10 +41,10 @@
                             <form class="form-main" action="{{route('customer_owed.update', $sale->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mb-2">
-                                    <div class="col-6 col-md-4">
+                                    <div class="col-12 col-md-4">
                                         <div class="select-group form-group">
                                             <label for="customer_id">{{__('customer_owed.list.customer_id')}}:</label>
-                                            <select class="form-control" id="customer_id" name="customer_id">
+                                            <select class="form-control" id="customer_id" name="customer_id" readonly>
                                                 <option value="{{ $sale->customer_id }}" selected>{{ $sale->customer->customerFullName() }}</option>
                                             </select>
                                             @if ($errors->has('customer_id'))
@@ -54,10 +54,10 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-6 col-md-4">
+                                    <div class="col-12 col-md-4">
                                         <div class="select-group form-group">
                                             <label for="sale_id">{{__('customer_owed.list.sale_id')}}:</label>
-                                            <select class="form-control" id="sale_id" name="sale_id">
+                                            <select class="form-control" id="sale_id" name="sale_id" readonly>
                                                 <option value="{{ $sale->id }}" selected>{{ $sale->quotaion_no }}</option>
                                             </select>
                                             @if ($errors->has('sale_id'))
@@ -85,10 +85,10 @@
                                     </div>
                                 </div><!--/row-->
                                 <div class="row mb-2">
-                                    <div class="col-6 col-md-4">
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="amount">{{__('customer_owed.list.amount')}}:</label>
-                                            <input type="text" name="amount" class="form-control {{ $errors->has('amount') ? ' is-invalid' : '' }}" id="amount" value="{{old('amount', currencyFormat($amount))}}">
+                                            <input type="text" name="amount" class="form-control {{ $errors->has('amount') ? ' is-invalid' : '' }}" id="amount" value="{{old('amount', currencyFormat($amount))}}" readonly>
                                             @if ($errors->has('amount'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('amount') }}</strong>
@@ -96,7 +96,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-6 col-md-4">
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="receive_amount">{{__('customer_owed.list.receive_amount')}}:</label>
                                             <input type="text" name="receive_amount" class="form-control {{ $errors->has('receive_amount') ? ' is-invalid' : '' }}" id="receive_amount" 
@@ -111,7 +111,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group w-50 d-inline-flex">
+                                <div class="form-group w-100 w-md-50 d-inline-flex">
                                     <button type="submit" class="btn btn-circle btn-primary w-50 mw-100 mr-2">{{__('button.pay')}}</button>
                                     <a href="{{route('customer_owed.index')}}" class="btn btn-circle btn-secondary w-50 mw-100">{{__('button.return')}}</a>
                                 </div>

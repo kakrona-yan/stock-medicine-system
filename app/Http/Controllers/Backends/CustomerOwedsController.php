@@ -33,7 +33,7 @@ class CustomerOwedsController extends Controller
             $limit = config('pagination.limit');
             // Check flash danger
             flashDanger($customers->count(), __('flash.empty_data'));
-            $customers = $customers->paginate($limit);
+            $customers = $customers->paginate(30);
             return view('backends.customer_oweds.index', [
                 'request' => $request,
                 'customers' =>  $customers,
