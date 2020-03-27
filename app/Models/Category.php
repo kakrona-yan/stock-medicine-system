@@ -57,6 +57,7 @@ class Category extends BaseModel
     public function getCategoryNameByProducts()
     {
         return $this->where('category_type', CategoryType::CATEGORY_TYPE_PRODUCT)
+            ->orderBy('name', 'ASC')
             ->pluck('name', 'id')
             ->all();
     }
