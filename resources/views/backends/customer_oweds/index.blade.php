@@ -17,12 +17,6 @@
                 </li>
             </ol>
         </nav>
-        <a href="{{route('customer_owed.create')}}" 
-            class="btn btn-circle btn-primary"
-            data-toggle="tooltip" 
-            data-placement="left" title="" 
-            data-original-title="{{__('button.add_new')}}"
-        ><i class="fas fa-plus-circle"></i> {{__('button.add_new')}}</a>
     </div>
     <!--list product-->
     @include('backends.customer_oweds.include._list_customer_owed')

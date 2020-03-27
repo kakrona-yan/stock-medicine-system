@@ -11,36 +11,86 @@
                     </div>
                 </form>
                 <div class="table-responsive cus-table">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-bordered">
                         <thead class="bg-primary text-light">
                             <tr>
-                                <th>{{ __('customer_owed.list.sale_id') }}</th>
-                                <th>{{ __('customer_owed.list.customer_id') }}</th>
-                                <th>{{ __('customer_owed.list.amount') }}</th>
-                                <th>{{ __('customer_owed.list.receive_amount') }}</th>
-                                <th>{{ __('customer_owed.list.owed_amount') }}</th>
-                                <th class="text-center">{{ __('customer_owed.list.receive_date') }}</th>
-                                <th class="text-center">{{ __('customer_owed.list.action') }}</th>
+                                <th class="text-center" style="width: 20px;">#</th>
+                                <th>{{__('customer.list.name')}}</th>
+                                <th>{{__('customer.list.created_at')}}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach( $customerOweds as $customerOwed)
+                            @foreach( $customers as $customer)
                                 <tr>
-                                    <td>{{ $customerOwed->sale ? $customerOwed->sale->quotaion_no　: ''}}</td>
-                                    <td>{{ $customerOwed->customer ? $customerOwed->customer->customerFullName() : ''}}</td>
-                                    <td>{{ $customerOwed->amount }}</td>
-                                    <td>{{ $customerOwed->receive_amount }}</td>
-                                    <td>{{ $customerOwed->owed_amount }}</td>
-                                    <td class="text-center">{{ date('Y-m-d', strtotime($customerOwed->receive_date)) }}</td>
-                                    <td class="text-center">
+                                    <td class="text-center" rowspan="{{$customer->sales->count() > 0 ? 2 : 1}}">
+                                        @if ($customer->sales->count() > 0)
+                                        <a href="#customer_{{$customer->id}}" data-toggle="collapse" style="text-decoration: none !important;" class="collapsed"><i class="fas fa-minus-circle"></i></a>
+                                        @endif
+                                    </td>
+                                    <td>{{ $customer->customerFullName() }}</td>
+                                    <td>{{ date('Y-m-d', strtotime($customer->created_at)) }}</td>
+                                </tr>
+                                @if ($customer->sales->count() > 0)
+                                <tr>
+                                    <td colspan="2" id="customer_{{$customer->id}}" class="collapse p-0">
+                                        <table class="table mb-0 tabel-row-1">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>{{__('sale.list.invoice_code')}}</th>
+                                                    <th>{{ __('customer_owed.list.amount') }}</th>
+                                                    <th>{{ __('customer_owed.list.receive_amount') }}</th>
+                                                    <th>{{ __('customer_owed.list.owed_amount') }}</th>
+                                                    <th class="text-center">{{ __('customer_owed.list.receive_date') }}</th>
+                                                    <th class="text-center">{{__('sale.list.sale_date')}}</th>
+                                                    <th>{{__('sale.list.staff_name')}}</th>
+                                                    <th class="text-center">{{ __('customer_owed.list.action') }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($customer->sales as $sale)
+                                                    @php
+                                                        $customerOwed = 0;
+                                                        $amount = $sale->customerOwed ? $sale->customerOwed->amount : $sale->total_amount;
+                                                        $receiveAmount = $sale->customerOwed ? $sale->customerOwed->receive_amount : 0;
+                                                        $customerOwed = ($amount - $receiveAmount);
+                                                    @endphp
+                                                    <tr>
+                                                        <td>{{ $sale->quotaion_no }}</td>
+                                                        <td class="text-right">{{ $sale->customerOwed ? $sale->customerOwed->amount : $sale->total_amount }}</td>
+                                                        <td class="text-right">{{ $sale->customerOwed ? $sale->customerOwed->receive_amount : 0 }}</td>
+                                                        <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
+                                                        <td class="text-center">{{ $sale->customerOwed ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
+                                                        <td class="text-center">{{date('Y-m-d h:i', strtotime($sale->sale_date))}}</td>
+                                                        <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                                        <td>
+                                                            <a class="btn btn-circle btn-circle btn-sm btn-success btn-circle mr-1" 
+                                                                data-toggle="tooltip" 
+                                                                data-placement="top"
+                                                                data-original-title="Invoice #{{$sale->quotaion_no}}"
+                                                                href="{{route('sale.downloadPDF', $sale->id)}}"
+                                                                ><i class="far fa-file-pdf"></i>
+                                                            </a>
+                                                            <a class="btn btn-circle btn-sm btn-warning btn-circle" 
+                                                                data-toggle="tooltip" 
+                                                                data-placement="top"
+                                                                data-original-title="{{__('button.pay')}}"
+                                                                href="{{route('customer_owed.edit', $sale->id)}}"
+                                                                >{{__('button.pay')}}
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </td>
                                 </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="d-flex justify-content-center">
-                    {{ $customerOweds->appends(request()->query())->links() }}
+                    {{ $customers->appends(request()->query())->links() }}
                 </div>
                 @if( Session::has('flash_danger') )
                     <p class="alert text-center {{ Session::get('alert-class', 'alert-danger') }}">
@@ -51,44 +101,3 @@
         </div>
     </div>
 </div><!--/row-->
-<!--Modal delete customer_owed-->
-<div class="modal fade" id="deletecustomer_owed">
-    <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">       
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h5 class="modal-title"><i class="fa fa-trash"></i> {{__('customer_owed.confirm_delete')}}</h5>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div> 
-        <!-- Modal body -->
-        <div class="modal-body text-center">
-            <div class="message">{{__('customer_owed.confirm_msg') }}</div>
-            <div id="modal-name"></div>
-        </div>
-        <!-- Modal footer -->
-        <div class="modal-footer d-flex justify-content-center">
-            <form id="delete_customer_owed_form" action="{{route('customer_owed.destroy')}}" method="POST">
-                @csrf
-                <input type="hidden" type="form-control" name="customer_owed_id">
-                <button type="submit" class="btn btn-circle btn-circlebtn-primary">{{__('button.ok')}}</button>
-                <button type="button" class="btn btn-circle btn-circlebtn-danger" data-dismiss="modal"
-                    onclick="clearData()"
-                >{{__('button.close')}}</button>
-            </form>
-        </div>
-    </div>
-    </div>
-</div>
-@push('footer-script')
-<script>
-    function deletePopup(obj) {
-        $('input[name="customer_owed_id"]').val($(obj).attr("data-id"));
-        $("#modal-name" ).html($(obj).attr("data-name"));
-    }
-
-    function clearData() {
-        $('input[name="customer_owed_id"]').val('');
-        $("#modal-name" ).html('');
-    }
-</script>
-@endpush

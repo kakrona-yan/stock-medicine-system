@@ -40,6 +40,11 @@ class Sale extends BaseModel
         return $this->hasMany('App\Models\SaleProduct', 'sale_id', 'id');
     }
 
+    public function customerOwed()
+    {
+        return $this->hasOne('App\Models\CustomerOwed', 'sale_id', 'id');
+    }
+
     public function filter($request)
     {
         $sales = $this->where('is_delete', '<>', DeleteStatus::DELETED)->orderBy('id', 'DESC');

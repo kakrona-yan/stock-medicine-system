@@ -28,10 +28,15 @@ class CustomerOwedsController extends Controller
     public function index(Request $request)
     {
         try {
-            $customerOweds  = $this->customerOwed->filter($request);
+            $customers  = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
+                ->orderBy('created_at', 'DESC');
+            $limit = config('pagination.limit');
+            // Check flash danger
+            flashDanger($customers->count(), __('flash.empty_data'));
+            $customers = $customers->paginate($limit);
             return view('backends.customer_oweds.index', [
                 'request' => $request,
-                'customerOweds' =>  $customerOweds,
+                'customers' =>  $customers,
             ]);
         }catch (\ValidationException $e) {
             return exceptionError($e, 'customer_owed.index');
@@ -39,61 +44,71 @@ class CustomerOwedsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for editing the specified resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function edit(Request $request, int $id)
     {
         try {
-            $customers = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
-                ->orderBy('id', 'DESC')
-                ->get();
-
-            return view('backends.customer_oweds.create', [
+            $sale = $this->sale->available($id);
+            if (!$sale) {
+                return response()->view('errors.404', [], 404);
+            }
+            return view('backends.customer_oweds.edit', [
+                'sale' => $sale,
                 'request' => $request,
-                'customers' => $customers
             ]);
-        }catch (\ValidationException $e) {
-            return exceptionError($e, 'customer_oweds.create');
+        } catch (\ValidationException $e) {
+            return exceptionError($e, 'backends.products.edit');
         }
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function update(Request $request, $id)
     {
         try {
             // Rules of field
             $rules = [
-                'name' => 'required|unique:customers,name',
-                'customer_type_id' => 'required',
-                'phone1' => 'required',
-                'address' => 'required',
-                'thumbnail'         => 'nullable|mimes:jpeg,jpg,png|max:10240',
+                'sale_id' => 'required',
+                'customer_id' => 'required',
+                'amount' => 'required',
+                'receive_date' => 'required'
             ];
             // Set field of Validattion
             $validator = \Validator::make([
-                'name' => $request->name,
-                'customer_type_id' => $request->customer_type_id,
-                'phone1' => $request->phone1,
-                'address' => $request->address,
-                'thumbnail' => $request->thumbnail,
+                'sale_id' => $request->sale_id,
+                'customer_id' => $request->customer_id,
+                'amount' => $request->amount,
+                'receive_date' => $request->receive_date
             ], $rules);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             } else {
-                $customerRequest = $request->all();
-                if ($request->exists('thumbnail') && !empty($customerRequest['thumbnail'])) {
-                    $customerRequest['thumbnail'] = uploadFile($customerRequest['thumbnail'], config('upload.customer'));
+                $saleRequest = $request->all();
+                $sale = $this->sale->available($id);
+                $sale->update([
+                    'money_change' => $saleRequest['receive_amount']
+                ]);
+                if($sale) {
+                    $customerOwed = $this->customerOwed->where('sale_id', $saleRequest["sale_id"])
+                        ->where('customer_id', $saleRequest["customer_id"])
+                        ->first();
+                    if($customerOwed) {
+                        $customerOwed->update($saleRequest);
+                    } else {
+                        $this->customerOwed->create($saleRequest);
+                    }
                 }
-                $this->customer->create($customerRequest);
-                return \Redirect::route('customer.index')
-                    ->with('success',__('flash.store'));
+                return \Redirect::route('customer_owed.index')
+                    ->with('warning',__('flash.update'));
             }
         }catch (\ValidationException $e) {
             return exceptionError($e, 'customers.index');

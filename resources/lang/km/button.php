@@ -14,5 +14,7 @@ return [
     'ok' => 'យល់ព្រម',
     'close' => 'បិទ',
     'save_draft' => 'រក្សាឯកជន',
-    'remove' => 'លុបចោល'
+    'remove' => 'លុបចោល',
+    'please_select' => 'សូមជ្រើសរើស',
+    'pay' => 'Pay'
 ];

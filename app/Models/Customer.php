@@ -26,6 +26,11 @@ class Customer extends BaseModel
         'is_delete'
     ];
 
+    public function sales()
+    {
+        return $this->hasMany('App\Models\Sale', 'customer_id', 'id');
+    }
+
     public function filter($request)
     {
         $customer = $this->where('is_delete', '<>', DeleteStatus::DELETED)

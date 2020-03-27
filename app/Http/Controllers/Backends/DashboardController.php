@@ -31,7 +31,7 @@ class DashboardController extends Controller
         $categoryCount = \App\Models\Category::count();
         $products = $this->product->where('is_delete', '<>', DeleteStatus::DELETED)
             ->orderBy('id', 'desc')
-            ->paginate(6);
+            ->paginate(10, ['*'], 'product-page');
         $sales  = $this->sale->where('is_delete', '<>', DeleteStatus::DELETED)
             ->whereYear('sale_date', date('Y'))
             ->whereMonth('sale_date', date('m'))
@@ -44,7 +44,7 @@ class DashboardController extends Controller
         // count total sales
         $salesCount = $sales->count();
         // list sales
-        $sales = $sales->paginate(6);
+        $sales = $sales->paginate(10, ['*'], 'sale-page');
         // login of staff
         $salesCountMonthlyByUser = $this->sale->where('is_delete', '<>', DeleteStatus::DELETED)
             ->whereYear('sale_date', date('Y'))

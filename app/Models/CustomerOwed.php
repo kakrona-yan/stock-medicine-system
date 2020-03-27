@@ -37,4 +37,11 @@ class CustomerOwed extends BaseModel
         flashDanger($customerOweds->count(), __('flash.empty_data'));
         return $customerOweds->paginate($limit);
     }
+
+    public function getPrice($column)
+    {
+        dd($column);
+        $price = $this->exists() ? $this->{$column} : 0;
+        return currencyFormat($price);
+    }
 }
