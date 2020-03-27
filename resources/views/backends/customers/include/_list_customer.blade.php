@@ -89,6 +89,7 @@
                                         href="{{route('customer.edit', $customer->id)}}"
                                     ><i class="far fa-edit"></i>
                                     </a>
+                                    @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
                                     <button type="button"
                                         id="btn-deleted"
                                         class="btn btn-circle btn-circle btn-sm btn-danger btn-circle"
@@ -99,6 +100,7 @@
                                         title="{{__('button.delete')}}"
                                         ><i class="fa fa-trash"></i>
                                     </button>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
