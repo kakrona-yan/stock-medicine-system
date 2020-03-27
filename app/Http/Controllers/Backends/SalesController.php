@@ -154,7 +154,7 @@ class SalesController extends Controller
                 ->where('is_active', 1) // is_delete = 1 and is_active = 1
                 ->where('category_id', $request->category_id)
                 ->select(['id', 'category_id', 'title', 'price', 'in_store', 'thumbnail'])
-                ->orderBy('id', 'DESC')
+                ->orderBy('title', 'ASC')
                 ->get();
             return response()
                 ->json([
