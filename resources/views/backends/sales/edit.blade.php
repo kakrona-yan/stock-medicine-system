@@ -42,6 +42,64 @@
                             <form id="form_sale_stock" class="form-main" action="{{route('sale.update', $sale->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mb-4 flex-sm-row-reverse flex-md-row-reverse flex-lg-row-reverse">
+                                    <div class="col-12 col-sm-12 col-md-12 mb-3 mt-md-2">
+                                        <fieldset class="edit-master-registration-fieldset">
+                                            <legend class="edit-application-information-legend text-left">{{__('sale.sub_title')}}:</legend>
+                                            <div class="table-responsive cus-table">
+                                                <table class="table table-striped table-bordered">
+                                                    <thead class="bg-primary text-light">
+                                                        <tr>
+                                                            <th style="width: 50px;">#</th>
+                                                            <th style="width: 280px;">{{__('sale.form.pro_name')}}</th>
+                                                            <th style="width: 100px;">{{__('sale.form.q_t')}}</th>
+                                                            <th style="width: 100px;">{{__('sale.form.pro_free')}}</th>
+                                                            <th style="width: 200px;">{{__('sale.form.rate')}}</th>
+                                                            <th style="width: 200px;">{{__('sale.list.amount')}}</th>
+                                                            <th style="width: 20px;">{{__('sale.form.action')}}</th>
+                                                        </tr>
+                                                    </thead>
+                                                <tbody id="dynamic_sale_product">
+                                                    <input id="sale_ids" type="hidden" name="sale_ids" value="">
+                                                    @php
+                                                    $i = 0;
+                                                    $saleQuantities = 0;
+                                                    $saleProductFree = 0;
+                                                    @endphp
+                                                    @foreach ($sale->productSales as $productSale)
+                                                    <tr id="sale_product_{{$i}}">
+                                                        <td>
+                                                        <input type="hidden" class="form-control" name="sale_product[{{$i }}][sale_id]" value="{{$productSale->id}}">
+                                                        <input type="hidden" class="form-control" name="sale_product[{{$i }}][product_id]" value="{{$productSale->product_id}}">{{$productSale->product_id}}
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="form-control" value="{{$productSale->product->title}}" readonly="">
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" min="0" id="quantity_{{$i}}" data-id="{{$i}}" data-quantity="{{$productSale->quantity}}" class="form-control" name="sale_product[{{$i}}][quantity]" value="{{$productSale->quantity}}" oninput="updateQuantity(this)">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" id="productFree_{{$i}}" data-id="{{$i}}" data-productfree="{{$productSale->product_free}}" class="form-control sale_rate" name="sale_product[{{$i}}][product_free]" value="{{$productSale->product_free}}" oninput="updateProductFree(this)">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" min="0" id="rate_{{$i}}" data-id="{{$i}}" data-rate="{{$productSale->rate}}" class="form-control sale_rate" name="sale_product[{{$i}}][rate]" value="{{$productSale->rate}}" oninput="updateRate(this)">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" id="amount_{{$i}}" class="form-control" name="sale_product[{{$i}}][amount]" value="{{$productSale->amount}}" readonly="">
+                                                        </td>
+                                                        <td class="text-center">    
+                                                            <button type="button" data-sale-id="{{$productSale->id}}" data-id="{{$i}}" data-quantity="{{$productSale->quantity}}" data-amount="{{$productSale->amount}}" class="remove_product btn btn-circle btn-circle btn-sm btn-danger btn-circle"><i class="fa fa-trash"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                    @php
+                                                        $i ++;
+                                                        $saleQuantities += $productSale->quantity;
+                                                        $saleProductFree += $productSale->product_free;
+                                                    @endphp
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </fieldset>
+                                    </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
                                         <div class="form-group" style="background: #eaecf4;padding: 10px;">
                                             <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>{{__('button.save')}}</button>
@@ -120,65 +178,7 @@
                                             </div>
                                         </fieldset>
                                         <div class="row">
-                                            <div class="col-12 col-sm-12 col-md-12 mb-3 mt-md-2">
-                                                <fieldset class="edit-master-registration-fieldset">
-                                                    <legend class="edit-application-information-legend text-left">{{__('sale.sub_title')}}:</legend>
-                                                    <div class="table-responsive cus-table">
-                                                        <table class="table table-striped table-bordered" style="width:1000px">
-                                                            <thead class="bg-primary text-light">
-                                                                <tr>
-                                                                    <th style="width: 50px;">#</th>
-                                                                    <th style="width: 280px;">{{__('sale.form.pro_name')}}</th>
-                                                                    <th style="width: 100px;">{{__('sale.form.q_t')}}</th>
-                                                                    <th style="width: 100px;">{{__('sale.form.pro_free')}}</th>
-                                                                    <th style="width: 200px;">{{__('sale.form.rate')}}</th>
-                                                                    <th style="width: 200px;">{{__('sale.list.amount')}}</th>
-                                                                    <th style="width: 20px;">{{__('sale.form.action')}}</th>
-                                                                </tr>
-                                                            </thead>
-                                                        <tbody id="dynamic_sale_product">
-                                                            <input id="sale_ids" type="hidden" name="sale_ids" value="">
-                                                            @php
-                                                            $i = 0;
-                                                            $saleQuantities = 0;
-                                                            $saleProductFree = 0;
-                                                            @endphp
-                                                            @foreach ($sale->productSales as $productSale)
-                                                            <tr id="sale_product_{{$i}}">
-                                                                <td>
-                                                                <input type="hidden" class="form-control" name="sale_product[{{$i }}][sale_id]" value="{{$productSale->id}}">
-                                                                <input type="hidden" class="form-control" name="sale_product[{{$i }}][product_id]" value="{{$productSale->product_id}}">{{$productSale->product_id}}
-                                                                </td>
-                                                                <td>
-                                                                    <input type="text" class="form-control" value="{{$productSale->product->title}}" readonly="">
-                                                                </td>
-                                                                <td>
-                                                                    <input type="number" min="0" id="quantity_{{$i}}" data-id="{{$i}}" data-quantity="{{$productSale->quantity}}" class="form-control" name="sale_product[{{$i}}][quantity]" value="{{$productSale->quantity}}" oninput="updateQuantity(this)">
-                                                                </td>
-                                                                <td>
-                                                                    <input type="text" id="productFree_{{$i}}" data-id="{{$i}}" data-productfree="{{$productSale->product_free}}" class="form-control sale_rate" name="sale_product[{{$i}}][product_free]" value="{{$productSale->product_free}}" oninput="updateProductFree(this)">
-                                                                </td>
-                                                                <td>
-                                                                    <input type="text" min="0" id="rate_{{$i}}" data-id="{{$i}}" data-rate="{{$productSale->rate}}" class="form-control sale_rate" name="sale_product[{{$i}}][rate]" value="{{$productSale->rate}}" oninput="updateRate(this)">
-                                                                </td>
-                                                                <td>
-                                                                    <input type="text" id="amount_{{$i}}" class="form-control" name="sale_product[{{$i}}][amount]" value="{{$productSale->amount}}" readonly="">
-                                                                </td>
-                                                                <td class="text-center">    
-                                                                    <button type="button" data-sale-id="{{$productSale->id}}" data-id="{{$i}}" data-quantity="{{$productSale->quantity}}" data-amount="{{$productSale->amount}}" class="remove_product btn btn-circle btn-circle btn-sm btn-danger btn-circle"><i class="fa fa-trash"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                            @php
-                                                                $i ++;
-                                                                $saleQuantities += $productSale->quantity;
-                                                                $saleProductFree += $productSale->product_free;
-                                                            @endphp
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col-12 col-sm-12 col-md-12">
+                                            <div class="col-12 col-sm-12 col-md-12 mt-3">
                                                 <fieldset class="edit-master-registration-fieldset">
                                                     <legend class="edit-application-information-legend text-left">{{__('sale.form.payment')}}:</legend>
                                                     <div class="form-group row">

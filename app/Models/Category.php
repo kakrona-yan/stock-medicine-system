@@ -71,7 +71,7 @@ class Category extends BaseModel
     public function filter($request)
     {
         $categories = $this->where('is_delete', '<>', DeleteStatus::DELETED)
-            ->orderBy('id', 'DESC');
+            ->orderBy('name', 'ASC');
         // Check flash danger
         flashDanger($categories->count(), __('flash.empty_data'));
         $limit = config('pagination.limit');
