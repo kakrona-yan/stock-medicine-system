@@ -34,6 +34,7 @@ class CustomerOwedsController extends Controller
         try {
             // list all
             $customers  = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
+                ->whereHas('sales')
                 ->orderBy('created_at', 'DESC');
             $limit = 30;
             // Check flash danger
@@ -56,6 +57,7 @@ class CustomerOwedsController extends Controller
             
             // customer pay all
             $customerPayAlls = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
+                ->whereHas('sales')
                 ->whereHas('customerOweds', function($customerOweds) use ($somePay, $allPay){
                     $customerOweds->whereRaw('status_pay = ? OR status_pay = ? ', [$somePay, $allPay])
                         ->orderBy('date_pay', 'DESC');
