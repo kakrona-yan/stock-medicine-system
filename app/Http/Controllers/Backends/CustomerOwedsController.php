@@ -39,7 +39,7 @@ class CustomerOwedsController extends Controller
             $limit = 30;
             // Check flash danger
             flashDanger($customers->count(), __('flash.empty_data'));
-            $customers = $customers->paginate($limit, ['*'], 'customers-page');
+            $customers = $customers->paginate($limit, ['*'], 'customers_page');
             $notPay = self::STATUS_NOT_PAY;
             $somePay = self::STATUS_SOME_PAY;
             $allPay = self::STATUS_ALL_PAY;
@@ -53,7 +53,7 @@ class CustomerOwedsController extends Controller
                 
             // Check flash danger
             flashDanger($customerNotPays->count(), __('flash.empty_data'));
-            $customerNotPays = $customerNotPays->paginate($limit, ['*'], 'pay_no-page');
+            $customerNotPays = $customerNotPays->paginate($limit, ['*'], 'pay_no_page');
             
             // customer pay all
             $customerPayAlls = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
@@ -65,7 +65,7 @@ class CustomerOwedsController extends Controller
                
             // Check flash danger
             flashDanger($customerPayAlls->count(), __('flash.empty_data'));
-            $customerPayAlls = $customerPayAlls->paginate($limit, ['*'], 'pay_all-page');
+            $customerPayAlls = $customerPayAlls->paginate($limit, ['*'], 'pay_all_page');
 
 
             return view('backends.customer_oweds.index', [

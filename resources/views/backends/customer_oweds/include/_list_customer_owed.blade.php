@@ -6,18 +6,18 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-justified mb-2" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#pay">ការសងប្រាក់នៃការលក់ទាំងអស់</a>
+                    <a class="nav-link {{$request->customers_page ? ' active' : ''}}" data-toggle="tab" href="#pay">ការសងប្រាក់នៃការលក់ទាំងអស់</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#pay_ready">បញ្ចីសងប្រាក់ហើយ និងបានខ្លះរបស់អតិថិជន</a>
+                        <a class="nav-link {{$request->pay_all_page ? ' active' : ''}}" data-toggle="tab" href="#pay_ready">បញ្ចីសងប្រាក់ហើយ និងបានខ្លះរបស់អតិថិជន</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#pay_in_ready">បញ្ចីមិនទាន់​សងប្រាក់របស់អតិថិជន</a>
+                        <a class="nav-link {{$request->pay_no_page ? ' active' : ''}}" data-toggle="tab" href="#pay_in_ready">បញ្ចីមិនទាន់​សងប្រាក់របស់អតិថិជន</a>
                     </li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane active" id="pay">
+                    <div class="tab-pane fade {{$request->customers_page ? ' active show' : ''}}" id="pay">
                         <div class="table-responsive cus-table">
                             <table class="table table-bordered">
                                 <thead class="bg-primary text-light">
@@ -103,7 +103,7 @@
                             </p>
                         @endif
                     </div>
-                    <div class="tab-pane fade" id="pay_ready">
+                    <div class="tab-pane fade {{$request->pay_all_page ? ' active show' : ''}}" id="pay_ready">
                         <div class="table-responsive cus-table">
                             <table class="table table-bordered">
                                 <thead class="bg-primary text-light">
@@ -189,7 +189,7 @@
                             </p>
                         @endif
                     </div>
-                    <div class="tab-pane fade" id="pay_in_ready">
+                    <div class="tab-pane fade {{$request->pay_no_page ? ' active show' : ''}}" id="pay_in_ready">
                         <div class="table-responsive cus-table">
                             <table class="table table-bordered">
                                 <thead class="bg-primary text-light">
