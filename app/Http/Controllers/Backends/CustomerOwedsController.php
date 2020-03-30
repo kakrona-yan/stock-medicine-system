@@ -11,6 +11,10 @@ use App\Http\Constants\DeleteStatus;
 
 class CustomerOwedsController extends Controller
 {
+    const STATUS_NOT_PAY = 0;
+    const STATUS_SOME_PAY = 1;
+    const STATUS_ALL_PAY = 2;
+    
     public function __construct(
         Customer $customer,
         CustomerOwed $customerOwed,
@@ -28,15 +32,45 @@ class CustomerOwedsController extends Controller
     public function index(Request $request)
     {
         try {
+            // list all
             $customers  = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
                 ->orderBy('created_at', 'DESC');
-            $limit = config('pagination.limit');
+            $limit = 30;
             // Check flash danger
             flashDanger($customers->count(), __('flash.empty_data'));
-            $customers = $customers->paginate(30);
+            $customers = $customers->paginate($limit, ['*'], 'customers-page');
+            $notPay = self::STATUS_NOT_PAY;
+            $somePay = self::STATUS_SOME_PAY;
+            $allPay = self::STATUS_ALL_PAY;
+            // customer not yet pay
+            $customerNotPays  = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
+                ->whereHas('sales')
+                ->with(['customerOweds' => function($customerOweds) use ($notPay){
+                    $customerOweds->whereRaw('status_pay = ? OR status_pay IS NULL ', $notPay)
+                        ->orderBy('date_pay', 'DESC');
+                }]);
+                
+            // Check flash danger
+            flashDanger($customerNotPays->count(), __('flash.empty_data'));
+            $customerNotPays = $customerNotPays->paginate($limit, ['*'], 'pay_no-page');
+            
+            // customer pay all
+            $customerPayAlls = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
+                ->whereHas('customerOweds', function($customerOweds) use ($somePay, $allPay){
+                    $customerOweds->whereRaw('status_pay = ? OR status_pay = ? ', [$somePay, $allPay])
+                        ->orderBy('date_pay', 'DESC');
+                });
+               
+            // Check flash danger
+            flashDanger($customerPayAlls->count(), __('flash.empty_data'));
+            $customerPayAlls = $customerPayAlls->paginate($limit, ['*'], 'pay_all-page');
+
+
             return view('backends.customer_oweds.index', [
                 'request' => $request,
                 'customers' =>  $customers,
+                'customerNotPays' => $customerNotPays,
+                'customerPayAlls' => $customerPayAlls
             ]);
         }catch (\ValidationException $e) {
             return exceptionError($e, 'customer_owed.index');

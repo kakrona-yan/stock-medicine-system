@@ -31,6 +31,11 @@ class Customer extends BaseModel
         return $this->hasMany('App\Models\Sale', 'customer_id', 'id');
     }
 
+    public function customerOweds()
+    {
+        return $this->hasMany('App\Models\CustomerOwed', 'customer_id', 'id');
+    }
+    
     public function filter($request)
     {
         $customer = $this->where('is_delete', '<>', DeleteStatus::DELETED)
@@ -91,4 +96,5 @@ class Customer extends BaseModel
     {
         return $this->customerType()->exists() ? $this->customerType->name ." ". $this->name : $this->name;
     }
+
 }

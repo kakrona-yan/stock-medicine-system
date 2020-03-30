@@ -12,11 +12,14 @@ class CustomerOwed extends BaseModel
         'amount',
         'receive_amount',
         'owed_amount',
-        'receive_date',  
+        'receive_date',
+        'status_pay',
+        'date_pay'
     ];
     
     protected $dates = [
         'receive_date',
+        'date_pay'
     ];
 
     public function customer()
@@ -40,8 +43,44 @@ class CustomerOwed extends BaseModel
 
     public function getPrice($column)
     {
-        dd($column);
         $price = $this->exists() ? $this->{$column} : 0;
         return currencyFormat($price);
+    }
+
+    // status pay
+    const STATUS_NOT_PAY = 0;
+    const STATUS_SOME_PAY = 1;
+    const STATUS_ALL_PAY = 2;
+
+    const STATUS_PAY_TEXT = [
+        '0' => 'មិនទាន់សងប្រាក់',
+        '1' => 'សងប្រាក់បានខ្លះ',
+        '2' => 'សងប្រាក់ហើយ',
+    ];
+
+    public function statusPay()
+    {
+        $statusPay = $this->status_pay;
+        $statusText = '';
+        $color = '#e74a3b';
+        if (is_null($statusPay) && empty($statusPay)) return;
+        switch ($statusPay) {
+            case 0:
+                $statusText = self::STATUS_PAY_TEXT[$statusPay];
+                $color = '#e74a3b';
+                break;
+            case 1:
+                $statusText = self::STATUS_PAY_TEXT[$statusPay];
+                $color = '#00a3df';
+                break;
+            case 1:
+                $statusText = self::STATUS_PAY_TEXT[$statusPay];
+                $color = '#1cc88a';
+                break;
+        }
+        return [
+            'statusText' => $statusText, 
+            'color' => $color
+        ];
     }
 }

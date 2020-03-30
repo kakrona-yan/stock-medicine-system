@@ -16,5 +16,5 @@ return [
     'save_draft' => 'រក្សាឯកជន',
     'remove' => 'លុបចោល',
     'please_select' => 'សូមជ្រើសរើស',
-    'pay' => 'Pay'
+    'pay' => 'បង់ប្រាក់'
 ];
