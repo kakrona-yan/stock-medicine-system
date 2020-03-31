@@ -314,7 +314,7 @@ input{
   }
   li {
     display: inline-block;
-    max-width: 144px;
+    max-width: 125px;
     vertical-align: top;
     width: 100%;
     .text-center{
@@ -356,8 +356,8 @@ input{
     transform: scale(0);
   }
   label img {
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    max-width: 80px;
     transition-duration: 0.2s;
     transform-origin: 50% 50%;
   }
