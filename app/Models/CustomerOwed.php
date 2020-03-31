@@ -76,7 +76,7 @@ class CustomerOwed extends BaseModel
                 $statusText = self::STATUS_PAY_TEXT[$statusPay];
                 $color = '#00a3df';
                 break;
-            case 1:
+            case 2:
                 $statusText = self::STATUS_PAY_TEXT[$statusPay];
                 $color = '#1cc88a';
                 break;

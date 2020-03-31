@@ -66,7 +66,7 @@
                                                                 <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
                                                                 <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
                                                                 <td class="text-center">
-                                                                    <div class="btn-sm text-white font-size-10" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
+                                                                    <div class="btn-sm text-white font-size-10 d-inline-block" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
                                                                         {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សងប្រាក់' }}
                                                                     </div>
                                                                 </td>
@@ -150,11 +150,11 @@
                                                             <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
                                                             <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
                                                             <td class="text-center">
-                                                                <div class="btn-sm text-white font-size-10" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
+                                                                <div class="btn-sm text-white font-size-10 d-inline-block" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
                                                                     {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សងប្រាក់' }}
                                                                 </div>
                                                             </td>
-                                                            <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</td>
+                                                            <td class="text-center">{{ $sale->customerOwed()->exists() && $sale->customerOwed->date_pay ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</td>
                                                             <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
                                                             <td class="text-center">
                                                                 <a class="btn btn-sm btn-warning" 
@@ -234,7 +234,7 @@
                                                             <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
                                                             <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
                                                             <td class="text-center">
-                                                                <div class="btn-sm text-white font-size-10" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
+                                                                <div class="btn-sm text-white font-size-10 d-inline-block" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
                                                                     {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សងប្រាក់' }}
                                                                 </div>             
                                                             </td>

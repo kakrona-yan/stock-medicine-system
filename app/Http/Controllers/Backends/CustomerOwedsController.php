@@ -56,13 +56,12 @@ class CustomerOwedsController extends Controller
             $customerNotPays = $customerNotPays->paginate($limit, ['*'], 'pay_no_page');
             
             // customer pay all
-            $customerPayAlls = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
-                ->whereHas('sales')
+            $customerPayAlls = $this->customer->where('is_delete', '<>', 0)
                 ->whereHas('customerOweds', function($customerOweds) use ($somePay, $allPay){
-                    $customerOweds->whereRaw('status_pay = ? OR status_pay = ? ', [$somePay, $allPay])
-                        ->orderBy('date_pay', 'DESC');
-                });
-               
+                    $customerOweds->orderBy('date_pay', 'DESC');
+                })
+                ->whereHas('sales');
+           
             // Check flash danger
             flashDanger($customerPayAlls->count(), __('flash.empty_data'));
             $customerPayAlls = $customerPayAlls->paginate($limit, ['*'], 'pay_all_page');
@@ -92,9 +91,11 @@ class CustomerOwedsController extends Controller
             if (!$sale) {
                 return response()->view('errors.404', [], 404);
             }
+            $statusPays = CustomerOwed::STATUS_PAY_TEXT;
             return view('backends.customer_oweds.edit', [
                 'sale' => $sale,
                 'request' => $request,
+                'statusPays' => $statusPays
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.products.edit');

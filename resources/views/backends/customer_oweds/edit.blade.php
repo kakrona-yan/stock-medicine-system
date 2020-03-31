@@ -111,6 +111,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="fom-group w-50 mb-3">
+                                    <label for="sale_id">{{__('customer_owed.list.date_pay')}}:</label>
+                                    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                                        <input type="text" class="form-control" name="date_pay"
+                                            value="{{ old('date_pay', date('Y-m-d')) }}">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
+                                        </div>
+                                    </div>  
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-check form-check-inline align-top" for="status_pay">{{ __('customer_owed.list.status_pay') }}:</label>
+                                    @foreach ($statusPays as $key => $statusPay)
+                                        <div class="form-check form-check-inline">
+                                        <input style="margin-top:-3px" class="form-check-input" type="radio" name="status_pay" id="status_pay_{{$key}}" 
+                                            value="{{$key}}" {{old('status_pay', $sale->customerOwed()->exists() ? $sale->customerOwed->status_pay : 0) == $key ? 'checked' : ''}}>
+                                            <label class="form-check-label" for="status_pay_{{$key}}">{{$statusPay}}</label>
+                                        </div>  
+                                    @endforeach                        
+                                </div>
                                 <div class="form-group w-100 w-md-50 d-inline-flex">
                                     <button type="submit" class="btn btn-circle btn-primary w-50 mw-100 mr-2">{{__('button.pay')}}</button>
                                     <a href="{{route('customer_owed.index')}}" class="btn btn-circle btn-secondary w-50 mw-100">{{__('button.return')}}</a>
