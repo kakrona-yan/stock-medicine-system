@@ -42,7 +42,7 @@
                             <form id="form_sale_stock" class="form-main" action="{{route('sale.update', $sale->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mb-4 flex-sm-row-reverse flex-md-row-reverse flex-lg-row-reverse">
-                                    <div class="col-12 col-md-12 mb-3 mt-md-2">
+                                    <div class="col-12 col-md-12 mb-3 ">
                                         <div class="form-group" style="background: #eaecf4;padding: 10px;">
                                             <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>{{__('button.save')}}</button>
                                         </div>
@@ -123,7 +123,7 @@
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
                                         <div class="row">
-                                            <div class="col-12 col-sm-12 col-md-12 mb-3 mt-md-2">
+                                            <div class="col-12 col-sm-12 col-md-12 mb-3 ">
                                                 <fieldset class="edit-master-registration-fieldset">
                                                     <legend class="edit-application-information-legend text-left">{{__('sale.sub_title')}}:</legend>
                                                     <div class="table-responsive cus-table">
@@ -206,7 +206,7 @@
                                                             >
                                                         </div>
                                                     </div>
-                                                    @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
+                                                    {{-- @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                                      <div class="form-group row">
                                                         <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_discount">{{__('sale.form.dicount')}}</label>
                                                         <div class="col-12 col-sm-12 col-md-12">
@@ -230,7 +230,7 @@
                                                             <input type="text" class="form-control" id="money_owed" value="{{currencyFormat($owed)}}">
                                                         </div>
                                                     </div>
-                                                    @endif
+                                                    @endif --}}
                                                     <div class="form-group row">
                                                         <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="note">{{__('sale.form.note')}}</label>
                                                         <div class="col-12 col-sm-12 col-md-12 col-lg-9">

@@ -45,7 +45,7 @@
                                     <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>{{__('button.save')}}</button>
                                 </div>
                                 <div class="row mb-4 flex-sm-row-reverse flex-md-row-reverse flex-lg-row-reverse">
-                                    <div class="col-12 col-sm-12 col-md-12 mb-3 mt-md-2">
+                                    <div class="col-12 col-sm-12 col-md-12 mb-3 ">
                                         <fieldset class="edit-master-registration-fieldset">
                                             <legend class="edit-application-information-legend text-left">{{__('sale.form.sale')}}:</legend>
                                             <div class="form-group row">
@@ -122,7 +122,7 @@
                                     </div>
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
                                         <div class="row">
-                                            <div class="col-12 col-sm-12 col-md-12 mb-3 mt-md-2">
+                                            <div class="col-12 col-sm-12 col-md-12 mb-3 ">
                                                 <fieldset class="edit-master-registration-fieldset">
                                                     <legend class="edit-application-information-legend text-left">{{__('sale.sub_title')}}:</legend>
                                                     <div class="table-responsive cus-table">
@@ -169,7 +169,7 @@
                                                             >
                                                         </div>
                                                     </div>
-                                                    @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
+                                                    {{-- @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                                      <div class="form-group row">
                                                         <label class="col-12 col-sm-12 col-md-12 col-form-label" for="total_discount">{{__('sale.form.dicount')}}</label>
                                                         <div class="col-12 col-sm-12 col-md-12">
@@ -183,14 +183,14 @@
                                                                 oninput="calculatorMoney(this)"
                                                             >
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row">
+                                                    </div> --}}
+                                                    {{-- <div class="form-group row">
                                                         <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="money_owed">{{__('sale.form.owed')}}</label>
                                                         <div class="col-12 col-sm-12 col-md-12 col-lg-9">
                                                             <input type="text" class="form-control" id="money_owed" value="0">
                                                         </div>
                                                     </div>
-                                                    @endif
+                                                    @endif --}}
                                                     <div class="form-group row">
                                                         <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="note">{{__('sale.form.note')}}</label>
                                                         <div class="col-12 col-sm-12 col-md-12 col-lg-9">

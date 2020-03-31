@@ -47,7 +47,7 @@ class CustomerOwedsController extends Controller
             $customerNotPays  = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
                 ->whereHas('sales')
                 ->with(['customerOweds' => function($customerOweds) use ($notPay){
-                    $customerOweds->whereRaw('status_pay = ? OR status_pay IS NULL ', $notPay)
+                    $customerOweds->whereRaw('status_pay = ? OR status_pay IS NULL', $notPay)
                         ->orderBy('date_pay', 'DESC');
                 }]);
                 
@@ -57,8 +57,9 @@ class CustomerOwedsController extends Controller
             
             // customer pay all
             $customerPayAlls = $this->customer->where('is_delete', '<>', 0)
-                ->whereHas('customerOweds', function($customerOweds) use ($somePay, $allPay){
-                    $customerOweds->orderBy('date_pay', 'DESC');
+                ->whereHas('customerOweds', function($customerOweds) use ($notPay){
+                    $customerOweds->where('status_pay', '<>', $notPay)
+                        ->orderBy('date_pay', 'DESC');
                 })
                 ->whereHas('sales');
            
