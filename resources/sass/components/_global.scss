@@ -512,7 +512,15 @@ body.list-product {
   font-size: 10px;
 }
 #tab-list{
-
+  .table .thead-light th,
+  .cus-table .table tr .table tr > td {
+    font-size: 14px;
+    padding: 5px;
+  }
+  .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    background-color: $white !important;
+    color: $gray-800 !important;
+  }
 }
 @media (max-width: 767px) {
   h2.h-s-1.mb-4.font-national-cartoon{
