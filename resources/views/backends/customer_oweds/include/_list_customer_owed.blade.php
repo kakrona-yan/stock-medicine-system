@@ -1,4 +1,4 @@
-<div class="row mb-2">
+<div id="tab-list" class="row mb-2">
     <div class="col-12">
         <!-- Circle Buttons -->
         <div class="card mb-4">
@@ -6,13 +6,13 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-justified mb-2" role="tablist">
                     <li class="nav-item">
-                    <a class="nav-link {{$request->customers_page ? ' active' : ''}}" data-toggle="tab" href="#pay">ការសងប្រាក់នៃការលក់ទាំងអស់</a>
+                    <a class="nav-link bg-info text-white {{$request->customers_page ? ' active' : ''}}" data-toggle="tab" href="#pay">ការសងប្រាក់នៃការលក់ទាំងអស់</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{$request->pay_all_page ? ' active' : ''}}" data-toggle="tab" href="#pay_ready">បញ្ចីសងប្រាក់ហើយ និងបានខ្លះរបស់អតិថិជន</a>
+                        <a class="nav-link bg-success text-white {{$request->pay_all_page ? ' active' : ''}}" data-toggle="tab" href="#pay_ready">បញ្ចីសងប្រាក់ហើយ និងបានខ្លះរបស់អតិថិជន</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{$request->pay_no_page ? ' active' : ''}}" data-toggle="tab" href="#pay_in_ready">បញ្ចីមិនទាន់​សងប្រាក់របស់អតិថិជន</a>
+                        <a class="nav-link bg-danger text-white {{$request->pay_no_page ? ' active' : ''}}" data-toggle="tab" href="#pay_in_ready">បញ្ចីមិនទាន់​សងប្រាក់របស់អតិថិជន</a>
                     </li>
                 </ul>
                 <!-- Tab panes -->
@@ -20,7 +20,7 @@
                     <div class="tab-pane fade {{$request->customers_page ? ' active show' : ''}}" id="pay">
                         <div class="table-responsive cus-table">
                             <table class="table table-bordered">
-                                <thead class="bg-primary text-light">
+                                <thead class="bg-info text-light">
                                     <tr>
                                         <th class="text-center" style="width: 20px;">#</th>
                                         <th>{{__('customer.list.name')}}</th>
@@ -66,11 +66,9 @@
                                                                 <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
                                                                 <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
                                                                 <td class="text-center">
-                                                                    @if($sale->customerOwed()->exists())
-                                                                    <div class="btn-sm text-white" style="background:{{$sale->customerOwed->statusPay()['color']}}">
-                                                                        {{ $sale->customerOwed->statusPay()['statusText'] }}
+                                                                    <div class="btn-sm text-white font-size-10" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
+                                                                        {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សងប្រាក់' }}
                                                                     </div>
-                                                                    @endif
                                                                 </td>
                                                                 <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</td>
                                                                 <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
@@ -106,7 +104,7 @@
                     <div class="tab-pane fade {{$request->pay_all_page ? ' active show' : ''}}" id="pay_ready">
                         <div class="table-responsive cus-table">
                             <table class="table table-bordered">
-                                <thead class="bg-primary text-light">
+                                <thead class="bg-success text-light">
                                     <tr>
                                         <th class="text-center" style="width: 20px;">#</th>
                                         <th>{{__('customer.list.name')}}</th>
@@ -152,11 +150,9 @@
                                                             <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
                                                             <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
                                                             <td class="text-center">
-                                                                @if($sale->customerOwed()->exists())
-                                                                <div class="btn-sm text-white" style="background:{{$sale->customerOwed->statusPay()['color']}}">
-                                                                    {{ $sale->customerOwed->statusPay()['statusText'] }}
+                                                                <div class="btn-sm text-white font-size-10" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
+                                                                    {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សងប្រាក់' }}
                                                                 </div>
-                                                                @endif
                                                             </td>
                                                             <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</td>
                                                             <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
@@ -192,7 +188,7 @@
                     <div class="tab-pane fade {{$request->pay_no_page ? ' active show' : ''}}" id="pay_in_ready">
                         <div class="table-responsive cus-table">
                             <table class="table table-bordered">
-                                <thead class="bg-primary text-light">
+                                <thead class="bg-danger text-light">
                                     <tr>
                                         <th class="text-center" style="width: 20px;">#</th>
                                         <th>{{__('customer.list.name')}}</th>
@@ -238,11 +234,9 @@
                                                             <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
                                                             <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
                                                             <td class="text-center">
-                                                                @if($sale->customerOwed()->exists())
-                                                                <div class="btn-sm text-white" style="background:{{$sale->customerOwed->statusPay()['color']}}">
-                                                                    {{ $sale->customerOwed->statusPay()['statusText'] }}
-                                                                </div>
-                                                                @endif
+                                                                <div class="btn-sm text-white font-size-10" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
+                                                                    {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សងប្រាក់' }}
+                                                                </div>             
                                                             </td>
                                                             <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</td>
                                                             <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
