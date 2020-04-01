@@ -138,6 +138,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($customer->sales as $sale)
+                                                        @if($sale->status_pay == 1 || $sale->status_pay == 2)
                                                         @php
                                                             $customerOwed = 0;
                                                             $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
@@ -166,6 +167,7 @@
                                                                 </a>
                                                             </td>
                                                         </tr>
+                                                        @endif
                                                     @endforeach
                                                 </tbody>
                                             </table>
