@@ -92,7 +92,7 @@
                                      <td>{{currencyFormat($owed)}}</td>
                                     <td>{{date('Y-m-d h:i', strtotime($sale->sale_date))}}</td>
                                     <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
-                                    @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
+                                    @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
                                     <td rowspan="{{$sale->productSales->count() > 0 ? 2 : 1}}">   
                                         {{-- <a class="btn btn-circle btn-circle btn-sm btn-warning btn-circle mr-1" 
                                             data-toggle="tooltip" 
