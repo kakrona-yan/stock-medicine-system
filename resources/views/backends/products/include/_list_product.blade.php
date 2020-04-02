@@ -63,7 +63,7 @@
                                 <td>{{$product->product_import}}</td>
                                 <td class="text-right">{{$product->price}}</td>
                                 <td>{{$product->terms}}</td>
-                                <td>{{$product->expird_date ? date('Y-m-d', strtotime($product->expird_date)) : "-"}}</td>
+                                <td>{{$product->expird_date ? date('Y-m', strtotime($product->expird_date)) : "-"}}</td>
                                 <td class="text-center">
                                     <label class="switch">
                                         <input type="checkbox" data-toggle="toggle" data-onstyle="success" name="active"

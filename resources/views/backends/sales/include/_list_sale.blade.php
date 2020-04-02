@@ -108,6 +108,7 @@
                                             href="{{route('sale.downloadPDF', $sale->id)}}"
                                             ><i class="far fa-file-pdf"></i>
                                         </a>
+                                        @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                         <a class="btn btn-circle btn-sm btn-warning btn-circle" 
                                             data-toggle="tooltip" 
                                             data-placement="top"
@@ -124,6 +125,7 @@
                                             title="{{__('button.delete')}}"
                                             ><i class="fa fa-trash"></i>
                                         </button>
+                                        @endif
                                     </td>
                                     @endif
                                 </tr>
