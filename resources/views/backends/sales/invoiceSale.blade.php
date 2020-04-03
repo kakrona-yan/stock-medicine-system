@@ -207,7 +207,7 @@
                 <thead style="background:#eee">
                     <tr>
                         <th>ផលិតផល</th>
-                        <th>បរិមាណ</th>
+                        <th>ចំនួនទិញ</th>
                         <th>ចំនួនថែម</th>
                         <th>តម្លែ(ឯកតា)</th>
                         <th class="text-right">ចំនួនទឹកប្រាក់</th>
