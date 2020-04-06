@@ -3,7 +3,7 @@
         <!-- Circle Buttons -->
         <div class="card mb-4">
             <div class="card-body">
-                <div class="d-flex w-100 mb-2 justify-content-end">
+                <div class="pb-3">
                     <a href="{{route('customer_type.create')}}" 
                         class="btn btn-circle btn-primary"
                         data-toggle="tooltip" 
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </form>
-                <div class="table-responsive cus-table w-50">
+                <div class="table-responsive cus-table">
                     <table class="table table-striped table-bordered">
                         <thead class="bg-primary text-light">
                             <tr>

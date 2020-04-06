@@ -1,7 +1,7 @@
 @if (auth()->check())
 	@if ($menus)
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex justify-content-center align-items-center"
             href="{{ \Auth::user()->isRoleAdmin() ? route('dashboard') : '#'}}">
