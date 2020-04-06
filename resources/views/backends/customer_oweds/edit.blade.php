@@ -126,7 +126,7 @@
                                     @foreach ($statusPays as $key => $statusPay)
                                         <div class="form-check form-check-inline">
                                         <input style="margin-top:-3px" class="form-check-input" type="radio" name="status_pay" id="status_pay_{{$key}}" 
-                                            value="{{$key}}" {{old('status_pay', $sale->customerOwed()->exists() ? $sale->customerOwed->status_pay : 0) == $key ? 'checked' : ''}}>
+                                            value="{{$key}}" {{old('status_pay', $sale->customerOwed()->exists() ? $sale->customerOwed->status_pay : 2) == $key ? 'checked' : ''}}>
                                             <label class="form-check-label" for="status_pay_{{$key}}">{{$statusPay}}</label>
                                         </div>  
                                     @endforeach                        
