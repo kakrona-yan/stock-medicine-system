@@ -121,6 +121,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach( $customerNotPays as $customer)
+                                    
                                     <tr>
                                         <td class="text-center" rowspan="{{$customer->sales->count() > 0 ? 2 : 1}}">
                                             @if ($customer->sales->count() > 0)
@@ -148,6 +149,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($customer->sales as $sale)
+                                                        @if($sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0)
                                                         @php
                                                             $customerOwed = 0;
                                                             $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
@@ -176,6 +178,7 @@
                                                                 </a>
                                                             </td>
                                                         </tr>
+                                                        @endif
                                                     @endforeach
                                                 </tbody>
                                             </table>
