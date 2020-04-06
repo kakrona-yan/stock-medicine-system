@@ -73,7 +73,7 @@ class CustomerOwed extends BaseModel
         $statusText = '';
         $color = '#e74a3b';
         if (is_null($statusPay) && empty($statusPay)) return [
-            'statusText' => 'មិនទាន់សងប្រាក់', 
+            'statusText' => self::STATUS_PAY_TEXT[0],
             'color' => $color
         ];
         switch ($statusPay) {
