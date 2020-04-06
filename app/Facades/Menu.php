@@ -36,6 +36,14 @@ class Menu
                 'sub_menu' => null
             ],
             [
+                // staff management
+                'route' => 'staff.index',
+                'icon' => 'fas fa-user',
+                'label' => __('menu.staff'),
+                'role_type' => $this->RoleType('staff.index'),
+                'sub_menu' => null
+            ],
+            [
                 // category management
                 'route' => 'category.index',
                 'icon' => 'fas fa-tags',
@@ -73,14 +81,6 @@ class Menu
                 'icon' => 'fas fa-hand-holding-usd',
                 'label' => __('menu.customer_owed'),
                 'role_type' => $this->RoleType('customer_owed.index'),
-                'sub_menu' => null
-            ],
-            [
-                // staff management
-                'route' => 'staff.index',
-                'icon' => 'fas fa-user',
-                'label' => __('menu.staff'),
-                'role_type' => $this->RoleType('staff.index'),
                 'sub_menu' => null
             ],
             [
