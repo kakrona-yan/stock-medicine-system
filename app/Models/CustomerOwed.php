@@ -53,18 +53,18 @@ class CustomerOwed extends BaseModel
     const STATUS_ALL_PAY = 2;
 
     const STATUS_PAY_TEXT = [
-        '0' => 'មិនទាន់សងប្រាក់',
-        '1' => 'សងប្រាក់បានខ្លះ',
-        '2' => 'សងប្រាក់ហើយ',
+        '0' => 'មិនទាន់សង',
+        '1' => 'សងបានខ្លះ',
+        '2' => 'សងហើយ',
     ];
 
     const STATUS_PAY_TEXT_FORM = [
-        '1' => 'សងប្រាក់បានខ្លះ',
-        '2' => 'សងប្រាក់ហើយ',
+        '1' => 'សងបានខ្លះ',
+        '2' => 'សងហើយ',
     ];
 
     const STATUS_PAY_ALL_TEXT = [
-        '2' => 'សងប្រាក់ហើយ',
+        '2' => 'សងហើយ',
     ];
 
     public function statusPay()
