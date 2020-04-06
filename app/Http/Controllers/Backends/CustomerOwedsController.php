@@ -70,6 +70,7 @@ class CustomerOwedsController extends Controller
             
             // customer of sale
             $sales = $this->sale->where('is_delete', '<>', 0)
+                ->orderBy('created_at', 'DESC')
                 ->with('customerOwed');
             if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
                 $quotationNo = $request->quotaion_no;
