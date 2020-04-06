@@ -105,7 +105,7 @@ class CustomerOwedsController extends Controller
             if (!$sale) {
                 return response()->view('errors.404', [], 404);
             }
-            $statusPays = CustomerOwed::STATUS_PAY_TEXT;
+            $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
             return view('backends.customer_oweds.edit', [
                 'sale' => $sale,
                 'request' => $request,

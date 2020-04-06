@@ -120,7 +120,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach( $customerNotPays as $customer)
+                                @foreach( $customerNotPays as $customer)
                                     <tr>
                                         <td class="text-center" rowspan="{{$customer->sales->count() > 0 ? 2 : 1}}">
                                             @if ($customer->sales->count() > 0)
