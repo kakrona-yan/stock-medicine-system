@@ -71,20 +71,10 @@ class CustomerOwedsController extends Controller
             // customer of sale
             $sales = $this->sale->where('is_delete', '<>', 0)
                 ->orderBy('id', 'DESC');;
-            // $sales->with(['customerOwed' => function($customerOwed) use ($notPay){
-            //     $customerOwed->whereRaw('status_pay = ? OR status_pay IS NULL', $notPay)
-            //         ->orderBy('date_pay', 'DESC');
-            // }]);
             if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
                 $quotationNo = $request->quotaion_no;
                 $sales = $sales->where('quotaion_no', 'like', '%' . $quotationNo . '%');
             } 
-            if ($request->exists('status_pay') && !empty($request->status_pay)) {
-                $statusPay = $request->status_pay;
-                $sales->whereHas('customerOwed', function($customerOwed) use($statusPay){
-                    $customerOwed->where('status_pay', $statusPay);
-                });
-            }
             // Check flash danger
             flashDanger($sales->count(), __('flash.empty_data'));
             $sales = $sales->paginate($limit, ['*'], 'pay_day_page');
@@ -193,7 +183,64 @@ class CustomerOwedsController extends Controller
             return exceptionError($e, 'customers.index');
         }
     }
+    
+    public function updatePayModal(Request $request)
+    {
+        try {
+            $saleRequest = $request->all();
+            $sale = $this->sale->available($saleRequest["sale_id"]);
+            
+            $sale->update([
+                'money_change' => $sale->total_amount
+            ]);
+            if($sale) {
+                $customerOwed = $this->customerOwed->where('sale_id', $saleRequest["sale_id"])
+                    ->where('customer_id', $saleRequest["customer_id"])
+                    ->first();
 
+                $saleRequest['amount'] = $sale->total_amount;
+                $saleRequest['receive_amount']= $sale->total_amount;
+                $saleRequest['owed_amount']= 0;
+                $saleRequest['receive_date']= date('Y-m-d h:i:s');
+                $saleRequest['status_pay']= 2;
+                $saleRequest['date_pay'] = date('Y-m-d h:i:s');
+                if($customerOwed) {
+                    $customerOwed->update($saleRequest);
+                } else {
+                    $this->customerOwed->create($saleRequest);
+                }
+            }
+            return \Redirect::route('customer_owed.index', ['pay_model' => 1])
+                ->with('warning',__('flash.update'));
+           
+        }catch (\ValidationException $e) {
+            return exceptionError($e, 'customers.index');
+        }
+    }
+
+    public function updateSetDateModal(Request $request)
+    {
+        try {
+            $saleRequest = $request->all();
+            $sale = $this->sale->available($saleRequest["sale_id"]);
+            if($sale) {
+                $customerOwed = $this->customerOwed->where('sale_id', $saleRequest["sale_id"])
+                    ->where('customer_id', $saleRequest["customer_id"])
+                    ->first();
+                if($customerOwed) {
+                    $customerOwed->update($saleRequest);
+                } else {
+                    $this->customerOwed->create($saleRequest);
+                }
+            }
+            return \Redirect::route('customer_owed.index', ['pay_model' => 1])
+                ->with('warning',__('flash.update'));
+           
+        }catch (\ValidationException $e) {
+            return exceptionError($e, 'customers.index');
+        }
+    }
+    
     public function getSaleByCustomer(Request $request)
     {
         $sales = [];

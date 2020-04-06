@@ -27,7 +27,7 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-justified mb-2" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link bg-success text-white {{$request->pay_day_page || $request->quotaion_no || $request->status_pay ? ' active' : ''}}" data-toggle="tab" href="#pay_day">សងប្រាក់តាមថ្ងៃ</a>
+                        <a class="nav-link bg-success text-white {{$request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->pay_model ? ' active' : ''}}" data-toggle="tab" href="#pay_day">សងប្រាក់តាមថ្ងៃ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link bg-danger text-white {{$request->pay_no_page ? ' active' : ''}}" data-toggle="tab" href="#pay_in_ready">សងប្រាក់តាមអតិថិជន</a>
@@ -39,7 +39,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <!--/list pay by day-->
-                    <div class="tab-pane fade {{($request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->status_pay) ? ' active show' : ''}}" id="pay_day">
+                    <div class="tab-pane fade {{($request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->status_pay || $request->pay_model) ? ' active show' : ''}}" id="pay_day">
                         <div class="table-responsive cus-table">
                             <table class="table table-bordered">
                                 <thead class="bg-success text-light">
@@ -57,42 +57,53 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($sales as $sale) 
-                                    @php
-                                        $customerOwed = 0;
-                                        $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
-                                        $receiveAmount = $sale->customerOwed()->exists() ? $sale->customerOwed->receive_amount : 0;
-                                        $customerOwed = ($amount - $receiveAmount);
-                                    @endphp
-                                    <tr>
-                                        <td>{{ $sale->quotaion_no }}</td>
-                                        <td>{{ $sale->customer->customerFullName() }}</td>
-                                        <td class="text-right">{{ $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount }}</td>
-                                        <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
-                                        <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
-                                        <td class="text-center">
-                                            <div class="btn-sm text-white font-size-10 d-inline-block" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
-                                                {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សង' }}
-                                            </div>             
-                                        </td>
-                                        <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</td>
-                                        <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
-                                        <td class="text-center" style="width: 130px;">
-                                            <a class="btn btn-sm btn-warning d-inline-flex" 
-                                                data-toggle="tooltip" 
-                                                data-placement="top"
-                                                data-original-title="{{__('button.pay')}}"
-                                                href="{{route('customer_owed.edit', $sale->id)}}"
-                                                >{{__('button.pay')}}
-                                            </a>
-                                            <a class="btn btn-sm btn-warning d-inline-flex" 
-                                                data-toggle="tooltip" 
-                                                data-placement="top"
-                                                data-original-title="{{__('button.pay_all')}}"
-                                                href="{{route('customer_owed.edit_pay_all', $sale->id)}}"
-                                                >{{__('button.pay_all')}}
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0)
+                                        @php
+                                            $customerOwed = 0;
+                                            $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
+                                            $receiveAmount = $sale->customerOwed()->exists() ? $sale->customerOwed->receive_amount : 0;
+                                            $customerOwed = ($amount - $receiveAmount);
+                                        @endphp
+                                        <tr>
+                                            <td>{{ $sale->quotaion_no }}</td>
+                                            <td>{{ $sale->customer->customerFullName() }}</td>
+                                            <td class="text-right">{{ $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount }}</td>
+                                            <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
+                                            <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
+                                            <td class="text-center">
+                                                <div class="btn-sm text-white font-size-10 d-inline-block" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
+                                                    {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សង' }}
+                                                </div>             
+                                            </td>
+                                            <td class="text-center">
+                                                <div>{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</div>
+                                                <button type="button" class="btn btn-sm btn-warning" style="font-size: 10px;padding: 1px 5px;" 
+                                                    onclick="setDatePayPopup(this)"
+                                                    data-sale-id="{{ $sale->id }}"
+                                                    data-customer-id="{{ $sale->customer->id }}"
+                                                    data-toggle="modal" data-target="#set_date_pay_confirm"
+                                                    ><i class="far fa-calendar-alt"></i>
+                                                </button>
+                                            </td>
+                                            <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                            <td class="text-center" style="width: 130px;">
+                                                <a class="btn btn-sm btn-warning d-inline-flex" 
+                                                    data-toggle="tooltip" 
+                                                    data-placement="top"
+                                                    data-original-title="{{__('button.pay')}}"
+                                                    href="{{route('customer_owed.edit', $sale->id)}}"
+                                                    >{{__('button.pay')}}
+                                                </a>
+                                                <button type="button" class="btn btn-sm btn-info d-inline-flex" 
+                                                    onclick="updatePopup(this)"
+                                                    data-sale-id="{{ $sale->id }}"
+                                                    data-customer-id="{{ $sale->customer->id }}"
+                                                    data-toggle="modal" data-target="#update_sale_confirm"
+                                                    >{{__('button.pay_all')}}
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endif
                                     @endforeach
                                 </tbody>
                             </table>
@@ -128,8 +139,20 @@
                                             @endif
                                         </td>
                                         <td>{{ $customer->customerFullName() }}</td>
-                                        <td></td>
-                                        <td></td>
+                                        @php
+                                            $totalAmount = 0;
+                                            $totalCustomerOwed = 0;
+                                            foreach ($customer->sales as $sale) {
+                                                if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0) {
+                                                    $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
+                                                    $customerOwed = $sale->customerOwed()->exists() ? $sale->customerOwed->owed_amount : $sale->total_amount;
+                                                    $totalAmount += $amount;
+                                                    $totalCustomerOwed +=$customerOwed;
+                                                }
+                                            }
+                                        @endphp
+                                        <td>{{ currencyFormat($totalAmount) }}</td>
+                                        <td>{{ currencyFormat($totalCustomerOwed) }}</td>
                                     </tr>
                                     @if ($customer->sales->count() > 0)
                                     <tr>
@@ -149,7 +172,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($customer->sales as $sale)
-                                                        @if($sale->money_change >= 0 || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0)
+                                                        @if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0)
                                                         @php
                                                             $customerOwed = 0;
                                                             $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
@@ -220,9 +243,23 @@
                                                 @endif
                                             </td>
                                             <td>{{ $customer->customerFullName() }}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            @php
+                                                $ctotalAmount = 0;
+                                                $ctotalCustomerOwed = 0;
+                                                $ctotalCustomerPay = 0;
+                                                foreach ($customer->sales as $sale) {
+                                                    if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists()) {
+                                                        $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
+                                                        $customerPay = $sale->customerOwed()->exists() ? $sale->customerOwed->receive_amount : 0;
+                                                        $ctotalAmount += $amount;
+                                                        $ctotalCustomerPay += $customerPay;
+                                                    }
+                                                }
+                                                $ctotalCustomerOwed = ($ctotalAmount - $ctotalCustomerPay);
+                                            @endphp
+                                            <td>{{currencyFormat($ctotalAmount)}}</td>
+                                            <td>{{currencyFormat($ctotalCustomerPay)}}</td>
+                                            <td>{{currencyFormat($ctotalCustomerOwed)}}</td>
                                         </tr>
                                         @if ($customer->sales->count() > 0)
                                         <tr>
@@ -294,6 +331,71 @@
         </div>
     </div>
 </div><!--/row-->
+<!--pay fast-->
+<div class="modal fade" id="update_sale_confirm">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">       
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h5 class="modal-title"><i class="fa fa-trash"></i> {{__('customer_owed.confirm_pay')}}</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div> 
+        <!-- Modal body -->
+        <div class="modal-body text-center">
+            <div class="message">{{__('customer_owed.confirm_msg_pay') }}</div>
+            <div id="modal-name"></div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer d-flex justify-content-center">
+            <form id="update_sale_confirm_form" action="{{route('customer_owed.update.pay_day')}}" method="POST">
+                @csrf
+                <input type="hidden" type="form-control" name="customer_id">
+                <input type="hidden" type="form-control" name="sale_id">
+                <button type="submit" class="btn btn-circle btn-primary">{{__('button.ok')}}</button>
+                <button type="button" class="btn btn-circle btn-danger pl-4 pr-4" data-dismiss="modal"
+                    onclick="clearData()"
+                >{{__('button.close')}}</button>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
+<!--set date-->
+<div class="modal fade" id="set_date_pay_confirm">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">       
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-trash"></i> {{__('customer_owed.confirm_set_date')}}</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div> 
+            <form id="update_sale_confirm_form" action="{{route('customer_owed.update.set_date')}}" method="POST">
+                @csrf
+                <!-- Modal body -->
+                <div class="modal-body text-center">
+                    <div class="fom-group　mb-3">
+                        <input type="hidden" type="form-control" name="customer_id">
+                        <input type="hidden" type="form-control" name="sale_id">
+                        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                            <input type="text" class="form-control" name="date_pay"
+                                value="{{ old('date_pay', date('Y-m-d')) }}">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer d-flex justify-content-center">
+                        <button type="submit" class="btn btn-circle btn-primary">{{__('button.ok')}}</button>
+                        <button type="button" class="btn btn-circle btn-danger pl-4 pr-4" data-dismiss="modal"
+                            onclick="clearData()"
+                        >{{__('button.close')}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @push('footer-script')
 <script>
     (function( $ ){
@@ -301,5 +403,20 @@
             allowClear: false
         });
     })( jQuery );
+
+    function updatePopup(obj) {
+        $('input[name="customer_id"]').val($(obj).attr("data-customer-id"));
+        $('input[name="sale_id"]').val($(obj).attr("data-sale-id"));
+    }
+
+    function setDatePayPopup(obj){
+        $('input[name="customer_id"]').val($(obj).attr("data-customer-id"));
+        $('input[name="sale_id"]').val($(obj).attr("data-sale-id"));
+    }
+
+    function clearData() {
+        $('input[name="customer_id"]').val('');
+        $('input[name="sale_id"]').val('');
+    }
 </script>
 @endpush

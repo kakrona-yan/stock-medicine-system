@@ -148,6 +148,10 @@ Route::group(
                     ->name('edit_pay_all');
                 Route::post('/update/{id}', 'CustomerOwedsController@update')
                     ->name('update');
+                Route::post('/update_pay_day', 'CustomerOwedsController@updatePayModal')
+                    ->name('update.pay_day');
+                Route::post('/update_set_date', 'CustomerOwedsController@updateSetDateModal')
+                    ->name('update.set_date');
                 Route::get('/sale', 'CustomerOwedsController@getSaleByCustomer')
                     ->name('sale');
             });
