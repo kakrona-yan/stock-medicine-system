@@ -108,14 +108,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            {{ $sales->appends(request()->query())->links() }}
-                        </div>
-                        @if( Session::has('flash_danger') )
-                            <p class="alert text-center {{ Session::get('alert-class', 'alert-danger') }}">
-                                <span class="spinner-border spinner-border-sm text-darktext-danger align-middle"></span> {{ Session::get('flash_danger') }}
-                            </p>
-                        @endif
                     </div>
                     <!--/list not yet play-->
                     <div class="tab-pane fade {{$request->pay_no_page ? ' active show' : ''}}" id="pay_in_ready">
@@ -369,7 +361,7 @@
                 <h5 class="modal-title"><i class="fa fa-trash"></i> {{__('customer_owed.confirm_set_date')}}</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div> 
-            <form id="update_sale_confirm_form" action="{{route('customer_owed.update.set_date')}}" method="POST">
+            <form id="set_date_pay_confirm_form" action="{{route('customer_owed.update.set_date')}}" method="POST">
                 @csrf
                 <!-- Modal body -->
                 <div class="modal-body text-center">
@@ -418,5 +410,13 @@
         $('input[name="customer_id"]').val('');
         $('input[name="sale_id"]').val('');
     }
+    $(document).keypress(function(e) {
+        if ($("#update_sale_confirm").hasClass('show') && (e.keycode == 13 || e.which == 13)) {
+            $("#update_sale_confirm_form").submit()
+        }
+        if ($("#set_date_pay_confirm").hasClass('show') && (e.keycode == 13 || e.which == 13)) {
+            $("#set_date_pay_confirm_form").submit()
+        }
+    });
 </script>
 @endpush

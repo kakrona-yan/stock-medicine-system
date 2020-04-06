@@ -70,14 +70,14 @@ class CustomerOwedsController extends Controller
             
             // customer of sale
             $sales = $this->sale->where('is_delete', '<>', 0)
-                ->orderBy('id', 'DESC');;
+                ->with('customerOwed');
             if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
                 $quotationNo = $request->quotaion_no;
                 $sales = $sales->where('quotaion_no', 'like', '%' . $quotationNo . '%');
             } 
             // Check flash danger
             flashDanger($sales->count(), __('flash.empty_data'));
-            $sales = $sales->paginate($limit, ['*'], 'pay_day_page');
+            $sales = $sales->get()->sortByDesc('customerOwed.date_pay');
 
             $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
             return view('backends.customer_oweds.index', [
