@@ -28,9 +28,9 @@
         <div class="col-12 tab-card">
             @php
                 $customerOwed = 0;
-                $amount = $sale->customerOwed ? $sale->customerOwed->amount : $sale->total_amount;
-                $receiveAmount = $sale->customerOwed ? $sale->customerOwed->receive_amount : 0;
-                $customerOwed = $sale->customerOwed ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
+                $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
+                $receiveAmount = $sale->customerOwed()->exists() ? $sale->customerOwed->receive_amount : 0;
+                $customerOwed = $sale->customerOwed()->exists() ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
             @endphp
             <!-- Circle Buttons -->
             <div class="card mb-4">
