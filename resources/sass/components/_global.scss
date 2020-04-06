@@ -522,6 +522,9 @@ body.list-product {
     color: $gray-800 !important;
   }
 }
+.cus-table tr > td {
+  font-size: 14px;
+}
 @media (max-width: 767px) {
   h2.h-s-1.mb-4.font-national-cartoon{
     margin-top: 70% !important;

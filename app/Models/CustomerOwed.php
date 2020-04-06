@@ -63,6 +63,10 @@ class CustomerOwed extends BaseModel
         '2' => 'សងប្រាក់ហើយ',
     ];
 
+    const STATUS_PAY_ALL_TEXT = [
+        '2' => 'សងប្រាក់ហើយ',
+    ];
+
     public function statusPay()
     {
         $statusPay = $this->status_pay;

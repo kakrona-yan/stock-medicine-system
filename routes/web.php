@@ -144,6 +144,8 @@ Route::group(
                     ->name('index');
                 Route::get('/edit/{id}', 'CustomerOwedsController@edit')
                     ->name('edit');
+                Route::get('/edit/pay_all/{id}', 'CustomerOwedsController@editPayAll')
+                    ->name('edit_pay_all');
                 Route::post('/update/{id}', 'CustomerOwedsController@update')
                     ->name('update');
                 Route::get('/sale', 'CustomerOwedsController@getSaleByCustomer')

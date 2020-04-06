@@ -68,24 +68,34 @@ class CustomerOwedsController extends Controller
             flashDanger($customerNotPays->count(), __('flash.empty_data'));
             $customerNotPays = $customerNotPays->paginate($limit, ['*'], 'pay_no_page');
             
-            // customer pay all
-            $customerPayAlls = $this->customer->where('is_delete', '<>', 0)
-                ->whereHas('customerOweds', function($customerOweds) use ($notPay){
-                    $customerOweds->where('status_pay', '<>', $notPay)
-                        ->orderBy('date_pay', 'DESC');
-                })
-                ->whereHas('sales');
-           
+            // customer of sale
+            $sales = $this->sale->where('is_delete', '<>', 0)
+                ->orderBy('id', 'DESC');;
+            // $sales->with(['customerOwed' => function($customerOwed) use ($notPay){
+            //     $customerOwed->whereRaw('status_pay = ? OR status_pay IS NULL', $notPay)
+            //         ->orderBy('date_pay', 'DESC');
+            // }]);
+            if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
+                $quotationNo = $request->quotaion_no;
+                $sales = $sales->where('quotaion_no', 'like', '%' . $quotationNo . '%');
+            } 
+            if ($request->exists('status_pay') && !empty($request->status_pay)) {
+                $statusPay = $request->status_pay;
+                $sales->whereHas('customerOwed', function($customerOwed) use($statusPay){
+                    $customerOwed->where('status_pay', $statusPay);
+                });
+            }
             // Check flash danger
-            flashDanger($customerPayAlls->count(), __('flash.empty_data'));
-            $customerPayAlls = $customerPayAlls->paginate($limit, ['*'], 'pay_all_page');
+            flashDanger($sales->count(), __('flash.empty_data'));
+            $sales = $sales->paginate($limit, ['*'], 'pay_day_page');
 
-
+            $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
             return view('backends.customer_oweds.index', [
                 'request' => $request,
                 'customers' =>  $customers,
                 'customerNotPays' => $customerNotPays,
-                'customerPayAlls' => $customerPayAlls
+                'sales' => $sales,
+                'statusPays' => $statusPays
             ]);
         }catch (\ValidationException $e) {
             return exceptionError($e, 'customer_owed.index');
@@ -106,6 +116,24 @@ class CustomerOwedsController extends Controller
                 return response()->view('errors.404', [], 404);
             }
             $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
+            return view('backends.customer_oweds.edit', [
+                'sale' => $sale,
+                'request' => $request,
+                'statusPays' => $statusPays
+            ]);
+        } catch (\ValidationException $e) {
+            return exceptionError($e, 'backends.products.edit');
+        }
+    }
+
+    public function editPayAll(Request $request, int $id)
+    {
+        try {
+            $sale = $this->sale->available($id);
+            if (!$sale) {
+                return response()->view('errors.404', [], 404);
+            }
+            $statusPays = CustomerOwed::STATUS_PAY_ALL_TEXT;
             return view('backends.customer_oweds.edit', [
                 'sale' => $sale,
                 'request' => $request,
