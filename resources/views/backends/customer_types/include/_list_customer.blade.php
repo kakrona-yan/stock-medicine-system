@@ -3,7 +3,15 @@
         <!-- Circle Buttons -->
         <div class="card mb-4">
             <div class="card-body">
-                <form id="customer-search" action="{{ route('customer_type.index') }}" method="GET" class="form form-horizontal form-search">
+                <div class="d-flex w-100 mb-2 justify-content-end">
+                    <a href="{{route('customer_type.create')}}" 
+                        class="btn btn-circle btn-primary"
+                        data-toggle="tooltip" 
+                        data-placement="left" title="" 
+                        data-original-title="{{__('button.add_new')}}"
+                    ><i class="fas fa-plus-circle"></i> {{__('button.add_new')}}ប្រភេទអតិថិជន</a>
+                </div>
+                <form id="customer-search" action="{{ route('customer.index') }}" method="GET" class="form form-horizontal form-search">
                     <div class="row">
                         <div class="col-6 col-md-3 mb-1">
                             <div class="form-group">
@@ -50,7 +58,7 @@
                                         onclick="deletePopup(this)"
                                         data-id="{{ $customerType->id }}"
                                         data-name="{{ $customerType->name}}"
-                                        data-toggle="modal" data-target="#deleteCustomer"
+                                        data-toggle="modal" data-target="#deleteCustomerType"
                                         title="{{__('button.delete')}}"
                                         ><i class="fa fa-trash"></i>
                                     </button>
@@ -73,7 +81,7 @@
     </div>
 </div><!--/row-->
 <!--Modal delete customer-->
-<div class="modal fade" id="deleteCustomer">
+<div class="modal fade" id="deleteCustomerType">
     <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">       
         <!-- Modal Header -->

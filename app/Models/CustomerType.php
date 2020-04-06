@@ -26,7 +26,7 @@ class CustomerType extends BaseModel
         $limit = config('pagination.limit');
         // Check flash danger
         flashDanger($customerType->count(), __('flash.empty_data'));
-        return $customerType->paginate($limit);
+        return $customerType->paginate($limit, ['*'], 'customer_type-page');
     }
 
     public function customer()

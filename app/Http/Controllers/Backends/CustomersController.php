@@ -32,11 +32,13 @@ class CustomersController extends Controller
     {
         try {
             $customers  = $this->customer->filter($request);
+            $customerTypes = $this->customerType->filter($request);
             $genders = UserRole::USER_GANDER_TEXT_EN;
             return view('backends.customers.index', [
                 'request' => $request,
                 'customers' =>  $customers,
-                'genders' => $genders
+                'genders' => $genders,
+                'customerTypes' => $customerTypes
             ]);
         }catch (\ValidationException $e) {
             return exceptionError($e, 'customers.index');

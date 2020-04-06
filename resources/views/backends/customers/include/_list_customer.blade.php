@@ -3,6 +3,14 @@
         <!-- Circle Buttons -->
         <div class="card mb-4">
             <div class="card-body">
+                <div class="d-flex w-100 mb-2 justify-content-end">
+                    <a href="{{route('customer.create')}}" 
+                        class="btn btn-circle btn-primary"
+                        data-toggle="tooltip" 
+                        data-placement="left" title="" 
+                        data-original-title="{{__('button.add_new')}}"
+                    ><i class="fas fa-plus-circle"></i> {{__('button.add_new')}}អតិថិជន</a>
+                </div>
                 @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
                 <form id="customer-search" action="{{ route('customer.index') }}" method="GET" class="form form-horizontal form-search">
                     <div class="row">

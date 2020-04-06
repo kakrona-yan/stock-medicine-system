@@ -17,14 +17,9 @@
                 </li>
             </ol>
         </nav>
-        <a href="{{route('customer.create')}}" 
-            class="btn btn-circle btn-primary"
-            data-toggle="tooltip" 
-            data-placement="left" title="" 
-            data-original-title="{{__('button.add_new')}}"
-        ><i class="fas fa-plus-circle"></i> {{__('button.add_new')}}</a>
     </div>
     <!--list product-->
+    @include('backends.customer_types.include._list_customer')
     @include('backends.customers.include._list_customer')
 </div>
 
