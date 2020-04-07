@@ -12,17 +12,17 @@
     </div>
     @else
         <div class="row {{Auth::user()->isRoleStaff() ? 'sp-staff-block' : ''}}">
-            <div class="col-6  mb-4 p-1">
+            <div class="col-6 mb-4 p-1">
                 <div class="card shadow py-2 border-success">
                     <div class="card-body text-center">
-                        <a href="{{route('customer.index')}}"><i class="fas fa-users text-danger"></i> {{__('menu.customer')}}</a>
+                        <a href="{{route('sale.index')}}"><i class="far fa-newspaper text-warning"></i> {{__('menu.sale')}}</a>
                     </div>
                 </div>
             </div>
             <div class="col-6 mb-4 p-1">
                 <div class="card shadow py-2 border-success">
                     <div class="card-body text-center">
-                        <a href="{{route('sale.index')}}"><i class="far fa-newspaper text-warning"></i> {{__('menu.sale')}}</a>
+                        <a href="{{route('customer.index')}}"><i class="fas fa-users text-danger"></i> {{__('menu.customer')}}</a>
                     </div>
                 </div>
             </div>
