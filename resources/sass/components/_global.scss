@@ -540,7 +540,6 @@ body.list-product {
     font-size: 28px !important;
   }
   .list-product {
-    min-height: 100%;
     .check-product li {
       max-width: 130px;
       margin: 0px auto;
@@ -559,6 +558,8 @@ body.list-product {
   }
   .list-product{
     max-height: 200px !important;
+    min-height: 200px !important;
+    height: 200px !important;
   }
   .sp-staff-block{
     .card-body{
