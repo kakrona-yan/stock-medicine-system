@@ -525,6 +525,14 @@ body.list-product {
 .cus-table tr > td {
   font-size: 14px;
 }
+.sp-staff-block{
+  display: none !important;
+}
+@media (min-width: 767px) {
+  .w-md-50{
+    width: 50%;
+  }
+}
 @media (max-width: 767px) {
   h2.h-s-1.mb-4.font-national-cartoon{
     margin-top: 70% !important;
@@ -542,5 +550,14 @@ body.list-product {
       height: 85px;
       width: 85px;
     }
+  }
+  .sp-staff-none{
+    display: none !important;
+  }
+  .sp-staff-block{
+    display: flex !important;
+  }
+  .list-product{
+    max-height: 190px;
   }
 }

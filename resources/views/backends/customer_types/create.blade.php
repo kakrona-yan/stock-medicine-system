@@ -2,6 +2,24 @@
 @section('title', __('customer.title'))
 @section('content')
 <div id="customer-list">
+    @if(\Auth::user()->isRoleStaff())
+    <div class="row {{Auth::user()->isRoleStaff() ? 'sp-staff-block' : ''}}">
+        <div class="col-6  mb-4 p-1">
+            <div class="card shadow py-2 border-success">
+                <div class="card-body text-center">
+                    <a href="{{route('customer.index')}}"><i class="fas fa-users text-danger"></i> {{__('menu.customer')}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 mb-4 p-1">
+            <div class="card shadow py-2 border-success">
+                <div class="card-body text-center">
+                    <a href="{{route('sale.index')}}"><i class="far fa-newspaper text-warning"></i> {{__('menu.sale')}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @else
     <!-- Page Heading -->
     <div class="border-bottom mb-3 pb-3">
         <nav aria-label="breadcrumb">
@@ -13,7 +31,7 @@
                     </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <span class="sub-title">{{ __('customer.sub_title') }} Type</span>
+                    <span class="sub-title">ប្រភេទ{{ __('customer.sub_title') }}</span>
                 </li>
             </ol>
         </nav>
@@ -24,6 +42,7 @@
             data-original-title="{{__('customer.sub_title')}}"
         ><i class="fas fa-list"></i> {{__('customer.sub_title')}}</a>
     </div>
+    @endif
     <div class="row mb-2">
         <div class="col-12 tab-card">
             <!-- Circle Buttons -->
@@ -54,8 +73,8 @@
                                 <div class="row">
                                     <div class="col-12 col-md-4">
                                         <div class="form-group w-100 d-inline-flex">
-                                            <button type="submit" class="btn btn-circle btn-primary w-50 mw-100 mr-2">{{__('button.add')}}</button>
-                                            <a href="{{route('customer_type.index')}}" class="btn btn-circle btn-secondary w-50 mw-100">{{__('button.return')}}</a>
+                                            <button type="submit" class="btn btn-circle btn-primary w-100 w-md-50 mw-100 mr-2">{{__('button.add')}}</button>
+                                            <a href="{{route('customer_type.index')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100">{{__('button.return')}}</a>
                                         </div>
                                     </div>
                                 </div>

@@ -13,7 +13,7 @@
                     </div>
                     <div class="form-group input-group mb-2 mr-2" style="width: 300px;">
                         <label for="title" class="mr-sm-2">{{__('customer_owed.list.status_pay')}}:</label>
-                        <select class="form-control w-50" id="status_pay" name="status_pay" style="width: 200px !important;">
+                        <select class="form-control w-100 w-md-50" id="status_pay" name="status_pay" style="width: 200px !important;">
                             <option value="" selected>{{__('sale.select')}}</option>
                             @foreach($statusPays as $key => $name)
                                 <option value="{{ $key }}" {{ $key == $request->status_pay ? 'selected' : '' }}>{{ $name }}</option>

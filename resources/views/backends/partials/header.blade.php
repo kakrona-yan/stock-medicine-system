@@ -2,9 +2,14 @@
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-3 static-top" style="background-color: #e2e2e2 !important;">
     <!-- Sidebar Toggle (Topbar) -->
-    <button id="sidebarToggleTop" class="btn btn-circle">
+    <button id="sidebarToggleTop" class="btn btn-circle {{Auth::user()->isRoleStaff() ? 'sp-staff-none' : ''}}">
         <i class="fas fa-bars fa-fw fa-lg"></i>
     </button>
+    @if(\Auth::user()->isRoleStaff())
+        <div class="{{Auth::user()->isRoleStaff() ? 'sp-staff-block' : ''}}">
+            <h2 class="text-info text-info pt-2 pl-2 text-bold"><a href="{{route('dashboard')}}">RRPS-PHARMA</a></h2>
+        </div>
+    @endif
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
         <!-- Nav Item - User Information -->

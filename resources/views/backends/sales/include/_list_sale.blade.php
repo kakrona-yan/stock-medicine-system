@@ -3,6 +3,9 @@
         <!-- Circle Buttons -->
         <div class="card mb-4">
             <div class="card-body">
+                @if(\Auth::user()->isRoleStaff())
+                <a href="{{route('sale.create')}}" class="btn btn-circle btn-primary mb-3 pl-4 pr-4" data-toggle="tooltip" data-placement="left" title="" data-original-title="{{__('button.add_new')}}"><i class="fas fa-plus-circle mr-2"></i> {{__('button.add_new')}}</a>
+                @endif
                 @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
                 <form id="sale-search" action="{{ route('sale.index') }}" method="GET" class="form form-horizontal form-search form-inline mb-2 d-inline-flex">
                     <div class="form-group mb-2 mr-2">

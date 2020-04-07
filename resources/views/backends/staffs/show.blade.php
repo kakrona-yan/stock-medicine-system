@@ -66,16 +66,16 @@
                                     <tr>
                                         <th>{{__('staff.form.thumbnail')}}:</th>
                                         <td>
-                                            <div class="w-50">
+                                            <div class="w-100 w-md-50">
                                                 <img class="img-thumbnail" src="{{$staff->thumbnail? getUploadUrl($staff->thumbnail, config('upload.staff')) : asset('images/no-avatar.jpg') }}" />
                                             </div>
                                         </td>
                                     </tr>
                                 </tbody>
                               </table>
-                            <div class="form-group w-50 d-inline-flex">
-                                <a href="{{route('staff.edit', $staff->id)}}" class="btn btn-circle btn-primary w-50 mw-100 mr-2">{{__('button.edit')}}</a>
-                                <a href="{{route('staff.index')}}" class="btn btn-circle btn-secondary w-50 mw-100">{{__('button.return')}}</a>
+                            <div class="form-group w-100 w-md-50 d-inline-flex">
+                                <a href="{{route('staff.edit', $staff->id)}}" class="btn btn-circle btn-primary w-100 w-md-50 mw-100 mr-2">{{__('button.edit')}}</a>
+                                <a href="{{route('staff.index')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100">{{__('button.return')}}</a>
                             </div>
                         </div><!--/tab-add-staff-->
                     </div>

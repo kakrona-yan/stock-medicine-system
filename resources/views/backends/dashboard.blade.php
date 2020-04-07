@@ -3,12 +3,31 @@
 @section('content')
 <div id="dashboard">
     <!-- Page Heading -->
+    @if(!\Auth::user()->isRoleStaff())
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h5 class="mb-0 text-gray-800">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             RRPS-PHARMA
         </h5>
     </div>
+    @else
+        <div class="row {{Auth::user()->isRoleStaff() ? 'sp-staff-block' : ''}}">
+            <div class="col-6  mb-4 p-1">
+                <div class="card shadow py-2 border-success">
+                    <div class="card-body text-center">
+                        <a href="{{route('customer.index')}}"><i class="fas fa-users text-danger"></i> {{__('menu.customer')}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mb-4 p-1">
+                <div class="card shadow py-2 border-success">
+                    <div class="card-body text-center">
+                        <a href="{{route('sale.index')}}"><i class="far fa-newspaper text-warning"></i> {{__('menu.sale')}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <!-- Content Row -->
     <div class="row">
         <!-- Product -->

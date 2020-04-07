@@ -9,6 +9,24 @@
 </style>
 @section('content')
 <div id="category-list">
+    @if(\Auth::user()->isRoleStaff())
+    <div class="row {{Auth::user()->isRoleStaff() ? 'sp-staff-block' : ''}}">
+        <div class="col-6  mb-4 p-1">
+            <div class="card shadow py-2 border-success">
+                <div class="card-body text-center">
+                    <a href="{{route('customer.index')}}"><i class="fas fa-users text-danger"></i> {{__('menu.customer')}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 mb-4 p-1">
+            <div class="card shadow py-2 border-success">
+                <div class="card-body text-center">
+                    <a href="{{route('sale.index')}}"><i class="far fa-newspaper text-warning"></i> {{__('menu.sale')}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @else
     <!-- Page Heading -->
     <div class="border-bottom mb-3 pb-3">
         <nav aria-label="breadcrumb">
@@ -31,6 +49,7 @@
             data-original-title="Sale Product"
         ><i class="fas fa-list mr-1"></i> {{__('sale.sub_title')}}</a>
     </div>
+    @endif
     <div class="row mb-2">
         <div class="col-12 col-sm-12 tab-card">
             <!-- Circle Buttons -->

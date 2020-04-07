@@ -111,7 +111,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="fom-group w-50 mb-3">
+                                <div class="fom-group w-100 w-md-50 mb-3">
                                     <label for="sale_id">{{__('customer_owed.list.date_pay')}}:</label>
                                     <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                                         <input type="text" class="form-control" name="date_pay"
@@ -132,8 +132,8 @@
                                     @endforeach                        
                                 </div>
                                 <div class="form-group w-100 w-md-50 d-inline-flex">
-                                    <button type="submit" class="btn btn-circle btn-primary w-50 mw-100 mr-2">{{__('button.pay')}}</button>
-                                    <a href="{{route('customer_owed.index')}}" class="btn btn-circle btn-secondary w-50 mw-100">{{__('button.return')}}</a>
+                                    <button type="submit" class="btn btn-circle btn-primary w-100 w-md-50 mw-100 mr-2">{{__('button.pay')}}</button>
+                                    <a href="{{route('customer_owed.index')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100">{{__('button.return')}}</a>
                                 </div>
                             </form><!--/form-main-->
                         </div><!--/tab-add-customer_owed-->
