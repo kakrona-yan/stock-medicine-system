@@ -196,7 +196,7 @@
 @endsection
 @push('footer-script')
 <script>
-    var discount_type = $(".discount_type").val();
+    var discount_type = $("#discount_type").val();
     (function( $ ){
         $("[name='customer_id'], [name='sale_id']").select2({
             allowClear: false,
