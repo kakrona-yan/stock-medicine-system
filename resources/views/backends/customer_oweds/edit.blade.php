@@ -157,8 +157,11 @@
                                         <div class="fom-group w-100 w-md-50 mb-3">
                                             <label for="sale_id">{{__('customer_owed.list.date_pay')}}:</label>
                                             <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                                                @php
+                                                $date_pay = $sale->customerOwed()->exists() ? $sale->customerOwed->date_pay :  date('Y-m-d');
+                                                @endphp
                                                 <input type="text" class="form-control" name="date_pay"
-                                                    value="{{ old('date_pay', date('Y-m-d')) }}">
+                                                    value="{{ old('date_pay', $date_pay) }}">
                                                 <div class="input-group-append">
                                                     <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
                                                 </div>
