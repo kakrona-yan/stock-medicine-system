@@ -67,7 +67,7 @@
                                         <tr>
                                             <td>{{ $sale->quotaion_no }}</td>
                                             <td>{{ $sale->customer->customerFullName() }}</td>
-                                            <td class="text-right">{{ $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount }}</td>
+                                            <td class="text-right">{{ $sale->customerOwed()->exists() ? $sale->customerOwed->amount_pay : $sale->total_amount }}</td>
                                             <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
                                             <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
                                             <td class="text-center">

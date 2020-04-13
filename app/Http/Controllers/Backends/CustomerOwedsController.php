@@ -108,10 +108,12 @@ class CustomerOwedsController extends Controller
                 return response()->view('errors.404', [], 404);
             }
             $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
+            $discountType = CustomerOwed::DICOUNT_TYPE_TEXT;
             return view('backends.customer_oweds.edit', [
                 'sale' => $sale,
                 'request' => $request,
-                'statusPays' => $statusPays
+                'statusPays' => $statusPays,
+                'discountType' => $discountType,
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.products.edit');

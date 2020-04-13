@@ -18,10 +18,13 @@ class CreateCustomerOwedsTable extends Migration
             $table->integer('sale_id')->length(11);
             $table->integer('customer_id')->length(11);
             $table->decimal('amount', 10, 2)->nullable();
+            $table->decimal('amount_pay', 10, 2)->nullable();
             $table->decimal('receive_amount', 10, 2)->nullable();
             $table->decimal('owed_amount', 10, 2)->nullable();
             $table->dateTime('receive_date')->nullable();
-            $table->integer('status_pay')->length(11)->default(1)->comment('0：no pay、1：some pay, 2: pay all');;
+            $table->integer('discount_type')->length(11)->default(1)->comment('0：percent、1：amount');
+            $table->string('discount_amount')->nullable();
+            $table->integer('status_pay')->length(11)->default(1)->comment('0：no pay、1：some pay, 2: pay all');
             $table->dateTime('date_pay')->nullable();
             $table->timestamps();
         });

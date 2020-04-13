@@ -10,11 +10,16 @@ class CustomerOwed extends BaseModel
         'sale_id',
         'customer_id',
         'amount',
+        'amount_pay',
         'receive_amount',
         'owed_amount',
         'receive_date',
         'status_pay',
-        'date_pay'
+        'date_pay',
+        'amount_pay',
+        'discount_type',
+        'discount_amount'
+
     ];
     
     protected $dates = [
@@ -65,6 +70,11 @@ class CustomerOwed extends BaseModel
 
     const STATUS_PAY_ALL_TEXT = [
         '2' => 'សងហើយ',
+    ];
+
+    const DICOUNT_TYPE_TEXT = [
+        '0' => 'ជាភាគរយ(%)',
+        '1' => 'ជាប្រាក់'
     ];
 
     public function statusPay()

@@ -97,39 +97,86 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-4">
+                                        <div class="form-group select-group">
+                                            <label for="amount">{{__('customer_owed.list.discount_type')}}:</label>
+                                            @php
+                                                $discount = $sale->customerOwed()->exists() ? $sale->customerOwed->discount_type : 1;
+                                            @endphp
+                                            <select class="form-control" id="discount_type" name="discount_type">
+                                                @foreach ($discountType as $key => $type)
+                                                <option value="{{ $key }}" {{ $discount == $key ? 'selected' : ''}}>{{ $type}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-group">
+                                            <label for="discount_amount">{{__('customer_owed.list.discount_amount')}}:</label>
+                                            @php
+                                            $discountAmount = $sale->customerOwed()->exists() ? $sale->customerOwed->discount_amount : 0;
+                                            @endphp
+                                            <input type="text" name="discount_amount" class="form-control" id="discount_amount" 
+                                                value="{{old('discount_amount',  $discountAmount)}}"
+                                                oninput="calculatorDiscountMoney(this)"
+                                                >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 col-md-3">
+                                        <div class="form-group">
+                                            <label for="amount_pay">{{__('customer_owed.list.amount_pay')}}:</label>
+                                            @php
+                                                $amountPay = $sale->customerOwed()->exists() ? $sale->customerOwed->amount_pay : $amount;
+                                            @endphp
+                                            <input type="text" name="amount_pay" class="form-control {{ $errors->has('amount_pay') ? ' is-invalid' : '' }}" id="amount_pay" value="{{old('amount_pay', currencyFormat($amountPay))}}" readonly>
+                                            @if ($errors->has('amount_pay'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('amount_pay') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
                                         <div class="form-group">
                                             <label for="receive_amount">{{__('customer_owed.list.receive_amount')}}:</label>
                                             <input type="text" name="receive_amount" class="form-control {{ $errors->has('receive_amount') ? ' is-invalid' : '' }}" id="receive_amount" 
-                                                value="{{old('receive_amount', currencyFormat($receiveAmount))}}">
+                                                value="{{old('receive_amount', currencyFormat($receiveAmount))}}"
+                                                oninput="calculatorMoney(this)"
+                                                >
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-4">
+                                    <div class="col-6 col-md-3">
                                         <div class="form-group">
                                             <label for="owed_amount">{{__('customer_owed.list.owed_amount')}}:</label>
                                             <input type="text" name="owed_amount" class="form-control" id="owed_amount"
-                                                value="{{currencyFormat($customerOwed)}}">
+                                                value="{{currencyFormat($customerOwed)}}" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="fom-group w-100 w-md-50 mb-3">
+                                            <label for="sale_id">{{__('customer_owed.list.date_pay')}}:</label>
+                                            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                                                <input type="text" class="form-control" name="date_pay"
+                                                    value="{{ old('date_pay', date('Y-m-d')) }}">
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
+                                                </div>
+                                            </div>  
                                         </div>
                                     </div>
                                 </div>
-                                <div class="fom-group w-100 w-md-50 mb-3">
-                                    <label for="sale_id">{{__('customer_owed.list.date_pay')}}:</label>
-                                    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                                        <input type="text" class="form-control" name="date_pay"
-                                            value="{{ old('date_pay', date('Y-m-d')) }}">
-                                        <div class="input-group-append">
-                                            <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
-                                        </div>
-                                    </div>  
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-check form-check-inline align-top" for="status_pay">{{ __('customer_owed.list.status_pay') }}:</label>
-                                    @foreach ($statusPays as $key => $statusPay)
-                                        <div class="form-check form-check-inline">
-                                        <input style="margin-top:-3px" class="form-check-input" type="radio" name="status_pay" id="status_pay_{{$key}}" 
-                                            value="{{$key}}" {{old('status_pay', $sale->customerOwed()->exists() ? $sale->customerOwed->status_pay : 2) == $key ? 'checked' : ''}}>
-                                            <label class="form-check-label" for="status_pay_{{$key}}">{{$statusPay}}</label>
-                                        </div>  
-                                    @endforeach                        
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-check form-check-inline align-top" for="status_pay">{{ __('customer_owed.list.status_pay') }}:</label>
+                                        @foreach ($statusPays as $key => $statusPay)
+                                            <div class="form-check form-check-inline">
+                                            <input style="margin-top:-3px" class="form-check-input" type="radio" name="status_pay" id="status_pay_{{$key}}" 
+                                                value="{{$key}}" {{old('status_pay', $sale->customerOwed()->exists() ? $sale->customerOwed->status_pay : 2) == $key ? 'checked' : ''}}>
+                                                <label class="form-check-label" for="status_pay_{{$key}}">{{$statusPay}}</label>
+                                            </div>  
+                                        @endforeach                        
+                                    </div>
                                 </div>
                                 <div class="form-group w-100 w-md-50 d-inline-flex">
                                     <button type="submit" class="btn btn-circle btn-primary w-100 w-md-50 mw-100 mr-2">{{__('button.pay')}}</button>
@@ -146,10 +193,72 @@
 @endsection
 @push('footer-script')
 <script>
+    var discount_type = $(".discount_type").val();
     (function( $ ){
         $("[name='customer_id'], [name='sale_id']").select2({
-            allowClear: false
+            allowClear: false,
+        });
+        $("[name='discount_type']").select2({
+            allowClear: false,
+        }).on('select2:select', function (e) {
+            discount_type = e.params.data.id;
+            switch (discount_type) {
+                case 0:
+                    var amount = Number($("#amount").val());
+                    var discountAmount = Number($("#discount_amount").val()) / 100;
+                    var totalAmount = amount - (amount * discountAmount);
+                    $("#amount_pay").val(totalAmount.toFixed(2));
+                    break;
+                case 1:
+                    var amount = Number($("#amount").val());
+                    var discountAmount = Number($("#discount_amount").val());
+                    var totalAmount = (amount - discountAmount);
+                    $("#amount_pay").val(totalAmount.toFixed(2));
+                    break;
+                default:
+                    var amount = Number($("#amount").val());
+                    var discountAmount = Number($(data)[0] ? $(data)[0].value : 0);
+                    var totalAmount = (amount - discountAmount);
+                    $("#amount_pay").val(totalAmount.toFixed(2));
+                    break;
+            }
+        });
+        $('#discount_amount').keypress(function(event) {
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
         });
     })( jQuery );
+
+    function calculatorMoney(data) {
+        let revicePrice = $(data)[0] ? $(data)[0].value : 0;
+        let totalAmountPayment = $('input[name="amount_pay"]').val();
+        let moneyOwed = Number(totalAmountPayment)- Number(revicePrice);
+        $("#owed_amount").val(moneyOwed.toFixed(2));
+    }
+
+    function calculatorDiscountMoney(data) {
+        switch (discount_type) {
+            case 0:
+                var amount = Number($("#amount").val());
+                var discountAmount = Number($(data)[0] ? $(data)[0].value : 0) / 100;
+                var totalAmount = amount - (amount * discountAmount);
+                $("#amount_pay").val(totalAmount.toFixed(2));
+                break;
+            case 1:
+                var amount = Number($("#amount").val());
+                var discountAmount = Number($(data)[0] ? $(data)[0].value : 0);
+                var totalAmount = (amount - discountAmount);
+                $("#amount_pay").val(totalAmount.toFixed(2));
+                break;
+            default:
+                var amount = Number($("#amount").val());
+                var discountAmount = Number($(data)[0] ? $(data)[0].value : 0);
+                var totalAmount = (amount - discountAmount);
+                $("#amount_pay").val(totalAmount.toFixed(2));
+                break;
+        }
+    }
+
 </script>
 @endpush
