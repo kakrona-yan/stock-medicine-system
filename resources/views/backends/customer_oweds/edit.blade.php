@@ -196,6 +196,7 @@
 @endsection
 @push('footer-script')
 <script>
+    
     (function( $ ){
         $("[name='customer_id'], [name='sale_id']").select2({
             allowClear: false,
@@ -203,24 +204,27 @@
         $("[name='discount_type']").select2({
             allowClear: false,
         }).on('select2:select', function (e) {
-            let discount_type = e.params.data.id;
+            let amount = 0;
+            let discountAmount = 0;
+            let totalAmount = 0;
+            let discount_type = Number(e.params.data.id);
             switch (discount_type) {
                 case 0:
-                    var amount = Number($("#amount").val());
-                    var discountAmount = Number($("#discount_amount").val()) / 100;
-                    var totalAmount = amount - (amount * discountAmount);
+                    amount = Number($("#amount").val());
+                    discountAmount = Number($("#discount_amount").val()) / 100;
+                    totalAmount = amount - (amount * discountAmount);
                     $("#amount_pay").val(totalAmount.toFixed(2));
                     break;
                 case 1:
-                    var amount = Number($("#amount").val());
-                    var discountAmount = Number($("#discount_amount").val());
-                    var totalAmount = (amount - discountAmount);
+                    amount = Number($("#amount").val());
+                    discountAmount = Number($("#discount_amount").val());
+                    totalAmount = (amount - discountAmount);
                     $("#amount_pay").val(totalAmount.toFixed(2));
                     break;
                 default:
-                    var amount = Number($("#amount").val());
-                    var discountAmount = Number($("#discount_amount").val());
-                    var totalAmount = (amount - discountAmount);
+                    amount = Number($("#amount").val());
+                    discountAmount = Number($("#discount_amount").val());
+                    totalAmount = (amount - discountAmount);
                     $("#amount_pay").val(totalAmount.toFixed(2));
                     break;
             }
@@ -240,24 +244,27 @@
     }
 
     function calculatorDiscountMoney(data) {
-        var discount_type = $("#discount_type").val();
+        let amount = 0;
+        let discountAmount = 0;
+        let totalAmount = 0;
+        var discount_type = Number($("#discount_type").val());
         switch (discount_type) {
             case 0:
-                var amount = Number($("#amount").val());
-                var discountAmount = Number($(data)[0] ? $(data)[0].value : 0) / 100;
-                var totalAmount = amount - (amount * discountAmount);
+                amount = Number($("#amount").val());
+                discountAmount = Number($(data)[0] ? $(data)[0].value : 0) / 100;
+                totalAmount = amount - (amount * discountAmount);
                 $("#amount_pay").val(totalAmount.toFixed(2));
                 break;
             case 1:
-                var amount = Number($("#amount").val());
-                var discountAmount = Number($(data)[0] ? $(data)[0].value : 0);
-                var totalAmount = (amount - discountAmount);
+                amount = Number($("#amount").val());
+                discountAmount = Number($(data)[0] ? $(data)[0].value : 0);
+                totalAmount = (amount - discountAmount);
                 $("#amount_pay").val(totalAmount.toFixed(2));
                 break;
             default:
-                var amount = Number($("#amount").val());
-                var discountAmount = Number($(data)[0] ? $(data)[0].value : 0);
-                var totalAmount = (amount - discountAmount);
+                amount = Number($("#amount").val());
+                discountAmount = Number($(data)[0] ? $(data)[0].value : 0);
+                totalAmount = (amount - discountAmount);
                 $("#amount_pay").val(totalAmount.toFixed(2));
                 break;
         }
