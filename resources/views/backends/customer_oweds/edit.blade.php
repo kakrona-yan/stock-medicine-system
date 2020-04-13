@@ -205,6 +205,8 @@
             allowClear: false,
         }).on('select2:select', function (e) {
             discount_type = e.params.data.id;
+            console.log(discount_type);
+            
             switch (discount_type) {
                 case 0:
                     var amount = Number($("#amount").val());
@@ -220,7 +222,7 @@
                     break;
                 default:
                     var amount = Number($("#amount").val());
-                    var discountAmount = Number($(data)[0] ? $(data)[0].value : 0);
+                    var discountAmount = Number($("#discount_amount").val());
                     var totalAmount = (amount - discountAmount);
                     $("#amount_pay").val(totalAmount.toFixed(2));
                     break;
