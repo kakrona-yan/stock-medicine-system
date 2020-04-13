@@ -196,7 +196,6 @@
 @endsection
 @push('footer-script')
 <script>
-    var discount_type = $("#discount_type").val();
     (function( $ ){
         $("[name='customer_id'], [name='sale_id']").select2({
             allowClear: false,
@@ -204,9 +203,7 @@
         $("[name='discount_type']").select2({
             allowClear: false,
         }).on('select2:select', function (e) {
-            discount_type = e.params.data.id;
-            console.log(discount_type);
-            
+            let discount_type = e.params.data.id;
             switch (discount_type) {
                 case 0:
                     var amount = Number($("#amount").val());
@@ -243,6 +240,7 @@
     }
 
     function calculatorDiscountMoney(data) {
+        var discount_type = $("#discount_type").val();
         switch (discount_type) {
             case 0:
                 var amount = Number($("#amount").val());
