@@ -17,14 +17,22 @@
                 </li>
             </ol>
         </nav>
-        <a href="{{route('product.create')}}" 
-            class="btn btn-circle btn-primary"
+    </div>
+    <!--list category-->
+    <a href="{{route('category.create')}}" 
+            class="btn btn-circle btn-primary mb-2"
             data-toggle="tooltip" 
             data-placement="left" title="" 
             data-original-title="{{__('button.add_new')}}"
-        ><i class="fas fa-plus-circle"></i> {{__('button.add_new')}}</a>
-    </div>
+        ><i class="fas fa-plus-circle"></i> ប្រភេទផលិតផល{{__('button.add_new')}}</a>
+    @include('backends.categories.include._list_category')
     <!--list product-->
+    <a href="{{route('product.create')}}" 
+            class="btn btn-circle btn-primary mb-2"
+            data-toggle="tooltip" 
+            data-placement="left" title="" 
+            data-original-title="{{__('button.add_new')}}"
+        ><i class="fas fa-plus-circle"></i> ផលិតផល{{__('button.add_new')}}</a>
     @include('backends.products.include._list_product')
 </div>
 

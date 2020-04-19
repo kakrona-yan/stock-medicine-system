@@ -84,9 +84,9 @@
                             <i class="fas fa-bullhorn mr-1 text-blue-100"></i>
                             <span>{{$product->category ? $product->category->name : ''}}</span>
                         </p> 
-                        <p class="font-italic text-muted mb-0 small">
+                        {{-- <p class="font-italic text-muted mb-0 small">
                             {!! nl2br($product->description) !!}
-                        </p>
+                        </p> --}}
                         <div class="d-flex align-items-center justify-content-between mt-1">
                             
                             <div class="prince text-danger font-weight-bold"><i class="fa fa-phone"></i> <a href="tel:+85593399330">(+855) 093 399 330</a></div>

@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Http\Constants\CategoryType;
 
 class ProductsController extends Controller
 {
@@ -31,10 +32,17 @@ class ProductsController extends Controller
         try {
             $products = $this->product->filter($request);
             $categories = $this->category->getCategoryNameByProducts();
+            // category
+            $listCategories = $this->category->filter($request);
+            $categoryType = CategoryType::CATEGORY_TYPE_TEXT;
+            $categoryNames = $this->category->getCategoryName();
             return view('backends.products.index', [
                 'request' => $request,
                 'products' => $products,
-                'categories' => $categories
+                'categories' => $categories,
+                'listCategories' => $listCategories,
+                'categoryType' => $categoryType,
+                'categoryNames' => $categoryNames
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.products.index');

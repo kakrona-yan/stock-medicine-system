@@ -17,7 +17,7 @@
                 </li>
             </ol>
         </nav>
-        <a href="{{route('staff.index')}}" 
+        <a href="{{route('user.index')}}" 
             class="btn btn-circle btn-primary"
             data-toggle="tooltip" 
             data-placement="left" title="" 
@@ -139,7 +139,7 @@
                                 </div><!--/row-->
                                 <div class="form-group w-100 w-md-50 d-inline-flex">
                                     <button type="submit" class="btn btn-circle btn-primary w-100 w-md-50 mw-100 mr-2">{{__('button.add')}}</button>
-                                    <a href="{{route('staff.index')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100">{{__('button.return')}}</a>
+                                    <a href="{{route('user.index')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100">{{__('button.return')}}</a>
                                 </div>
                             </form><!--/form-main-->
                         </div><!--/tab-add-staff-->

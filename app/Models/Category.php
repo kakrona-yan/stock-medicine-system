@@ -79,7 +79,7 @@ class Category extends BaseModel
         if ($request->exists('limit') && !is_null($request->limit)) {
             $limit = $request->limit;
         }
-        return $categories->paginate($limit);
+        return $categories->paginate($limit, ['*'], 'category-page');
     }
 
     public function CategoryType()

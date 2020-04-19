@@ -35,22 +35,22 @@ class Menu
                 'role_type' => $this->RoleType('user.index'),
                 'sub_menu' => null
             ],
-            [
-                // staff management
-                'route' => 'staff.index',
-                'icon' => 'fas fa-user',
-                'label' => __('menu.staff'),
-                'role_type' => $this->RoleType('staff.index'),
-                'sub_menu' => null
-            ],
-            [
-                // category management
-                'route' => 'category.index',
-                'icon' => 'fas fa-tags',
-                'label' => __('menu.category'),
-                'role_type' => $this->RoleType('category.index'),
-                'sub_menu' => null
-            ],
+            // [
+            //     // staff management
+            //     'route' => 'staff.index',
+            //     'icon' => 'fas fa-user',
+            //     'label' => __('menu.staff'),
+            //     'role_type' => $this->RoleType('staff.index'),
+            //     'sub_menu' => null
+            // ],
+            // [
+            //     // category management
+            //     'route' => 'category.index',
+            //     'icon' => 'fas fa-tags',
+            //     'label' => __('menu.category'),
+            //     'role_type' => $this->RoleType('category.index'),
+            //     'sub_menu' => null
+            // ],
             [
                 // Product Management
                 'route' => 'product.index',

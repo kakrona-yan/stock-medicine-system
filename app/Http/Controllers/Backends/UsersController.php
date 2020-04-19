@@ -29,10 +29,14 @@ class UsersController extends Controller
         try {
             $users = $this->user->filter($request);
             $userRoles = UserRole::USER_ROLE_TEXT_EN;
+            $staffs  = $this->staff->filter($request);
+            $genders = UserRole::USER_GANDER_TEXT_EN;
             return view('backends.users.index', [
                 'request' => $request,
                 'users' => $users,
-                'userRoles' => $userRoles
+                'userRoles' => $userRoles,
+                'staffs' =>  $staffs,
+                'genders' => $genders
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.users.index');

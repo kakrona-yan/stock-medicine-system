@@ -34,7 +34,7 @@
                         <thead class="bg-primary text-light">
                         <tr>
                             <th>{{ __('category.list.name') }}</th>
-                            <th>{{ __('category.list.categories') }}</th>
+                            <th>{{ __('category.list.listCategories') }}</th>
                             <th>{{ __('category.list.category_type') }}</th>
                             <th class="text-center">{{ __('category.list.active') }}</th>
                             @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
@@ -43,7 +43,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($categories as $category)
+                        @foreach ($listCategories as $category)
                             <tr>
                                 <td>{{$category->name}}</td>
                                 <td>
@@ -101,7 +101,7 @@
                     </table>
                 </div>
                 <div class="d-flex justify-content-center">
-                    {{ $categories->appends(request()->query())->links() }}
+                    {{ $listCategories->appends(request()->query())->links() }}
                 </div>
                 @if( Session::has('flash_danger') )
                     <p class="alert text-center {{ Session::get('alert-class', 'alert-danger') }}">

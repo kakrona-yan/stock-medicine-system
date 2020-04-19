@@ -53,7 +53,7 @@ class Staff extends BaseModel
         $limit = config('pagination.limit');
         // Check flash danger
         flashDanger($suppliers->count(), __('flash.empty_data'));
-        return $suppliers->paginate($limit);
+        return $suppliers->paginate($limit, ['*'], 'staff-page');
     }
 
     public function getGender()

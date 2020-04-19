@@ -63,7 +63,7 @@ class Product extends BaseModel
         if ($request->exists('title') && !empty($request->title)) {
             $customer->where('title', 'like', '%' . $request->title . '%');
         }
-        return $products->paginate($limit);
+        return $products->paginate($limit, ['*'], 'product-page');
     }
 
     public function getProduct($request)

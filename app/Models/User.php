@@ -113,7 +113,7 @@ class User extends Authenticatable
         }
         // Check flash danger
         flashDanger($users->count(), __('flash.empty_data'));
-        return $users->paginate($limit);
+        return $users->paginate($limit, ['*'], 'user-page');
     }
 
     public function available($id)

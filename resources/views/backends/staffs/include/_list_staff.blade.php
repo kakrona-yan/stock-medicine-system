@@ -3,7 +3,7 @@
             <!-- Circle Buttons -->
             <div class="card mb-4">
                 <div class="card-body">
-                    <form id="staff-search" action="{{ route('staff.index') }}" method="GET" class="form form-horizontal form-search">
+                    <form id="staff-search" action="{{ route('user.index') }}" method="GET" class="form form-horizontal form-search">
                         <div class="row">
                             <div class="col-12 col-md-10">
                                 <div class="row">

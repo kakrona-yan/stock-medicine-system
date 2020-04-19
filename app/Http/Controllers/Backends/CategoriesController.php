@@ -24,12 +24,12 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         try {
-            $categories = $this->category->filter($request);
+            $listCategories = $this->category->filter($request);
             $categoryType = CategoryType::CATEGORY_TYPE_TEXT;
             $categoryNames = $this->category->getCategoryName();
             return view('backends.categories.index', [
                 'request' => $request,
-                'categories' => $categories,
+                'listCategories' => $listCategories,
                 'categoryType' => $categoryType,
                 'categoryNames' => $categoryNames
             ]);
