@@ -214,18 +214,21 @@
                     discountAmount = Number($("#discount_amount").val()) / 100;
                     totalAmount = amount - (amount * discountAmount);
                     $("#amount_pay").val(totalAmount.toFixed(2));
+                    $("#owed_amount").val(totalAmount.toFixed(2));
                     break;
                 case 1:
                     amount = Number($("#amount").val());
                     discountAmount = Number($("#discount_amount").val());
                     totalAmount = (amount - discountAmount);
                     $("#amount_pay").val(totalAmount.toFixed(2));
+                    $("#owed_amount").val(totalAmount.toFixed(2));
                     break;
                 default:
                     amount = Number($("#amount").val());
                     discountAmount = Number($("#discount_amount").val());
                     totalAmount = (amount - discountAmount);
                     $("#amount_pay").val(totalAmount.toFixed(2));
+                    $("#owed_amount").val(totalAmount.toFixed(2));
                     break;
             }
         });
@@ -254,18 +257,21 @@
                 discountAmount = Number($(data)[0] ? $(data)[0].value : 0) / 100;
                 totalAmount = amount - (amount * discountAmount);
                 $("#amount_pay").val(totalAmount.toFixed(2));
+                $("#owed_amount").val(totalAmount.toFixed(2));
                 break;
             case 1:
                 amount = Number($("#amount").val());
                 discountAmount = Number($(data)[0] ? $(data)[0].value : 0);
                 totalAmount = (amount - discountAmount);
                 $("#amount_pay").val(totalAmount.toFixed(2));
+                $("#owed_amount").val(totalAmount.toFixed(2));
                 break;
             default:
                 amount = Number($("#amount").val());
                 discountAmount = Number($(data)[0] ? $(data)[0].value : 0);
                 totalAmount = (amount - discountAmount);
                 $("#amount_pay").val(totalAmount.toFixed(2));
+                $("#owed_amount").val(totalAmount.toFixed(2));
                 break;
         }
     }
