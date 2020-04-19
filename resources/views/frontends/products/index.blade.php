@@ -14,9 +14,9 @@
             border-radius: 50px;
             color: #0dc6d3;
             position: absolute;
-            right: 0px;
+            right: -15px;
             z-index: 99;
-            top: -10px;
+            top: -70px;
         }
     </style>
 </head>
