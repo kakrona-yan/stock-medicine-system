@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Invoice - #{{ $sale->quotaion_no }}</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <!-- Styles -->
@@ -128,6 +129,11 @@
             }
             .con-print {
                 display: block;
+            }
+        }
+        @media (max-width: 999px) {
+            .d-inline{
+                width: 200px;
             }
         }
     </style>
