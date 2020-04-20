@@ -34,7 +34,7 @@
                         <thead class="bg-primary text-light">
                         <tr>
                             <th>{{ __('category.list.name') }}</th>
-                            <th>{{ __('category.list.listCategories') }}</th>
+                            <th>{{ __('category.list.categories') }}</th>
                             <th>{{ __('category.list.category_type') }}</th>
                             <th class="text-center">{{ __('category.list.active') }}</th>
                             @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
