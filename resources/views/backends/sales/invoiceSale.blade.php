@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Invoice - #{{ $sale->quotaion_no }}</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Styles -->
     <style type="text/css">
         @font-face {
@@ -252,12 +253,12 @@
                     
                 </tfoot>
             </table>
-            <div style="text-align: center; margin-top: 50px;width:100%;">
-                <div class="d-inline">
+            <div class="row text-center" style="margin-top: 50px;">
+                <div class="col-6 pr-5">
                     <p>ត្រូតពិនិត្យដោយ</p>
                     <p style="margin-top: 50px;border-bottom: 1px solid #000;"></p>
                 </div>
-                <div class="d-inline">
+                <div class="col-6 pl-5">
                     <p>ហត្ថលេខាអតិថិជន</p>
                     <p style="margin-top: 50px;border-bottom: 1px solid #000;"></p>
                 </div>
