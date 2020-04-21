@@ -70,6 +70,18 @@
                                     <td>{{$product->product_free}}</td>
                                 </tr>
                                 <tr>
+                                    <th>{{ __('product.list.terms') }}</th>
+                                    <td>{{$product->terms}}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ __('product.list.expird_date') }}</th>
+                                    <td>{{$product->expird_date ? date('Y-m', strtotime($product->expird_date)) : "-"}}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ __('product.list.amount_in_box') }}</th>
+                                    <td>{{$product->amount_in_box}}</td>
+                                </tr>
+                                <tr>
                                     <th>{{ __('product.list.active') }}</th>
                                     <td>
                                         <label class="switch">

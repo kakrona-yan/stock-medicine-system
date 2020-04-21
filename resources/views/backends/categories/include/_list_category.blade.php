@@ -3,12 +3,12 @@
         <!-- Circle Buttons -->
         <div class="card mb-4">
             <div class="card-body">
-                <form id="category-search" action="{{ route('category.index') }}" method="GET" class="form form-horizontal form-search form-inline mb-2">
+                <form id="category-search" action="{{ route('product.index') }}" method="GET" class="form form-horizontal form-search form-inline mb-2">
                     <div class="form-group mb-2 mr-2">
                         <label for="name" class="mr-sm-2">{{ __('category.list.filter') }}:</label>
                         <input type="text" class="form-control mr-1" id="name" 
                             name="name" value="{{ old('name', $request->name)}}"
-                            placeholder="name"
+                            placeholder="{{ __('category.list.name') }}"
                         >
                     </div>
                     <div class="form-group mb-2">
@@ -19,7 +19,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-hand-pointer"></i></span>
                             </div>
-                            <select class="form-control" name="limit" id="limit">
+                            <select class="form-control" name="limit" id="limit_category">
                                 @for( $i=10; $i<=50; $i +=10 )
                                     <option value="{{$i}}" 
                                     {{ $request->limit == $i || config('pagination.limit') == $i ? 'selected' : ''}}
@@ -34,8 +34,8 @@
                         <thead class="bg-primary text-light">
                         <tr>
                             <th>{{ __('category.list.name') }}</th>
-                            <th>{{ __('category.list.categories') }}</th>
-                            <th>{{ __('category.list.category_type') }}</th>
+                            {{-- <th>{{ __('category.list.categories') }}</th> --}}
+                            {{-- <th>{{ __('category.list.category_type') }}</th> --}}
                             <th class="text-center">{{ __('category.list.active') }}</th>
                             @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                             <th class="w-action text-center">{{__('category.list.action')}}</th>
@@ -46,16 +46,16 @@
                         @foreach ($listCategories as $category)
                             <tr>
                                 <td>{{$category->name}}</td>
-                                <td>
+                                {{-- <td>
                                     @foreach($category->childs as $cat)
                                     <span class="label font-xs-14 text-info">
                                         <i class="fa fa-btn fa-tags"></i> {{$cat->name}}
                                     </span>
                                     @endforeach
-                                </td>
-                                <td>
+                                </td> --}}
+                                {{-- <td>
                                     <span class="text-warning font-xs-14"><i class="fas fa-dot-circle"></i> {{ $category->CategoryType() }}</span>
-                                </td>
+                                </td> --}}
                                 <td class="text-center">
                                     <label class="switch">
                                         <input type="checkbox" data-toggle="toggle" data-onstyle="success" name="active"
@@ -152,13 +152,12 @@
         $("#modal-name" ).html('');
     }
     
-    (function( $ ){
-        $("[name='limit']").select2({
+    $( document ).ready(function() {
+        $("#limit_category").select2({
             allowClear: false
         }).on('select2:select', function (e) {
             $('#category-search').submit();
         });
-    })( jQuery );
-    
+    });
 </script>
 @endpush

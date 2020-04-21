@@ -8,7 +8,13 @@
                         <label for="title" class="mr-sm-2">{{ __('product.list.filter') }}:</label>
                         <input type="text" class="form-control mr-1" id="title" 
                             name="title" value="{{ old('title', $request->title)}}"
-                            placeholder="title"
+                            placeholder="{{ __('product.list.title') }}"
+                        >
+                    </div>
+                    <div class="form-group mb-2 mr-2">
+                        <input type="text" class="form-control mr-1" id="terms" 
+                            name="terms" value="{{ old('terms', $request->terms)}}"
+                            placeholder="{{ __('product.list.terms') }}"
                         >
                     </div>
                     <div class="form-group mb-2">
@@ -19,7 +25,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-hand-pointer"></i></span>
                             </div>
-                            <select class="form-control" name="limit" id="limit">
+                            <select class="form-control" name="limit" id="limit_product">
                                 @for( $i=10; $i<=50; $i +=10 )
                                     <option value="{{$i}}" 
                                     {{ $request->limit == $i || config('pagination.limit') == $i ? 'selected' : ''}}
@@ -37,10 +43,10 @@
                                 <th>{{ __('product.list.thumbnail') }}</th>
                                 <th>{{ __('product.list.product_title') }}</th>
                                 <th>{{ __('product.list.category') }}</th>
-                                <th>{{ __('product.list.product_import') }}</th>
+                                {{-- <th>{{ __('product.list.product_import') }}</th> --}}
                                 <th>{{ __('product.list.price') }}</th>
-                                <th>Terms</th>
-                                <th>Expird date</th>
+                                <th>{{ __('product.list.terms') }}</th>
+                                <th>{{ __('product.list.expird_date') }}</th>
                                 <th class="text-center">{{ __('product.list.active') }}</th>
                                 @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                 <th class="w-action text-center">{{__('product.list.action')}}</th>
@@ -60,7 +66,7 @@
                                 </td>
                                 <td>{{$product->title}}</td>
                                 <td>{{$product->category ? $product->category->name : ""}}</td>
-                                <td>{{$product->product_import}}</td>
+                                {{-- <td>{{$product->product_import}}</td> --}}
                                 <td class="text-right">{{$product->price}}</td>
                                 <td>{{$product->terms}}</td>
                                 <td>{{$product->expird_date ? date('Y-m', strtotime($product->expird_date)) : "-"}}</td>
@@ -160,13 +166,12 @@
         $("#modal-name" ).html('');
     }
     
-    (function( $ ){
-        $("[name='limit']").select2({
+    $( document ).ready(function() {
+        $("#limit_product").select2({
             allowClear: false
         }).on('select2:select', function (e) {
             $('#product-search').submit();
         });
-    })( jQuery );
-    
+    });
 </script>
 @endpush

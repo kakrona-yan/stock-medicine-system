@@ -29,7 +29,9 @@ class Product extends BaseModel
         'is_active',
         'is_delete',
         'terms',
-        'expird_date'
+        'expird_date',
+        'amount_in_box',
+        'note'
     ];
 
     protected $dates = [
@@ -61,7 +63,10 @@ class Product extends BaseModel
             $limit = $request->limit;
         }
         if ($request->exists('title') && !empty($request->title)) {
-            $customer->where('title', 'like', '%' . $request->title . '%');
+            $products->where('title', 'like', '%' . $request->title . '%');
+        }
+        if ($request->exists('terms') && !empty($request->terms)) {
+            $products->where('terms', 'like', '%' . $request->terms . '%');
         }
         return $products->paginate($limit, ['*'], 'product-page');
     }

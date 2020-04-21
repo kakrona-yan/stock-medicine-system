@@ -16,6 +16,8 @@ class AddTermsToProductsTable extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->string('terms', 100)->nullable();
             $table->dateTime('expird_date')->nullable();
+            $table->integer('amount_in_box')->length(11)->default(0)->nullable();
+            $table->text('note')->nullable();
         });
     }
 

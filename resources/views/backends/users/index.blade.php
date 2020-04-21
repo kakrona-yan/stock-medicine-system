@@ -18,21 +18,15 @@
             </ol>
         </nav>
     </div>
-    <!--list user-->
-    <a href="{{route('user.create')}}" 
-        class="btn btn-circle btn-primary mb-2"
-        data-toggle="tooltip" 
-        data-placement="left" title="" 
-        data-original-title="{{__('button.add_new')}}"
-    ><i class="fas fa-plus-circle"></i> អ្នកប្រើប្រាស់{{__('button.add_new')}}</a>
-    @include('backends.users.include._list_user')
-     <!--list staff-->
     <a href="{{route('staff.create')}}" 
      class="btn btn-circle btn-primary mb-2"
      data-toggle="tooltip" 
      data-placement="left" title="" 
      data-original-title="{{__('button.add_new')}}"
- ><i class="fas fa-plus-circle"></i> បុគ្គលិក{{__('button.add_new')}}</a>
+    ><i class="fas fa-plus-circle"></i> បុគ្គលិក{{__('button.add_new')}}</a>
+    <!--list user-->
+    @include('backends.users.include._list_user')
+    <!--list staff-->
     @include('backends.staffs.include._list_staff')
 </div>
 

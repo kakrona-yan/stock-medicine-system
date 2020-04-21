@@ -76,7 +76,7 @@
                                 </div><!--/row-->
                                 <div class="form-group d-inline-flex">
                                     <button type="submit" class="btn btn-circle btn-primary w-btn-125 mr-2">{{__('button.edit')}}</button>
-                                    <a href="{{route('category.index')}}" class="btn btn-circle btn-secondary w-btn-125">{{__('button.return')}}</a>
+                                    <a href="{{route('product.index')}}" class="btn btn-circle btn-secondary w-btn-125">{{__('button.return')}}</a>
                                 </div>
                             </form><!--/form-main-->
                         </div><!--/tab-add-category-->

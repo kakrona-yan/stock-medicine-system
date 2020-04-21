@@ -104,7 +104,7 @@
                     </div>
                     <div class="form-group d-inline-flex mb-3">
                         <a href="{{route('category.edit', $category->id)}}" class="btn btn-circle btn-primary w-btn-125 mr-2">{{__('button.edit')}}</a>
-                        <a href="{{route('category.index')}}" class="btn btn-circle btn-secondary w-btn-125">{{__('button.return')}}</a>
+                        <a href="{{route('product.index')}}" class="btn btn-circle btn-secondary w-btn-125">{{__('button.return')}}</a>
                     </div>
                 </div>
             </div>

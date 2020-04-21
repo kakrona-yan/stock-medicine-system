@@ -107,9 +107,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
-                                            <label for="invoiceCode">Expird date:</label>
+                                            <label for="invoiceCode">{{ __('product.list.expird_date') }}</label>
                                             <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                                                 <input type="text" class="form-control" name="expird_date"
                                                     value="{{ old('expird_date', $product->expird_date)}}">
@@ -119,9 +119,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
-                                            <label for="product_free">Terms(B/3x10T):</label>
+                                            <label for="product_free">{{ __('product.list.terms') }}(B/3x10T):</label>
                                             <input type="text" class="form-control" 
                                                 placeholder="terms"
                                                 name="terms"
@@ -129,6 +129,20 @@
                                             >
                                         </div>
                                     </div>
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label for="product_free">{{ __('product.list.amount_in_box') }}:</label>
+                                            <input type="text" class="form-control" 
+                                                placeholder="amount in box"
+                                                name="amount_in_box"
+                                                value="{{ old('amount_in_box', $product->amount_in_box) }}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group note">
+                                    <label for="product_free">{{ __('product.list.note') }}:</label>
+                                    <textarea class="form-control" id="note" rows="3" name="note">{{ old('note', $product->note) }}</textarea>
                                 </div>
                                 <div class="form-group description">
                                     <textarea class="form-control textarea" id="description" rows="3" name="description">{{$product->description}}</textarea>
