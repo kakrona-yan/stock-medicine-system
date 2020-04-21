@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="col-12 col-md-4">
                                         <div class="form-group">
-                                            <label for="product_free">{{ __('product.list.terms') }}(B/3x10T):</label>
+                                            <label for="product_free">{{ __('product.list.terms') }}:</label>
                                             <input type="text" class="form-control" 
                                                 placeholder="terms"
                                                 name="terms"
