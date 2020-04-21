@@ -42,7 +42,7 @@
                                 <th>#</th>
                                 <th>{{ __('product.list.thumbnail') }}</th>
                                 <th>{{ __('product.list.product_title') }}</th>
-                                <th>{{ __('product.list.category') }}</th>
+                                <th>{{ __('product.list.amount_in_box') }}</th>
                                 {{-- <th>{{ __('product.list.product_import') }}</th> --}}
                                 <th>{{ __('product.list.price') }}</th>
                                 <th>{{ __('product.list.terms') }}</th>
@@ -65,7 +65,7 @@
                                     </div>
                                 </td>
                                 <td>{{$product->title}}</td>
-                                <td>{{$product->category ? $product->category->name : ""}}</td>
+                                <td>{{$product->amount_in_box ? $product->amount_in_box : "-"}}</td>
                                 {{-- <td>{{$product->product_import}}</td> --}}
                                 <td class="text-right">{{$product->price}}</td>
                                 <td>{{$product->terms}}</td>
