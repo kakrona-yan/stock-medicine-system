@@ -332,11 +332,11 @@
     function checkSaleProduct(id, title, price) {
         let html = '<tr id="sale_product_'+id+'">';
             html += '<td class="sale-bg-no"><input type="hidden" class="form-control" name="sale_product['+i+'][product_id]" value="'+id+'"/><span class="sale-no-sp">លេខរៀងផលិតផលទី '+id+'</span></td>';
-            html += '<td><input type="text" class="form-control" value="'+title+'" readonly/></td>';
-            html += '<td><input type="number" min="0" id="quantity_'+id+'" data-id="'+id+'" data-quantity="1" class="form-control" name="sale_product['+i+'][quantity]" value="1" oninput="updateQuantity(this)"/></td>';
-            html += '<td><input type="text" id="productFree_'+id+'" data-id="'+id+'" data-productFree="0" class="form-control sale_rate" name="sale_product['+i+'][product_free]" value="0" oninput="updateProductFree(this)"/></td>';
-            html += '<td><input type="text" min="0" id="rate_'+id+'" data-id="'+id+'" data-rate="'+price+'" class="form-control sale_rate" name="sale_product['+i+'][rate]" value="'+price+'" oninput="updateRate(this)"/></td>';
-            html += '<td><input type="text" id="amount_'+id+'" class="form-control" name="sale_product['+i+'][amount]" value="'+price+'" readonly /></td>';
+            html += '<td><div class="sale-hide-sp">{{__('sale.form.pro_name')}}</div><input type="text" class="form-control" value="'+title+'" readonly/></td>';
+            html += '<td><div class="sale-hide-sp">{{__('sale.form.q_t')}}</div><input type="number" min="0" id="quantity_'+id+'" data-id="'+id+'" data-quantity="1" class="form-control" name="sale_product['+i+'][quantity]" value="1" oninput="updateQuantity(this)"/></td>';
+            html += '<td><div class="sale-hide-sp">{{__('sale.form.pro_free')}}</div><input type="text" id="productFree_'+id+'" data-id="'+id+'" data-productFree="0" class="form-control sale_rate" name="sale_product['+i+'][product_free]" value="0" oninput="updateProductFree(this)"/></td>';
+            html += '<td><div class="sale-hide-sp">{{__('sale.list.rate')}}</div><input type="text" min="0" id="rate_'+id+'" data-id="'+id+'" data-rate="'+price+'" class="form-control sale_rate" name="sale_product['+i+'][rate]" value="'+price+'" oninput="updateRate(this)"/></td>';
+            html += '<td><div class="sale-hide-sp">{{__('sale.list.amount')}}</div><input type="text" id="amount_'+id+'" class="form-control" name="sale_product['+i+'][amount]" value="'+price+'" readonly /></td>';
             html += '<td class="text-center">';
             html += '    <button type="button" data-id="'+id+'" data-quantity="1" data-amount="'+price+'" class="remove_product btn btn-circle btn-circle btn-sm btn-danger btn-circle"><i class="fa fa-trash"></i></button>';
             html += '</td>';

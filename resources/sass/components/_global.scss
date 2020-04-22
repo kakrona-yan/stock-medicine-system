@@ -538,6 +538,9 @@ body.list-product {
  .sale-no-sp{
    display: none;
  }
+ .sale-hide-sp{
+   display: none;
+ }
 }
 @media (max-width: 767px) {
   h2.h-s-1.mb-4.font-national-cartoon{
@@ -590,6 +593,11 @@ body.list-product {
       padding: 5px;
       color: #fff;
     }
+    .sale-hide-sp{
+      display: inline-flex;
+      text-align: left;
+      width: 40%;
+    }
     .hide-sp{
       display: none;
     }
@@ -603,10 +611,14 @@ body.list-product {
         max-width: 100%;
         position: relative;
         width: 100%;
-        padding-right: 0.75rem;
-        padding-left: 0.75rem;
+        padding-right: 3px;
+        padding-left: 3px;
         border: none;
         text-align: center;
+        input {
+          display: inline-flex;
+          width: 60%;
+        }
       }
     }
   }
