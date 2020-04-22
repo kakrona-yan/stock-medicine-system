@@ -59,8 +59,7 @@ class SalesController extends Controller
             $categories = $this->category->getCategoryNameByProducts();
             $customers = $this->customer->getCustomer();
             $invoiceCode =  $this->sale->incrementStringUniqueInvoiceCode();
-            $staffs = Staff::where('is_delete', '<>', DeleteStatus::DELETED)
-                ->select(['id', 'name'])->get();
+            $staffs = Staff::select(['id', 'name'])->get();
             return view('backends.sales.create', [
                 'request' => $request,
                 'categories' => $categories,
