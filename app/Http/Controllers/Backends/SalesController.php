@@ -56,13 +56,13 @@ class SalesController extends Controller
     public function create(Request $request)
     {
         try {
-            $categories = $this->category->getCategoryNameByProducts();
+            $products = $this->product->getProductName();
             $customers = $this->customer->getCustomer();
             $invoiceCode =  $this->sale->incrementStringUniqueInvoiceCode();
             $staffs = Staff::select(['id', 'name'])->get();
             return view('backends.sales.create', [
                 'request' => $request,
-                'categories' => $categories,
+                'products' => $products,
                 'customers' => $customers,
                 'invoiceCode' => $invoiceCode,
                 'staffs' => $staffs
@@ -151,7 +151,7 @@ class SalesController extends Controller
         try {
             $productOrders = $this->product->where('is_delete', '<>', 0)
                 ->where('is_active', 1) // is_delete = 1 and is_active = 1
-                ->where('category_id', $request->category_id)
+                ->where('id', $request->product_id)
                 ->select(['id', 'category_id', 'title', 'price', 'in_store', 'thumbnail'])
                 ->orderBy('title', 'ASC')
                 ->get();
@@ -229,7 +229,7 @@ class SalesController extends Controller
                 return response()->view('errors.404', [], 404);
             }
 
-            $categories = $this->category->getCategoryNameByProducts();
+            $products = $this->product->getProductName();
             $customers = $this->customer->getCustomer();
             $staffs = Staff::select(['id', 'name'])
                 ->get();
@@ -237,7 +237,7 @@ class SalesController extends Controller
             return view('backends.sales.edit', [
                 'sale' => $sale,
                 'request' => $request,
-                'categories' => $categories,
+                'products' => $products,
                 'customers' => $customers,
                 'staffs' => $staffs
             ]);

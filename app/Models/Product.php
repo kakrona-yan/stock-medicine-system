@@ -79,4 +79,12 @@ class Product extends BaseModel
         }
         return $products->orderBy('id', 'DESC')->paginate(config('pagination.product_limit'));
     }
+
+    public function getProductName()
+    {
+        return $this->where('is_delete', '<>', DeleteStatus::DELETED)
+            ->pluck('title', 'id')
+            ->all();
+    }
+    
 }

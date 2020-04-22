@@ -1,5 +1,5 @@
 @extends('backends.layouts.master')
-@section('title', 'Create Sale Product')
+@section('title', 'RRPS-PHARMA | លក់ផលិតផល')
 <style>
     .span-p{
         position: absolute;
@@ -8,7 +8,7 @@
     }
 </style>
 @section('content')
-<div id="category-list">
+<div id="sale-list">
     @if(\Auth::user()->isRoleStaff())
     <div class="row {{Auth::user()->isRoleStaff() ? 'sp-staff-block' : ''}}">
         <div class="col-6 mb-4 p-1">
@@ -124,12 +124,11 @@
                                     <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
                                         <fieldset class="edit-master-registration-fieldset">
                                             <div class="form-group select-group row mb-4">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="invoiceCode">{{__('sale.form.category')}}</label>
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-                                                    <select class="form-control" id="category_id" name="category_id">
-                                                        <option value="">Please select</option>
-                                                        @foreach($categories as $id => $name)
-                                                            <option value="{{ $id }}" {{ $id == 1 || $id == $request->category_id ? 'selected' : '' }}>{{ $name }}</option>
+                                                <div class="col-12 col-sm-12 col-md-12">
+                                                    <select class="form-control" id="product_id" name="product_category_id">
+                                                        <option value="">{{__('sale.select')}}</option>
+                                                        @foreach($products as $id => $name)
+                                                            <option value="{{ $id }}" {{ $id == $request->product_category_id ? 'selected' : '' }}>{{ $name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -312,13 +311,13 @@
     });
     // filter product
     $(function(){
-        if($("#category_id").val() != ''){
+        if($("#product_id").val() != ''){
             let routeUrl = "{{config('app.url')}}/sales/product";
-            let category_id = $("#category_id").val();
+            let product_id = e.params.data.id;
             $.ajax({
                 url     : routeUrl,
                 type    : 'GET',
-                data    : {category_id},
+                data    : {product_id},
                 dataType: 'json',
                 success : function (data) {
                     if(data.code == 200) {
@@ -329,15 +328,15 @@
                 }
             });
         }
-        $("#category_id").select2({
+        $("#product_id").select2({
             allowClear: false
         }).on('select2:select', function (e) {
             let routeUrl = "{{config('app.url')}}/sales/product";
-            let category_id = e.params.data.id;
+            let product_id = e.params.data.id;
             $.ajax({
                 url     : routeUrl,
                 type    : 'GET',
-                data    : {category_id},
+                data    : {product_id},
                 dataType: 'json',
                 success : function (data) {
                     if(data.code == 200) {
