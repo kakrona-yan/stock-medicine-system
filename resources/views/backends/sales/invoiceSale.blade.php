@@ -30,7 +30,7 @@
             text-align: left;
             line-height: 24px;
             font-family: 'KhmerOSBattambang', 'Roboto', sans-serif;
-            font-size: 16px !important;
+            font-size: 14px !important;
             font-weight: normal;
             position: relative;
         }
@@ -51,8 +51,8 @@
         }
         .container{
             padding-left: 80px;
-            padding-right: 40px;
-            max-width: 1100px;
+            padding-right: 60px;
+            max-width: 794px;
             width: 100%;
             margin: 0px auto;
             position: relative;
