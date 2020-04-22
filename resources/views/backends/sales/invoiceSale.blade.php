@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Invoice - #{{ $sale->quotaion_no }}</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Styles -->
     <style type="text/css">
         @font-face {
@@ -31,7 +30,7 @@
             text-align: left;
             line-height: 24px;
             font-family: 'KhmerOSBattambang', 'Roboto', sans-serif;
-            font-size: 14px;
+            font-size: 16px !important;
             font-weight: normal;
             position: relative;
         }
@@ -51,12 +50,13 @@
             font-weight: normal;
         }
         .container{
-            padding-left: 60px;
-            padding-right: 60px;
-            max-width: 794px;
+            padding-left: 80px;
+            padding-right: 40px;
+            max-width: 1100px;
             width: 100%;
             margin: 0px auto;
             position: relative;
+            padding-top: 20px;
         }
         h1{
             font-size: 25px;
@@ -136,6 +136,29 @@
             .d-inline{
                 width: 200px;
             }
+        }
+        .text-center {
+            text-align: center !important;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -0.75rem;
+            margin-left: -0.75rem;
+        }
+        .pr-5, .px-5 {
+            padding-right: 3rem !important;
+        }
+        .pl-5, .px-5 {
+            padding-left: 3rem !important;
+        }
+        .col-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            position: relative;
+            width: 100%;
+            padding-right: 0.75rem;
+            padding-left: 0.75rem;
         }
     </style>
     <script>
