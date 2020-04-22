@@ -596,7 +596,7 @@ body.list-product {
     .sale-hide-sp{
       display: inline-flex;
       text-align: left;
-      width: 35%;
+      width: 100%;
     }
     .hide-sp{
       display: none;
@@ -615,10 +615,10 @@ body.list-product {
         padding-left: 3px;
         border: none;
         text-align: center;
-        input {
-          display: inline-flex;
-          width: 60%;
-        }
+      }
+      .tb-6{
+        flex: 0 0 50%;
+        max-width: 50%;
       }
     }
   }
