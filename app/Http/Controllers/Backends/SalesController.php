@@ -232,8 +232,7 @@ class SalesController extends Controller
 
             $categories = $this->category->getCategoryNameByProducts();
             $customers = $this->customer->getCustomer();
-            $staffs = Staff::where('is_delete', '<>', DeleteStatus::DELETED)
-                ->select(['id', 'name'])
+            $staffs = Staff::select(['id', 'name'])
                 ->get();
 
             return view('backends.sales.edit', [
