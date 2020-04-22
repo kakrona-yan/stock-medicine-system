@@ -172,23 +172,23 @@
                                                                 <span class="sale-no-sp">លេខរៀងផលិតផលទី {{$productSale->product_id}}</span>
                                                                 </td>
                                                                 <td>
-                                                                    <div class="sale-hide-sp">{{__('sale.form.pro_name')}}
+                                                                    <div class="sale-hide-sp">{{__('sale.form.pro_name')}}</div>
                                                                     <input type="text" class="form-control" value="{{$productSale->product->title}}" readonly="">
                                                                 </td>
                                                                 <td>
-                                                                    <div class="sale-hide-sp">{{__('sale.form.q_t')}}
+                                                                    <div class="sale-hide-sp">{{__('sale.form.q_t')}}</div>
                                                                     <input type="number" min="0" id="quantity_{{$i}}" data-id="{{$i}}" data-quantity="{{$productSale->quantity}}" class="form-control" name="sale_product[{{$i}}][quantity]" value="{{$productSale->quantity}}" oninput="updateQuantity(this)">
                                                                 </td>
                                                                 <td>
-                                                                    <div class="sale-hide-sp">{{__('sale.form.pro_free')}}
+                                                                    <div class="sale-hide-sp">{{__('sale.form.pro_free')}}</div>
                                                                     <input type="text" id="productFree_{{$i}}" data-id="{{$i}}" data-productfree="{{$productSale->product_free}}" class="form-control sale_rate" name="sale_product[{{$i}}][product_free]" value="{{$productSale->product_free}}" oninput="updateProductFree(this)">
                                                                 </td>
                                                                 <td>
-                                                                    <div class="sale-hide-sp">{{__('sale.form.rate')}}
+                                                                    <div class="sale-hide-sp">{{__('sale.form.rate')}}</div>
                                                                     <input type="text" min="0" id="rate_{{$i}}" data-id="{{$i}}" data-rate="{{$productSale->rate}}" class="form-control sale_rate" name="sale_product[{{$i}}][rate]" value="{{$productSale->rate}}" oninput="updateRate(this)">
                                                                 </td>
                                                                 <td>
-                                                                    <div class="sale-hide-sp">{{__('sale.form.amount')}}
+                                                                    <div class="sale-hide-sp">{{__('sale.form.amount')}}</div>
                                                                     <input type="text" id="amount_{{$i}}" class="form-control" name="sale_product[{{$i}}][amount]" value="{{$productSale->amount}}" readonly="">
                                                                 </td>
                                                                 <td class="text-center">    
