@@ -534,6 +534,11 @@ body.list-product {
     width: 50%;
   }
 }
+#sale-list{
+ .sale-no-sp{
+   display: none;
+ }
+}
 @media (max-width: 767px) {
   h2.h-s-1.mb-4.font-national-cartoon{
     margin-top: 70% !important;
@@ -576,6 +581,33 @@ body.list-product {
     }
     .card-body {
       padding: 0.7rem 0.5rem;
+    }
+  }
+  #sale-list{
+    .sale-no-sp{
+      display: block;
+      background: #0ec7d3;
+      padding: 5px;
+      color: #fff;
+    }
+    .hide-sp{
+      display: none;
+    }
+    .table{
+      tr{
+        display: flex;
+        flex-wrap: wrap;
+      }
+      td{
+        flex: 0 0 100%;
+        max-width: 100%;
+        position: relative;
+        width: 100%;
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+        border: none;
+        text-align: center;
+      }
     }
   }
 }

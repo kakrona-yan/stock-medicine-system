@@ -144,8 +144,8 @@
                                                 <fieldset class="edit-master-registration-fieldset">
                                                     <legend class="edit-application-information-legend text-left">{{__('sale.sub_title')}}:</legend>
                                                     <div class="table-responsive cus-table">
-                                                    <table class="table table-striped table-bordered" style="width:1000px;">
-                                                        <thead class="bg-primary text-light">
+                                                    <table class="table table-striped table-bordered">
+                                                        <thead class="bg-primary text-light hide-sp">
                                                             <tr>
                                                                 <th style="width: 50px;">#</th>
                                                                 <th style="width: 280px;">{{__('sale.form.pro_name')}}</th>
@@ -331,7 +331,7 @@
 
     function checkSaleProduct(id, title, price) {
         let html = '<tr id="sale_product_'+id+'">';
-            html += '<td><input type="hidden" class="form-control" name="sale_product['+i+'][product_id]" value="'+id+'"/>'+id+'</td>';
+            html += '<td class="sale-bg-no"><input type="hidden" class="form-control" name="sale_product['+i+'][product_id]" value="'+id+'"/><span class="sale-no-sp">លេខរៀងផលិតផលទី '+id+'</span></td>';
             html += '<td><input type="text" class="form-control" value="'+title+'" readonly/></td>';
             html += '<td><input type="number" min="0" id="quantity_'+id+'" data-id="'+id+'" data-quantity="1" class="form-control" name="sale_product['+i+'][quantity]" value="1" oninput="updateQuantity(this)"/></td>';
             html += '<td><input type="text" id="productFree_'+id+'" data-id="'+id+'" data-productFree="0" class="form-control sale_rate" name="sale_product['+i+'][product_free]" value="0" oninput="updateProductFree(this)"/></td>';
