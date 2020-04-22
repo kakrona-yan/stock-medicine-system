@@ -177,25 +177,26 @@ class CustomerOwedsController extends Controller
                         ->first();
                     if($customerOwed) {
                         $customerOwed->update($saleRequest);
+                        // store customer owed history
+                        $customerOwedHistory = CustomerOwedHistory::where('customer_owed_id', $customerOwed->id)
+                            ->first();
+                        if($customerOwedHistory){
+                            $customerOwedHistory->update([
+                                'customer_owed_id' => $customerOwed->id,
+                                'receive_amount' => $request->amount_pay,
+                                'recipient' => \Auth::user()->name
+                            ]);
+                        } else{
+                            CustomerOwedHistory::create([
+                                'customer_owed_id' => $customerOwed->id,
+                                'receive_amount' => $request->amount_pay,
+                                'recipient' => \Auth::user()->name
+                            ]);
+                        }
                     } else {
                         $customerOwed = $this->customerOwed->create($saleRequest);
                     }
-                    // store customer owed history
-                    $customerOwedHistory = CustomerOwedHistory::where('customer_owed_id', $customerOwed->id)
-                        ->first();
-                    if($customerOwedHistory){
-                        $customerOwedHistory->update([
-                            'customer_owed_id' => $customerOwed->id,
-                            'receive_amount' => $request->amount_pay,
-                            'recipient' => \Auth::user()->name
-                        ]);
-                    } else{
-                        CustomerOwedHistory::create([
-                            'customer_owed_id' => $customerOwed->id,
-                            'receive_amount' => $request->amount_pay,
-                            'recipient' => \Auth::user()->name
-                        ]);
-                    }
+                    
                 }
                 return \Redirect::route('customer_owed.index')
                     ->with('warning',__('flash.update'));
