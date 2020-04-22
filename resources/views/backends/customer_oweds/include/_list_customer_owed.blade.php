@@ -27,7 +27,7 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-justified mb-2" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link bg-success text-white {{$request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->pay_model ? ' active' : ''}}" data-toggle="tab" href="#pay_day">សងប្រាក់តាមថ្ងៃ</a>
+                        <a class="nav-link bg-success text-white {{$request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->pay_model ? ' active' : 'active'}}" data-toggle="tab" href="#pay_day">សងប្រាក់តាមថ្ងៃ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link bg-danger text-white {{$request->pay_no_page ? ' active' : ''}}" data-toggle="tab" href="#pay_in_ready">សងប្រាក់តាមអតិថិជន</a>
@@ -39,7 +39,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <!--/list pay by day-->
-                    <div class="tab-pane fade {{($request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->status_pay || $request->pay_model) ? ' active show' : ''}}" id="pay_day">
+                    <div class="tab-pane fade {{($request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->status_pay || $request->pay_model) ? ' active show' : ' active show'}}" id="pay_day">
                         <div class="table-responsive cus-table">
                             <table class="table table-bordered">
                                 <thead class="bg-success text-light">

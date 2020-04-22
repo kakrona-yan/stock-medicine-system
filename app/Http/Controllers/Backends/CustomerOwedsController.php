@@ -80,7 +80,7 @@ class CustomerOwedsController extends Controller
             } 
             // Check flash danger
             flashDanger($sales->count(), __('flash.empty_data'));
-            $sales = $sales->get()->sortByDesc('customerOwed.date_pay');
+            $sales = $sales->get();
 
             $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
             return view('backends.customer_oweds.index', [
