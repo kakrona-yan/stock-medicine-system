@@ -228,24 +228,24 @@ class CustomerOwedsController extends Controller
                 $saleRequest['date_pay'] = date('Y-m-d h:i:s');
                 if($customerOwed) {
                     $customerOwed->update($saleRequest);
+                    // store customer owed history
+                    $customerOwedHistory = CustomerOwedHistory::where('customer_owed_id', $customerOwed->id)
+                    ->first();
+                    if($customerOwedHistory){
+                        $customerOwedHistory->update([
+                            'customer_owed_id' => $customerOwed->id,
+                            'receive_amount' => $request->amount_pay,
+                            'recipient' => \Auth::user()->name
+                        ]);
+                    } else{
+                        CustomerOwedHistory::create([
+                            'customer_owed_id' => $customerOwed->id,
+                            'receive_amount' => $request->amount_pay,
+                            'recipient' => \Auth::user()->name
+                        ]);
+                    }
                 } else {
                     $this->customerOwed->create($saleRequest);
-                }
-                // store customer owed history
-                $customerOwedHistory = CustomerOwedHistory::where('customer_owed_id', $customerOwed->id)
-                ->first();
-                if($customerOwedHistory){
-                    $customerOwedHistory->update([
-                        'customer_owed_id' => $customerOwed->id,
-                        'receive_amount' => $request->amount_pay,
-                        'recipient' => \Auth::user()->name
-                    ]);
-                } else{
-                    CustomerOwedHistory::create([
-                        'customer_owed_id' => $customerOwed->id,
-                        'receive_amount' => $request->amount_pay,
-                        'recipient' => \Auth::user()->name
-                    ]);
                 }
             }
             return \Redirect::route('customer_owed.index', ['pay_model' => 1])
