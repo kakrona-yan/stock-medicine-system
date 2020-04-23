@@ -85,6 +85,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('customer_owed.index', function ($userRole) {
             return $userRole->role === UserRole::ROLE_ADMIN ||   // admin = 1
+                $userRole->role === UserRole::ROLE_VIEW || 
                 $userRole->role === UserRole::ROLE_EDITOR;
         });
     }

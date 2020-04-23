@@ -52,7 +52,9 @@
                                         <th class="text-center">{{ __('customer_owed.list.status_pay') }}</th>
                                         <th class="text-center">{{ __('customer_owed.list.date_pay') }}</th>
                                         <th>{{__('sale.list.staff_name')}}</th>
+                                        @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                         <th class="text-center">{{ __('customer_owed.list.action') }}</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -86,6 +88,7 @@
                                                 </button>
                                             </td>
                                             <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                            @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                             <td class="text-center" style="width: 130px;">
                                                 <a class="btn btn-sm btn-warning d-inline-flex" 
                                                     data-toggle="tooltip" 
@@ -102,6 +105,7 @@
                                                     >{{__('button.pay_all')}}
                                                 </button>
                                             </td>
+                                            @endif
                                         </tr>
                                     @endif
                                     @endforeach
@@ -167,7 +171,9 @@
                                                         <th class="text-center">{{ __('customer_owed.list.status_pay') }}</th>
                                                         <th class="text-center">{{ __('customer_owed.list.date_pay') }}</th>
                                                         <th>{{__('sale.list.staff_name')}}</th>
+                                                        @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                                         <th class="text-center">{{ __('customer_owed.list.action') }}</th>
+                                                        @endif
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -191,6 +197,7 @@
                                                             </td>
                                                             <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</td>
                                                             <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                                            @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                                             <td class="text-center">
                                                                 <a class="btn btn-sm btn-warning" 
                                                                     data-toggle="tooltip" 
@@ -200,6 +207,7 @@
                                                                     >{{__('button.pay')}}
                                                                 </a>
                                                             </td>
+                                                            @endif
                                                         </tr>
                                                         @endif
                                                     @endforeach
@@ -274,7 +282,9 @@
                                                             <th class="text-center">{{ __('customer_owed.list.status_pay') }}</th>
                                                             <th class="text-center">{{ __('customer_owed.list.date_pay') }}</th>
                                                             <th>{{__('sale.list.staff_name')}}</th>
+                                                            @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                                             <th class="text-center">{{ __('customer_owed.list.action') }}</th>
+                                                            @endif
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -297,6 +307,7 @@
                                                                 </td>
                                                                 <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</td>
                                                                 <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                                                @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                                                 <td class="text-center">
                                                                     <a class="btn btn-sm btn-warning" 
                                                                         data-toggle="tooltip" 
@@ -306,6 +317,7 @@
                                                                         >{{__('button.pay')}}
                                                                     </a>
                                                                 </td>
+                                                                @endif
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
