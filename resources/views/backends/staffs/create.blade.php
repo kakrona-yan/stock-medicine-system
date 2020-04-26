@@ -38,7 +38,7 @@
                                     <div class="col-12 col-md-6 mb-2">
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-12">
                                                     <label for="name">{{__('staff.list.name')}}:</label>
                                                     <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" 
                                                         placeholder="{{__('staff.list.name')}}"

@@ -70,9 +70,9 @@
                                             <div class="form-group select-group row">
                                                 <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="sale_date">{{__('sale.form.date_sale')}} <span class="text-danger">*</span></label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-                                                    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                                                    <div class="input-group">
                                                         <input type="text" class="form-control" name="sale_date"
-                                                            value="{{ old('sale_date', date('Y-m-d')) }}">
+                                                            value="{{ old('sale_date', date('Y-m-d')) }}" readonly="">
                                                         <div class="input-group-append">
                                                             <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
                                                         </div>
