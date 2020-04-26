@@ -64,7 +64,7 @@
                                                 </span>
                                             @endif
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="email">{{__('staff.list.email')}}:</label>
                                             <input type="emal" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" 
                                                 placeholder="{{__('staff.list.email')}}"
@@ -77,7 +77,7 @@
                                                 </span>
                                             @endif
                 
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group">
                                             <label for="address">{{__('staff.list.address')}}:</label>
                                             <textarea name="address" class="form-control {{ $errors->has('address') ? ' is-invalid' : '' }}" id="address" rows="5">{{old('address', $staff->address)}}</textarea>

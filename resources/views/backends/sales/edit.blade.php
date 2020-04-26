@@ -67,6 +67,23 @@
                                         </div>
                                         <fieldset class="edit-master-registration-fieldset">
                                             <legend class="edit-application-information-legend text-left">{{__('sale.form.sale')}}:</legend>
+                                            <div class="form-group select-group row">
+                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="sale_date">{{__('sale.form.date_sale')}} <span class="text-danger">*</span></label>
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
+                                                    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                                                        <input type="text" class="form-control" name="sale_date"
+                                                            value="{{ old('sale_date', date('Y-m-d', strtotime($sale->sale_date))) }}">
+                                                        <div class="input-group-append">
+                                                            <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
+                                                        </div>
+                                                    </div>
+                                                    @if ($errors->has('sale_date'))
+                                                        <span class="text-danger">
+                                                            <strong>{{ $errors->first('sale_date') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
                                             <div class="form-group row">
                                                 <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="quotaion_no">{{__('sale.form.invoice_code')}}</label>
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-9">
@@ -101,23 +118,6 @@
                                                 </div>
                                             </div>
                                             @endif
-                                            <div class="form-group select-group row">
-                                                <label class="col-12 col-sm-12 col-md-12 col-lg-3 col-form-label" for="sale_date">{{__('sale.form.date_sale')}} <span class="text-danger">*</span></label>
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-                                                    <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                                                        <input type="text" class="form-control" name="sale_date"
-                                                            value="{{ old('sale_date', date('Y-m-d', strtotime($sale->sale_date))) }}">
-                                                        <div class="input-group-append">
-                                                            <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
-                                                        </div>
-                                                    </div>
-                                                    @if ($errors->has('sale_date'))
-                                                        <span class="text-danger">
-                                                            <strong>{{ $errors->first('sale_date') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                            </div>
                                         </fieldset>
                                     </div>
                                     

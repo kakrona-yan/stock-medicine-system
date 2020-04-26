@@ -79,7 +79,7 @@ class LoginController extends Controller
     public function Login(LoginRequest $request)
     {
         $authAdmin = Auth::attempt([
-            'email' => $request->email,
+            'name' => $request->name,
             'password' => $request->password,
             'is_active' => 1,
             'is_delete' => 1 // if want to check 0 for user active
@@ -89,8 +89,10 @@ class LoginController extends Controller
             Session::forget('login');
             return redirect()->route('dashboard');
         }
-        return Redirect::route('login')
-            ->with('login', __('validation.auth'));
+        return Redirect::route('login', [
+            'request' => $request
+        ])
+        ->with('login', __('validation.auth'));
     }
 
     public function Logout()

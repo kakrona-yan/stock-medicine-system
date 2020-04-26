@@ -19,12 +19,12 @@
                                             <input type="text" class="form-control" name="phone_number"  value="{{ old('phone_number', $request->phone_number) }}">
                                         </div>
                                     </div>
-                                    <div class="col-6 col-md-4 mb-1">
+                                    {{-- <div class="col-6 col-md-4 mb-1">
                                         <div class="form-group">
                                             <label class="font-weight-bold">@lang('staff.list.email')</label>
                                             <input type="text" class="form-control" name="email"  value="{{ old('email', $request->email) }}">
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="col-12 col-md-2 d-flex align-items-end mb-1">
@@ -40,7 +40,7 @@
                                 <tr>
                                     <th class="text-center w-10">{{__('staff.form.thumbnail')}}</th>
                                     <th>{{ __('staff.list.name') }}</th>
-                                    <th>{{ __('staff.list.email') }}</th>
+                                    {{-- <th>{{ __('staff.list.email') }}</th> --}}
                                     <th>{{ __('staff.list.password') }}</th>
                                     <th>{{ __('staff.list.phone') }}</th>
                                     <th>{{ __('staff.list.address') }}</th>
@@ -60,7 +60,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $staff->getFullnameAttribute() }}</td>
-                                    <td>{{ $staff->email }}</td>
+                                    {{-- <td>{{ $staff->email }}</td> --}}
                                     <td>{{ $staff->password }}</td>
                                     <td>
                                         <div class="d-flex flex-row">

@@ -67,7 +67,7 @@ class StaffsController extends Controller
             $email = $request->email;
             $ruleEmail = '';
             if ($email && !empty($email)) {
-                $ruleEmail = 'email|unique:staffs|unique:users,email';
+                $ruleEmail = 'nullable|email|unique:staffs|unique:users,email';
             }
             $rules = [
                 'name' => 'required',
@@ -180,7 +180,7 @@ class StaffsController extends Controller
             if ($email && !empty($email)) {
                 $staff = $this->staff->available($id);
                 $userId = $staff->user ? $staff->user->id : $id;
-                $ruleEmail = 'email|unique:staffs,email,' . $id .'|unique:users,email,' . $userId;
+                $ruleEmail = 'nullable|email|unique:staffs,email,' . $id .'|unique:users,email,' . $userId;
             }
             $rules = [
                 'name' => 'required',

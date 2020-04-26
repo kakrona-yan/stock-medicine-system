@@ -38,7 +38,9 @@
     </div>
     @endif
     <!--list product-->
+    @if(!Auth::user()->isRoleStaff())
     @include('backends.customer_types.include._list_customer')
+    @endif
     @include('backends.customers.include._list_customer')
 </div>
 

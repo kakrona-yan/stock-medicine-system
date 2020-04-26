@@ -9,7 +9,7 @@
         <div class="item item-4"></div>
     </div>
     <h2 class="h-s-1 mb-4 font-national-cartoon" style="margin-top: 21%;
-    z-index: 9999; color:#FFF;">Welcome to RRPS PHARMA</h2>
+    z-index: 9999; color:#FFF;">ស្វាគមន៍​មកកាន់ RRPS PHARMA</h2>
 </div>
 <div class="container">
     <!-- Row -->
@@ -37,12 +37,12 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user-circle"></i></span>
                                 </div>
-                                <input type="email" name="email" class="form-control form-control-user {{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                value="{{ old('email', $request->email) }}" 
-                                placeholder="{{__('user.list.email')}}"/>
-                                @if ($errors->has('email'))
+                                <input type="text" name="name" class="form-control form-control-user {{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                value="{{ old('name', $request->name) }}" 
+                                placeholder="{{__('user.list.name')}}"/>
+                                @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
                             </div>

@@ -11,12 +11,12 @@
                             placeholder="name"
                         >
                     </div>
-                    <div class="form-group mb-2 mr-2">
+                    {{-- <div class="form-group mb-2 mr-2">
                         <input type="email" class="form-control mr-1" id="email" 
                             name="email" value="{{ old('email', $request->email)}}"
                                 placeholder="email"
                         >
-                    </div>
+                    </div> --}}
                     <div class="form-group mb-2">
                         <button type="submit" class="btn btn-circle btn-primary"><i class="fa fa-search"></i> @lang('button.search')</button>
                     </div>
@@ -41,7 +41,7 @@
                             <tr>
                                 <th class="text-center">{{__('user.list.thumbnail')}}</th>
                                 <th>{{ __('user.list.name') }}</th>
-                                <th>{{ __('user.list.email') }}</th>
+                                {{-- <th>{{ __('user.list.email') }}</th> --}}
                                 <th>{{ __('user.list.role') }}</th>
                                 <th>Password</th>
                                 <th class="text-center">{{ __('user.list.active') }}</th>
@@ -59,7 +59,7 @@
                                     </div>
                                 </td>
                                 <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
+                                {{-- <td>{{$user->email}}</td> --}}
                                 <td><i class="fas fa-user text-pink "></i> {{$user->roleType()}}</td>
                                 <td>{{$user->staff ? $user->staff->password : '123****'}}</td>
                                 <td class="text-center">

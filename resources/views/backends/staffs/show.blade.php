@@ -43,10 +43,10 @@
                                         <th class="border-top-0 w-15">{{__('staff.list.name')}}:</th>
                                         <td class="border-top-0">{{ $staff->getFullnameAttribute() }}</td>
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <th>{{__('staff.list.email')}}:</th>
                                         <td>{{ $staff->email }}</td>
-                                    </tr>
+                                    </tr> --}}
                                     <tr>
                                         <th>{{__('staff.list.phone')}}: </th>
                                         <td> 
