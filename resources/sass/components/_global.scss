@@ -541,6 +541,9 @@ body.list-product {
  .sale-hide-sp{
    display: none;
  }
+ .w-260{
+   width: 260px;
+ }
 }
 @media (max-width: 767px) {
   h2.h-s-1.mb-4.font-national-cartoon{
@@ -620,6 +623,9 @@ body.list-product {
         flex: 0 0 50%;
         max-width: 50%;
       }
+    }
+    .w-260{
+      width: 100%;
     }
   }
 }

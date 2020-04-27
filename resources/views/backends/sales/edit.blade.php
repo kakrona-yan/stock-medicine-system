@@ -121,7 +121,7 @@
                                         </fieldset>
                                     </div>
                                     
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 mb-3">
+                                    <div class="col-12 col-sm-12 col-md-3 col-lg-3 mb-3">
                                         <fieldset class="edit-master-registration-fieldset">
                                             <div class="form-group select-group row mb-4">
                                                 <div class="col-12 col-sm-12 col-md-12">
@@ -139,7 +139,7 @@
                                             </div>
                                         </fieldset>
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-7 mb-3">
+                                    <div class="col-12 col-sm-12 col-md-9 col-lg-9 mb-3">
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-md-12 mb-3 ">
                                                 <fieldset class="edit-master-registration-fieldset">
@@ -148,7 +148,7 @@
                                                         <table class="table table-striped table-bordered">
                                                             <thead class="bg-primary text-light hide-sp">
                                                                 <tr>
-                                                                    <th style="width: 50px;">#</th>
+                                                                    <th style="width: 50px;" class="sale-no-sp">#</th>
                                                                     <th style="width: 280px;">{{__('sale.form.pro_name')}}</th>
                                                                     <th style="width: 100px;">{{__('sale.form.q_t')}}</th>
                                                                     <th style="width: 100px;">{{__('sale.form.pro_free')}}</th>
@@ -397,8 +397,8 @@
 
     function checkSaleProduct(id, title, price) {
         let html = '<tr id="sale_product_'+i+'">';
-            html += '<td class="sale-bg-no"><input type="hidden" class="form-control" name="sale_product['+i+'][product_id]" value="'+id+'"/><span class="sale-no-sp">លេខរៀងផលិតផលទី '+id+'</span></td>';
-            html += '<td><div class="sale-hide-sp">{{__('sale.form.pro_name')}}<input type="text" class="form-control" value="'+title+'" readonly/></td>';
+            html += '<td class="sale-no-sp sale-bg-no"><input type="hidden" class="form-control" name="sale_product['+i+'][product_id]" value="'+id+'"/><span class="sale-no-sp">លេខរៀងផលិតផលទី '+id+'</span></td>';
+            html += '<td><div class="sale-hide-sp">{{__('sale.form.pro_name')}}<input type="text" class="form-control w-260" value="'+title+'" readonly/></td>';
             html += '<td class="tb-6"><div class="sale-hide-sp">{{__('sale.form.q_t')}}</div><input type="number" min="0" id="quantity_'+i+'" data-id="'+i+'" data-quantity="1" class="form-control" name="sale_product['+i+'][quantity]" value="1" oninput="updateQuantity(this)"/></td>';
             html += '<td class="tb-6"><div class="sale-hide-sp">{{__('sale.form.pro_free')}}</div><input type="tect" id="productFree_'+i+'" data-id="'+i+'" data-productFree="0" class="form-control sale_rate" name="sale_product['+i+'][product_free]" value="0" oninput="updateProductFree(this)"/></td>';
             html += '<td class="tb-6"><div class="sale-hide-sp">{{__('sale.list.rate')}}</div><input type="text" min="0" id="rate_'+i+'" data-id="'+i+'" data-rate="'+price+'" class="form-control sale_rate" name="sale_product['+i+'][rate]" value="'+price+'" oninput="updateRate(this)"/></td>';
