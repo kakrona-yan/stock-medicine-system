@@ -79,7 +79,7 @@
                         <tbody>
                             @foreach( $sales as $sale)
                                 @php
-                                   $owed = ($sale->total_amount - $sale->money_change);
+                                   $owed = $sale->customerOwed()->exists() ? $sale->customerOwed->owed_amount : ($sale->total_amount - $sale->money_change);
                                 @endphp
                                 <tr>
                                     <td class="text-center">
