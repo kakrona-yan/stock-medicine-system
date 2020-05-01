@@ -9,14 +9,14 @@
                                 <div class="row">
                                     <div class="col-6 col-md-4 mb-1">
                                         <div class="form-group">
-                                            <label class="font-weight-bold">@lang('staff.list.name')</label>
-                                            <input type="text" class="form-control d-inline-flex" name="name"  value="{{ old('name', $request->name) }}"> 
+                                            <input type="text" class="form-control d-inline-flex" name="name"  
+                                                value="{{ old('name', $request->name) }}" placeholder="@lang('staff.list.name')"> 
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3 mb-1">
                                         <div class="form-group">
-                                            <label class="font-weight-bold">@lang('staff.list.phone')</label>
-                                            <input type="text" class="form-control" name="phone_number"  value="{{ old('phone_number', $request->phone_number) }}">
+                                            <input type="text" class="form-control" name="phone_number"  
+                                                value="{{ old('phone_number', $request->phone_number) }}" placeholder="@lang('staff.list.phone')">
                                         </div>
                                     </div>
                                     {{-- <div class="col-6 col-md-4 mb-1">
@@ -25,11 +25,11 @@
                                             <input type="text" class="form-control" name="email"  value="{{ old('email', $request->email) }}">
                                         </div>
                                     </div> --}}
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-2 d-flex align-items-end mb-1">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-circle btn-primary"><i class="fa fa-search"></i> @lang('button.search')</button>
+                                    <div class="col-12 col-md-2 d-flex align-items-end mb-1">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-circle btn-primary"><i class="fa fa-search"></i> @lang('button.search')</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -63,6 +63,7 @@
                                     {{-- <td>{{ $staff->email }}</td> --}}
                                     <td>{{ $staff->password }}</td>
                                     <td>
+                                        @if($staff->phone1)
                                         <div class="d-flex flex-row">
                                             <i class="fas fa-phone-square-alt text-success my-1 mr-1"></i>
                                         <div>
@@ -70,6 +71,7 @@
                                             {{ $staff->phone2 ? $staff->phone2: '' }}
                                         </div>
                                         </div>
+                                        @endif
                                     </td>
                                     <td>{{ str_limit($staff->address, 30) }}</td>
                                     @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
