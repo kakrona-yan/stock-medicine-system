@@ -5,14 +5,24 @@
             <div class="card-body">
                 <form id="sale-search" action="{{ route('customer_owed.index') }}" method="GET" class="form form-horizontal form-search form-inline mb-2 d-inline-flex">
                     <div class="form-group mb-2 mr-2">
-                        <label for="title" class="mr-sm-2">{{__('sale.list.invoice_code')}}:</label>
                         <input type="text" class="form-control mr-1" id="quotaion_no" 
                             name="quotaion_no" value="{{ old('quotaion_no', $request->quotaion_no)}}"
                             placeholder="{{__('sale.list.invoice_code')}}"
                         >
                     </div>
-                    <div class="form-group input-group mb-2 mr-2" style="width: 300px;">
-                        <label for="title" class="mr-sm-2">{{__('customer_owed.list.status_pay')}}:</label>
+                    <div class="form-group mb-2 mr-2">
+                        <input type="text" class="form-control mr-1" id="customer" 
+                            name="customer_name" value="{{ old('customer_name', $request->customer_name)}}"
+                            placeholder="{{__('sale.list.customer_name')}}"
+                        >
+                    </div>
+                    <div class="form-group mb-2 mr-2">
+                        <input type="text" class="form-control mr-1" id="staff_name" 
+                            name="staff_name" value="{{ old('staff_name', $request->staff_name)}}"
+                            placeholder="{{__('sale.list.staff_name')}}"
+                        >
+                    </div>
+                    <div class="form-group input-group mb-2 mr-2">
                         <select class="form-control w-100 w-md-50" id="status_pay" name="status_pay" style="width: 200px !important;">
                             <option value="" selected>{{__('sale.select')}}</option>
                             @foreach($statusPays as $key => $name)
@@ -27,19 +37,19 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-justified mb-2" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link bg-success text-white {{$request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->pay_model || count($request->all()) == 0 ? ' active' : ''}}" data-toggle="tab" href="#pay_day">សងប្រាក់តាមថ្ងៃ</a>
+                        <a class="nav-link bg-success text-white {{$request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->pay_model || count($request->all()) == 0 || count($request->all()) > 2 ? ' active' : ''}}" data-toggle="tab" href="#pay_day">សងប្រាក់តាមថ្ងៃ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link bg-danger text-white {{$request->pay_no_page && count($request->all()) == 1 ? ' active' : ''}}" data-toggle="tab" href="#pay_in_ready">សងប្រាក់តាមអតិថិជន</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link bg-info text-white {{ $request->customers_page && count($request->all()) >= 2 ? ' active' : ''}}" data-toggle="tab" href="#pay">សងប្រាក់ទាំងអស់</a>
+                    <a class="nav-link bg-info text-white {{ $request->customers_page && count($request->all()) == 2 ? ' active' : ''}}" data-toggle="tab" href="#pay">សងប្រាក់ទាំងអស់</a>
                     </li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <!--/list pay by day-->
-                    <div class="tab-pane fade {{($request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->status_pay || $request->pay_model) || count($request->all()) == 0 ? ' active show' : ' '}}" id="pay_day">
+                    <div class="tab-pane fade {{($request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->status_pay || $request->pay_model) || count($request->all()) == 0 || count($request->all()) > 2 ? ' active show' : ' '}}" id="pay_day">
                         <div class="table-responsive cus-table">
                             <table class="table table-bordered">
                                 <thead class="bg-success text-light">
@@ -230,7 +240,7 @@
                         @endif
                     </div>
                     <!--/list not yet play and pay-->
-                    <div class="tab-pane fade {{$request->customers_page && count($request->all()) >= 2 ? ' active show' : ''}}" id="pay">
+                    <div class="tab-pane fade {{$request->customers_page && count($request->all()) == 2 ? ' active show' : ''}}" id="pay">
                         <div class="table-responsive cus-table">
                             <table class="table table-bordered">
                                 <thead class="bg-info text-light">
