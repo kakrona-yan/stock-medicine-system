@@ -65,10 +65,7 @@
      data-original-title="{{__('button.add_new')}}"
     ><i class="fas fa-plus-circle"></i> បុគ្គលិក{{__('button.add_new')}}</a>
     <!--list user-->
-    <fieldset class="edit-master-registration-fieldset mt-2">
-        <legend class="edit-application-information-legend text-left">{{__('user.sub_title')}}</legend>
-        @include('backends.users.include._list_user')
-    </fieldset>
+    @include('backends.users.include._list_user')
 </div>
 
 @endsection

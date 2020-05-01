@@ -74,7 +74,7 @@
                                             $customerOwed = 0;
                                             $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
                                             $receiveAmount = $sale->customerOwed()->exists() ? $sale->customerOwed->receive_amount : 0;
-                                            $customerOwed = ($amount - $receiveAmount);
+                                            $customerOwed = $sale->customerOwed()->exists() ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
                                         @endphp
                                         <tr>
                                             <td>{{ $sale->quotaion_no }}</td>
@@ -193,7 +193,7 @@
                                                             $customerOwed = 0;
                                                             $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
                                                             $receiveAmount = $sale->customerOwed()->exists() ? $sale->customerOwed->receive_amount : 0;
-                                                            $customerOwed = ($amount - $receiveAmount);
+                                                            $customerOwed  = $sale->customerOwed()->exists() ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
                                                         @endphp
                                                         <tr>
                                                             <td>{{ $sale->quotaion_no }}</td>
@@ -303,7 +303,7 @@
                                                                 $customerOwed = 0;
                                                                 $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
                                                                 $receiveAmount = $sale->customerOwed()->exists() ? $sale->customerOwed->receive_amount : 0;
-                                                                $customerOwed = ($amount - $receiveAmount);
+                                                                $customerOwed = $sale->customerOwed()->exists() ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
                                                             @endphp
                                                             <tr>
                                                                 <td>{{ $sale->quotaion_no }}</td>

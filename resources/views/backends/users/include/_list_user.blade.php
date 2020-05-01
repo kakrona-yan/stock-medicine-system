@@ -8,7 +8,7 @@
                         <label for="name" class="mr-sm-2">{{ __('user.list.filter') }}:</label>
                         <input type="text" class="form-control mr-1" id="name" 
                             name="name" value="{{ old('name', $request->name)}}"
-                            placeholder="name"
+                            placeholder="@lang('user.list.name')"
                         >
                     </div>
                     {{-- <div class="form-group mb-2 mr-2">
