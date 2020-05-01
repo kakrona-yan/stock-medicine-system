@@ -88,7 +88,7 @@
                                     <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="amount">{{__('customer_owed.list.amount')}}:</label>
-                                            <input type="text" name="amount" class="form-control {{ $errors->has('amount') ? ' is-invalid' : '' }}" id="amount" value="{{old('amount', currencyFormat($amount))}}" readonly>
+                                            <input type="text" name="amount" class="form-control {{ $errors->has('amount') ? ' is-invalid' : '' }}" id="amount" value="{{old('amount', $amount)}}" readonly>
                                             @if ($errors->has('amount'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('amount') }}</strong>
@@ -129,7 +129,7 @@
                                             @php
                                                 $amountPay = $sale->customerOwed()->exists() ? $sale->customerOwed->amount_pay : $amount;
                                             @endphp
-                                            <input type="text" name="amount_pay" class="form-control {{ $errors->has('amount_pay') ? ' is-invalid' : '' }}" id="amount_pay" value="{{old('amount_pay', currencyFormat($amountPay))}}" readonly>
+                                            <input type="text" name="amount_pay" class="form-control {{ $errors->has('amount_pay') ? ' is-invalid' : '' }}" id="amount_pay" value="{{old('amount_pay', $amountPay)}}" readonly>
                                             @if ($errors->has('amount_pay'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('amount_pay') }}</strong>
@@ -141,7 +141,7 @@
                                         <div class="form-group">
                                             <label for="receive_amount">{{__('customer_owed.list.receive_amount')}}:</label>
                                             <input type="text" name="receive_amount" class="form-control {{ $errors->has('receive_amount') ? ' is-invalid' : '' }}" id="receive_amount" 
-                                                value="{{old('receive_amount', currencyFormat($receiveAmount))}}"
+                                                value="{{old('receive_amount', $receiveAmount)}}"
                                                 oninput="calculatorMoney(this)"
                                                 >
                                         </div>
@@ -150,7 +150,7 @@
                                         <div class="form-group">
                                             <label for="owed_amount">{{__('customer_owed.list.owed_amount')}}:</label>
                                             <input type="text" name="owed_amount" class="form-control" id="owed_amount"
-                                                value="{{currencyFormat($customerOwed)}}" readonly>
+                                                value="{{$customerOwed}}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
@@ -232,7 +232,7 @@
                     break;
             }
         });
-        $('#discount_amount').keypress(function(event) {
+        $('#discount_amount, #receive_amount').keypress(function(event) {
             if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
                 event.preventDefault();
             }
