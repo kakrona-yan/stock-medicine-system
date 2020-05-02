@@ -39,7 +39,7 @@
                         <tbody>
                             @foreach( $staffs as $staff)
                             <tr>
-                                <td class="text-center" rowspan="{{$staff->sales->count() > 0 ? 2 : 1}}">
+                                <td class="text-center align-top" rowspan="{{$staff->sales->count() > 0 ? 2 : 1}}">
                                     @if ($staff->sales->count() > 0)
                                         <a href="#staff_{{$staff->id}}" data-toggle="collapse" style="text-decoration: none !important;" 
                                             aria-expanded="true"><i class="fas fa-minus-circle"></i>
