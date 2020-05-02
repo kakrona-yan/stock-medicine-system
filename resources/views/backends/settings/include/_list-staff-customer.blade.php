@@ -1,3 +1,8 @@
+<style>
+    .thead-light tr th{
+        padding: 0.3rem 0.75rem;
+    }
+</style>
 <div class="row mb-2">
     <div class="col-12">
         <!-- Circle Buttons -->
@@ -41,7 +46,7 @@
                                         </a>
                                     @endif
                                 </td>
-                                <td>{{ $staff->getFullnameAttribute() }}</td>
+                                <td><b>{{ $staff->getFullnameAttribute() }}</b></td>
                                 <td><i class="fas fa-user text-pink "></i> {{$staff->user->roleType()}}</td>
                             </tr>
                             @if ($staff->sales->count() > 0)

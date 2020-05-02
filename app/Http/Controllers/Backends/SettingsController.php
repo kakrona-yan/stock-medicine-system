@@ -42,8 +42,7 @@ class SettingsController extends Controller
     public function customerOwnerByStaff(Request $request)
     {
         try {
-            $staffs  = $this->staff->where('is_delete', '<>', DeleteStatus::DELETED)
-            ->orderBy('created_at', 'DESC');
+            $staffs  = $this->staff->orderBy('name', 'DESC');
             if ($request->exists('name') && !empty($request->name)) {
                 $customerName = $request->name;
                 $staffs->whereHas('sales.customer', function($customer) use ($customerName){
