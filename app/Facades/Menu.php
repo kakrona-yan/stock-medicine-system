@@ -83,14 +83,14 @@ class Menu
                 'role_type' => $this->RoleType('sale.index'),
                 'sub_menu' => null
             ],
-            // [
-            //     // Setting management
-            //     'route' => 'setting.index',
-            //     'icon' => 'fas fa-cogs',
-            //     'label' => __('menu.setting'),
-            //     'role_type' => $this->RoleType('setting.index'),
-            //     'sub_menu' => null
-            // ],
+            [
+                // Setting management
+                'route' => 'setting.index',
+                'icon' => 'fas fa-cogs',
+                'label' => __('menu.setting'),
+                'role_type' => $this->RoleType('setting.index'),
+                'sub_menu' => null
+            ],
         ];
     }
     /*

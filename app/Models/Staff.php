@@ -28,6 +28,11 @@ class Staff extends BaseModel
         return $this->belongsTo('App\Models\User', 'user_id');
     }
 
+    public function sales()
+    {
+        return $this->hasMany('App\Models\Sale', 'staff_id', 'id');
+    }
+
     public function filter($request)
     {
         $suppliers = $this->where('is_delete', '<>', DeleteStatus::DELETED)

@@ -116,8 +116,8 @@ Route::group(
             Route::group(['prefix' => 'settings', 'as' => 'setting.'], function () {
                 Route::get('/', 'SettingsController@index')
                     ->name('index');
-                Route::get('/create', 'SettingsController@create')
-                    ->name('create');
+                Route::get('/customer-of-staff', 'SettingsController@customerOwnerByStaff')
+                    ->name('staff_to_customer');
                 Route::post('/storeOrUpdate', 'SettingsController@storeOrUpdate')
                     ->name('storeOrUpdate');
             });

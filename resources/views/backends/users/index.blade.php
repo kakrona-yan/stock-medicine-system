@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-header text-white bg-info">
                     <div class="font-weight-bold">
-                        <span>{{__('customer.sub_title')}}</span>
+                        <span>{{__('staff.sub_title')}}</span>
                     </div>
                 </div>
                 <div class="card-block py-3 px-4 b-t-1">

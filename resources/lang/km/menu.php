@@ -9,7 +9,7 @@ return [
     'customer' => 'អតិថិជន',
     'staff' => 'បុគ្គលិក',
     'sale' => 'គ្រប់គ្រងការលក់',
-    'setting' => 'ការកំណត់',
+    'setting' => 'Setting',
     'view_site' => 'មើលគេហទំព័រ',
     'customer_type' => 'ប្រភេទអតិថិជន',
     'customer_owed' => 'គ្រប់គ្រងប្រាក់ជំពាក់អតិថិជន'
