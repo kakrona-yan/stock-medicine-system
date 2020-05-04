@@ -62,30 +62,30 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($staff->sale as $sale)
+                                                @if($staff->sale()->exists())
                                                    <tr>
-                                                        <td style="width:250px;">{{ $sale->customer->customerFullName() }}</td>
+                                                        <td style="width:250px;">{{$staff->sale->customer->customerFullName() }}</td>
                                                         <td style="width:300px;">
                                                             <div class="d-flex flex-row">
                                                                 <i class="fas fa-phone-square-alt text-success my-1 mr-1"></i>
                                                             <div>
-                                                                {{ $sale->customer->phone1 }}<br/>
-                                                                {{ $sale->customer->phone2 ? $sale->customer->phone2: '' }}
+                                                                {{ $staff->sale->customer->phone1 }}<br/>
+                                                                {{ $staff->sale->customer->phone2 ? $staff->sale->customer->phone2: '' }}
                                                             </div>
                                                             </div>
                                                         </td>
-                                                        <td style="width:500px;">{{ $sale->customer->address }}</td>
+                                                        <td style="width:500px;">{{ $staff->sale->customer->address }}</td>
                                                         <td class="text-center">
-                                                            @if($sale->customer->map_address)
+                                                            @if($staff->sale->customer->map_address)
                                                                 <span class="position-relative">
-                                                                    <a href="{{$sale->customer->map_address}}" target="_blank"><i class="fas fa-globe-africa"></i>
+                                                                    <a href="{{$staff->sale->customer->map_address}}" target="_blank"><i class="fas fa-globe-africa"></i>
                                                                     <span class="spinner-grow spinner-grow-sm  text-success position-absolute" role="status"></span></a>
                                                                 </span>
                                                             @endif
                                                             
                                                         </td>
                                                    </tr>
-                                                @endforeach
+                                                @endif
                                             </tbody>
                                         </table>
                                     </td>

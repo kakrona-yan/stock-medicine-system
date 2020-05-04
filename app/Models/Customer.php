@@ -31,6 +31,11 @@ class Customer extends BaseModel
         return $this->hasMany('App\Models\Sale', 'customer_id', 'id');
     }
 
+    public function sale()
+    {
+        return $this->hasOne('App\Models\Sale', 'customer_id', 'id');
+    }
+
     public function customerOweds()
     {
         return $this->hasMany('App\Models\CustomerOwed', 'customer_id', 'id');
