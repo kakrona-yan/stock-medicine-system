@@ -101,7 +101,7 @@ class StaffsController extends Controller
                 $user['name'] = ucfirst($request->name);
                 $user['role'] = 2;
                 $user['email_verified_at'] = now();
-                $user['email'] = $staffRequest['email'];
+                $user['email'] = $request->email;
                 $user['password'] =  bcrypt($staffRequest['password']);
                 $user['thumbnail'] = $request->thumbnail ? uploadFile($request->thumbnail, config('upload.user')) : '';
                 $user = $this->user->create($user);
@@ -227,7 +227,7 @@ class StaffsController extends Controller
                     } 
                     $user['name'] = ucfirst($request->name);
                     $user['role'] = 2;
-                    $user['email'] = $staffRequest['email'];
+                    $user['email'] = $request->email;
                     $staff->user()->update($user);
                 }
                 return \Redirect::route('staff.index')
