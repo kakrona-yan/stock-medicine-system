@@ -20,7 +20,9 @@ class Staff extends BaseModel
         'thumbnail',
         'is_active',
         'is_delete',
-        'password'
+        'password',
+        'line_id',
+        'work_status'
     ];
 
     public function user()
@@ -31,6 +33,11 @@ class Staff extends BaseModel
     public function sales()
     {
         return $this->hasMany('App\Models\Sale', 'staff_id', 'id');
+    }
+
+    public function sale()
+    {
+        return $this->hasOne('App\Models\Sale', 'staff_id', 'id');
     }
 
     public function filter($request)

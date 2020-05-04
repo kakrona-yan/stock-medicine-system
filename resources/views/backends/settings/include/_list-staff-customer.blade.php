@@ -62,7 +62,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($staff->sales as $sale)
+                                                @foreach ($staff->sale as $sale)
                                                    <tr>
                                                         <td style="width:250px;">{{ $sale->customer->customerFullName() }}</td>
                                                         <td style="width:300px;">
