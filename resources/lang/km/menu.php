@@ -8,9 +8,9 @@ return [
     'news' => 'ព័ត៌មាន',
     'customer' => 'អតិថិជន',
     'staff' => 'បុគ្គលិក',
-    'sale' => 'គ្រប់គ្រងការលក់',
+    'sale' => 'ការលក់',
     'setting' => 'Setting',
     'view_site' => 'មើលគេហទំព័រ',
     'customer_type' => 'ប្រភេទអតិថិជន',
-    'customer_owed' => 'គ្រប់គ្រងប្រាក់ជំពាក់អតិថិជន'
+    'customer_owed' => 'ប្រាក់ជំពាក់'
 ];
