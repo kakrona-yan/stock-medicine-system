@@ -50,7 +50,7 @@
                                                     </span>
                                                     @endif
                                                 </div>
-                                                <div class="col-12 select-group">
+                                                <div class="col-12 col-md-6 select-group">
                                                     <label for="category text-center">{{__('staff.group_staff')}}</label>
                                                     <select class="form-control {{ $errors->has('group_staff_id') ? ' is-invalid' : '' }}" name="group_staff_id" id="group_staff_id">
                                                         @foreach($groupStaffNames as $id => $name)
@@ -168,5 +168,10 @@
 <script>
     // script for upload image
     $('.img-upload').imgUpload();
+    $( document ).ready(function() {
+        $("#group_staff_id").select2({
+            allowClear: false
+        });
+    });
 </script>
 @endpush

@@ -46,7 +46,7 @@
                                 <tr>
                                     <th class="text-center w-10">{{__('staff.form.thumbnail')}}</th>
                                     <th>{{ __('staff.list.name') }}</th>
-                                    {{-- <th>{{ __('staff.list.email') }}</th> --}}
+                                    <th>{{ __('staff.group_staff') }}</th>
                                     <th>{{ __('staff.list.password') }}</th>
                                     <th>{{ __('staff.list.phone') }}</th>
                                     <th>{{ __('staff.list.address') }}</th>
@@ -66,7 +66,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $staff->getFullnameAttribute() }}</td>
-                                    {{-- <td>{{ $staff->email }}</td> --}}
+                                    <td>{{ $staff->groupStaff ? $staff->groupStaff->name : "-" }}</td>
                                     <td>{{ $staff->password }}</td>
                                     <td>
                                         @if($staff->phone1)

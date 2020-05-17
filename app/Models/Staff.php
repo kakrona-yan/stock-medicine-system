@@ -41,6 +41,11 @@ class Staff extends BaseModel
         return $this->hasOne('App\Models\Sale', 'staff_id', 'id');
     }
 
+    public function groupStaff()
+    {
+        return $this->belongsTo('App\Models\GroupStaff', 'group_staff_id');
+    }
+
     public function filter($request)
     {
         $suppliers = $this->where('is_delete', '<>', DeleteStatus::DELETED)

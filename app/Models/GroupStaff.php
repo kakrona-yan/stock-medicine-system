@@ -15,6 +15,11 @@ class GroupStaff extends BaseModel
         'is_delete'
     ];
 
+    public function staffs()
+    {
+        return $this->hasMany('App\Models\Customer', 'group_staff_id', 'id');
+    }
+
     public function filter($request)
     {
         $groupStaffs = $this->where('is_delete', '<>', DeleteStatus::DELETED)
