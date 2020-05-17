@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Constants\DeleteStatus;
 
-class GroupStaff extends Model
+class GroupStaff extends BaseModel
 {
     protected $table = 'group_staffs';
 
@@ -21,5 +21,11 @@ class GroupStaff extends Model
                     ->orderBy('created_at', 'DESC');
         $limit = config('pagination.limit');
         return $groupStaffs->paginate($limit, ['*'], 'group-staff-page');
+    }
+
+    public function getGroupStaffName()
+    {
+        return $this->pluck('name','id')
+            ->all();
     }
 }

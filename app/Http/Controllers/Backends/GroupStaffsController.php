@@ -80,11 +80,11 @@ class GroupStaffsController extends Controller
                 } 
             }
 
-            return \Redirect::route('customer_type.index')
+            return \Redirect::route('staff.index')
                 ->with('warning', __('flash.update'));
 
         } catch (\ValidationException $e) {
-            return exceptionError($e, 'backends.customer_types.index');
+            return exceptionError($e, 'backends.staffs.index');
         }
     }
 

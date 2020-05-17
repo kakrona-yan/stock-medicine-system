@@ -52,8 +52,10 @@ class StaffsController extends Controller
     public function create(Request $request)
     {
         try {
+            $groupStaffNames = $this->groupStaff->getGroupStaffName();
             return view('backends.staffs.create', [
                 'request' => $request,
+                'groupStaffNames' => $groupStaffNames
             ]);
         }catch (\ValidationException $e) {
             return exceptionError($e, 'backends.staffs.create');
@@ -162,9 +164,11 @@ class StaffsController extends Controller
             if (!$staff) {
                 return response()->view('errors.404', [], 404);
             }
+            $groupStaffNames = $this->groupStaff->getGroupStaffName();
             return view('backends.staffs.edit', [
                 'request' => $request,
                 'staff' => $staff,
+                'groupStaffNames' => $groupStaffNames
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.staffs.edit');
