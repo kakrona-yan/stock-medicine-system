@@ -181,18 +181,18 @@
     });
 
     function showGroupStaff(obj) {
-        $('input[name="id"]').val($(obj).attr("data-id"));
-        $('input[name="name"]').val($(obj).attr("data-name"));
+        $('.modal input[name="id"]').val($(obj).attr("data-id"));
+        $('.modal input[name="name"]').val($(obj).attr("data-name"));
     }
 
     function updateGroupStaff(obj) {
-        $('input[name="group_staff_id"]').val($(obj).attr("data-id"));
-        $('input[name="name"]').val($(obj).attr("data-name"));
+        $('.modal input[name="group_staff_id"]').val($(obj).attr("data-id"));
+        $('.modal input[name="name"]').val($(obj).attr("data-name"));
     }
 
     function clearData() {
-        $('input[name="staff_id"]').val('');
-        $('input[name="name"]').val('');
+        $('.modal input[name="staff_id"]').val('');
+        $('.modal input[name="name"]').val('');
     }
 </script>
 @endpush
