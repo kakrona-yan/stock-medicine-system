@@ -44,8 +44,10 @@ class GroupStaffsController extends Controller
                 $groupStaffs = $request->all();
                 $this->groupStaff->create($groupStaffs);
             }
-            return \Redirect::route('staff.index')
-                ->with('success', __('flash.store'));
+            return responseSuccess(
+                \Session::flash('success', __('flash.store')),
+                    ['danger', 'danger']
+                );
 
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.staffs.index');
@@ -64,7 +66,7 @@ class GroupStaffsController extends Controller
         try {
             // Rules of field
             $rules = [
-                'name' => 'required|unique:customer_types,name, ' . $request->group_staff_id,
+                'name' => 'required|unique:group_staffs,name, ' . $request->group_staff_id,
             ];
             // Set field of Validattion
             $validator = \Validator::make([
@@ -80,8 +82,10 @@ class GroupStaffsController extends Controller
                 } 
             }
 
-            return \Redirect::route('staff.index')
-                ->with('warning', __('flash.update'));
+            return responseSuccess(
+                \Session::flash('success', __('flash.store')),
+                    ['danger', 'danger']
+                );
 
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.staffs.index');

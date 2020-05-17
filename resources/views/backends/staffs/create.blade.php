@@ -38,7 +38,7 @@
                                     <div class="col-12 col-md-6 mb-2">
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-12">
+                                                <div class="col-12 col-md-6 mb-2">
                                                     <label for="name">{{__('staff.list.name')}}:</label>
                                                     <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" 
                                                         placeholder="{{__('staff.list.name')}}"
@@ -48,6 +48,19 @@
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $errors->first('name') }}</strong>
                                                     </span>
+                                                    @endif
+                                                </div>
+                                                <div class="col-12 select-group">
+                                                    <label for="category text-center">{{__('staff.group_staff')}}</label>
+                                                    <select class="form-control {{ $errors->has('group_staff_id') ? ' is-invalid' : '' }}" name="group_staff_id" id="group_staff_id">
+                                                        @foreach($groupStaffNames as $id => $name)
+                                                            <option value="{{ $id }}" {{ $id == $request->group_staff_id ? 'selected' : '' }}>{{ $name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @if ($errors->has('group_staff_id'))
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $errors->first('group_staff_id') }}</strong>
+                                                        </span>
                                                     @endif
                                                 </div>
                                             </div>

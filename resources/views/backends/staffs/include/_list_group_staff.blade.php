@@ -33,7 +33,7 @@
                                     ><i class="far fa-eye"></i>
                                     </a>
                                     <a class="btn btn-circle btn-sm btn-warning btn-circle"
-                                        href="#showGroupStaff"
+                                        href="#updateGroupStaff"
                                         onclick="updateGroupStaff(this)"
                                         data-id="{{ $groupStaff->id }}"
                                         data-name="{{ $groupStaff->name}}"
@@ -125,7 +125,7 @@
         <div class="modal-content">       
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title"><i class="fa fa-trash"></i> {{__('staff.confirm_create')}}</h5>
+                <h5 class="modal-title"><i class="fa fa-trash"></i> {{__('staff.confirm_update')}}</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div> 
             <!-- Modal body -->
@@ -160,6 +160,7 @@
 <script>
     $(function(){
         const formGroupStaff = $('#create_group_staff_form');
+        console.log(formUpdateGroupStaff);
         formGroupStaff.submit(function(e) {
             e.preventDefault();
             $.ajax({
@@ -168,7 +169,7 @@
                 data    : formGroupStaff.serialize(),
                 dataType: 'json',
                 success : function (json) {
-                    location.href = '{{ route("sale.index") }}';
+                    location.href = '{{ route("staff.index") }}';
                 },
                 error: function(json){
                     $.each(json.responseJSON.errors, function (key, value) {
@@ -180,18 +181,39 @@
         });
     });
 
+    $(function(){
+        const formUpdateGroupStaff = $('#update_group_staff_form');
+        formUpdateGroupStaff.submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url     : formUpdateGroupStaff.attr('action'),
+                type    : formUpdateGroupStaff.attr('method'),
+                data    : formUpdateGroupStaff.serialize(),
+                dataType: 'json',
+                success : function (json) {
+                    location.href = '{{ route("staff.index") }}';
+                },
+                error: function(json){
+                    $.each(json.responseJSON.errors, function (key, value) {
+                        $(`#${key}_error`).text(value);
+                    });
+                    $("html, body").animate({ scrollTop: 0 }, 500);
+                }
+            });
+        });
+    });
     function showGroupStaff(obj) {
         $('.modal input[name="id"]').val($(obj).attr("data-id"));
         $('.modal input[name="name"]').val($(obj).attr("data-name"));
     }
 
     function updateGroupStaff(obj) {
-        $('.modal input[name="group_staff_id"]').val($(obj).attr("data-id"));
-        $('.modal input[name="name"]').val($(obj).attr("data-name"));
+        $('.modal #update_group_staff_form input[name="group_staff_id"]').val($(obj).attr("data-id"));
+        $('.modal #update_group_staff_form input[name="name"]').val($(obj).attr("data-name"));
     }
 
     function clearData() {
-        $('.modal input[name="staff_id"]').val('');
+        $('.modal input[name="group_staff_id"]').val('');
         $('.modal input[name="name"]').val('');
     }
 </script>
