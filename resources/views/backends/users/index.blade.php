@@ -33,30 +33,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-md-3 mb-4">
-            <div class="card">
-                <div class="card-header text-white bg-success">
-                    <div class="font-weight-bold">
-                        <span>ចំនួនអ្នកមកធ្វើការថ្ងៃនេះ</span>
-                    </div>
-                </div>
-                <div class="card-block py-3 px-4 b-t-1">
-                    10 
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-md-3 mb-4">
-            <div class="card">
-                <div class="card-header text-white bg-danger">
-                    <div class="font-weight-bold">
-                        <span>ចំនួនអ្នកអត់មកធ្វើការថ្ងៃនេះ</span>
-                    </div>
-                </div>
-                <div class="card-block py-3 px-4 b-t-1">
-                    2  
-                </div>
-            </div>
-        </div>
     </div>
     <a href="{{route('staff.create')}}" 
      class="btn btn-circle btn-primary mb-2"

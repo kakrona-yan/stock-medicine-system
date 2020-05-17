@@ -22,6 +22,8 @@ class CreateCustomersTable extends Migration
             $table->string('thumbnail')->nullable();
             $table->boolean('is_active')->default(1)->comment('0：in-active、1：active');
             $table->boolean('is_delete')->default(1)->comment('0：delete、1：no delete');
+            $table->string('longitude', 255)->nullable();
+            $table->string('latitude', 255)->nullable();
             $table->timestamps();
         });
     }

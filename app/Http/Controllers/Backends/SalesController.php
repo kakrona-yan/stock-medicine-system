@@ -92,7 +92,7 @@ class SalesController extends Controller
                 'sale_date' => $request->sale_date,
             ], $rules);
             if ($validator->fails()) {
-                return response()->json(["errors" => $validator->errors()], 422);;
+                return response()->json(["errors" => $validator->errors()], 422);
             } else {
                 // insert to table sales
                 if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor() || \Auth::user()->isRoleView()) {

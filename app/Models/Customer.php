@@ -23,7 +23,9 @@ class Customer extends BaseModel
         'map_address',
         'thumbnail',
         'is_active',
-        'is_delete'
+        'is_delete',
+        'longitude',
+        'latitude'
     ];
 
     public function sales()

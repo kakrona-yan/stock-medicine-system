@@ -3,6 +3,12 @@
             <!-- Circle Buttons -->
             <div class="card mb-4">
                 <div class="card-body">
+                    <a href="{{route('staff.create')}}" 
+                        class="btn btn-circle btn-primary mb-2"
+                        data-toggle="tooltip" 
+                        data-placement="left" title="" 
+                        data-original-title="{{__('button.add_new')}}"
+                    ><i class="fas fa-plus-circle"></i> {{__('button.add_new')}}</a>
                     <form id="staff-search" action="{{ route('user.index') }}" method="GET" class="form form-horizontal form-search">
                         <div class="row">
                             <div class="col-12 col-md-10">
@@ -45,7 +51,7 @@
                                     <th>{{ __('staff.list.phone') }}</th>
                                     <th>{{ __('staff.list.address') }}</th>
                                     @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
-                                    <th >{{ __('staff.list.action') }}</th>
+                                    <th class="text-center">{{ __('staff.list.action') }}</th>
                                     @endif
                                 </tr>
                             </thead>
@@ -75,7 +81,7 @@
                                     </td>
                                     <td>{{ str_limit($staff->address, 30) }}</td>
                                     @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
-                                    <td>
+                                    <td class="text-center" style="width: 130px;">
                                         <a class="btn btn-circle btn-sm btn-info btn-circle" 
                                             data-toggle="tooltip" 
                                             data-placement="top"

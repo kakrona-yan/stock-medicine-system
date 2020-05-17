@@ -7,15 +7,19 @@ use Illuminate\Http\Request;
 use App\Models\Staff;
 use App\Models\User;
 use App\Http\Constants\UserRole;
+use App\Models\GroupStaff;
+use App\Http\Constants\DeleteStatus;
 
 class StaffsController extends Controller
 {
     public function __construct(
         User $user,
-        Staff $staff
+        Staff $staff,
+        GroupStaff $groupStaff
     ) {
         $this->user = $user;
         $this->staff = $staff;
+        $this->groupStaff = $groupStaff;
     }
     /**
      * Display a listing of the resource.
@@ -27,10 +31,13 @@ class StaffsController extends Controller
         try {
             $staffs  = $this->staff->filter($request);
             $genders = UserRole::USER_GANDER_TEXT_EN;
+            $groupStaffs  = $this->groupStaff->filter($request);
+
             return view('backends.staffs.index', [
                 'request' => $request,
                 'staffs' =>  $staffs,
-                'genders' => $genders
+                'genders' => $genders,
+                'groupStaffs' => $groupStaffs
             ]);
         }catch (\ValidationException $e) {
             return exceptionError($e, 'backends.staffs.index');

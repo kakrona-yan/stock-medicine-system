@@ -98,6 +98,11 @@ Route::group(
                 Route::get('/edit/{id}', 'StaffsController@edit')->name('edit');
                 Route::post('/update/{id}', 'StaffsController@update')->name('update');
                 Route::post('/destroy', 'StaffsController@destroy')->name('destroy');
+                // create group staff
+                Route::post('group/store', 'GroupStaffsController@store')
+                    ->name('group.store');
+                Route::post('group/update', 'GroupStaffsController@update')
+                    ->name('group.update');
             });
             // Staffs
             Route::group(['prefix' => 'sales', 'as' => 'sale.'], function() {

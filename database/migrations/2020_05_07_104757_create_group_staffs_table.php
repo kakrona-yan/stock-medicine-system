@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStaffsTable extends Migration
+class CreateGroupStaffsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,9 @@ class CreateStaffsTable extends Migration
      */
     public function up()
     {
-        Schema::create('staffs', function (Blueprint $table) {
+        Schema::create('group_staffs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('group_staff_id')->length(11)->default(1);
-            $table->string('name', 100)->nullable();
-            $table->string('email', 255)->nullable();
-            $table->string('phone1', 255)->nullable();
-            $table->string('phone2', 255)->nullable();
-            $table->text('address')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->string('name')->nullable();
             $table->boolean('is_active')->default(1)->comment('0：in-active、1：active');
             $table->boolean('is_delete')->default(1)->comment('0：delete、1：no delete');
             $table->timestamps();
@@ -35,6 +29,6 @@ class CreateStaffsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('staffs');
+        Schema::dropIfExists('group_staffs');
     }
 }

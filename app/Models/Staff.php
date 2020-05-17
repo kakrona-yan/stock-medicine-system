@@ -12,6 +12,7 @@ class Staff extends BaseModel
     
     protected $fillable = [
         'user_id',
+        'group_staff_id',
         'name',
         'email',
         'phone1',
