@@ -42,8 +42,8 @@
                                 <th>#</th>
                                 <th>{{ __('product.list.thumbnail') }}</th>
                                 <th>{{ __('product.list.product_title') }}</th>
+                                <th>{{ __('staff.group_staff') }}</th>
                                 <th>{{ __('product.list.amount_in_box') }}</th>
-                                {{-- <th>{{ __('product.list.product_import') }}</th> --}}
                                 <th>{{ __('product.list.price') }}</th>
                                 <th>{{ __('product.list.terms') }}</th>
                                 <th>{{ __('product.list.expird_date') }}</th>
@@ -65,8 +65,8 @@
                                     </div>
                                 </td>
                                 <td>{{$product->title}}</td>
+                                <td>{{$product->groupStaff ? $product->groupStaff->name : "-" }}</td>
                                 <td>{{$product->amount_in_box ? $product->amount_in_box : "-"}}</td>
-                                {{-- <td>{{$product->product_import}}</td> --}}
                                 <td class="text-right">{{$product->price}}</td>
                                 <td>{{$product->terms}}</td>
                                 <td>{{$product->expird_date ? date('Y-m', strtotime($product->expird_date)) : "-"}}</td>

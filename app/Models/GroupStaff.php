@@ -20,6 +20,11 @@ class GroupStaff extends BaseModel
         return $this->hasMany('App\Models\Customer', 'group_staff_id', 'id');
     }
 
+    public function products()
+    {
+        return $this->hasMany('App\Models\Products', 'group_staff_id', 'id');
+    }
+
     public function filter($request)
     {
         $groupStaffs = $this->where('is_delete', '<>', DeleteStatus::DELETED)

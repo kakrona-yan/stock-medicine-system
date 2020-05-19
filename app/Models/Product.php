@@ -52,6 +52,11 @@ class Product extends BaseModel
     {
         return $this->belongsTo('App\Models\Category', 'category_id');
     }
+
+    public function groupStaff()
+    {
+        return $this->belongsTo('App\Models\GroupStaff', 'group_staff_id');
+    }
     
     public function filter($request)
     {

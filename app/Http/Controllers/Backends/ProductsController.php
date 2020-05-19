@@ -10,17 +10,20 @@ use App\Models\ProductImage;
 use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Http\Constants\CategoryType;
+use App\Models\GroupStaff;
 
 class ProductsController extends Controller
 {
     public function __construct(
         Category $category,
         Product $product,
-        ProductImage $productImage
+        ProductImage $productImage,
+        GroupStaff $groupStaff
     ){
         $this->category = $category;
         $this->product = $product;
         $this->productImage = $productImage;
+        $this->groupStaff = $groupStaff;
     }
     /**
      * Display a listing of the resource.
@@ -58,9 +61,11 @@ class ProductsController extends Controller
     {
         try {
             $categories = $this->category->getCategoryNameByProducts();
+            $groupStaffNames = $this->groupStaff->getGroupStaffName();
             return view('backends.products.create', [
                 'request' => $request,
-                'categories' => $categories
+                'categories' => $categories,
+                'groupStaffNames' => $groupStaffNames
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.products.create');
@@ -140,13 +145,15 @@ class ProductsController extends Controller
         try {
             $product = $this->product->available($id);
             $categories = $this->category->getCategoryNameByProducts();
+            $groupStaffNames = $this->groupStaff->getGroupStaffName();
             if (!$product) {
                 return response()->view('errors.404', [], 404);
             }
             return view('backends.products.edit', [
                 'product' => $product,
                 'request' =>  $request,
-                'categories'  => $categories
+                'categories'  => $categories,
+                'groupStaffNames' =>  $groupStaffNames
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.products.edit');

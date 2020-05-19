@@ -34,18 +34,37 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div id="add-product-rigt" class="tab-pane active">
-                                <div class="form-group">
-                                    <label for="title">{{__('product.list.product_title')}}:</label>
-                                    <input type="text" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" 
-                                        placeholder="title"
-                                        name="title"
-                                        value="{{ old('title', $request->title) }}"
-                                    >
-                                    @if ($errors->has('title'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('title') }}</strong>
-                                        </span>
-                                    @endif
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label for="title">{{__('product.list.product_title')}}:</label>
+                                            <input type="text" class="form-control {{ $errors->has('title') ? ' is-invalid' : '' }}" 
+                                                placeholder="title"
+                                                name="title"
+                                                value="{{ old('title', $request->title) }}"
+                                            >
+                                            @if ($errors->has('title'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('title') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="select-group">
+                                            <label for="category text-center">{{__('staff.group_staff')}}</label>
+                                            <select class="form-control {{ $errors->has('group_staff_id') ? ' is-invalid' : '' }}" name="group_staff_id" id="group_staff_id">
+                                                @foreach($groupStaffNames as $id => $name)
+                                                    <option value="{{ $id }}" {{ $id == $request->group_staff_id ? 'selected' : '' }}>{{ $name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('group_staff_id'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('group_staff_id') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-12 col-md-6">
@@ -306,7 +325,10 @@
         $(document).on('click', '.btn_remove', function(e){
             $(this).parent().parent().remove();
             $(this).remove();
-        });	
+        });
+        $("#group_staff_id").select2({
+            allowClear: false
+        });
     });
 
 </script>
