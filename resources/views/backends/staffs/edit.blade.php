@@ -169,5 +169,10 @@
 <script>
     // script for upload image
     $('.img-upload').imgUpload();
+    $( document ).ready(function() {
+        $("#group_staff_id").select2({
+            allowClear: false
+        });
+    });
 </script>
 @endpush

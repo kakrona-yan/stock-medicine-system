@@ -188,8 +188,8 @@ class StaffsController extends Controller
             // Rules of field
             $email = $request->email;
             $ruleEmail = '';
+            $staff = $this->staff->available($id);
             if ($email && !empty($email)) {
-                $staff = $this->staff->available($id);
                 $userId = $staff->user ? $staff->user->id : $id;
                 $ruleEmail = 'nullable|email|unique:staffs,email,' . $id .'|unique:users,email,' . $userId;
             }
