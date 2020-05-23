@@ -82,6 +82,14 @@
                                             @php
                                                 $index = 0;
                                             @endphp
+                                            <div class="row border-bottom pt-1 pb-1">
+                                                <div class="col-6">
+                                                    <label for="title">{{__('product.list.product_title')}}:</label>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="title">{{__('staff.group_staff')}}:</label>
+                                                </div>
+                                            </div>
                                             @foreach ($products as $product)
                                             <div class="row border-bottom pt-1 pb-1">
                                                 <div class="col-6">
@@ -106,11 +114,12 @@
                                                 $index++;
                                             @endphp
                                             @endforeach
-                                        <div class="form-group w-100 w-md-50 d-inline-flex mt-5">
-                                            <button type="submit" class="btn btn-circle btn-primary w-100 w-md-50 mw-100 mr-2" name="update" value="2">{{__('button.add')}}</button>
-                                            <a href="{{route('staff.index')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100">{{__('button.return')}}</a>
-                                        </div>
+                                     </div>
+                                    <div class="form-group w-100 w-md-50 d-inline-flex mt-5">
+                                        <button type="submit" class="btn btn-circle btn-primary w-100 w-md-50 mw-100 mr-2" name="update" value="2">{{__('button.add')}}</button>
+                                        <a href="{{route('staff.index')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100">{{__('button.return')}}</a>
                                     </div>
+                                    
                                 </form>
                             </div>
                         </div>
