@@ -104,8 +104,8 @@ class GroupStaffsController extends Controller
     public function groupCreate(Request $request)
     {
         try {
-            $staffs = $this->staff->get();
-            $products = $this->product->get();
+            $staffs = $this->staff->orderBy('created_at', 'DESC')->get();
+            $products = $this->product->orderBy('created_at', 'DESC')->get();
             $groupStaffNames = $this->groupStaff->getGroupStaffName();
             return view('backends.settings.group_create', [
                 'request' => $request,
