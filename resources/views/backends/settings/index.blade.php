@@ -55,6 +55,22 @@
                 </div>
             </div>
         </div>
+        <div class="col-6 col-md-3 mb-4">
+            <div class="card">
+                <div class="card-header text-white bg-info">
+                    <div class="font-weight-bold">
+                        <span>គ្រប់គ្រងក្រុមបុគ្គលិក</span>
+                    </div>
+                </div>
+                <div class="card-block py-3 px-4 b-t-1">
+                    <div class="d-flex align-items-center" style="height:130px;">
+                    <a class="font-weight-bold font-xs btn-block text-muted" href="{{route('staff.group.create')}}">
+                        ចូលទៅបង្កើត <i class="fa fa-angle-right float-right font-lg"></i>
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-6 col-md-4 mb-4">
             <div class="card">
                 <div class="card-header text-white bg-success">

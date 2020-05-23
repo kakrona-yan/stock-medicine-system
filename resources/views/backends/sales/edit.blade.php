@@ -62,9 +62,6 @@
                                 @csrf
                                 <div class="row mb-4 flex-sm-row-reverse flex-md-row-reverse flex-lg-row-reverse">
                                     <div class="col-12 col-md-12 mb-3 ">
-                                        <div class="form-group" style="background: #eaecf4;padding: 10px;">
-                                            <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>{{__('button.save')}}</button>
-                                        </div>
                                         <fieldset class="edit-master-registration-fieldset">
                                             <legend class="edit-application-information-legend text-left">{{__('sale.form.sale')}}:</legend>
                                             <div class="form-group select-group row">

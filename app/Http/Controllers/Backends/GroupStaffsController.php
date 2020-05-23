@@ -8,17 +8,21 @@ use App\Models\Staff;
 use App\Models\User;
 use App\Http\Constants\UserRole;
 use App\Models\GroupStaff;
+use App\Models\Product;
+use App\Http\Constants\DeleteStatus;
 
 class GroupStaffsController extends Controller
 {
     public function __construct(
         User $user,
         Staff $staff,
-        GroupStaff $groupStaff
+        GroupStaff $groupStaff,
+        Product $product
     ) {
         $this->user = $user;
         $this->staff = $staff;
         $this->groupStaff = $groupStaff;
+        $this->product = $product;
     }
 
     /**
@@ -89,6 +93,73 @@ class GroupStaffsController extends Controller
 
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.staffs.index');
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function groupCreate(Request $request)
+    {
+        try {
+            $staffs = $this->staff->get();
+            $products = $this->product->get();
+            $groupStaffNames = $this->groupStaff->getGroupStaffName();
+            return view('backends.settings.group_create', [
+                'request' => $request,
+                'staffs' =>  $staffs,
+                'groupStaffNames' => $groupStaffNames,
+                'products' => $products
+            ]);
+            
+        }catch (\ValidationException $e) {
+            return exceptionError($e, 'backends.settings.group_create');
+        }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function groupUpdateByIds(Request $request)
+    {
+        try {
+            $update = $request->update;
+            switch ($update) {
+                case 1:
+                    $staffs = $request->staff;
+                    foreach ($staffs as $staff) {
+                        $id = isset($staff["id"]) ? $staff["id"] : 0;
+                        $findStaff = $this->staff->available($id);
+                        if($findStaff) {
+                            $findStaff->update([
+                                'group_staff_id' => $staff['group_staff_id']
+                            ]);
+                        }
+                    }
+                    break;
+                
+                case 2:
+                    $products = $request->product;
+                    foreach ($products as $product) {
+                        $id = isset($product["id"]) ? $product["id"] : 0;
+                        $findProduct = $this->product->find($id);
+                        if($findProduct) {
+                            $findProduct->update([
+                                'group_staff_id' => $staff['group_staff_id']
+                            ]);
+                        }
+                    }
+                    break;
+            }
+            return \Redirect::route('staff.group.create')
+                    ->with('success',__('flash.store'));
+            
+        }catch (\ValidationException $e) {
+            return exceptionError($e, 'backends.settings.group_create');
         }
     }
 

@@ -60,9 +60,6 @@
                         <div id="addsupplier" class="tab-pane active">
                             <form id="form_sale_stock" class="form-main" action="{{route('sale.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group" style="background: #eaecf4;padding: 10px;">
-                                    <button type="submit" class="btn btn-circle btn-primary w-100 mr-2"><i class="fas fa-money-bill-alt mr-2"></i>{{__('button.save')}}</button>
-                                </div>
                                 <div class="row mb-4 flex-sm-row-reverse flex-md-row-reverse flex-lg-row-reverse">
                                     <div class="col-12 col-sm-12 col-md-12 mb-3 ">
                                         <fieldset class="edit-master-registration-fieldset">
