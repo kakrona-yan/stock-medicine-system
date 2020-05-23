@@ -8,6 +8,9 @@
                     data-toggle="modal" data-target="#createGroupStaff"
                     data-original-title="{{__('button.add_new')}}"
                 ><i class="fas fa-plus-circle"></i> {{__('button.add_new')}}</a>
+                <a href="{{route("staff.group.product.create")}}" 
+                    class="btn btn-circle btn-primary mb-2"
+                ><i class="fas fa-plus-circle"></i> បង្កើតក្រុមផលិតផល</a>
                 <div class="table-responsive cus-table">
                     <table class="table table-striped table-bordered">
                         <thead class="bg-primary text-light">

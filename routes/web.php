@@ -106,6 +106,8 @@ Route::group(
                 // create group with multiple staff
                 Route::get('group/create/{id}', 'GroupStaffsController@groupCreate')
                     ->name('group.create');
+                Route::get('group/product/create/', 'GroupStaffsController@groupCreateProduct')
+                    ->name('group.product.create');
                 Route::post('group/update_ids', 'GroupStaffsController@groupUpdateByStaffIds')
                     ->name('group.update.staffIds');
             });

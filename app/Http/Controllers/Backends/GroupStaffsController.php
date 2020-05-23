@@ -129,6 +129,26 @@ class GroupStaffsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function  groupCreateProduct(Request $request)
+    {
+        try {
+            $products = $this->product->orderBy('created_at', 'DESC')->get();
+            $groupStaffNames = $this->groupStaff->getGroupStaffName();
+            return view('backends.staffs.group_product_create', [
+                'request' => $request,
+                'groupStaffNames' => $groupStaffNames,
+                'products' => $products,
+            ]);
+            
+        }catch (\ValidationException $e) {
+            return exceptionError($e, 'backends.staffs.group_product_create');
+        }
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function groupUpdateByStaffIds(Request $request)
     {
         try {
@@ -148,7 +168,7 @@ class GroupStaffsController extends Controller
                         $findProduct = $this->product->find($id);
                         if($findProduct) {
                             $findProduct->update([
-                                'group_staff_id' => $staff['group_staff_id']
+                                'group_staff_id' => $product['group_staff_id']
                             ]);
                         }
                     }
