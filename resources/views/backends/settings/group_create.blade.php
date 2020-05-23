@@ -47,6 +47,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <select class="form-control select2" name="product[{{$index}}][group_staff_id]">
+                                                        <option value="" {{ $product->group_staff_id == 0 ? 'selected' : ''}}>{{__('sale.select')}}</option>
                                                         @foreach($groupStaffNames as $id => $name)
                                                             <option value="{{ $id }}" {{ $id == $product->group_staff_id ? 'selected' : '' }}
                                                                 >{{ $name }}</option>
@@ -96,6 +97,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <select class="form-control select2" name="staff[{{$i}}][group_staff_id]">
+                                                        <option value="" {{ $staff->group_staff_id == 0 ? 'selected' : ''}}>{{__('sale.select')}}</option>
                                                         @foreach($groupStaffNames as $id => $name)
                                                             <option value="{{ $id }}" {{ $id == $staff->group_staff_id ? 'selected' : '' }}
                                                                 >{{ $name }}</option>
