@@ -629,3 +629,6 @@ body.list-product {
     }
   }
 }
+.custom-checkbox .custom-control-label::before{
+  border-radius: 0px;
+}

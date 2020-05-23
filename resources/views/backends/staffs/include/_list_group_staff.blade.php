@@ -24,6 +24,10 @@
                                 <td>{{ $groupStaff->name }}</td>
                                 @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                 <td class="text-center" style="width: 130px;">
+                                    <a class="btn btn-circle btn-sm btn-primary btn-circle"
+                                        href="{{route("staff.group.create", $groupStaff->id)}}"
+                                    ><i class="fas fa-plus-circle"></i>
+                                    </a>
                                     <a class="btn btn-circle btn-sm btn-info btn-circle"
                                         href="#showGroupStaff"
                                         onclick="showGroupStaff(this)"

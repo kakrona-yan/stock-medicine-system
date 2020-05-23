@@ -101,21 +101,26 @@ class GroupStaffsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function groupCreate(Request $request)
+    public function groupCreate(Request $request, $id)
     {
         try {
-            $staffs = $this->staff->orderBy('created_at', 'DESC')->get();
+            $staffs = $this->staff->orderBy('created_at', 'DESC')
+                ->whereIn('group_staff_id', [0, $id])
+                ->get();
             $products = $this->product->orderBy('created_at', 'DESC')->get();
             $groupStaffNames = $this->groupStaff->getGroupStaffName();
-            return view('backends.settings.group_create', [
+            $groupStaff = $this->groupStaff->available($id);
+            return view('backends.staffs.group_create', [
                 'request' => $request,
                 'staffs' =>  $staffs,
                 'groupStaffNames' => $groupStaffNames,
-                'products' => $products
+                'products' => $products,
+                'id' => $id,
+                'groupStaff' => $groupStaff
             ]);
             
         }catch (\ValidationException $e) {
-            return exceptionError($e, 'backends.settings.group_create');
+            return exceptionError($e, 'backends.staffs.group_create');
         }
     }
 
@@ -124,24 +129,18 @@ class GroupStaffsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function groupUpdateByIds(Request $request)
+    public function groupUpdateByStaffIds(Request $request)
     {
         try {
             $update = $request->update;
             switch ($update) {
                 case 1:
                     $staffs = $request->staff;
-                    foreach ($staffs as $staff) {
-                        $id = isset($staff["id"]) ? $staff["id"] : 0;
-                        $findStaff = $this->staff->available($id);
-                        if($findStaff) {
-                            $findStaff->update([
-                                'group_staff_id' => $staff['group_staff_id']
-                            ]);
-                        }
-                    }
+                    $this->staff->whereIn("id", $staffs)
+                        ->update([
+                            "group_staff_id" => $request->group_staff_id
+                        ]);
                     break;
-                
                 case 2:
                     $products = $request->product;
                     foreach ($products as $product) {
@@ -154,8 +153,10 @@ class GroupStaffsController extends Controller
                         }
                     }
                     break;
+                
             }
-            return \Redirect::route('staff.group.create')
+
+            return \Redirect::route('staff.group.create', $request->group_staff_id)
                     ->with('success',__('flash.store'));
             
         }catch (\ValidationException $e) {

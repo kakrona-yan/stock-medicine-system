@@ -103,10 +103,11 @@ Route::group(
                     ->name('group.store');
                 Route::post('group/update', 'GroupStaffsController@update')
                     ->name('group.update');
-                Route::get('group/create', 'GroupStaffsController@groupCreate')
+                // create group with multiple staff
+                Route::get('group/create/{id}', 'GroupStaffsController@groupCreate')
                     ->name('group.create');
-                Route::post('group/update_ids', 'GroupStaffsController@groupUpdateByIds')
-                    ->name('group.update.ids');
+                Route::post('group/update_ids', 'GroupStaffsController@groupUpdateByStaffIds')
+                    ->name('group.update.staffIds');
             });
             // Staffs
             Route::group(['prefix' => 'sales', 'as' => 'sale.'], function() {
