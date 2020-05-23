@@ -20,7 +20,7 @@
     </div>
     <!--list product-->
     <div class="row">
-        <div class="col-12 tab-card">
+        <div class="col-12 col-md-6 tab-card">
             <fieldset class="edit-master-registration-fieldset">
                 <legend class="edit-application-information-legend text-left">ផលិតផល:</legend>
                 <!-- Circle Buttons -->
