@@ -54,7 +54,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
-                                                    <select class="form-control select2" name="product[{{$index}}][group_staff_id]" multiple="multiple">
+                                                    <select class="form-control select2" name="product[{{$index}}][group_staff_id][]" multiple="multiple">
                                                         @foreach($groupStaffNames as $id => $name)
                                                             <option value="{{ $id }}" {{ $id == $product->group_staff_id ? 'selected' : '' }}
                                                                 >{{ $name }}</option>

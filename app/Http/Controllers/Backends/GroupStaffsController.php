@@ -167,16 +167,17 @@ class GroupStaffsController extends Controller
                         $id = isset($product["id"]) ? $product["id"] : 0;
                         $findProduct = $this->product->find($id);
                         if($findProduct) {
+                            $groupStaffId = implode(',',$product['group_staff_id']);
                             $findProduct->update([
-                                'group_staff_id' => $product['group_staff_id']
+                                'group_staff_id' => $groupStaffId
                             ]);
                         }
                     }
                     break;
                 
             }
-
-            return \Redirect::route('staff.group.create', $request->group_staff_id)
+           
+            return \Redirect::route('staff.index', $request->group_staff_id)
                     ->with('success',__('flash.store'));
             
         }catch (\ValidationException $e) {
