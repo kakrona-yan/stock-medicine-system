@@ -92,5 +92,11 @@ class Product extends BaseModel
             ->pluck('title', 'id')
             ->all();
     }
+
+    public function explodeGroupStaffID()
+    {
+        $str = $this->group_staff_id;
+        return explode(',', $str);
+    }
     
 }

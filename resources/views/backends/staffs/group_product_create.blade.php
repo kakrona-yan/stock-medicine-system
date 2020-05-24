@@ -56,7 +56,7 @@
                                                 <div class="col-6">
                                                     <select class="form-control select2" name="product[{{$index}}][group_staff_id][]" multiple="multiple">
                                                         @foreach($groupStaffNames as $id => $name)
-                                                            <option value="{{ $id }}" {{ $id == $product->group_staff_id ? 'selected' : '' }}
+                                                            <option value="{{ $id }}" {{ in_array($id, $product->explodeGroupStaffID()) ? 'selected' : '' }}
                                                                 >{{ $name }}</option>
                                                         @endforeach
                                                     </select>
