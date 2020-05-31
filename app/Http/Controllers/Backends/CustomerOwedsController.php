@@ -53,15 +53,13 @@ class CustomerOwedsController extends Controller
             $allPay = self::STATUS_ALL_PAY;
             // customer not yet pay
             $customerNotPays  = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
-                ->whereHas('sales')
                 ->orderBy('created_at', 'DESC');
             if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
                 $quotationNo = $request->quotaion_no;
-                $customers->whereHas('sales', function($sales) use($quotationNo){
+                $customerNotPays->whereHas('sales', function($sales) use($quotationNo){
                     $sales->where('quotaion_no', 'like', '%' . $quotationNo . '%');
                 });
             }
-                
             // Check flash danger
             flashDanger($customerNotPays->count(), __('flash.empty_data'));
             $customerNotPays = $customerNotPays->paginate($limit, ['*'], 'pay_no_page');
