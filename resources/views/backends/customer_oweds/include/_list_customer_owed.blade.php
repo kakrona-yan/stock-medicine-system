@@ -149,7 +149,7 @@
                                         <td class="text-center" rowspan="{{$customer->sales->count() > 0 ? 2 : 1}}">
                                             @if ($customer->sales->count() > 0)
                                             <a href="#customer_{{$customer->id}}" data-toggle="collapse" style="text-decoration: none !important;" 
-                                                class="{{ $request->quotaion_no ? '' : 'collapsed'}}" aria-expanded="{{ $request->quotaion_no ? true : false}}"><i class="fas fa-minus-circle"></i></a>
+                                                aria-expanded="true"><i class="fas fa-minus-circle"></i></a>
                                             @endif
                                         </td>
                                         <td>{{ $customer->customerFullName() }}</td>
@@ -170,7 +170,7 @@
                                     </tr>
                                     @if ($customer->sales->count() > 0)
                                     <tr>
-                                        <td colspan="3" id="customer_{{$customer->id}}" class="collapse p-0 {{ $request->quotaion_no ? ' show' : ''}}">
+                                        <td colspan="3" id="customer_{{$customer->id}}" class="collapse p-0 show">
                                             <table class="table mb-0 tabel-row-1">
                                                 <thead class="thead-light">
                                                     <tr>
