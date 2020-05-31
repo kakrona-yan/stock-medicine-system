@@ -157,7 +157,7 @@
                                             $totalAmount = 0;
                                             $totalCustomerOwed = 0;
                                             foreach ($customer->sales as $sale) {
-                                                if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0) {
+                                                if($sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 1 || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 2) {
                                                     $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
                                                     $customerOwed = $sale->customerOwed()->exists() ? $sale->customerOwed->owed_amount : $sale->total_amount;
                                                     $totalAmount += $amount;
@@ -188,7 +188,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($customer->sales as $sale)
-                                                        @if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0)
+                                                        @if($sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 1 || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 2)
                                                         @php
                                                             $customerOwed = 0;
                                                             $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;

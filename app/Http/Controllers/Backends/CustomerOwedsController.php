@@ -52,19 +52,15 @@ class CustomerOwedsController extends Controller
             $somePay = self::STATUS_SOME_PAY;
             $allPay = self::STATUS_ALL_PAY;
             // customer not yet pay
-            $customerNotPays  = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED);
-                if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
-                    $quotationNo = $request->quotaion_no;
-                    $customerNotPays->whereHas('sales', function($sales) use($quotationNo){
-                        $sales->where('quotaion_no', 'like', '%' . $quotationNo . '%');
-                    });
-                } else {
-                    $customerNotPays->whereHas('sales');
-                }
-                $customerNotPays->with(['customerOweds' => function($customerOweds) use ($notPay){
-                    $customerOweds->whereRaw('status_pay = ? OR status_pay IS NULL', $notPay)
-                        ->orderBy('date_pay', 'DESC');
-                }]);
+            $customerNotPays  = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
+                ->whereHas('sales')
+                ->orderBy('created_at', 'DESC');
+            if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
+                $quotationNo = $request->quotaion_no;
+                $customers->whereHas('sales', function($sales) use($quotationNo){
+                    $sales->where('quotaion_no', 'like', '%' . $quotationNo . '%');
+                });
+            }
                 
             // Check flash danger
             flashDanger($customerNotPays->count(), __('flash.empty_data'));
