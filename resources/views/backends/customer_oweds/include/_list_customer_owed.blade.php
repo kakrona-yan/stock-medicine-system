@@ -40,7 +40,7 @@
                         <a class="nav-link bg-success text-white {{$request->pay_day_page || $request->quotaion_no || $request->status_pay || $request->pay_model || count($request->all()) == 0 || count($request->all()) > 2 ? ' active' : ''}}" data-toggle="tab" href="#pay_day">សងប្រាក់តាមថ្ងៃ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link bg-danger text-white {{$request->pay_no_page && count($request->all()) == 1 ? ' active' : ''}}" data-toggle="tab" href="#pay_in_ready">សងប្រាក់តាមអតិថិជន</a>
+                        <a class="nav-link bg-danger text-white {{$request->pay_no_page && count($request->all()) == 1 ? ' active' : ''}}" data-toggle="tab" href="#pay_in_ready">សង​ប្រាក់​ហើយ​តាម​ថ្ងៃ</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link bg-info text-white {{ $request->customers_page && count($request->all()) == 2 ? ' active' : ''}}" data-toggle="tab" href="#pay">សងប្រាក់ទាំងអស់</a>
