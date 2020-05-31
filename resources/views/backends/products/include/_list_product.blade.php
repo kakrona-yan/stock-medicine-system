@@ -65,7 +65,11 @@
                                     </div>
                                 </td>
                                 <td>{{$product->title}}</td>
-                                <td>{{$product->groupStaff ? $product->groupStaff->name : "-" }}</td>
+                                <td>
+                                    @foreach ($product->listGroupStafff() as $item)
+                                    <div>{{$item->name}}</div>
+                                    @endforeach
+                                </td>
                                 <td>{{$product->amount_in_box ? $product->amount_in_box : "-"}}</td>
                                 <td class="text-right">{{$product->price}}</td>
                                 <td>{{$product->terms}}</td>

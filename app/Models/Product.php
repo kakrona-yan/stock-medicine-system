@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Constants\DeleteStatus;
-
+use App\Models\GroupStaff;
 class Product extends BaseModel
 {
     /**
@@ -99,4 +99,12 @@ class Product extends BaseModel
         return explode(',', $str);
     }
     
+    // Text group staff
+ 
+    public function listGroupStafff()
+    {
+        $groupStaffIds = $this->explodeGroupStaffID();
+        return GroupStaff::whereIn("id", $groupStaffIds)
+            ->get();
+    }
 }
