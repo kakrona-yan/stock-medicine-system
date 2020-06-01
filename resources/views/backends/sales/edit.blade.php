@@ -163,7 +163,7 @@
                                                             @endphp
                                                             @foreach ($sale->productSales as $productSale)
                                                             <tr id="sale_product_{{$i}}">
-                                                                <td>
+                                                                <td class="sale-no-sp">
                                                                 <input type="hidden" class="form-control" name="sale_product[{{$i }}][sale_id]" value="{{$productSale->id}}">
                                                                 <input type="hidden" class="form-control" name="sale_product[{{$i }}][product_id]" value="{{$productSale->product_id}}">
                                                                 <span class="sale-no-sp">លេខរៀងផលិតផលទី {{$productSale->product_id}}</span>
