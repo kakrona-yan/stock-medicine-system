@@ -10,7 +10,6 @@ class CustomerOwed extends BaseModel
         'sale_id',
         'customer_id',
         'amount',
-        'amount_pay',
         'receive_amount',
         'owed_amount',
         'receive_date',

@@ -72,23 +72,23 @@
                                     @if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0)
                                         @php
                                             $customerOwed = 0;
-                                            $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
-                                            $receiveAmount = $sale->customerOwed()->exists() ? $sale->customerOwed->receive_amount : 0;
-                                            $customerOwed = $sale->customerOwed()->exists() ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
+                                            $amount = $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount;
+                                            $receiveAmount = $sale->customerOwed()->exists() && $sale->customerOwed->receive_amount  ? $sale->customerOwed->receive_amount : 0;
+                                            $customerOwed = $sale->customerOwed()->exists() && $sale->customerOwed->owed_amount ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
                                         @endphp
                                         <tr>
                                             <td>{{ $sale->quotaion_no }}</td>
                                             <td>{{ $sale->customer->customerFullName() }}</td>
-                                            <td class="text-right">{{ $sale->customerOwed()->exists() ? $sale->customerOwed->amount_pay : $sale->total_amount }}</td>
+                                            <td class="text-right">{{ $sale->customerOwed()->exists() && $sale->customerOwed->amount_pay ? $sale->customerOwed->amount_pay : $sale->total_amount }}</td>
                                             <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
-                                            <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
+                                            <td class="text-center">{{ $sale->customerOwed()->exists() && $sale->customerOwed->receive_date ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
                                             <td class="text-center">
                                                 <div class="btn-sm text-white font-size-10 d-inline-block" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
                                                     {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សង' }}
                                                 </div>             
                                             </td>
                                             <td class="text-center">
-                                                <div>{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</div>
+                                                <div>{{ $sale->customerOwed()->exists() && $sale->customerOwed->date_pay ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</div>
                                                 <button type="button" class="btn btn-sm btn-warning" style="font-size: 10px;padding: 1px 5px;" 
                                                     onclick="setDatePayPopup(this)"
                                                     data-sale-id="{{ $sale->id }}"
@@ -158,8 +158,8 @@
                                             $totalCustomerOwed = 0;
                                             foreach ($customer->sales as $sale) {
                                                 if($sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 1 || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 2) {
-                                                    $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
-                                                    $customerOwed = $sale->customerOwed()->exists() ? $sale->customerOwed->owed_amount : $sale->total_amount;
+                                                    $amount = $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount;
+                                                    $customerOwed = $sale->customerOwed()->exists() && $sale->customerOwed->owed_amount ? $sale->customerOwed->owed_amount : $sale->total_amount;
                                                     $totalAmount += $amount;
                                                     $totalCustomerOwed +=$customerOwed;
                                                 }
@@ -191,15 +191,15 @@
                                                         @if($sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 1 || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 2)
                                                         @php
                                                             $customerOwed = 0;
-                                                            $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
-                                                            $receiveAmount = $sale->customerOwed()->exists() ? $sale->customerOwed->receive_amount : 0;
-                                                            $customerOwed  = $sale->customerOwed()->exists() ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
+                                                            $amount = $sale->customerOwed()->exists() && $sale->customerOwed->amount? $sale->customerOwed->amount : $sale->total_amount;
+                                                            $receiveAmount = $sale->customerOwed()->exists() && $sale->customerOwed->receive_amount ? $sale->customerOwed->receive_amount : 0;
+                                                            $customerOwed  = $sale->customerOwed()->exists() && $sale->customerOwed->owed_amount ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
                                                         @endphp
                                                         <tr>
                                                             <td>{{ $sale->quotaion_no }}</td>
-                                                            <td class="text-right">{{ $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount }}</td>
+                                                            <td class="text-right">{{ $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount }}</td>
                                                             <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
-                                                            <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
+                                                            <td class="text-center">{{ $sale->customerOwed()->exists() && $sale->customerOwed->receive_date ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
                                                             <td class="text-center">
                                                                 <div class="btn-sm text-white font-size-10 d-inline-block" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
                                                                     {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សង' }}
@@ -267,8 +267,8 @@
                                                 $ctotalCustomerPay = 0;
                                                 foreach ($customer->sales as $sale) {
                                                     if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists()) {
-                                                        $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
-                                                        $customerPay = $sale->customerOwed()->exists() ? $sale->customerOwed->receive_amount : 0;
+                                                        $amount = $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount;
+                                                        $customerPay = $sale->customerOwed()->exists() && $sale->customerOwed->receive_amount ? $sale->customerOwed->receive_amount : 0;
                                                         $ctotalAmount += $amount;
                                                         $ctotalCustomerPay += $customerPay;
                                                     }
@@ -301,21 +301,21 @@
                                                         @foreach ($customer->sales as $sale)
                                                             @php
                                                                 $customerOwed = 0;
-                                                                $amount = $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount;
-                                                                $receiveAmount = $sale->customerOwed()->exists() ? $sale->customerOwed->receive_amount : 0;
-                                                                $customerOwed = $sale->customerOwed()->exists() ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
+                                                                $amount = $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount;
+                                                                $receiveAmount = $sale->customerOwed()->exists() && $sale->customerOwed->receive_amount? $sale->customerOwed->receive_amount : 0;
+                                                                $customerOwed = $sale->customerOwed()->exists() && $sale->customerOwed->owed_amount ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
                                                             @endphp
                                                             <tr>
                                                                 <td>{{ $sale->quotaion_no }}</td>
-                                                                <td class="text-right">{{ $sale->customerOwed()->exists() ? $sale->customerOwed->amount : $sale->total_amount }}</td>
+                                                                <td class="text-right">{{ $sale->customerOwed()->exists() &&  $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount }}</td>
                                                                 <td class="text-right">{{ currencyFormat($customerOwed) }}</td>
-                                                                <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
+                                                                <td class="text-center">{{ $sale->customerOwed()->exists() && $sale->customerOwed->receive_date ? date('Y-m-d h:i', strtotime($sale->customerOwed->receive_date)) : '-'}}</td>
                                                                 <td class="text-center">
                                                                     <div class="btn-sm text-white font-size-10 d-inline-block" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
                                                                         {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សង' }}
                                                                     </div>
                                                                 </td>
-                                                                <td class="text-center">{{ $sale->customerOwed()->exists() ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</td>
+                                                                <td class="text-center">{{ $sale->customerOwed()->exists() && $sale->customerOwed->date_pay ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</td>
                                                                 <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
                                                                 @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                                                 <td class="text-center">

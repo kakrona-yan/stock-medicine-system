@@ -275,7 +275,18 @@ class CustomerOwedsController extends Controller
                 if($customerOwed) {
                     $customerOwed->update($saleRequest);
                 } else {
-                    $this->customerOwed->create($saleRequest);
+                    $sale = $this->sale->available($saleRequest["sale_id"]);
+                    if($sale) {
+                        $this->customerOwed->create([
+                            'sale_id' => $saleRequest["sale_id"],
+                            'customer_id' => $saleRequest["customer_id"],
+                            'amount' => $sale->total_amount,
+                            'amount_pay' => $sale->total_amount,
+                            'owed_amount' => $sale->total_amount,
+                            'status_pay' => 0,
+                            'date_pay' => $saleRequest["date_pay"]
+                        ]);
+                    }
                 }
             }
             return \Redirect::route('customer_owed.index', ['pay_model' => 1])
