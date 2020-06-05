@@ -1,6 +1,6 @@
 
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-3 static-top" style="background-color: #e2e2e2 !important;">
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-3 static-top" style="background-color: #f4f5f8 !important;">
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-circle {{Auth::user()->isRoleStaff() ? 'sp-staff-none' : ''}}">
         <i class="fas fa-bars fa-fw fa-lg"></i>
