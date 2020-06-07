@@ -88,9 +88,27 @@ class Product extends BaseModel
 
     public function getProductName()
     {
-        return $this->where('is_delete', '<>', DeleteStatus::DELETED)
-            ->pluck('title', 'id')
-            ->all();
+       
+        $productSale = [];
+        if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor() || \Auth::user()->isRoleView()) {
+            $productSale = $this->where('is_delete', '<>', DeleteStatus::DELETED)
+                ->pluck('title', 'id')
+                ->all();
+        } else {
+            $staffGroup = \Auth::user()->staff ? \Auth::user()->staff->group_staff_id : null;
+            if($staffGroup){
+                $productSale = $this->whereRaw("FIND_IN_SET(?, group_staff_id)", $staffGroup)
+                ->where('is_delete', '<>', DeleteStatus::DELETED)
+                ->pluck('title', 'id')
+                ->all();
+            } else {
+                $productSale = $this->where('is_delete', '<>', DeleteStatus::DELETED)
+                ->pluck('title', 'id')
+                ->all();
+            }
+        }
+        
+        return $productSale;
     }
 
     public function explodeGroupStaffID()
