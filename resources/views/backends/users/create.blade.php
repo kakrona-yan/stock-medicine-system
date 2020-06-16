@@ -49,7 +49,7 @@
                                                 </span>
                                             @endif
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="email">{{__('user.list.email')}}:</label>
                                             <input type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" 
                                                 placeholder="email"
@@ -61,7 +61,7 @@
                                                     <strong>{{ $errors->first('email') }}</strong>
                                                 </span>
                                             @endif
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group">
                                             <label for="password">{{__('user.list.password')}}:</label>
                                             <input type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" 
