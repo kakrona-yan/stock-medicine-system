@@ -167,6 +167,12 @@ Route::group(
                 Route::get('/sale', 'CustomerOwedsController@getSaleByCustomer')
                     ->name('sale');
             });
+            // customer maps
+            Route::group(['prefix' => 'customer_maps', 'as' => 'customer_map.'], function () {
+                Route::get('/', 'CustomerMapsController@index')
+                    ->name('index');
+            });
+
         });
     }
 );

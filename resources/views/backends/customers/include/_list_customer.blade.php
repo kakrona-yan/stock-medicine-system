@@ -45,6 +45,8 @@
                                 <th class="text-center">{{__('customer.form.thumbnail')}}</th>
                                 <th>{{ __('customer.list.name') }}</th>
                                 <th>{{ __('customer.list.phone') }}</th>
+                                <th>{{ __('customer.latitude') }}</th>
+                                <th>{{ __('customer.longitude') }}</th>
                                 <th>{{ __('customer.list.address') }}</th>
                                 <th class="text-center">{{ __('customer.list.map_link') }}</th>
                                 <th class="text-center">{{ __('customer.list.created_at') }}</th>
@@ -71,6 +73,8 @@
                                     </div>
                                     </div>
                                 </td>
+                                <td>{{ $customer->latitude }}</td>
+                                <td>{{ $customer->longitude }}</td>
                                 <td>{{ str_limit($customer->address, 30) }}</td>
                                 <td class="text-center">
                                     @if($customer->map_address)

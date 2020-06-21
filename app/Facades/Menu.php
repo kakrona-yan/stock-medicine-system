@@ -76,6 +76,14 @@ class Menu
                 'sub_menu' => null
             ],
             [
+                // customer map management
+                'route' => 'customer_map.index',
+                'icon' => 'fas fa-map-marked-alt',
+                'label' => __('menu.customer_map'),
+                'role_type' => $this->RoleType('customer_map.index'),
+                'sub_menu' => null
+            ],
+            [
                 // Sale management
                 'route' => 'sale.index',
                 'icon' => 'far fa-newspaper',

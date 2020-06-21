@@ -632,3 +632,65 @@ body.list-product {
 .custom-checkbox .custom-control-label::before{
   border-radius: 0px;
 }
+.gm-style .gm-style-iw {
+  min-width: 50px !important;
+  max-width: 250px !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  min-height: 150px !important;
+  display: block !important;
+  padding-left: 18px;
+}
+.gm-style .gm-style-iw>div {
+  max-width: 250px !important;
+  display: block !important;
+  max-height: 100% !important;
+}
+.gm-style .gm-style-iw>div>div {
+  overflow: hidden !important;
+}
+.gm-style .gm-style-iw .gd-bubble {
+  max-width: 250px;
+  overflow: visible;
+}
+.gm-style .gm-style-iw .gd-bubble .gd-bubble-inside .geodir-bubble_desc {
+  box-sizing: border-box;
+}
+.geodir-image-container ul.geodir-images {
+  list-style: none !important;
+  clear: both;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+.geodir-image-wrapper{
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  padding: 0 !important;
+  margin: 0;
+  border-radius: 4px;
+}
+.gm-style .gm-style-iw .gd-bubble .gd-bubble-inside .geodir-bubble_desc .geodir-post-title h5 {
+  clear: inherit;
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  padding-left: 5px;
+  padding-bottom: 16px;
+  margin-top: 0;
+  padding-top: 7px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.gm-style .gm-style-iw .gd-bubble .gd-bubble-inside .geodir-bubble_desc .geodir-post-title h5 a {
+  color: #fff;
+  font-weight: 700;
+}
+.gm-style img {
+  max-width: 100%;
+}

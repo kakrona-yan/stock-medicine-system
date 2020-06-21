@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Constants\DeleteStatus;
 use App\Http\Constants\UserRole;
+use Illuminate\Support\Facades\Storage;
 
 class Customer extends BaseModel
 {
@@ -102,6 +103,17 @@ class Customer extends BaseModel
     public function customerFullName()
     {
         return $this->customerType()->exists() ? $this->customerType->name ." ". $this->name : $this->name;
+    }
+
+    /**
+     * getQuestionImagePath
+     * @param $path
+     */
+    public function getCustomerImagePath($path)
+    {
+        if (Storage::disk(config('upload.customer'))->exists($path)) {
+            return Storage::disk(config('upload.customer'))->url($path);
+        }
     }
 
 }

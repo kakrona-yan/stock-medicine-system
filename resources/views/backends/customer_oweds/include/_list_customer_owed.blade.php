@@ -172,7 +172,7 @@
                                     <tr>
                                         <td colspan="3" id="customer_{{$customer->id}}" class="collapse p-0 show">
                                             <table class="table mb-0 tabel-row-1">
-                                                <thead class="thead-light">
+                                                <thead class="thead-white">
                                                     <tr>
                                                         <th>{{__('sale.list.invoice_code')}}</th>
                                                         <th>{{ __('customer_owed.list.amount') }}</th>

@@ -12,5 +12,6 @@ return [
     'setting' => 'Setting',
     'view_site' => 'មើលគេហទំព័រ',
     'customer_type' => 'ប្រភេទអតិថិជន',
-    'customer_owed' => 'ប្រាក់ជំពាក់'
+    'customer_owed' => 'ប្រាក់ជំពាក់',
+    'customer_map' => 'អតិថិជន MAP'
 ];

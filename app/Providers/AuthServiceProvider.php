@@ -89,5 +89,12 @@ class AuthServiceProvider extends ServiceProvider
                 $userRole->role === UserRole::ROLE_VIEW || 
                 $userRole->role === UserRole::ROLE_EDITOR;
         });
+
+        Gate::define('customer_map.index', function ($userRole) {
+            return $userRole->role === UserRole::ROLE_ADMIN ||   // admin = 1
+                $userRole->role === UserRole::ROLE_VIEW || 
+                $userRole->role === UserRole::ROLE_EDITOR || 
+                $userRole->role === UserRole::ROLE_STAFF;
+        });
     }
 }

@@ -122,6 +122,27 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!--map-->
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="form-group col-12 col-md-6">
+                                                    <label for="latitude">{{__('customer.latitude')}}:</label>
+                                                    <input type="text" class="form-control" 
+                                                        placeholder="{{__('customer.latitude')}}"
+                                                        name="latitude"
+                                                        value="{{ old('latitude', $request->latitude) }}"
+                                                    >
+                                                </div>
+                                                <div class="form-group col-12 col-md-6">
+                                                    <label for="longitude">{{__('customer.longitude')}}:</label>
+                                                    <input type="text" class="form-control" 
+                                                        placeholder="{{__('customer.longitude')}}"
+                                                        name="longitude"
+                                                        value="{{ old('longitude', $request->longitude) }}"
+                                                    >
+                                                </div>
+                                            </div><!--/row-->
+                                        </div>
                                         <div class="form-group">
                                             <label for="thumbnail">{{__('customer.form.thumbnail')}}:</label>
                                             <div class="upload-profile img-upload">
