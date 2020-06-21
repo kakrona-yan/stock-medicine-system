@@ -17,7 +17,7 @@ class CustomerMapsController extends Controller
     {
         $customerMaps = [];
         try {
-            $customerMaps = $this->customer->with("sales.staff")->where('is_delete', '<>', 0)
+            $customerMaps = $this->customer->where('is_delete', '<>', 0)
                 ->where('is_active', 1) // is_delete = 1 and is_active = 1
                 ->get();
             foreach ($customerMaps as $customerMap) {
