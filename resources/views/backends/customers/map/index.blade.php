@@ -4,8 +4,8 @@
 <div id="map-canvas-customer" style="height: 80vh; width: 100%; position: relative; overflow: hidden;"></div>
 @endsection
 @push('footer-script')
-<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-<script type='text/javascript' src='//maps.google.com/maps/api/js?language=en&key={{ config('app.google_api_map') }}&libraries=places&region=GB'></script>
+<script src="//polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script type='text/javascript' src="//maps.googleapis.com/maps/api/js?key={{ config('app.google_api_map') }}&callback=initMap"></script>
 <script defer>
 	function initialize() {
 		var mapOptions = {
