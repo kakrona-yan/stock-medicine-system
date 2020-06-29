@@ -82,7 +82,7 @@
                                         <th>{{__('customer.form.thumbnail')}}:</th>
                                         <td>
                                             <div class="w-100 w-md-50">
-                                                <img class="img-thumbnail" src="{{$customer->thumbnail? getUploadUrl($customer->thumbnail, config('upload.customer')) : asset('images/no-avatar.jpg') }}" />
+                                                <img class="img-thumbnail" src="{{$customer->thumbnail? getUploadUrl($customer->thumbnail, config('upload.customer')) : asset('images/no-avatar.jpg') }}" width="200px" />
                                             </div>
                                         </td>
                                     </tr>
