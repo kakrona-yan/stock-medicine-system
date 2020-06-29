@@ -32,7 +32,6 @@
             customerMap = customerMaps[customerMap];
             if(customerMap.latitude && customerMap.longitude)
             {
-                console.log(customerMap.latitude, customerMap.longitude); 
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(customerMap.latitude, customerMap.longitude),
                     icon:image,
