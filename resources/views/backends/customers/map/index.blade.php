@@ -78,24 +78,29 @@
         font-weight: bold;
         text-transform: uppercase;
     }
+    @media (max-width: 767px) {
+        .sidebar-map {
+            max-height: 200px;
+        }
+    }
 </style>
 @endpush
 <div class="map-customer">
     <div class="row">
-        <div class="col-2 px-0">
-        <div class="sidebar-map">
+        <div class="col-12 col-md-2 px-0">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="far fa-life-ring"></i></span>
                 </div>
                 <input class="form-control" id="range" type="number" value='0' min='0' step="10"/>
             </div>
-            <table class="table table-bordered">
-                <tbody id="t_points"></tbody>
-            </table>
+            <div class="sidebar-map">
+                <table class="table table-bordered">
+                    <tbody id="t_points"></tbody>
+                </table>
+            </div>
         </div>
-        </div>
-        <div class="col-10 px-0">
+        <div class="col-12 col-md-10 px-0">
             <div id="map-canvas-customer"style="height: 100vh; width: 100%; position: relative; overflow: hidden;"></div>
         </div>
     </div>
@@ -144,10 +149,10 @@
     function generateContent(customerMap)
     {
         var content = `<div class="row">
-        <div class="col-12 col-md-3 mb-2 px-0">
+        <div class="col-4 col-md-3 mb-2 px-0">
             <a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank"><img src="${ customerMap.thumbnail ? customerMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${customerMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
         </div>
-        <div class="col-12 col-md-9">
+        <div class="col-8 col-md-9">
             <h5><a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank">${customerMap.name}</a></h5>
             <p><i class="fas fa-map-marker-alt"></i> <span>${customerMap.address}</span></p>
         </div>
