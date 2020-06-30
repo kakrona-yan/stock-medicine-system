@@ -146,6 +146,7 @@
         }).addTo(map);
         buffers.push(c);
     }
+
     function generateContent(customerMap)
     {
         var content = `<div class="row">
@@ -158,14 +159,14 @@
         </div>
         `;
         if(customerMap.sales && customerMap.sales[0] && customerMap.sales[0].staff) {
-            content +=`<div class="staff-name"><i class="far fa-user"></i> ${customerMap.sales[0].staff.name} && លេខកូដវិក្កយបត្រ</div>`;
+            content +=`<div class="staff-name">លេខកូដវិក្កយបត្រ</div>`;
         }
         for(sale in customerMap.sales) {
             sale = customerMap.sales[sale];
             content +=`<ul class="list-group w-100">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <a href="{{ route('sale.index') }}?quotaion_no=${sale.id}" target="_blank">
-                            ${sale.quotaion_no}
+                            <i class="far fa-user"></i> ${sale.staff.name} ${sale.quotaion_no}
                         </a>
                     </li>
                     </ul>`;
@@ -176,7 +177,6 @@
 
     $(document).ready(function (){
         var customerMaps = @json($customerMaps);
-        var points = [];
         for(customerMap in customerMaps) {
             customerMap = customerMaps[customerMap];
             if(customerMap.latitude && customerMap.longitude)
