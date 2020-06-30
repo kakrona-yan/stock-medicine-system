@@ -154,7 +154,7 @@
             <a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank"><img src="${ customerMap.thumbnail ? customerMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${customerMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
         </div>
         <div class="col-8 col-md-9">
-            <h5><a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank">${customerMap.name}</a></h5>
+            <h5><a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank">${customerMap.customer_type.name} ${customerMap.name}</a></h5>
             <p><i class="fas fa-map-marker-alt"></i> <span>${customerMap.address}</span></p>
         </div>
         `;
