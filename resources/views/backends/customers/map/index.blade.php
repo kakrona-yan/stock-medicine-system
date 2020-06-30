@@ -147,7 +147,7 @@
         <div class="col-12 col-md-3 mb-2 px-0">
             <a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank"><img src="${ customerMap.thumbnail ? customerMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${customerMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
         </div>
-        <div class="col-12 col-md-7">
+        <div class="col-12 col-md-9">
             <h5><a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank">${customerMap.name}</a></h5>
             <p><i class="fas fa-map-marker-alt"></i> <span>${customerMap.address}</span></p>
         </div>
