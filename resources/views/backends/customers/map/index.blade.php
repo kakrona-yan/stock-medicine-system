@@ -152,7 +152,7 @@
             <p><i class="fas fa-map-marker-alt"></i> <span>${customerMap.address}</span></p>
         </div>
         `;
-        if(customerMap.sales && customerMap.sales[0].staff) {
+        if(customerMap.sales && customerMap.sales[0] && customerMap.sales[0].staff) {
             content +=`<div class="staff-name"><i class="far fa-user"></i> ${customerMap.sales[0].staff.name} && លេខកូដវិក្កយបត្រ</div>`;
         }
         for(sale in customerMap.sales) {
