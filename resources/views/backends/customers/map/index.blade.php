@@ -88,7 +88,7 @@
 <div class="map-customer">
     <div class="row">
         <div class="col-12 col-md-2 px-0">
-            <div class="input-group mb-3">
+            <div class="input-group mb-3 pr-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="far fa-life-ring"></i></span>
                 </div>
