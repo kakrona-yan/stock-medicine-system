@@ -153,14 +153,14 @@
         </div>
         `;
         if(customerMap.sales && customerMap.sales[0].staff) {
-            content +=`<div class="staff-name"><i class="far fa-user"></i> ${customerMap.sales[0].staff.name}</div>`;
+            content +=`<div class="staff-name"><i class="far fa-user"></i> ${customerMap.sales[0].staff.name} && លេខកូដវិក្កយបត្រ</div>`;
         }
         for(sale in customerMap.sales) {
             sale = customerMap.sales[sale];
             content +=`<ul class="list-group w-100">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a href="{{ route('sale.downloadPDF', '') }}/${sale.id}" target="_blank">
-                            ${sale.quotaion_no} ${sale.sale_date} <span class="badge badge-primary badge-pill">$${sale.total_amount}</span>
+                        <a href="{{ route('sale.index') }}?quotaion_no=${sale.id}" target="_blank">
+                            ${sale.quotaion_no}
                         </a>
                     </li>
                     </ul>`;
