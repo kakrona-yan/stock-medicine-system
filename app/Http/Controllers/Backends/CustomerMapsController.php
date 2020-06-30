@@ -19,6 +19,8 @@ class CustomerMapsController extends Controller
         try {
             $customerMaps = $this->customer->where('is_delete', '<>', 0)
                 ->where('is_active', 1) // is_delete = 1 and is_active = 1
+                ->with(['customerType', 'sales.staff'])
+                
                 ->get();
             foreach ($customerMaps as $customerMap) {
                 $customerMap->thumbnail = $this->customer->getCustomerImagePath($customerMap->thumbnail);

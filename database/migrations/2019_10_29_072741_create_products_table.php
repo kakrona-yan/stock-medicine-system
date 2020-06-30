@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price_discount', 10, 0)->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('promotion_banner')->nullable();
+            $table->string('amount_in_box')->nullable();
             $table->text('description')->nullable();
             $table->integer('in_store')->length(11)->default(0)->nullable();
             $table->integer('out_store')->length(11)->default(0)->nullable();
