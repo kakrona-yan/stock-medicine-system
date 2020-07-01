@@ -4,6 +4,9 @@
 @push("header-style")
 <link rel="stylesheet" href="//unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 <style>
+    html, body{
+        font-family: "KhmerOSBattambang-Regular", Helvetica, Arial, sans-serif !important;
+    }
     .map-customer {
         position: relative;
         margin-top: -15px;
@@ -131,7 +134,9 @@
     }
     var buffers = [];
     function addMarker(name,lat,lng, customerMap){
-        var p = L.marker([lat,lng]);
+        var p = L.marker([lat,lng])
+            .bindTooltip(name)
+            .openTooltip();
         p.title = name;
         p.alt = name;
         let content = generateContent(customerMap);
