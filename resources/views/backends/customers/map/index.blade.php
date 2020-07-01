@@ -135,13 +135,9 @@
     }).addTo(map);
     function onLocationFound(e) {
         var radius = e.accuracy;
-        L.marker(e.latlng).addTo(map)
-        .bindPopup(`ទីតាំងរបស់ខ្ញុំ(${e.longitude}, ${e.latitude})`).openPopup();
         L.circle(e.latlng, radius).addTo(map);
-        console.log(e);
     }   
     map.on('locationfound', onLocationFound);
-    console.log(lc)
     function addRowTable(code, coords, type){
         var tr = document.createElement("tr");
         var td = document.createElement("td");
