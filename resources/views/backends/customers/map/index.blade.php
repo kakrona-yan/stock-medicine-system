@@ -3,6 +3,7 @@
 @section('content')
 @push("header-style")
 <link rel="stylesheet" href="//unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.css" />
 <style>
     html, body{
         font-family: "KhmerOSBattambang-Regular", Helvetica, Arial, sans-serif !important;
@@ -81,6 +82,9 @@
         font-weight: bold;
         text-transform: uppercase;
     }
+    .leaflet-popup-content{
+        text-align: center;
+    }
     @media (max-width: 767px) {
         .sidebar-map {
             max-height: 200px;
@@ -113,6 +117,7 @@
 <script src="//polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script src="//unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 <script src="//ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
+<script src="//cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
 <script defer>
 	var map = L.map('map-canvas-customer').setView([
             {{ $latitude }}, 
@@ -122,7 +127,21 @@
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
-
+    var lc = L.control.locate({
+        strings: {
+            title: "My local"
+        },
+        showPopup: false
+    }).addTo(map);
+    function onLocationFound(e) {
+        var radius = e.accuracy;
+        L.marker(e.latlng).addTo(map)
+        .bindPopup(`ទីតាំងរបស់ខ្ញុំ(${e.longitude}, ${e.latitude})`).openPopup();
+        L.circle(e.latlng, radius).addTo(map);
+        console.log(e);
+    }   
+    map.on('locationfound', onLocationFound);
+    console.log(lc)
     function addRowTable(code, coords, type){
         var tr = document.createElement("tr");
         var td = document.createElement("td");
