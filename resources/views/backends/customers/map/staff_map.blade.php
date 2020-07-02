@@ -33,7 +33,12 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
     
-    var LeafIcon = L.Icon.extend();
+    var LeafIcon = L.Icon.extend({
+        options: {
+            iconUrl: '{{asset('/images/user.svg')}}',
+            iconSize: [17, 30]
+        } 
+    );
 
 	var icon = new LeafIcon({iconUrl: '{{asset('/images/user.svg')}}'});
     function addMarker(name,lat,lng, customerMap){
