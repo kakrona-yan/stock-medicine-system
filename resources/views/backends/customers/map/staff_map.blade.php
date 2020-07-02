@@ -63,7 +63,7 @@
             staffMap = staffMaps[staffMap];
             if(staffMap.latitude && staffMap.longitude)
             {
-                let name = `${staffMap.customer_type.name} ${staffMap.name} `;
+                let name = `${staffMap.staff.name}`;
                 addMarker(name, parseFloat(staffMap.latitude), parseFloat(staffMap.longitude), staffMap);
             }
         }
