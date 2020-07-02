@@ -112,9 +112,12 @@
         </div>
         <div class="col-8 col-md-9">
             <h5><a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank">${customerMap.customer_type.name} ${customerMap.name}</a></h5>
-            <p><i class="fas fa-map-marker-alt"></i> <span>${customerMap.address}</span></p>
-        </div>
-        `;
+            <p><i class="fas fa-map-marker-alt"></i> <span>${customerMap.address}</span></p>`;
+            if(customerMap.phone1){
+             content += `<p><i class="fas fa-phone-square-alt text-success my-1 mr-1"></i>${customerMap.phone1}-${customerMap.phone2}</p>`;
+            }
+        content +=`</div>`;
+        @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
         if(customerMap.sales && customerMap.sales[0] && customerMap.sales[0].staff) {
             content +=`<div class="staff-name">លេខកូដវិក្កយបត្រ</div>`;
         }
@@ -128,6 +131,7 @@
                     </li>
                     </ul>`;
         }
+        @endif
         content +`</div>`;
         return content;
     }
