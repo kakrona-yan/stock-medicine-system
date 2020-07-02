@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Constants\UserRole;
 use App\Http\Constants\DeleteStatus;
+use Illuminate\Support\Facades\Storage;
 
 class Staff extends BaseModel
 {
@@ -34,6 +35,11 @@ class Staff extends BaseModel
     public function sales()
     {
         return $this->hasMany('App\Models\Sale', 'staff_id', 'id');
+    }
+
+    public function staffGPSMaps()
+    {
+        return $this->hasMany('App\Models\StaffGPSMap', 'staff_id', 'id');
     }
 
     public function sale()
@@ -100,6 +106,17 @@ class Staff extends BaseModel
             ->orderBy('id', 'DESC')
             ->select(['id', 'name'])
             ->get();
+    }
+
+    /**
+     * getQuestionImagePath
+     * @param $path
+     */
+    public function getStaffImagePath($path)
+    {
+        if (Storage::disk(config('upload.staff'))->exists($path)) {
+            return Storage::disk(config('upload.staff'))->url($path);
+        }
     }
     
 }

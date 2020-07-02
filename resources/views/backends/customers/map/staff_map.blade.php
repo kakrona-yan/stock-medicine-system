@@ -5,6 +5,14 @@
 <link rel="stylesheet" href="//unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.css" />
 <link href="{{ asset('css/map.css') }}" rel="stylesheet">
+<style>
+.leaflet-popup-content {
+    width: 150px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
 @endpush
 <div class="map-customer">
     <div class="row">
@@ -48,13 +56,19 @@
         p.title = name;
         p.alt = name;
         let content = generateContent(staffMap);
-        p.bindPopup(content).openPopup();
+        p.bindPopup(content)
+        .openPopup();
         p.addTo(map);
     }
 
     function generateContent(staffMap)
     {
-        return "hello";
+        var content = `<div class="text-center">
+            <h5><a href="{{ route('user.show', '') }}/${staffMap.id}" target="_blank">${staffMap.name}</a></h5>
+        <div class="thumbnail-cicel" style="width:100px; height:100px;">
+            <a href="{{ route('user.show', '') }}/${staffMap.id}" target="_blank"><img src="${ staffMap.thumbnail ? staffMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${staffMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
+        </div></div>`;
+        return content;
     }
 
     $(document).ready(function (){

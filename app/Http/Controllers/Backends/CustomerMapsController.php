@@ -84,9 +84,11 @@ class CustomerMapsController extends Controller
     {
         $staffMaps = [];
         try {
-            $staffMaps = $this->staffGPSMap->with('staff')       
-                ->get();
-            
+            $staffMaps = $this->staffGPSMap->get();
+            foreach ($staffMaps as $staffMap) {
+                $staffMap["name"] = $staffMap->staff->name;
+                $staffMap["thumbnail"] = $staffMap->staff->getStaffImagePath($staffMap->staff->thumbnail);
+            }
             $latitude = $staffMaps->count()  ? $staffMaps->average('latitude') : 11.5629411;
             $longitude = $staffMaps->count() ? $staffMaps->average('longitude') : 104.9060205;
         
