@@ -4,100 +4,17 @@
 @push("header-style")
 <link rel="stylesheet" href="//unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.css" />
-<style>
-    html, body{
-        font-family: "KhmerOSBattambang-Regular", Helvetica, Arial, sans-serif !important;
-    }
-    .map-customer {
-        position: relative;
-        margin-top: -15px;
-    }
-    .sidebar-map {
-        margin-top: 10px;
-        padding-right: 10px;
-        max-height: 100vh;
-        overflow: hidden;
-        overflow-y: auto;
-    }
-    .sidebar-map .table-bordered{
-        border:none;
-    }
-    .sidebar-map tr td{
-        padding: 0.5rem 0.75rem;
-        border-left: 0px !important;
-        border-right: 0px !important;
-        font-size:13px;
-        cursor: pointer;
-    }
-    .sidebar-map tr td:hover{
-        opacity: 0.5;
-    }
-    .sidebar-map tr td:first-child{
-        border-top: 0px !important;
-    }
-    .sidebar-map tr td:last-child{
-        border-top: 0px !important;
-    }
-    .sidebar-map tr td:before {
-        content: "\f7f2";
-        font-family: 'Font Awesome\ 5 Free';
-        font-weight: 900;
-        margin-right: 5px;
-    }
-    .sidebar-map tr td.type1:before{
-        color: #36b9cc;
-    }
-    .sidebar-map tr td.type2:before{
-        color: #f6c23e;
-    }
-    .sidebar-map tr td.type3:before{
-        color: #1cc88a;
-    }
-    .leaflet-popup-content {
-        margin: 13px 19px;
-        line-height: 1.4;
-        max-width: 350px;
-        width: 300px!important;
-    }
-    .list-group{
-        max-height: 300px;
-        overflow: hidden;
-        overflow-y: auto;
-    }
-    .list-group-item {
-        border: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
-        padding: 0.3rem 0.7rem !important;
-    }
-    .list-group-item:last-child {
-        border-bottom-right-radius: 0px;
-        border-bottom-left-radius: 0px;
-        border-bottom: 0px;
-    }
-    .list-group-item:first-child {
-        border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-    }
-    .staff-name {
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-    .leaflet-popup-content{
-        text-align: center;
-    }
-    @media (max-width: 767px) {
-        .sidebar-map {
-            max-height: 200px;
-        }
-    }
-</style>
+<link href="{{ asset('css/map.css') }}" rel="stylesheet">
 @endpush
 <div class="map-customer">
     <div class="row">
         <div class="col-12 col-md-2 px-0">
+            <div class="mt-1 mb-3 pr-3">
+                <a href="{{route('map.gps.staff')}}" class="btn btn-circle btn-danger w-100"><i class="fas fa-map-marker-alt mr-1"></i> GPSបុគ្គលិក</a>
+            </div>
             <div class="input-group mb-3 pr-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="far fa-life-ring"></i></span>
+                    <span class="input-group-text"><i class="fas fa-arrows-alt"></i></span>
                 </div>
                 <input class="form-control" id="range" type="number" value='0' min='0' step="10"/>
             </div>
@@ -119,6 +36,11 @@
 <script src="//ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
 <script src="//cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
 <script defer>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 	var map = L.map('map-canvas-customer').setView([
             {{ $latitude }}, 
             {{$longitude}} 
@@ -136,6 +58,21 @@
     function onLocationFound(e) {
         var radius = e.accuracy;
         L.circle(e.latlng, radius).addTo(map);
+        $.ajax({
+            url     : "{{route('map.gps')}}",
+            method  : "POST",
+            data    : {
+                "_token": "{{ csrf_token() }}",
+                "latitude": e.latitude,
+                "longitude": e.longitude
+            },
+            dataType: 'json',
+            success : function (json) {
+            },
+            error: function(json){
+                $("html, body").animate({ scrollTop: 0 }, 500);
+            }
+        });
     }   
     map.on('locationfound', onLocationFound);
     function addRowTable(code, coords, type){

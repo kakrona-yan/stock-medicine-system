@@ -172,7 +172,11 @@ Route::group(
                 Route::get('/', 'CustomerMapsController@index')
                     ->name('index');
             });
-
+            // map gps
+            Route::post('map_gps', 'CustomerMapsController@saveGPSMap')
+                    ->name('map.gps');
+            Route::get('staff/map_gps', 'CustomerMapsController@staffGPSMap')
+                    ->name('map.gps.staff');
         });
     }
 );

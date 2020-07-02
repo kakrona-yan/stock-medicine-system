@@ -19,7 +19,7 @@
         </nav>
     </div>
     <div class="row">
-        <div class="col-6 col-md-3 mb-4">
+        <div class="col-12 col-md-3 mb-4">
             <div class="card">
                 <div class="card-header text-white bg-info">
                     <div class="font-weight-bold">

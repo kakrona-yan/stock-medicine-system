@@ -18,6 +18,7 @@ mix.js('resources/js/app.js', 'public/js')
     .copy('resources/images', 'public/images')
     .copyDirectory('node_modules/bootstrap-datepicker/dist', 'public/vendor/bootstrap-datepicker')
     .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/map.scss', 'public/css')
     .copyDirectory('node_modules/fslightbox/index.js', 'public/vendor/fslightbox/index.js')
     // .purgeCss()
     .webpackConfig({
