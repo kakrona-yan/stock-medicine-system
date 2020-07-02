@@ -35,46 +35,36 @@
     
     var LeafIcon = L.Icon.extend({
         options: {
-            iconUrl: '{{asset('/images/pin.png')}}',
-            iconSize: [25, 42]
+            iconUrl: '{{asset('/images/user.svg')}}',
+            iconSize: [32, 32]
         } 
     });
 
-	var icon = new LeafIcon({iconUrl: '{{asset('/images/pin.png')}}'});
-    function addMarker(name, lat, lng, customerMap){
+	var icon = new LeafIcon({iconUrl: '{{asset('/images/user.svg')}}'});
+    function addMarker(name, lat, lng, staffMap){
         var p = L.marker([lat,lng], {icon: icon})
             .bindTooltip(name)
             .openTooltip();
         p.title = name;
         p.alt = name;
-        let content = generateContent(customerMap);
+        let content = generateContent(staffMap);
         p.bindPopup(content).openPopup();
         p.addTo(map);
     }
 
-    function generateContent(customerMap)
+    function generateContent(staffMap)
     {
-        var content = `<div class="row">
-            <div class="col-4 col-md-3 mb-2 px-0">
-                <a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank"><img src="${ customerMap.thumbnail ? customerMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${customerMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
-            </div>
-            <div class="col-8 col-md-9">
-                <h5><a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank">${customerMap.customer_type.name} ${customerMap.name}</a></h5>
-                <p><i class="fas fa-map-marker-alt"></i> <span>${customerMap.address}</span></p>
-            </div>
-            `;
-        content +`</div>`;
-        return content;
+        return "hello";
     }
 
     $(document).ready(function (){
-        var customerMaps = @json($customerMaps);
-        for(customerMap in customerMaps) {
-            customerMap = customerMaps[customerMap];
-            if(customerMap.latitude && customerMap.longitude)
+        var staffMaps = @json($staffMaps);
+        for(staffMap in staffMaps) {
+            staffMap = staffMaps[staffMap];
+            if(staffMap.latitude && staffMap.longitude)
             {
-                let name = `${customerMap.customer_type.name} ${customerMap.name} `;
-                addMarker(name, parseFloat(customerMap.latitude), parseFloat(customerMap.longitude), customerMap);
+                let name = `${staffMap.customer_type.name} ${staffMap.name} `;
+                addMarker(name, parseFloat(staffMap.latitude), parseFloat(staffMap.longitude), staffMap);
             }
         }
     });

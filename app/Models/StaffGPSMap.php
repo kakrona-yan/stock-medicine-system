@@ -23,4 +23,9 @@ class StaffGPSMap extends Model
         'start_date_place',
         'end_date_place'
     ];
+
+    public function staff()
+    {
+        return $this->belongsTo('App\Models\Staff', 'staff_id');
+    }
 }

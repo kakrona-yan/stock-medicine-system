@@ -82,22 +82,17 @@ class CustomerMapsController extends Controller
 
     public function staffGPSMap(Request $request)
     {
-        $customerMaps = [];
+        $staffMaps = [];
         try {
-            $customerMaps = $this->customer->where('is_delete', '<>', 0)
-                ->where('is_active', 1) // is_delete = 1 and is_active = 1
-                ->with(['customerType', 'sales.staff'])
-                
+            $staffMaps = $this->staffGPSMap->with('staff')       
                 ->get();
-            foreach ($customerMaps as $customerMap) {
-                $customerMap->thumbnail = $this->customer->getCustomerImagePath($customerMap->thumbnail);
-            }
-            $latitude = $customerMaps->count() && (request()->filled('category') || request()->filled('search')) ? $customerMaps->average('latitude') : 11.5629411;
-            $longitude = $customerMaps->count() && (request()->filled('category') || request()->filled('search')) ? $customerMaps->average('longitude') : 104.9060205;
+            
+            $latitude = $staffMaps->count()  ? $customerMaps->average('latitude') : 11.5629411;
+            $longitude = $staffMaps->count() ? $customerMaps->average('longitude') : 104.9060205;
         
             return view('backends.customers.map.staff_map', [
                 'request' => $request,
-                'customerMaps' =>  $customerMaps,
+                'staffMaps' =>  $staffMaps,
                 'latitude' => $latitude,
                 'longitude' => $longitude
             ]);
