@@ -8,11 +8,11 @@
 @endpush
 <div class="map-customer">
     <div class="row">
-        <div class="col-12 col-md-2 px-0">
-            <div class="mt-1 mb-3 pr-3">
+        <div class="col-12 col-md-2 px-1">
+            <div class="mt-1 mb-3 px-1">
                 <a href="{{route('map.gps.staff')}}" class="btn btn-circle btn-danger w-100"><i class="fas fa-map-marker-alt mr-1"></i> GPSបុគ្គលិក</a>
             </div>
-            <div class="input-group mb-3 pr-3">
+            <div class="input-group mb-3 px-1">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-arrows-alt"></i></span>
                 </div>
