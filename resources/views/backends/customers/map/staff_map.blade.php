@@ -35,13 +35,13 @@
     
     var LeafIcon = L.Icon.extend({
         options: {
-            iconUrl: '{{asset('/images/user.svg')}}',
-            iconSize: [68, 68]
+            iconUrl: '{{asset('/images/pin.png')}}',
+            iconSize: [25, 42]
         } 
     });
 
-	var icon = new LeafIcon({iconUrl: '{{asset('/images/user.svg')}}'});
-    function addMarker(name,lat,lng, customerMap){
+	var icon = new LeafIcon({iconUrl: '{{asset('/images/pin.png')}}'});
+    function addMarker(name, lat, lng, customerMap){
         var p = L.marker([lat,lng], {icon: icon})
             .bindTooltip(name)
             .openTooltip();
