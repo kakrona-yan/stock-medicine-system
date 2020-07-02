@@ -36,9 +36,9 @@
     var LeafIcon = L.Icon.extend({
         options: {
             iconUrl: '{{asset('/images/user.svg')}}',
-            iconSize: [17, 30]
+            iconSize: [68, 68]
         } 
-    );
+    });
 
 	var icon = new LeafIcon({iconUrl: '{{asset('/images/user.svg')}}'});
     function addMarker(name,lat,lng, customerMap){
