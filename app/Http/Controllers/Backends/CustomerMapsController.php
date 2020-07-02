@@ -87,8 +87,8 @@ class CustomerMapsController extends Controller
             $staffMaps = $this->staffGPSMap->with('staff')       
                 ->get();
             
-            $latitude = $staffMaps->count()  ? $customerMaps->average('latitude') : 11.5629411;
-            $longitude = $staffMaps->count() ? $customerMaps->average('longitude') : 104.9060205;
+            $latitude = $staffMaps->count()  ? $staffMaps->average('latitude') : 11.5629411;
+            $longitude = $staffMaps->count() ? $staffMaps->average('longitude') : 104.9060205;
         
             return view('backends.customers.map.staff_map', [
                 'request' => $request,
