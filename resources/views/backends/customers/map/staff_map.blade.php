@@ -74,7 +74,7 @@
             if(customerMap.latitude && customerMap.longitude)
             {
                 let name = `${customerMap.customer_type.name} ${customerMap.name} `;
-                addMarker(name, customerMap.latitude, customerMap.longitude, customerMap);
+                addMarker(name, parseFloat(customerMap.latitude), parseFloat(customerMap.longitude), customerMap);
             }
         }
     });
