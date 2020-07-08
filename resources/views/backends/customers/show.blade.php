@@ -107,7 +107,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h3>ប្រវត្តិការទិញ</h3>
-                    <div id="sale-customer" class="table-responsive collapse">
+                    <div id="sale-customer" class="table-responsive collapse show">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
