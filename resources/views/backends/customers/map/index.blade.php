@@ -113,10 +113,10 @@
     {
         var content = `<div class="row">
         <div class="col-4 col-md-3 mb-2 px-0">
-            <a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank"><img src="${ customerMap.thumbnail ? customerMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${customerMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
+            <a href="{{ route('customer.show', '') }}/${customerMap.id}"><img src="${ customerMap.thumbnail ? customerMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${customerMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
         </div>
         <div class="col-8 col-md-9">
-            <h5><a href="{{ route('customer.show', '') }}/${customerMap.id}" target="_blank">${customerMap.customer_type.name} ${customerMap.name}</a></h5>
+            <h5><a href="{{ route('customer.show', '') }}/${customerMap.id}">${customerMap.customer_type.name} ${customerMap.name}</a></h5>
             <p><i class="fas fa-map-marker-alt"></i> <span>${customerMap.address}</span></p>`;
             if(customerMap.phone1){
              content += `<p><i class="fas fa-phone-square-alt text-success my-1 mr-1"></i>${customerMap.phone1}-${customerMap.phone2}</p>`;
@@ -130,7 +130,7 @@
             sale = customerMap.sales[sale];
             content +=`<ul class="list-group w-100">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a href="{{ route('sale.index') }}?quotaion_no=${sale.id}" target="_blank">
+                        <a href="{{ route('sale.index') }}?quotaion_no=${sale.id}">
                             <i class="far fa-user"></i> ${sale.staff.name} ${sale.quotaion_no}
                         </a>
                     </li>
