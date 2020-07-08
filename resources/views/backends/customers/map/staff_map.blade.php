@@ -14,9 +14,16 @@
 }
 </style>
 @endpush
-<div class="map-customer">
+<div class="map-customer staff-custom">
     <div class="row">
-        <div class="col-12 px-0">
+        <div class="col-12 col-md-2 px-1">
+            <div id="menu-plus" class="sidebar-map">
+                <table class="table table-bordered">
+                    <tbody id="t_points"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-12 col-md-10 px-0">
             <div id="map-canvas-customer"style="height: 100vh; width: 100%; position: relative; overflow: hidden;"></div>
         </div>
     </div>
@@ -48,13 +55,25 @@
         } 
     });
 
-	var icon = new LeafIcon({iconUrl: '{{asset('/images/user.svg')}}'});
+    function addRowTable(code, coords, type, created){
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
+        td.className = `type${type}`;
+        td.textContent = `${code}:${created}`;
+        tr.appendChild(td);
+        tr.onclick = function(){map.flyTo(coords, 17);};
+        document.getElementById("t_points").appendChild(tr);
+    }
+
+    var icon = new LeafIcon({iconUrl: '{{asset('/images/user.svg')}}'});
+    var buffers = [];
     function addMarker(name, lat, lng, staffMap){
         var p = L.marker([lat,lng], {icon: icon})
             .bindTooltip(name)
             .openTooltip();
         p.title = name;
         p.alt = name;
+        addRowTable(name, [lat,lng], staffMap.staff_id, staffMap.created_at);
         let content = generateContent(staffMap);
         p.bindPopup(content)
         .openPopup();
@@ -64,10 +83,10 @@
     function generateContent(staffMap)
     {
         var content = `<div class="text-center">
-            <h5><a href="{{ route('user.show', '') }}/${staffMap.id}" target="_blank">${staffMap.name}</a></h5>
-        <div class="thumbnail-cicel" style="width:100px; height:100px;">
+        <div class="thumbnail-cicel border-0 mb-1" style="width:100px; height:100px; margin: 0px auto;">
             <a href="{{ route('user.show', '') }}/${staffMap.id}" target="_blank"><img src="${ staffMap.thumbnail ? staffMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${staffMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
-        </div></div>`;
+        </div><h5><a href="{{ route('user.show', '') }}/${staffMap.id}" target="_blank">${staffMap.name}</a></h5>
+            <div>${staffMap.created_at}</div></div>`;
         return content;
     }
 

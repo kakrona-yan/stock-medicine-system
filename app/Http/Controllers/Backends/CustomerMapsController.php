@@ -84,7 +84,7 @@ class CustomerMapsController extends Controller
     {
         $staffMaps = [];
         try {
-            $staffMaps = $this->staffGPSMap->get();
+            $staffMaps = $this->staffGPSMap->whereDate('created_at', date('Y-m-d'))->get();
             foreach ($staffMaps as $staffMap) {
                 $staffMap["name"] = $staffMap->staff->name;
                 $staffMap["thumbnail"] = $staffMap->staff->getStaffImagePath($staffMap->staff->thumbnail);
