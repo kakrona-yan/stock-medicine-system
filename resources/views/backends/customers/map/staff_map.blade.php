@@ -14,6 +14,9 @@
 }
 </style>
 @endpush
+<button  class="btn btn-circle btn-danger bn-sp" onclick="openNav()">
+    <i class="fas fa-plus"></i>
+</button>
 <div class="map-customer staff-custom">
     <div class="row">
         <div class="col-12 col-md-2 px-1">
@@ -101,5 +104,8 @@
             }
         }
     });
+    function openNav() {
+        $("#menu-plus").toggleClass( "active" );
+    }
 </script>
 @endpush
