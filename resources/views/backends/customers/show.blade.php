@@ -125,7 +125,7 @@
                                             <a href="#slae_{{$sale->id}}" data-toggle="collapse" style="text-decoration: none !important;" class="collapsed"><i class="fas fa-minus-circle"></i></a>
                                             @endif
                                         </td>
-                                        <td>{{$sale->quotaion_no}}</td>
+                                        <td style="width: 270px;">{{$sale->quotaion_no}}</td>
                                         <td>{{date('Y-m-d h:i', strtotime($sale->sale_date))}}</td>
                                         <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
                                     </tr>
@@ -142,7 +142,7 @@
                                                         $total +=$productSale->amount;
                                                     @endphp
                                                     <tr class="border-sale">
-                                                        <td style="width: 35.7%;">{{$productSale->product ? $productSale->product->title : '' }}</td>
+                                                        <td style="width: 270px;">{{$productSale->product ? $productSale->product->title : '' }}</td>
                                                         <td>{{$productSale->quantity}}</td>
                                                         <td>{{$productSale->product_free}}</td>
                                                         <td>{{$productSale->rate}}</td>
