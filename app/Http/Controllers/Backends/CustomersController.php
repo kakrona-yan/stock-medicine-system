@@ -11,6 +11,8 @@ use App\Http\Requests\CustomerCreateRequest;
 use App\Http\Requests\CustomerUpdateRequest;
 use App\Http\Constants\UserRole;
 use App\Models\CustomerType;
+use App\Models\Sale;
+use App\Http\Constants\DeleteStatus;
 
 class CustomersController extends Controller
 {
@@ -116,8 +118,13 @@ class CustomersController extends Controller
             if (!$customer) {
                 return response()->view('errors.404', [], 404);
             }
+            $saleCustomers = Sale::where('is_delete', '<>', DeleteStatus::DELETED)
+                ->where('customer_id', $id)
+                ->orderBy('id', 'DESC')
+                ->get();
             return view('backends.customers.show', [
                 'customer' => $customer,
+                'saleCustomers' => $saleCustomers
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'customers.show');

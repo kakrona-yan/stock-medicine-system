@@ -40,16 +40,21 @@
                 </li>
             </ol>
         </nav>
-        <a href="{{route('customer.index')}}" 
-            class="btn btn-circle btn-primary"
-            data-toggle="tooltip" 
-            data-placement="left" title="" 
-            data-original-title="{{__('customer.sub_title')}}"
-        ><i class="fas fa-list"></i> {{__('customer.sub_title')}}</a>
+        <div class="d-flex">
+            <a href="{{route('customer.index')}}" 
+                class="btn btn-circle btn-primary"
+                data-toggle="tooltip" 
+                data-placement="left" title="" 
+                data-original-title="{{__('customer.sub_title')}}"
+            ><i class="fas fa-list"></i> {{__('customer.sub_title')}}</a>
+            <div class="d-inline-flex justify-content-end" style="width: 49%;">
+                <button  class="btn btn-circle btn-primary" data-toggle="collapse" data-target="#sale-customer">CheckIn</button>
+            </div>
+        </div>
     </div>
     @endif
     <div class="row mb-2">
-        <div class="col-12 tab-card">
+        <div class="col-12 col-md-6 tab-card mb-2">
             <!-- Circle Buttons -->
             <div class="card mb-4">
                 <div id="customerList" class="card-body collapse show">
@@ -93,6 +98,71 @@
                                 <a href="{{route('customer.index')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100">{{__('button.return')}}</a>
                             </div>
                         </div><!--/tab-add-customer-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 tab-card mb-2">
+            <!-- Circle Buttons -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3>ប្រវត្តិការទិញ</h3>
+                    <div id="sale-customer" class="table-responsive collapse">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>{{__('sale.list.invoice_code')}}</th>
+                                    <th>{{__('sale.list.sale_date')}}</th>
+                                    <th>{{__('sale.list.staff_name')}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach( $saleCustomers as $sale)
+                                    <tr>
+                                        <td class="text-center" rowspan="2">
+                                            @if ($sale->productSales->count() > 0)
+                                            <a href="#slae_{{$sale->id}}" data-toggle="collapse" style="text-decoration: none !important;" class="collapsed"><i class="fas fa-minus-circle"></i></a>
+                                            @endif
+                                        </td>
+                                        <td>{{$sale->quotaion_no}}</td>
+                                        <td>{{date('Y-m-d h:i', strtotime($sale->sale_date))}}</td>
+                                        <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                    </tr>
+                                    @if ($sale->productSales->count() > 0)
+                                    <tr>
+                                        <td colspan="9" id="slae_{{$sale->id}}" class="collapse p-0">
+                                            <table class="table table-borderless mb-0">
+                                                <tbody>
+                                                @php
+                                                    $total = 0;
+                                                @endphp
+                                                @foreach ($sale->productSales as $productSale)
+                                                    @php
+                                                        $total +=$productSale->amount;
+                                                    @endphp
+                                                    <tr class="border-sale">
+                                                        <td style="width: 35.7%;">{{$productSale->product ? $productSale->product->title : '' }}</td>
+                                                        <td>{{$productSale->quantity}}</td>
+                                                        <td>{{$productSale->product_free}}</td>
+                                                        <td>{{$productSale->rate}}</td>
+                                                        <td>{{$productSale->amount}}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr class="border-sale--top">
+                                                        <td colspan="4" class="text-right text-primary">{{__('sale.list.total')}}</td>
+                                                        <td>{{currencyFormat($sale->total_amount)}}</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
