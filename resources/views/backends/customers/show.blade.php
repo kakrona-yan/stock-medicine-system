@@ -142,7 +142,7 @@
                                                         $total +=$productSale->amount;
                                                     @endphp
                                                     <tr class="border-sale">
-                                                        <td style="width: 270px;">{{$productSale->product ? $productSale->product->title : '' }}</td>
+                                                        <td style="width: 269px;">{{$productSale->product ? $productSale->product->title : '' }}</td>
                                                         <td>{{$productSale->quantity}}</td>
                                                         <td>{{$productSale->product_free}}</td>
                                                         <td>{{$productSale->rate}}</td>
