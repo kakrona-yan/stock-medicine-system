@@ -6,19 +6,24 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.css" />
 <link href="{{ asset('css/map.css') }}" rel="stylesheet">
 @endpush
+<button  class="btn btn-circle btn-danger bn-sp" onclick="openNav()">
+    <i class="fas fa-plus"></i>
+</button>
 <div class="map-customer">
     <div class="row">
         <div class="col-12 col-md-2 px-1">
+            @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
             <div class="mt-1 mb-3 px-1">
-                <a href="{{route('map.gps.staff')}}" class="btn btn-circle btn-danger w-100"><i class="fas fa-map-marker-alt mr-1"></i> GPSបុគ្គលិក</a>
+                <a href="{{route('map.gps.staff')}}" class="btn btn-circle btn-primary w-100"><i class="fas fa-map-marker-alt mr-1"></i> GPSបុគ្គលិក</a>
             </div>
+            @endif
             <div class="input-group mb-3 px-1">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-arrows-alt"></i></span>
                 </div>
                 <input class="form-control" id="range" type="number" value='0' min='0' step="10"/>
             </div>
-            <div class="sidebar-map">
+            <div id="menu-plus" class="sidebar-map">
                 <table class="table table-bordered">
                     <tbody id="t_points"></tbody>
                 </table>
@@ -160,5 +165,10 @@
         e.addTo(map);
     });
     });
+</script>
+<script>
+function openNav() {
+    $("#menu-plus").toggleClass( "active" );
+}
 </script>
 @endpush
