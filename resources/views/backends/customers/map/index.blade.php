@@ -62,7 +62,7 @@
         }
     });
     // please replace this with your own mapbox token!
-    var token = "pk.eyJ1Ijoia2Frcm9uYSIsImEiOiJja2Npb2pydDUxOGZ0MnFvM295c2ZheTBzIn0.TUFSHv9qw6SPV5_aYjS2hQ";
+    var token = "pk.eyJ1Ijoia2Frcm9uYSIsImEiOiJja2NpcGF3cmsxMWlvMnhxcXZiajVvYno1In0.OdwnfS9n5Wv9qPQCtI-loA";
     var mapboxUrl = 'https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/{z}/{x}/{y}@2x?access_token=' + token;
     var mapboxAttrib = 'Map data © <a href="http://osm.org/copyright">OpenStreetMap</a> contributors. Tiles from <a href="https://www.mapbox.com">Mapbox</a>.';
     var mapbox = new L.TileLayer(mapboxUrl, {
