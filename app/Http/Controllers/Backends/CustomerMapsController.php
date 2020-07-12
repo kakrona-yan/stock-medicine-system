@@ -66,11 +66,12 @@ class CustomerMapsController extends Controller
                     'start_date_place' => date('Y-m-d h:i:s')
                 ]);
             }
-            
-            return responseSuccess(
-                \Session::flash('warning', __('flash.update')),
-                    ['danger', 'danger']
-                );
+            return response()
+            ->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => "checkin បានជោគជ័យ"
+            ]);
         } catch (Exception $e) {
             return response()
             ->json([

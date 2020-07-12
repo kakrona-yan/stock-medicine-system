@@ -5,6 +5,20 @@
 <link rel="stylesheet" href="//unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.css" />
 <link href="{{ asset('css/map.css') }}" rel="stylesheet">
+<style>
+.leaflet-popup-content p{
+    margin: 7px 0;
+}
+.checkin{
+    cursor: pointer;
+}
+#alert-success {
+    position: absolute;
+    z-index: 999;
+    top: 10px;
+    right: 10px;
+}
+</style>
 @endpush
 <button  class="btn btn-circle btn-danger bn-sp" onclick="openNav()">
     <i class="fas fa-plus"></i>
@@ -34,6 +48,7 @@
         </div>
     </div>
 </div>
+<div id="alert-success"></div>
 @endsection
 @push('footer-script')
 <script src="//polyfill.io/v3/polyfill.min.js?features=default"></script>
@@ -111,16 +126,21 @@
 
     function generateContent(customerMap)
     {
+        let phone2 = customerMap.phone2 ? `-${customerMap.phone2}` : '';
+        let latitude = customerMap.latitude;
+        let longitude = customerMap.longitude;
+
         var content = `<div class="row">
         <div class="col-4 col-md-3 mb-2 px-0">
             <a href="{{ route('customer.show', '') }}/${customerMap.id}"><img src="${ customerMap.thumbnail ? customerMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${customerMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
         </div>
         <div class="col-8 col-md-9">
             <h5><a href="{{ route('customer.show', '') }}/${customerMap.id}">${customerMap.customer_type.name} ${customerMap.name}</a></h5>
-            <p><i class="fas fa-map-marker-alt"></i> <span>${customerMap.address}</span></p>`;
+            <p><i class="fas fa-map-pin"></i> <span>${customerMap.address}</span></p>`;
             if(customerMap.phone1){
-             content += `<p><i class="fas fa-phone-square-alt text-success my-1 mr-1"></i>${customerMap.phone1}-${customerMap.phone2}</p>`;
+             content += `<p><i class="fas fa-phone-square-alt text-success my-1 mr-1"></i>${customerMap.phone1}${phone2}</p>`;
             }
+        content +=`<p onclick="mapCheckIn(${latitude},${longitude} )" class="checkin"><i class="fas fa-map-marker-alt text-danger"></i> checkin</p>`;
         content +=`</div>`;
         @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
         if(customerMap.sales && customerMap.sales[0] && customerMap.sales[0].staff) {
@@ -141,6 +161,38 @@
         return content;
     }
 
+    function mapCheckIn(latitude, longitude){
+        $.ajax({
+            url     : "{{route('map.gps')}}",
+            method  : "POST",
+            data    : {
+                "_token": "{{ csrf_token() }}",
+                "latitude": latitude,
+                "longitude": longitude
+            },
+            dataType: 'json',
+            success : function (json) {
+                if(json.code == 200){
+                    let html = `<div class="alert alert-success alert-dismissible fade show" id="checksuccess">
+                            <strong><i class="fas fa-info-circle"></i> ${json.message}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>`;
+                    $("#alert-success").html(html);
+
+                    window.setTimeout(function() {
+                        $("#checksuccess").fadeTo(500, 0).slideUp(500, function() {
+                            $(this).remove();
+                        });
+                    }, 5000);
+                }
+            },
+            error: function(json){
+                $("html, body").animate({ scrollTop: 0 }, 500);
+            }
+        });
+    }
     $(document).ready(function (){
         var customerMaps = @json($customerMaps);
         for(customerMap in customerMaps) {
@@ -160,15 +212,15 @@
 
     $("#range").change(function(e){
     var radius = parseInt($(this).val())
-    buffers.forEach(function(e){
-        e.setRadius(radius);
-        e.addTo(map);
-    });
+        buffers.forEach(function(e){
+            e.setRadius(radius);
+            e.addTo(map);
+        });
     });
 </script>
 <script>
-function openNav() {
-    $("#menu-plus").toggleClass( "active" );
-}
+    function openNav() {
+        $("#menu-plus").toggleClass( "active" );
+    }
 </script>
 @endpush
