@@ -53,7 +53,7 @@ class CustomerMapsController extends Controller
                 ->where("longitude", $request->longitude)
                 ->orderBy('id', 'desc')->first();
             if($staffGPSMap){
-                if($staffGPSMap->end_date_place && $staffGPSMap->latitude != $request->latitude){
+                if($staffId ==  $staffGPSMap->staff_id && $staffGPSMap->latitude != $request->latitude){
                     $staffGPSMap->update([
                         'end_date_place' => date('Y-m-d h:i:s')
                     ]);
