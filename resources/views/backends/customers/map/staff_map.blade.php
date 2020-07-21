@@ -85,11 +85,12 @@
 
     function generateContent(staffMap)
     {
+        let end_date_place = staffMap.end_date_place ? '-'+staffMap.end_date_place : '';
         var content = `<div class="text-center">
         <div class="thumbnail-cicel border-0 mb-1" style="width:100px; height:100px; margin: 0px auto;">
             <a href="{{ route('user.show', '') }}/${staffMap.id}" target="_blank"><img src="${ staffMap.thumbnail ? staffMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${staffMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
         </div><h5><a href="{{ route('user.show', '') }}/${staffMap.id}" target="_blank">${staffMap.name}</a></h5>
-            <div>${staffMap.created_at}</div></div>`;
+            <div>${staffMap.start_date_place}${end_date_place}</div></div>`;
         return content;
     }
 
