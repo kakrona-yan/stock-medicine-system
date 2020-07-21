@@ -206,7 +206,7 @@
             method  : "POST",
             data    : {
                 "_token": "{{ csrf_token() }}",
-                "cusstomre_id" : customerId,
+                "customer_id" : customerId,
                 "latitude": latitude,
                 "longitude": longitude
             },
