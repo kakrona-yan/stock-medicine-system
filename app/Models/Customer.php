@@ -44,6 +44,11 @@ class Customer extends BaseModel
         return $this->hasMany('App\Models\CustomerOwed', 'customer_id', 'id');
     }
     
+    public function staffGPSMaps()
+    {
+        return $this->hasMany('App\Models\StaffGPSMap', 'customer_id', 'id');
+    }
+
     public function filter($request)
     {
         $customer = $this->where('is_delete', '<>', DeleteStatus::DELETED)
@@ -114,6 +119,12 @@ class Customer extends BaseModel
         if (Storage::disk(config('upload.customer'))->exists($path)) {
             return Storage::disk(config('upload.customer'))->url($path);
         }
+    }
+
+    public function countCheckInByStaff()
+    {
+        if(\Auth::user()->isRoleAdmin() || \Auth::user()->isRoleEditor() || \Auth::user()->isRoleView()) return true;
+        return $this->staffGPSMaps()->exists() && $this->staffGPSMaps()->whereDate('start_date_place', date('Y-m-d'))->first() ? true : false;
     }
 
 }

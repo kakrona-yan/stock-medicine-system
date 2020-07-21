@@ -143,18 +143,19 @@
         let phone2 = customerMap.phone2 ? `-${customerMap.phone2}` : '';
         let latitude = customerMap.latitude;
         let longitude = customerMap.longitude;
+        let customerId = customerMap.id;
 
         var content = `<div class="row">
         <div class="col-4 col-md-3 mb-2 px-0">
-            <a href="{{ route('customer.show', '') }}/${customerMap.id}"><img src="${ customerMap.thumbnail ? customerMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${customerMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
+            <img src="${ customerMap.thumbnail ? customerMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${customerMap.name}" class="align size-medium_large" width="300" style="max-width:100%">
         </div>
         <div class="col-8 col-md-9">
-            <h5><a href="{{ route('customer.show', '') }}/${customerMap.id}">${customerMap.customer_type.name} ${customerMap.name}</a></h5>
+            <h5>${customerMap.customer_type.name} ${customerMap.name}</h5>
             <p><i class="fas fa-map-pin"></i> <span>${customerMap.address}</span></p>`;
             if(customerMap.phone1){
              content += `<p><i class="fas fa-phone-square-alt text-success my-1 mr-1"></i>${customerMap.phone1}${phone2}</p>`;
             }
-        content +=`<p onclick="mapCheckIn(${latitude},${longitude} )" class="checkin"><i class="fas fa-map-marker-alt text-danger"></i> checkin</p>`;
+        content +=`<p onclick="mapCheckIn(${customerId}, ${latitude},${longitude} )" class="checkin"><i class="fas fa-map-marker-alt text-danger"></i> checkin</p>`;
         content +=`</div>`;
         @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
         if(customerMap.sales && customerMap.sales[0] && customerMap.sales[0].staff) {
@@ -181,6 +182,7 @@
             method  : "POST",
             data    : {
                 "_token": "{{ csrf_token() }}",
+                "cusstomre_id" : customerId,
                 "latitude": latitude,
                 "longitude": longitude
             },

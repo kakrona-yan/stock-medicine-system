@@ -15,7 +15,8 @@ class CreateStaffGpsMapsTable extends Migration
     {
         Schema::create('staff_gps_maps', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('staff_id')->length(11);
+            $table->integer('customer_id')->length(11)->default(1);
+            $table->integer('staff_id')->length(11)->default(1);
             $table->string('latitude', 255)->nullable();
             $table->string('longitude', 255)->nullable();
             $table->dateTime('start_date_place');

@@ -61,6 +61,7 @@ class CustomerMapsController extends Controller
             } else {
                 $this->staffGPSMap->create([
                     'staff_id' => $staffId,
+                    'customer_id' => $request->customer_id,
                     'latitude' => $request->latitude,
                     'longitude' =>$request->longitude,
                     'start_date_place' => date('Y-m-d h:i:s')

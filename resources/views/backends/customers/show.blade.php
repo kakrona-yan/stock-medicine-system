@@ -107,63 +107,65 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h3>ប្រវត្តិការទិញ</h3>
-                    <div id="sale-customer" class="table-responsive collapse show">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>{{__('sale.list.invoice_code')}}</th>
-                                    <th>{{__('sale.list.sale_date')}}</th>
-                                    <th>{{__('sale.list.staff_name')}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach( $saleCustomers as $sale)
+                    @if($customer->countCheckInByStaff())
+                        <div id="sale-customer" class="table-responsive collapse show">
+                            <table class="table table-bordered">
+                                <thead>
                                     <tr>
-                                        <td class="text-center" rowspan="2">
-                                            @if ($sale->productSales->count() > 0)
-                                            <a href="#slae_{{$sale->id}}" data-toggle="collapse" style="text-decoration: none !important;" class="collapsed"><i class="fas fa-minus-circle"></i></a>
-                                            @endif
-                                        </td>
-                                        <td style="width: 270px;">{{$sale->quotaion_no}}</td>
-                                        <td>{{date('Y-m-d h:i', strtotime($sale->sale_date))}}</td>
-                                        <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                        <th class="text-center">#</th>
+                                        <th>{{__('sale.list.invoice_code')}}</th>
+                                        <th>{{__('sale.list.sale_date')}}</th>
+                                        <th>{{__('sale.list.staff_name')}}</th>
                                     </tr>
-                                    @if ($sale->productSales->count() > 0)
-                                    <tr>
-                                        <td colspan="9" id="slae_{{$sale->id}}" class="collapse p-0">
-                                            <table class="table table-borderless mb-0">
-                                                <tbody>
-                                                @php
-                                                    $total = 0;
-                                                @endphp
-                                                @foreach ($sale->productSales as $productSale)
+                                </thead>
+                                <tbody>
+                                    @foreach( $saleCustomers as $sale)
+                                        <tr>
+                                            <td class="text-center" rowspan="2">
+                                                @if ($sale->productSales->count() > 0)
+                                                <a href="#slae_{{$sale->id}}" data-toggle="collapse" style="text-decoration: none !important;" class="collapsed"><i class="fas fa-minus-circle"></i></a>
+                                                @endif
+                                            </td>
+                                            <td style="width: 270px;">{{$sale->quotaion_no}}</td>
+                                            <td>{{date('Y-m-d h:i', strtotime($sale->sale_date))}}</td>
+                                            <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
+                                        </tr>
+                                        @if ($sale->productSales->count() > 0)
+                                        <tr>
+                                            <td colspan="9" id="slae_{{$sale->id}}" class="collapse p-0">
+                                                <table class="table table-borderless mb-0">
+                                                    <tbody>
                                                     @php
-                                                        $total +=$productSale->amount;
+                                                        $total = 0;
                                                     @endphp
-                                                    <tr class="border-sale">
-                                                        <td style="width: 269px;">{{$productSale->product ? $productSale->product->title : '' }}</td>
-                                                        <td>{{$productSale->quantity}}</td>
-                                                        <td>{{$productSale->product_free}}</td>
-                                                        <td>{{$productSale->rate}}</td>
-                                                        <td>{{$productSale->amount}}</td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr class="border-sale--top">
-                                                        <td colspan="4" class="text-right text-primary">{{__('sale.list.total')}}</td>
-                                                        <td>{{currencyFormat($sale->total_amount)}}</td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    @endif
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                                    @foreach ($sale->productSales as $productSale)
+                                                        @php
+                                                            $total +=$productSale->amount;
+                                                        @endphp
+                                                        <tr class="border-sale">
+                                                            <td style="width: 269px;">{{$productSale->product ? $productSale->product->title : '' }}</td>
+                                                            <td>{{$productSale->quantity}}</td>
+                                                            <td>{{$productSale->product_free}}</td>
+                                                            <td>{{$productSale->rate}}</td>
+                                                            <td>{{$productSale->amount}}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr class="border-sale--top">
+                                                            <td colspan="4" class="text-right text-primary">{{__('sale.list.total')}}</td>
+                                                            <td>{{currencyFormat($sale->total_amount)}}</td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -10,6 +10,7 @@ class StaffGPSMap extends Model
     protected $table = 'staff_gps_maps';
 
     protected $fillable = [
+        'customer_id',
         'staff_id',
         'latitude',
         'longitude',
@@ -27,5 +28,10 @@ class StaffGPSMap extends Model
     public function staff()
     {
         return $this->belongsTo('App\Models\Staff', 'staff_id');
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer', 'customer_id');
     }
 }
