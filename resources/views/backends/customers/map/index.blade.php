@@ -200,7 +200,7 @@
         return content;
     }
 
-    function mapCheckIn(latitude, longitude){
+    function mapCheckIn(customerId, latitude, longitude){
         $.ajax({
             url     : "{{route('map.gps')}}",
             method  : "POST",
