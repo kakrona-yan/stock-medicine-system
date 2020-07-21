@@ -120,6 +120,7 @@
             method  : "POST",
             data    : {
                 "_token": "{{ csrf_token() }}",
+                "customer_id": 0,
                 "latitude": e.latitude,
                 "longitude": e.longitude
             },
