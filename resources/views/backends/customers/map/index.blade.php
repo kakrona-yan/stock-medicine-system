@@ -22,7 +22,7 @@
     top: 10px;
     right: 10px;
 }
-.leaflet-container, span, p, div{
+.leaflet-container{
     font-family: "KhmerOSBattambang-Regular", Helvetica, Arial, sans-serif !important;
 }
 </style>

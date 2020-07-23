@@ -12,7 +12,7 @@
     justify-content: center;
     align-items: center;
 }
-.leaflet-container, span, p, div{
+.leaflet-container{
     font-family: "KhmerOSBattambang-Regular", Helvetica, Arial, sans-serif !important;
 }
 .leaflet-popup-content p {
