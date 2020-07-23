@@ -71,6 +71,7 @@ class CustomerMapsController extends Controller
             ->json([
                 'status' => 'success',
                 'code' => 200,
+                'customer_id' => $request->customer_id,
                 'message' => "checkin បានជោគជ័យ"
             ]);
         } catch (Exception $e) {
@@ -86,7 +87,7 @@ class CustomerMapsController extends Controller
     {
         $staffMaps = [];
         try {
-            $staffMaps = $this->staffGPSMap->whereDate('created_at', date('Y-m-d'))->get();
+            $staffMaps = $this->staffGPSMap->with("customer")->whereDate('start_date_place', date('Y-m-d'))->get();
             foreach ($staffMaps as $staffMap) {
                 $staffMap["name"] = $staffMap->staff->name;
                 $staffMap["thumbnail"] = $staffMap->staff->getStaffImagePath($staffMap->staff->thumbnail);

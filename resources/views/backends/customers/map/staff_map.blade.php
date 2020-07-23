@@ -12,6 +12,15 @@
     justify-content: center;
     align-items: center;
 }
+.leaflet-container, span, p, div{
+    font-family: "KhmerOSBattambang-Regular", Helvetica, Arial, sans-serif !important;
+}
+.leaflet-popup-content p {
+    margin: 10px 0;
+}
+.thumbnail-cicel {
+    box-shadow: 0 1px 5px 1px rgb(255 255 255), 0 1px 5px 1px rgb(255 255 255);
+}
 </style>
 @endpush
 <div class="row sp-staff-block">
@@ -108,12 +117,18 @@
 
     function generateContent(staffMap)
     {
+        console.log(staffMap);
         let end_date_place = staffMap.end_date_place ? '-'+staffMap.end_date_place : '';
+        let customerName = staffMap.customer ? staffMap.customer.name : '';
         var content = `<div class="text-center">
         <div class="thumbnail-cicel border-0 mb-1" style="width:100px; height:100px; margin: 0px auto;">
             <a href="{{ route('user.show', '') }}/${staffMap.id}" target="_blank"><img src="${ staffMap.thumbnail ? staffMap.thumbnail : '{{asset('images/no-avatar.jpg')}}'}" alt="${staffMap.name}" class="align size-medium_large" width="300" style="max-width:100%"></a>
-        </div><h5><a href="{{ route('user.show', '') }}/${staffMap.id}" target="_blank">${staffMap.name}</a></h5>
-            <div>${staffMap.start_date_place}${end_date_place}</div></div>`;
+        </div>
+        <div style="text-align: left;">
+        <p><a href="{{ route('user.show', '') }}/${staffMap.id}" target="_blank"><i class="fas fa-user-tie"></i> ${staffMap.name}</a></p>
+        <p><a href="{{ route('customer.show', '') }}/${staffMap.customer_id}" target="_blank"><i class="fas fa-user-md"></i> ${customerName}</a></p>
+        <div><i class="far fa-clock"></i> ${staffMap.start_date_place}${end_date_place}</div></div>
+        </div>`;
         return content;
     }
 

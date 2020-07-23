@@ -11,12 +11,19 @@
 }
 .checkin{
     cursor: pointer;
+    background: #31696d;
+    display: inline-block;
+    padding: 3px 10px;
+    color: #fff;
 }
 #alert-success {
     position: absolute;
     z-index: 999;
     top: 10px;
     right: 10px;
+}
+.leaflet-container, span, p, div{
+    font-family: "KhmerOSBattambang-Regular", Helvetica, Arial, sans-serif !important;
 }
 </style>
 @endpush
@@ -79,6 +86,7 @@
 <script src="//ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
 <script src="//cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
 <script defer>
+  
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -224,6 +232,7 @@
                     window.setTimeout(function() {
                         $("#checksuccess").fadeTo(500, 0).slideUp(500, function() {
                             $(this).remove();
+                            window.location.href = '{{route("customer.show", "")}}/'+json.code.customer_id
                         });
                     }, 5000);
                 }

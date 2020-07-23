@@ -115,8 +115,8 @@ class CustomersController extends Controller
     {
         try {
             $customer = $this->customer->available($id);
-            if (!$customer) {
-                return response()->view('errors.404', [], 404);
+            if (!$customer->exists()) {
+                return abort(404);
             }
             $saleCustomers = Sale::where('is_delete', '<>', DeleteStatus::DELETED)
                 ->where('customer_id', $id)
@@ -141,8 +141,8 @@ class CustomersController extends Controller
         try {
             $customerName = $this->customerType->getCustomerTypeName();
             $customer = $this->customer->available($id);
-            if (!$customer) {
-                return response()->view('errors.404', [], 404);
+            if (!$customer->exists()) {
+                return abort(404);
             }
             return view('backends.customers.edit', [
                 'request' => $request,
