@@ -221,6 +221,7 @@
             dataType: 'json',
             success : function (json) {
                 if(json.code == 200){
+                    window.location.href = '{{route("customer.show", "")}}/'+json.customer_id
                     let html = `<div class="alert alert-success alert-dismissible fade show" id="checksuccess">
                             <strong><i class="fas fa-info-circle"></i> ${json.message}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -232,7 +233,6 @@
                     window.setTimeout(function() {
                         $("#checksuccess").fadeTo(500, 0).slideUp(500, function() {
                             $(this).remove();
-                            window.location.href = '{{route("customer.show", "")}}/'+json.code.customer_id
                         });
                     }, 5000);
                 }
