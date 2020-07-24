@@ -33,8 +33,6 @@ class DashboardController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10, ['*'], 'product-page');
         $sales  = $this->sale->where('is_delete', '<>', DeleteStatus::DELETED)
-            ->whereYear('sale_date', date('Y'))
-            ->whereMonth('sale_date', date('m'))
             ->orderBy('id', 'desc');
         // login of staff
         if(\Auth::user()->isRoleStaff()) {
