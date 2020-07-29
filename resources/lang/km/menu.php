@@ -13,5 +13,6 @@ return [
     'view_site' => 'មើលគេហទំព័រ',
     'customer_type' => 'ប្រភេទអតិថិជន',
     'customer_owed' => 'ប្រាក់ជំពាក់',
-    'customer_map' => 'អតិថិជន MAP'
+    'customer_map' => 'អតិថិជន MAP',
+    'staff_check_in' => 'បុគ្គលិកCHECKIN'
 ];

@@ -30,7 +30,7 @@
         ><i class="fas fa-list"></i> {{__('staff.sub_title')}}</a>
     </div>
     <div class="row mb-2">
-        <div class="col-12 tab-card">
+        <div class="col-12 col-md-6 tab-card">
             <!-- Circle Buttons -->
             <div class="card mb-4">
                 <div id="staffList" class="card-body collapse show">
@@ -75,10 +75,53 @@
                               </table>
                             <div class="form-group w-100 w-md-50 d-inline-flex">
                                 <a href="{{route('staff.edit', $staff->id)}}" class="btn btn-circle btn-primary w-100 w-md-50 mw-100 mr-2">{{__('button.edit')}}</a>
-                                <a href="{{route('staff.index')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100">{{__('button.return')}}</a>
+                                <a href="{{route('staff.checkin')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100 mr-2">{{__('menu.staff_check_in')}}</a>
+                                <a href="{{route('staff.index')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100">{{__('menu.staff')}}</a>
                             </div>
                         </div><!--/tab-add-staff-->
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 tab-card mb-2">
+            <!-- Circle Buttons -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3>CHECKINរបស់បុគ្គលិកប្រចាំថ្ងៃ</h3>
+                    <div id="sale-customer" class="table-responsive collapse show">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>{{__('customer.list.name')}}</th>
+                                        <th>{{__('customer.list.created_at')}}</th>
+                                        <th>មើលលំអិត</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach( $gpsStaffs as $gpsStaff)
+                                        <tr>
+                                            <td>{{$gpsStaff->customer ? $gpsStaff->customer->customerFullName() : ''}}</td>
+                                            <td>{{date('Y-m-d h:i', strtotime($gpsStaff->start_date_place))}}</td>
+                                            <td class="text-center">
+                                                <a class="btn btn-circle btn-circle btn-sm btn-info btn-circle" 
+                                                    data-toggle="tooltip" 
+                                                    data-placement="top"
+                                                    data-original-title="{{__('button.show')}}"
+                                                    href="{{route('customer.show', $gpsStaff->customer->id)}}"
+                                                ><i class="far fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                <tfooter>
+                                        <tr>
+                                            <td colspan="2" class="text-right">អតិថិជនសរុប</td>
+                                            <td>{{$gpsStaffs->count()}}នាក់</td>
+                                        </tr>
+                                </tfooter>
+                            </table>
+                        </div>
                 </div>
             </div>
         </div>

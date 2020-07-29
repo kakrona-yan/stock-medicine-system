@@ -95,6 +95,7 @@ Route::group(
                 Route::get('/create', 'StaffsController@create')->name('create');
                 Route::post('/store', 'StaffsController@store')->name('store');
                 Route::get('/show/{id}', 'StaffsController@show')->name('show');
+                
                 Route::get('/edit/{id}', 'StaffsController@edit')->name('edit');
                 Route::post('/update/{id}', 'StaffsController@update')->name('update');
                 Route::post('/destroy', 'StaffsController@destroy')->name('destroy');
@@ -177,6 +178,8 @@ Route::group(
                     ->name('map.gps');
             Route::get('staff/map_gps', 'CustomerMapsController@staffGPSMap')
                     ->name('map.gps.staff');
+            Route::get('staffs/checkin', 'CustomerMapsController@staffCheckinList')
+                    ->name('staff.checkin');
         });
     }
 );

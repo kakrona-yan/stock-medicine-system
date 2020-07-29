@@ -84,6 +84,14 @@ class Menu
                 'sub_menu' => null
             ],
             [
+                // staff checkin management
+                'route' => 'staff.checkin',
+                'icon' => 'fas fa-map',
+                'label' => __('menu.staff_check_in'),
+                'role_type' => $this->RoleType('customer_map.index'),
+                'sub_menu' => null
+            ],
+            [
                 // Sale management
                 'route' => 'sale.index',
                 'icon' => 'far fa-newspaper',

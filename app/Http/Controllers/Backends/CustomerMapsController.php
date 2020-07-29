@@ -6,15 +6,23 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\StaffGPSMap;
+use App\Models\Staff;
+use App\Models\User;
+use App\Http\Constants\UserRole;
+use App\Models\GroupStaff;
 
 class CustomerMapsController extends Controller
 {
     public function __construct(
         Customer $customer,
-        StaffGPSMap $staffGPSMap
+        StaffGPSMap $staffGPSMap,
+        Staff $staff,
+        GroupStaff $groupStaff
     ){
         $this->customer = $customer;
         $this->staffGPSMap = $staffGPSMap;
+        $this->staff = $staff;
+        $this->groupStaff = $groupStaff;
     }
 
     public function index(Request $request)
@@ -103,6 +111,29 @@ class CustomerMapsController extends Controller
             ]);
         }catch (\ValidationException $e) {
             return exceptionError($e, 'customers.map.index');
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function staffCheckinList(Request $request)
+    {
+        try {
+            $staffs  = $this->staff->filter($request);
+            $genders = UserRole::USER_GANDER_TEXT_EN;
+            $groupStaffs  = $this->groupStaff->filter($request);
+
+            return view('backends.staffs.checkin', [
+                'request' => $request,
+                'staffs' =>  $staffs,
+                'genders' => $genders,
+                'groupStaffs' => $groupStaffs
+            ]);
+        }catch (\ValidationException $e) {
+            return exceptionError($e, 'backends.staffs.index');
         }
     }
 }

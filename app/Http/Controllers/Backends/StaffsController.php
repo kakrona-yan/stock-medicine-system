@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Http\Constants\UserRole;
 use App\Models\GroupStaff;
 use App\Http\Constants\DeleteStatus;
+use App\Models\ StaffGPSMap;
 
 class StaffsController extends Controller
 {
@@ -140,11 +141,13 @@ class StaffsController extends Controller
     {
         try {
             $staff = $this->staff->available($id);
-            if (!$staff) {
-                return response()->view('errors.404', [], 404);
+            if (!$staff->exists()) {
+                return abort(404);
             }
+            $gpsStaffs = StaffGPSMap::where('staff_id', $staff->id)->whereDate('start_date_place', date('Y-m-d'))->get();
             return view('backends.staffs.show', [
                 'staff' => $staff,
+                'gpsStaffs' => $gpsStaffs
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.staffs.show');
@@ -161,8 +164,8 @@ class StaffsController extends Controller
     {
         try {
             $staff = $this->staff->available($id);
-            if (!$staff) {
-                return response()->view('errors.404', [], 404);
+            if (!$staff->exists()) {
+                return abort(404);
             }
             $groupStaffNames = $this->groupStaff->getGroupStaffName();
             return view('backends.staffs.edit', [
