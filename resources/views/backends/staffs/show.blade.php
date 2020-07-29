@@ -103,7 +103,7 @@
                                     
                                     @foreach( $gpsStaffs as $gpsStaff)          
                                         <tr>
-                                            <td>{{$gpsStaff->customer ? $gpsStaff->customer->customerFullName() : ''}}</td>
+                                            <td>{{$gpsStaff->customer ? $gpsStaff->customer->customerFullName() : 'ទីតាំងរបស់បុគ្គលិក'}}</td>
                                             <td>{{date('Y-m-d h:i', strtotime($gpsStaff->start_date_place))}}</td>
                                             <td class="text-center">
                                                 <span class="position-relative">
@@ -112,10 +112,12 @@
                                                 </span>
                                             </td>
                                             <td class="text-center">
+                                                @if($gpsStaff->customer)
                                                 <span class="position-relative">
                                                     <a href="{{route('customer_map.index')}}?customer_id={{$gpsStaff->customer_id}}&latitude={{$gpsStaff->latitude}}&longitude={{$gpsStaff->longitude}}"><i class="fas fa-globe-africa"></i>
                                                     <span class="spinner-grow spinner-grow-sm  text-success position-absolute" role="status"></span></a>
                                                 </span>
+                                                @endif
                                             </td>
                                             <td class="text-center">
                                                 @if($gpsStaff->customer)
