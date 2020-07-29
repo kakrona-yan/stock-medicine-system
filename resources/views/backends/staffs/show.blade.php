@@ -94,16 +94,29 @@
                                     <tr>
                                         <th>{{__('customer.list.name')}}</th>
                                         <th>{{__('customer.list.created_at')}}</th>
+                                        <th>ទីតាំងបុគ្គលិក</th>
+                                        <th>ទីតាំងអតិថិជន</th>
                                         <th>មើលលំអិត</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     
-                                    @foreach( $gpsStaffs as $gpsStaff)
-                                       
+                                    @foreach( $gpsStaffs as $gpsStaff)          
                                         <tr>
                                             <td>{{$gpsStaff->customer ? $gpsStaff->customer->customerFullName() : ''}}</td>
                                             <td>{{date('Y-m-d h:i', strtotime($gpsStaff->start_date_place))}}</td>
+                                            <td class="text-center">
+                                                <span class="position-relative">
+                                                    <a href="{{route('map.gps.staff')}}?staff_id={{$gpsStaff->staff_id}}&latitude={{$gpsStaff->latitude}}&longitude={{$gpsStaff->longitude}}"><i class="fas fa-globe-africa"></i>
+                                                    <span class="spinner-grow spinner-grow-sm  text-success position-absolute" role="status"></span></a>
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="position-relative">
+                                                    <a href="{{route('customer_map.index')}}?customer_id={{$gpsStaff->customer_id}}&latitude={{$gpsStaff->latitude}}&longitude={{$gpsStaff->longitude}}"><i class="fas fa-globe-africa"></i>
+                                                    <span class="spinner-grow spinner-grow-sm  text-success position-absolute" role="status"></span></a>
+                                                </span>
+                                            </td>
                                             <td class="text-center">
                                                 @if($gpsStaff->customer)
                                                 <a class="btn btn-circle btn-circle btn-sm btn-info btn-circle" 
@@ -121,7 +134,7 @@
                                 </tbody>
                                 <tfooter>
                                         <tr>
-                                            <td colspan="2" class="text-right">អតិថិជនសរុប</td>
+                                            <td colspan="4" class="text-right">អតិថិជនសរុប</td>
                                             <td>{{$gpsStaffs->count()}}នាក់</td>
                                         </tr>
                                 </tfooter>

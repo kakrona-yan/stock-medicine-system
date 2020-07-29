@@ -32,8 +32,13 @@ class CustomerMapsController extends Controller
             $customerMaps = $this->customer->where('is_delete', '<>', 0)
                 ->where('is_active', 1) // is_delete = 1 and is_active = 1
                 ->with(['customerType', 'sales.staff'])
-                ->orderBy('id', 'DESC')
-                ->get();
+                ->orderBy('id', 'DESC');
+            if ($request->exists('customer_id') && $request->exists('latitude') && $request->exists('longitude')) {
+                $customerMaps->where('id', $request->customer_id)
+                ->where('latitude', $request->latitude)
+                ->where('longitude', $request->longitude);
+            }
+            $customerMaps = $customerMaps->get();
             foreach ($customerMaps as $customerMap) {
                 $customerMap->thumbnail = $this->customer->getCustomerImagePath($customerMap->thumbnail);
             }
@@ -95,14 +100,20 @@ class CustomerMapsController extends Controller
     {
         $staffMaps = [];
         try {
-            $staffMaps = $this->staffGPSMap->with("customer")->whereDate('start_date_place', date('Y-m-d'))->get();
+            $staffMaps = $this->staffGPSMap->with("customer")->whereDate('start_date_place', date('Y-m-d'));
+            if ($request->exists('staff_id') && $request->exists('latitude') && $request->exists('longitude')) {
+                $staffMaps->where('staff_id', $request->staff_id)
+                ->where('latitude', $request->latitude)
+                ->where('longitude', $request->longitude);
+            }
+            $staffMaps = $staffMaps->get();
             foreach ($staffMaps as $staffMap) {
                 $staffMap["name"] = $staffMap->staff->name;
                 $staffMap["thumbnail"] = $staffMap->staff->getStaffImagePath($staffMap->staff->thumbnail);
             }
             $latitude = $staffMaps->count()  ? $staffMaps->average('latitude') : 11.5629411;
             $longitude = $staffMaps->count() ? $staffMaps->average('longitude') : 104.9060205;
-        
+            
             return view('backends.customers.map.staff_map', [
                 'request' => $request,
                 'staffMaps' =>  $staffMaps,
