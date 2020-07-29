@@ -94,7 +94,9 @@
                                 </tbody>
                               </table>
                             <div class="form-group w-100 w-md-50 d-inline-flex">
+                                @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
                                 <a href="{{route('customer.edit', $customer->id)}}" class="btn btn-circle btn-primary w-100 w-md-50 mw-100 mr-2">{{__('button.edit')}}</a>
+                                @endif
                                 <a href="{{route('customer.index')}}" class="btn btn-circle btn-secondary w-100 w-md-50 mw-100">{{__('button.return')}}</a>
                             </div>
                         </div><!--/tab-add-customer-->
