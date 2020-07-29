@@ -49,6 +49,7 @@
                                 <th>{{ __('customer.longitude') }}</th>
                                 <th>{{ __('customer.list.address') }}</th>
                                 <th class="text-center">{{ __('customer.list.map_link') }}</th>
+                                <th>ទីតាំងអតិថិជន</th>
                                 <th class="text-center">{{ __('customer.list.created_at') }}</th>
                                 <th class="text-center">{{ __('customer.list.action') }}</th>
                             </tr>
@@ -84,6 +85,12 @@
                                         </span>
                                     @endif
                                     
+                                </td>
+                                <td class="text-center">
+                                    <span class="position-relative">
+                                        <a href="{{route('customer_map.index')}}?customer_id={{$customer->id}}&latitude={{$customer->latitude}}&longitude={{$customer->longitude}}"><i class="fas fa-globe-africa"></i>
+                                        <span class="spinner-grow spinner-grow-sm  text-success position-absolute" role="status"></span></a>
+                                    </span>
                                 </td>
                                 <td class="text-center">{{ date('Y-m-d', strtotime($customer->created_at)) }}</td>
                                 <td class="text-center">
