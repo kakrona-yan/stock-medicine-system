@@ -98,12 +98,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($gpsStaff->customer)
+                                    
                                     @foreach( $gpsStaffs as $gpsStaff)
+                                       
                                         <tr>
                                             <td>{{$gpsStaff->customer ? $gpsStaff->customer->customerFullName() : ''}}</td>
                                             <td>{{date('Y-m-d h:i', strtotime($gpsStaff->start_date_place))}}</td>
                                             <td class="text-center">
+                                                @if($gpsStaff->customer)
                                                 <a class="btn btn-circle btn-circle btn-sm btn-info btn-circle" 
                                                     data-toggle="tooltip" 
                                                     data-placement="top"
@@ -111,10 +113,11 @@
                                                     href="{{route('customer.show', $gpsStaff->customer->id)}}"
                                                 ><i class="far fa-eye"></i>
                                                 </a>
+                                                @endif
                                             </td>
                                         </tr>
+                                       
                                     @endforeach
-                                    @endif
                                 </tbody>
                                 <tfooter>
                                         <tr>
