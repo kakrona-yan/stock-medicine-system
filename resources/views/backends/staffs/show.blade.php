@@ -98,6 +98,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if($gpsStaff->customer)
                                     @foreach( $gpsStaffs as $gpsStaff)
                                         <tr>
                                             <td>{{$gpsStaff->customer ? $gpsStaff->customer->customerFullName() : ''}}</td>
@@ -113,6 +114,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @endif
                                 </tbody>
                                 <tfooter>
                                         <tr>

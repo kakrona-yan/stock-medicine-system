@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'limit' => 10,
+    'limit' => 15,
     'product_limit' => 12
 ];
