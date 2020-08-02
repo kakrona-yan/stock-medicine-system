@@ -102,6 +102,7 @@ class CustomerMapsController extends Controller
                     'start_date_place' => date('Y-m-d h:i:s')
                 ]);
             }
+            session()->forget(['staff_latitude', 'staff_longitude']);
             return response()
             ->json([
                 'status' => 'success',
