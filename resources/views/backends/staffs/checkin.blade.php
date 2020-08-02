@@ -43,7 +43,6 @@
                                         <th>{{__('customer.list.created_at')}}</th>
                                         <th>ទីតាំងបុគ្គលិក</th>
                                         <th>ទីតាំងអតិថិជន</th>
-                                        <th>មើលលំអិត</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,7 +64,6 @@
                                                 </span>
                                                 @endif
                                             </td>
-                                            <td rowspan="{{$staff->staffGPSMaps->count()}}" class="text-right">{{$staff->staffGPSMaps->count()}}នាក់</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
