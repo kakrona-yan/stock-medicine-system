@@ -36,7 +36,7 @@
                 <tr>
                     <td colspan="2" style="padding: 0px;">
                         <div id="sale-customer" class="table-responsive collapse show">
-                            <table class="table table-borderless mb-0">
+                            <table class="table table-bordered mb-0">
                                 <thead class="thead-light">
                                     <tr>
                                         <th>{{__('customer.list.name')}}</th>
