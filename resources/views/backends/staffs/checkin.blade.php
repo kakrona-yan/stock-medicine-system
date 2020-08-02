@@ -82,7 +82,7 @@
                                 <tfoot>
                                         <tr>
                                             <td colspan="4" class="text-right">អតិថិជនសរុប</td>
-                                            <td>{{$gpsStaffs->count()}}នាក់</td>
+                                            <td>{{$staff->staffGPSMaps->count()}}នាក់</td>
                                         </tr>
                                 </tfoot>
                             </table>
