@@ -197,7 +197,7 @@
              content += `<p><i class="fas fa-phone-square-alt text-success my-1 mr-1"></i>${customerMap.phone1}${phone2}</p>`;
             }
         @if (Session::get('staff_latitude') && Session::get('staff_longitude'))
-        content +=`<p onclick="mapCheckIn(${customerId}, ${latitude},${longitude} )" class="checkin"><i class="fas fa-map-marker-alt text-danger"></i> checkin</p>`;
+        content +=`<p onclick="mapCheckIn(${customerId}, ${latitude}, ${longitude} )" class="checkin"><i class="fas fa-map-marker-alt text-danger"></i> checkin</p>`;
         @endif
         content +=`</div>`;
         @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())

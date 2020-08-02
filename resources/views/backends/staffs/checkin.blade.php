@@ -34,7 +34,7 @@
                 </tr>
                 @if($staff->staffGPSMaps->count() > 0)
                 <tr>
-                    <td colspan="2"　class="pd-0">
+                    <td colspan="2" style="padding: 0px;">
                         <div id="sale-customer" class="table-responsive collapse show">
                             <table class="table table-borderless mb-0">
                                 <thead class="thead-light">
