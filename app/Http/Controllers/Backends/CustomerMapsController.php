@@ -61,6 +61,7 @@ class CustomerMapsController extends Controller
         try {
             session(['staff_latitude' => $request->staff_latitude]);
             session(['staff_longitude' => $request->staff_longitude]);
+            
             return response()
             ->json([
                 'status' => 'success',

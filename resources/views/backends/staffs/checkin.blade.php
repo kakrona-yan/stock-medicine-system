@@ -19,7 +19,7 @@
         </nav>
     </div>
     <div class="table-responsive cus-table">
-        <table class="table table-striped table-bordered">
+        <table class="table table-bordered">
             <thead class="bg-primary text-light">
                 <tr>
                     <th>{{ __('staff.list.name') }}</th>
@@ -32,19 +32,11 @@
                     <td>{{ $staff->getFullnameAttribute() }}</td>
                     <td>{{ $staff->groupStaff ? $staff->groupStaff->name : "-" }}</td>
                 </tr>
+                @if($staff->staffGPSMaps->count() > 0)
                 <tr>
-                    <td colspan="2">
+                    <td colspan="2"　class="pd-0">
                         <div id="sale-customer" class="table-responsive collapse show">
                             <table class="table table-borderless mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>{{__('customer.list.name')}}</th>
-                                        <th>{{__('customer.list.created_at')}}</th>
-                                        <th>ទីតាំងបុគ្គលិក</th>
-                                        <th>ទីតាំងអតិថិជន</th>
-                                        <th>មើលលំអិត</th>
-                                    </tr>
-                                </thead>
                                 <tbody>      
                                     @foreach( $staff->staffGPSMaps as $gpsStaff)          
                                         <tr>
@@ -64,31 +56,15 @@
                                                 </span>
                                                 @endif
                                             </td>
-                                            <td class="text-center">
-                                                @if($gpsStaff->customer)
-                                                <a class="btn btn-circle btn-circle btn-sm btn-info btn-circle" 
-                                                    data-toggle="tooltip" 
-                                                    data-placement="top"
-                                                    data-original-title="{{__('button.show')}}"
-                                                    href="{{route('customer.show', $gpsStaff->customer->id)}}"
-                                                ><i class="far fa-eye"></i>
-                                                </a>
-                                                @endif
-                                            </td>
+                                            <td rowspan="{{$staff->staffGPSMaps->count()}}" class="text-right">{{$staff->staffGPSMaps->count()}}នាក់</td>
                                         </tr>
-                                        
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                        <tr>
-                                            <td colspan="4" class="text-right">អតិថិជនសរុប</td>
-                                            <td>{{$staff->staffGPSMaps->count()}}នាក់</td>
-                                        </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </td>
                 </tr>
+                @endif
                 @endforeach
             </tbody>
         </table>
