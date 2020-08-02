@@ -142,6 +142,7 @@
                         });
                     }, 700);
                 }
+                location.reload();
             },
             error: function(json){
                 $("html, body").animate({ scrollTop: 0 }, 500);
