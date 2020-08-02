@@ -76,7 +76,7 @@
     });
 	var map = L.map('map-canvas-customer').setView([
             {{ $latitude }}, 
-            {{$longitude}} 
+            {{ $longitude }}
         ], 16);
     var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -136,10 +136,10 @@
         var staffMaps = @json($staffMaps);
         for(staffMap in staffMaps) {
             staffMap = staffMaps[staffMap];
-            if(staffMap.latitude && staffMap.longitude)
+            if(staffMap.staff_latitude && staffMap.staff_longitude)
             {
                 let name = `${staffMap.staff.name}`;
-                addMarker(name, parseFloat(staffMap.latitude), parseFloat(staffMap.longitude), staffMap);
+                addMarker(name, parseFloat(staffMap.staff_latitude), parseFloat(staffMap.staff_longitude), staffMap);
             }
         }
     });

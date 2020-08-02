@@ -174,6 +174,8 @@ Route::group(
                     ->name('index');
             });
             // map gps
+            Route::post('staff/checkin', 'CustomerMapsController@saveStaffGPS')
+                    ->name('staff.gps');
             Route::post('map_gps', 'CustomerMapsController@saveGPSMap')
                     ->name('map.gps');
             Route::get('staff/map_gps', 'CustomerMapsController@staffGPSMap')

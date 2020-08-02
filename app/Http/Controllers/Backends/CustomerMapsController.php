@@ -10,6 +10,7 @@ use App\Models\Staff;
 use App\Models\User;
 use App\Http\Constants\UserRole;
 use App\Models\GroupStaff;
+use Session;
 
 class CustomerMapsController extends Controller
 {
@@ -56,6 +57,25 @@ class CustomerMapsController extends Controller
         }
     }
 
+    public function saveStaffGPS(Request $request) {
+        try {
+            session(['staff_latitude' => $request->staff_latitude]);
+            session(['staff_longitude' => $request->staff_longitude]);
+            return response()
+            ->json([
+                'status' => 'success',
+                'code' => 200,
+                'message' => "សូមបន្តcheckin លើតំបន់របស់អតិថិជន"
+            ]);
+        } catch (Exception $e) {
+            return response()
+            ->json([
+                'code'  => 422,
+                'status'  => 'fail'
+            ]);
+        }
+    }
+
     public function saveGPSMap(Request $request)
     {
       
@@ -76,7 +96,9 @@ class CustomerMapsController extends Controller
                     'staff_id' => $staffId,
                     'customer_id' => $request->customer_id,
                     'latitude' => $request->latitude,
-                    'longitude' =>$request->longitude,
+                    'longitude' => $request->longitude,
+                    'staff_latitude' => session('staff_latitude'),
+                    'staff_longitude' => session('staff_longitude'),
                     'start_date_place' => date('Y-m-d h:i:s')
                 ]);
             }
@@ -96,6 +118,7 @@ class CustomerMapsController extends Controller
         }
     }
 
+
     public function staffGPSMap(Request $request)
     {
         $staffMaps = [];
@@ -103,8 +126,8 @@ class CustomerMapsController extends Controller
             $staffMaps = $this->staffGPSMap->with("customer")->whereDate('start_date_place', date('Y-m-d'));
             if ($request->exists('staff_id') && $request->exists('latitude') && $request->exists('longitude')) {
                 $staffMaps->where('staff_id', $request->staff_id)
-                ->where('latitude', $request->latitude)
-                ->where('longitude', $request->longitude);
+                ->where('staff_latitude', $request->latitude)
+                ->where('staff_longitude', $request->longitude);
             }
             $staffMaps = $staffMaps->get();
             foreach ($staffMaps as $staffMap) {

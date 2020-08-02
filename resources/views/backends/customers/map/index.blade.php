@@ -61,12 +61,6 @@
                 <a href="{{route('map.gps.staff')}}" class="btn btn-circle btn-primary w-100"><i class="fas fa-map-marker-alt mr-1"></i> GPSបុគ្គលិក</a>
             </div>
             @endif
-            <div class="input-group mb-3 px-1">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-arrows-alt"></i></span>
-                </div>
-                <input class="form-control" id="range" type="number" value='0' min='0' step="10"/>
-            </div>
             <div id="menu-plus" class="sidebar-map">
                 <table class="table table-bordered">
                     <tbody id="t_points"></tbody>
@@ -124,16 +118,30 @@
         var radius = e.accuracy;
         L.circle(e.latlng, radius).addTo(map);
         $.ajax({
-            url     : "{{route('map.gps')}}",
+            url     : "{{route('staff.gps')}}",
             method  : "POST",
             data    : {
                 "_token": "{{ csrf_token() }}",
                 "customer_id": 0,
-                "latitude": e.latitude,
-                "longitude": e.longitude
+                "staff_latitude": e.latitude,
+                "staff_longitude": e.longitude
             },
             dataType: 'json',
             success : function (json) {
+                if(json.code == 200){
+                    let html = `<div class="alert alert-success alert-dismissible fade show" id="checksuccess">
+                            <strong><i class="fas fa-info-circle"></i> ${json.message}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>`;
+                    $("#alert-success").html(html);
+                    window.setTimeout(function() {
+                        $("#checksuccess").fadeTo(500, 0).slideUp(500, function() {
+                            $(this).remove();
+                        });
+                    }, 700);
+                }
             },
             error: function(json){
                 $("html, body").animate({ scrollTop: 0 }, 500);
@@ -187,7 +195,9 @@
             if(customerMap.phone1){
              content += `<p><i class="fas fa-phone-square-alt text-success my-1 mr-1"></i>${customerMap.phone1}${phone2}</p>`;
             }
+        @if (Session::get('staff_latitude') && Session::get('staff_longitude'))
         content +=`<p onclick="mapCheckIn(${customerId}, ${latitude},${longitude} )" class="checkin"><i class="fas fa-map-marker-alt text-danger"></i> checkin</p>`;
+        @endif
         content +=`</div>`;
         @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
         if(customerMap.sales && customerMap.sales[0] && customerMap.sales[0].staff) {
@@ -234,7 +244,7 @@
                         $("#checksuccess").fadeTo(500, 0).slideUp(500, function() {
                             $(this).remove();
                         });
-                    }, 5000);
+                    }, 700);
                 }
             },
             error: function(json){
@@ -254,18 +264,17 @@
         }
     });
 
-    L.control.scale({maxWidth:240, metric:true, position: 'bottomleft'}).addTo(map);
+    // L.control.scale({maxWidth:240, metric:true, position: 'bottomleft'}).addTo(map);
 
-    L.control.polylineMeasure({position:'topleft', imperial:false, clearMeasurementsOnStop: false, showMeasurementsClearControl: true}).addTo(map);
+    // L.control.polylineMeasure({position:'topleft', imperial:false, clearMeasurementsOnStop: false, showMeasurementsClearControl: true}).addTo(map);
 
-
-    $("#range").change(function(e){
-    var radius = parseInt($(this).val())
-        buffers.forEach(function(e){
-            e.setRadius(radius);
-            e.addTo(map);
-        });
-    });
+    // $("#range").change(function(e){
+    // var radius = parseInt($(this).val())
+    //     buffers.forEach(function(e){
+    //         e.setRadius(radius);
+    //         e.addTo(map);
+    //     });
+    // });
 </script>
 <script>
     function openNav() {

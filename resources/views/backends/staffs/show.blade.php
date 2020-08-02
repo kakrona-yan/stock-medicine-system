@@ -107,7 +107,7 @@
                                             <td>{{date('Y-m-d h:i', strtotime($gpsStaff->start_date_place))}}</td>
                                             <td class="text-center">
                                                 <span class="position-relative">
-                                                    <a href="{{route('map.gps.staff')}}?staff_id={{$gpsStaff->staff_id}}&latitude={{$gpsStaff->latitude}}&longitude={{$gpsStaff->longitude}}"><i class="fas fa-globe-africa"></i>
+                                                    <a href="{{route('map.gps.staff')}}?staff_id={{$gpsStaff->staff_id}}&latitude={{$gpsStaff->staff_latitude}}&longitude={{$gpsStaff->staff_longitude}}"><i class="fas fa-globe-africa"></i>
                                                     <span class="spinner-grow spinner-grow-sm  text-success position-absolute" role="status"></span></a>
                                                 </span>
                                             </td>
@@ -134,12 +134,12 @@
                                        
                                     @endforeach
                                 </tbody>
-                                <tfooter>
+                                <tfoot>
                                         <tr>
                                             <td colspan="4" class="text-right">អតិថិជនសរុប</td>
                                             <td>{{$gpsStaffs->count()}}នាក់</td>
                                         </tr>
-                                </tfooter>
+                                </tfoot>
                             </table>
                         </div>
                 </div>

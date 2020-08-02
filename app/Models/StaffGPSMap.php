@@ -17,7 +17,9 @@ class StaffGPSMap extends Model
         'start_date_place',
         'end_date_place',
         'created_at',
-        'updated_at'   
+        'updated_at',
+        'staff_latitude',
+        'staff_longitude'
     ];
     
     protected $dates = [
