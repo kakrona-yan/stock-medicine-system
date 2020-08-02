@@ -37,7 +37,16 @@
                     <td colspan="2"　class="pd-0">
                         <div id="sale-customer" class="table-responsive collapse show">
                             <table class="table table-borderless mb-0">
-                                <tbody>      
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>{{__('customer.list.name')}}</th>
+                                        <th>{{__('customer.list.created_at')}}</th>
+                                        <th>ទីតាំងបុគ្គលិក</th>
+                                        <th>ទីតាំងអតិថិជន</th>
+                                        <th>មើលលំអិត</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @foreach( $staff->staffGPSMaps as $gpsStaff)          
                                         <tr>
                                             <td>{{$gpsStaff->customer ? $gpsStaff->customer->customerFullName() : 'ទីតាំងរបស់បុគ្គលិក'}}</td>
