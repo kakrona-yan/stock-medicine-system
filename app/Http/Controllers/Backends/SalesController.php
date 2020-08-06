@@ -105,7 +105,7 @@ class SalesController extends Controller
                 if ($request->exists('sale_product') && !empty($request->sale_product)) {
                     $requestSale['staff_id'] = $staff;
                     $requestSale['customer_id'] = $request->customer_id;
-                    $requestSale['quotaion_no'] = $request->quotaion_no;
+                    $requestSale['quotaion_no'] = $this->sale->incrementStringUniqueInvoiceCode();
                     $requestSale['money_change'] = $request->money_change;
                     $requestSale['total_quantity'] = $request->total_quantity;
                     $requestSale['total_discount'] = $request->total_discount;
