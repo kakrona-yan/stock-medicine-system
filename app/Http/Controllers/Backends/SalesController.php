@@ -105,7 +105,7 @@ class SalesController extends Controller
                 if ($request->exists('sale_product') && !empty($request->sale_product)) {
                     $requestSale['staff_id'] = $staff;
                     $requestSale['customer_id'] = $request->customer_id;
-                    $requestSale['quotaion_no'] = $this->sale->incrementStringUniqueInvoiceCode();
+                    $requestSale['quotaion_no'] = $request->quotaion_no;
                     $requestSale['money_change'] = $request->money_change;
                     $requestSale['total_quantity'] = $request->total_quantity;
                     $requestSale['total_discount'] = $request->total_discount;
@@ -114,6 +114,11 @@ class SalesController extends Controller
                     $requestSale['sale_date'] = date('Y-m-d h:i:s', strtotime($saleDate));
                     $requestSale['note'] = $request->note;
                     $sale = $this->sale->create($requestSale);
+                    if($sale) {
+                        $sale->update([
+                            "quotaion_no" => date('d/m') ."/A".$sale->id
+                        ]);
+                    }
                     // insert to table salesProduct
                     if($sale) {
                         $saleProducts = [];
