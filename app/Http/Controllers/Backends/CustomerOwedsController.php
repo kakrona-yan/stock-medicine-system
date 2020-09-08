@@ -140,17 +140,17 @@ class CustomerOwedsController extends Controller
                 
             if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
                 $quotationNo = $request->quotaion_no;
-                $sales = $sales->where('quotaion_no', 'like', '%' . $quotationNo . '%');
+                $saleAllPays = $saleAllPays->where('quotaion_no', 'like', '%' . $quotationNo . '%');
             }
             if ($request->exists('customer_name') && !empty($request->customer_name)) {
                 $customerName = $request->customer_name;
-                $sales->whereHas('customer', function($customer) use ($customerName){
+                $saleAllPays->whereHas('customer', function($customer) use ($customerName){
                     $customer->where('name', 'like', '%' . $customerName . '%');
                 });
             }
             if ($request->exists('staff_name') && !empty($request->staff_name)) {
                 $staffName = $request->staff_name;
-                $sales->whereHas('staff', function($staff) use ($staffName){
+                $saleAllPays->whereHas('staff', function($staff) use ($staffName){
                     $staff->where('name', 'like', '%' . $staffName . '%');
                 });
             }
