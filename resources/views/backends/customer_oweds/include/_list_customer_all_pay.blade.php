@@ -3,7 +3,7 @@
         <!-- Circle Buttons -->
         <div class="card mb-4">
             <div class="card-body">
-                <form id="sale-search" action="{{ route('customer_owed.index') }}" method="GET" class="form form-horizontal form-search form-inline mb-2 d-inline-flex">
+                <form id="sale-search" action="{{ route('customer_owed.all_pay') }}" method="GET" class="form form-horizontal form-search form-inline mb-2 d-inline-flex">
                     <div class="form-group mb-2 mr-2">
                         <input type="text" class="form-control mr-1" id="quotaion_no" 
                             name="quotaion_no" value="{{ old('quotaion_no', $request->quotaion_no)}}"
@@ -27,11 +27,11 @@
                     </div>
                 </form>
                 <div class="tab-content">
-                    <!--/list pay by day-->
-                    <div class="tab-pane fade  active show" id="pay_day">
+                    <!--/list not yet play-->
+                    <div class="tab-pane fade active show" id="pay_in_ready">
                         <div class="table-responsive cus-table">
                             <table class="table table-bordered">
-                                <thead class="bg-success text-light">
+                                <thead class="bg-info text-light">
                                     <tr>
                                         <th>{{__('sale.list.invoice_code')}}</th>
                                         <th>{{__('customer.list.name')}}</th>
@@ -47,8 +47,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($sales as $sale) 
-                                    @if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0)
+                                    @foreach ($saleAllPays as $sale) 
+                                    @if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 2)
                                         @php
                                             $customerOwed = 0;
                                             $amount = $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount;
@@ -68,13 +68,6 @@
                                             </td>
                                             <td class="text-center">
                                                 <div>{{ $sale->customerOwed()->exists() && $sale->customerOwed->date_pay ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</div>
-                                                <button type="button" class="btn btn-sm btn-warning" style="font-size: 10px;padding: 1px 5px;" 
-                                                    onclick="setDatePayPopup(this)"
-                                                    data-sale-id="{{ $sale->id }}"
-                                                    data-customer-id="{{ $sale->customer->id }}"
-                                                    data-toggle="modal" data-target="#set_date_pay_confirm"
-                                                    ><i class="far fa-calendar-alt"></i>
-                                                </button>
                                             </td>
                                             <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
                                             @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
@@ -86,13 +79,6 @@
                                                     href="{{route('customer_owed.edit', $sale->id)}}"
                                                     >{{__('button.pay')}}
                                                 </a>
-                                                <button type="button" class="btn btn-sm btn-info d-inline-flex" 
-                                                    onclick="updatePopup(this)"
-                                                    data-sale-id="{{ $sale->id }}"
-                                                    data-customer-id="{{ $sale->customer->id }}"
-                                                    data-toggle="modal" data-target="#update_sale_confirm"
-                                                    >{{__('button.pay_all')}}
-                                                </button>
                                             </td>
                                             @endif
                                         </tr>
@@ -101,14 +87,14 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{-- <div class="d-flex justify-content-center">
-                            {{ $sales->appends(request()->query())->links() }}
+                        <div class="d-flex justify-content-center">
+                            {{ $saleAllPays->appends(request()->query())->links() }}
                         </div>
                         @if( Session::has('flash_danger') )
                             <p class="alert text-center {{ Session::get('alert-class', 'alert-danger') }}">
                                 <span class="spinner-border spinner-border-sm text-darktext-danger align-middle"></span> {{ Session::get('flash_danger') }}
                             </p>
-                        @endif --}}
+                        @endif
                     </div>
                 </div>
             </div>

@@ -33,36 +33,9 @@ class CustomerOwedsController extends Controller
     public function index(Request $request)
     {
         try {
-            // list all
-            $customers  = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
-                ->whereHas('sales')
-                ->orderBy('created_at', 'DESC');
-            $limit = 30;
-            if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
-                $quotationNo = $request->quotaion_no;
-                $customers->whereHas('sales', function($sales) use($quotationNo){
-                    $sales->where('quotaion_no', 'like', '%' . $quotationNo . '%');
-                });
-            }
-            
-            // Check flash danger
-            flashDanger($customers->count(), __('flash.empty_data'));
-            $customers = $customers->paginate($limit, ['*'], 'customers_page');
             $notPay = self::STATUS_NOT_PAY;
             $somePay = self::STATUS_SOME_PAY;
             $allPay = self::STATUS_ALL_PAY;
-            // customer not yet pay
-            $customerNotPays  = $this->customer->where('is_delete', '<>', DeleteStatus::DELETED)
-                ->orderBy('created_at', 'DESC');
-            if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
-                $quotationNo = $request->quotaion_no;
-                $customerNotPays->whereHas('sales', function($sales) use($quotationNo){
-                    $sales->where('quotaion_no', 'like', '%' . $quotationNo . '%');
-                });
-            }
-            // Check flash danger
-            flashDanger($customerNotPays->count(), __('flash.empty_data'));
-            $customerNotPays = $customerNotPays->paginate($limit, ['*'], 'pay_no_page');
             
             // customer of sale
             $sales = $this->sale->where('is_delete', '<>', 0)
@@ -92,8 +65,6 @@ class CustomerOwedsController extends Controller
             $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
             return view('backends.customer_oweds.index', [
                 'request' => $request,
-                'customers' =>  $customers,
-                'customerNotPays' => $customerNotPays,
                 'sales' => $sales,
                 'statusPays' => $statusPays
             ]);
@@ -102,6 +73,108 @@ class CustomerOwedsController extends Controller
         }
     }
 
+    public function somPay(Request $request){
+        try {
+            $notPay = self::STATUS_NOT_PAY;
+            $somePay = self::STATUS_SOME_PAY;
+            $allPay = self::STATUS_ALL_PAY;
+            
+            // customer of sale
+            $saleSomePays = $this->sale->where('is_delete', '<>', 0)
+                ->orderBy('created_at', 'DESC')
+                ->with('customerOwed')
+                ->whereHas('customerOwed', function($customerOwed) use ($somePay){
+                    $customerOwed->where('status_pay',  $somePay);
+                });
+                
+            if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
+                $quotationNo = $request->quotaion_no;
+                $saleSomePays = $saleSomePays->where('quotaion_no', 'like', '%' . $quotationNo . '%');
+            }
+            if ($request->exists('customer_name') && !empty($request->customer_name)) {
+                $customerName = $request->customer_name;
+                $saleSomePays->whereHas('customer', function($customer) use ($customerName){
+                    $customer->where('name', 'like', '%' . $customerName . '%');
+                });
+            }
+            if ($request->exists('staff_name') && !empty($request->staff_name)) {
+                $staffName = $request->staff_name;
+                $saleSomePays->whereHas('staff', function($staff) use ($staffName){
+                    $staff->where('name', 'like', '%' . $staffName . '%');
+                });
+            }
+            if ($request->exists('status_pay') && !empty($request->status_pay)) {
+                $status_pay = $request->status_pay;
+                $saleSomePays->whereHas('customerOwed', function($customerOwed) use ($status_pay){
+                    $customerOwed->where('status_pay',  $status_pay);
+                });
+            }
+            // Check flash danger
+            flashDanger($saleSomePays->count(), __('flash.empty_data'));
+            $saleSomePays = $saleSomePays->paginate(30);
+
+            $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
+            return view('backends.customer_oweds.index_some_pay', [
+                'request' => $request,
+                'saleSomePays' => $saleSomePays,
+                'statusPays' => $statusPays
+            ]);
+        }catch (\ValidationException $e) {
+            return exceptionError($e, 'customer_owed.index');
+        }
+    }
+
+    public function allPay(Request $request){
+        try {
+            $notPay = self::STATUS_NOT_PAY;
+            $somePay = self::STATUS_SOME_PAY;
+            $allPay = self::STATUS_ALL_PAY;
+            
+            // customer of sale
+            $saleAllPays = $this->sale->where('is_delete', '<>', 0)
+                ->orderBy('created_at', 'DESC')
+                ->with('customerOwed')
+                ->whereHas('customerOwed', function($customerOwed) use ($allPay){
+                    $customerOwed->where('status_pay',  $allPay);
+                });
+                
+            if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
+                $quotationNo = $request->quotaion_no;
+                $sales = $sales->where('quotaion_no', 'like', '%' . $quotationNo . '%');
+            }
+            if ($request->exists('customer_name') && !empty($request->customer_name)) {
+                $customerName = $request->customer_name;
+                $sales->whereHas('customer', function($customer) use ($customerName){
+                    $customer->where('name', 'like', '%' . $customerName . '%');
+                });
+            }
+            if ($request->exists('staff_name') && !empty($request->staff_name)) {
+                $staffName = $request->staff_name;
+                $sales->whereHas('staff', function($staff) use ($staffName){
+                    $staff->where('name', 'like', '%' . $staffName . '%');
+                });
+            }
+            if ($request->exists('status_pay') && !empty($request->status_pay)) {
+                $status_pay = $request->status_pay;
+                $saleAllPays->whereHas('customerOwed', function($customerOwed) use ($status_pay){
+                    $customerOwed->where('status_pay',  $status_pay);
+                });
+            }
+            
+            // Check flash danger
+            flashDanger($saleAllPays->count(), __('flash.empty_data'));
+            $saleAllPays = $saleAllPays->paginate(30);
+
+            $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
+            return view('backends.customer_oweds.index_all_pay', [
+                'request' => $request,
+                'saleAllPays' => $saleAllPays,
+                'statusPays' => $statusPays
+            ]);
+        }catch (\ValidationException $e) {
+            return exceptionError($e, 'customer_owed.index');
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -155,6 +155,11 @@ Route::group(
             Route::group(['prefix' => 'customer_oweds', 'as' => 'customer_owed.'], function () {
                 Route::get('/', 'CustomerOwedsController@index')
                     ->name('index');
+                Route::get('/some_pay', 'CustomerOwedsController@somPay')
+                    ->name('some_pay');
+                Route::get('/all_pay', 'CustomerOwedsController@allPay')
+                    ->name('all_pay');
+
                 Route::get('/edit/{id}', 'CustomerOwedsController@edit')
                     ->name('edit');
                 Route::get('/edit/pay_all/{id}', 'CustomerOwedsController@editPayAll')

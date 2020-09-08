@@ -37,7 +37,7 @@
             <a class="nav-link bg-info text-white " href="{{route("customer_owed.all_pay")}}">សងប្រាក់ទាំងអស់</a>
         </li>
     </ul>
-    @include('backends.customer_oweds.include._list_customer_owed')
+    @include('backends.customer_oweds.include._list_customer_some_pay')
 </div>
 
 @endsection
