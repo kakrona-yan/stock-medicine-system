@@ -28,13 +28,13 @@
     <!--list product-->
     <ul class="nav nav-tabs nav-justified mb-2" role="tablist">
         <li class="nav-item">
-            <a class="nav-link bg-success text-white" href="{{route("customer_owed.index")}}">សងប្រាក់តាមថ្ងៃ</a>
+            <a class="nav-link bg-success text-white" href="{{route("customer_owed.index")}}">មិនទាន់សង</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link bg-danger text-white" href="{{route("customer_owed.some_pay")}}">សង​ប្រាក់​ហើយ​តាម​ថ្ងៃ</a>
+            <a class="nav-link bg-danger text-white" href="{{route("customer_owed.some_pay")}}">សង​បានខ្លះ</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link bg-info text-white " href="{{route("customer_owed.all_pay")}}">សងប្រាក់ទាំងអស់</a>
+            <a class="nav-link bg-info text-white " href="{{route("customer_owed.all_pay")}}">សងប្រាក់ហើយ</a>
         </li>
     </ul>
     @include('backends.customer_oweds.include._list_customer_owed')
