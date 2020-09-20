@@ -17,7 +17,8 @@ class CustomerOwed extends BaseModel
         'date_pay',
         'amount_pay',
         'discount_type',
-        'discount_amount'
+        'discount_amount',
+        'product_note'
 
     ];
     
@@ -55,16 +56,19 @@ class CustomerOwed extends BaseModel
     const STATUS_NOT_PAY = 0;
     const STATUS_SOME_PAY = 1;
     const STATUS_ALL_PAY = 2;
+    const STATUS_RETURN_PAY = 3;
 
     const STATUS_PAY_TEXT = [
         '0' => 'មិនទាន់សង',
         '1' => 'សងបានខ្លះ',
         '2' => 'សងហើយ',
+        '3' => 'មិនយកវិញ'
     ];
 
     const STATUS_PAY_TEXT_FORM = [
         '1' => 'សងបានខ្លះ',
         '2' => 'សងហើយ',
+        '3' => 'មិនយកវិញ'
     ];
 
     const STATUS_PAY_ALL_TEXT = [
@@ -97,6 +101,10 @@ class CustomerOwed extends BaseModel
             case 2:
                 $statusText = self::STATUS_PAY_TEXT[$statusPay];
                 $color = '#1cc88a';
+                break;
+            case 3:
+                $statusText = self::STATUS_PAY_TEXT[$statusPay];
+                $color = '#858796';
                 break;
         }
         return [

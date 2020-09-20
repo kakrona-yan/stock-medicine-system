@@ -135,7 +135,7 @@ class CustomerOwedsController extends Controller
                 ->orderBy('created_at', 'DESC')
                 ->with('customerOwed')
                 ->whereHas('customerOwed', function($customerOwed) use ($allPay){
-                    $customerOwed->where('status_pay',  $allPay);
+                    $customerOwed->whereIn('status_pay',  [2,3]);
                 });
                 
             if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {

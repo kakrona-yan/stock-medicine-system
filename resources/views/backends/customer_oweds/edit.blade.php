@@ -100,7 +100,7 @@
                                         <div class="form-group select-group">
                                             <label for="amount">{{__('customer_owed.list.discount_type')}}:</label>
                                             @php
-                                                $discount = $sale->customerOwed()->exists() ? $sale->customerOwed->discount_type : 1;
+                                                $discount = $sale->customerOwed()->exists() ? $sale->customerOwed->discount_type : 0;
                                             @endphp
                                             <select class="form-control" id="discount_type" name="discount_type">
                                                 @foreach ($discountType as $key => $type)
@@ -169,16 +169,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-check form-check-inline align-top" for="status_pay">{{ __('customer_owed.list.status_pay') }}:</label>
-                                        @foreach ($statusPays as $key => $statusPay)
-                                            <div class="form-check form-check-inline">
-                                            <input style="margin-top:-3px" class="form-check-input" type="radio" name="status_pay" id="status_pay_{{$key}}" 
-                                                value="{{$key}}" {{old('status_pay', $sale->customerOwed()->exists() ? $sale->customerOwed->status_pay : 2) == $key ? 'checked' : ''}}>
-                                                <label class="form-check-label" for="status_pay_{{$key}}">{{$statusPay}}</label>
-                                            </div>  
-                                        @endforeach                        
+                                <div class="row">
+                                    <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-check form-check-inline align-top" for="status_pay">{{ __('customer_owed.list.status_pay') }}:</label>
+                                            @foreach ($statusPays as $key => $statusPay)
+                                                <div class="form-check form-check-inline">
+                                                <input style="margin-top:-3px" class="form-check-input" type="radio" name="status_pay" id="status_pay_{{$key}}" 
+                                                    value="{{$key}}" {{old('status_pay', $sale->customerOwed()->exists() ? $sale->customerOwed->status_pay : 2) == $key ? 'checked' : ''}}>
+                                                    <label class="form-check-label" for="status_pay_{{$key}}">{{$statusPay}}</label>
+                                                </div>  
+                                            @endforeach                        
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <label for="product_note">បន្លែម:</label>
+                                            <textarea class="form-control w-100" rows="7" name="product_note">{{ old('product_note', $sale->product_note) }}</textarea>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group w-100 w-md-50 d-inline-flex">

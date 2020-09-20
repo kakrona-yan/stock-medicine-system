@@ -26,6 +26,7 @@ class CreateCustomerOwedsTable extends Migration
             $table->string('discount_amount')->nullable();
             $table->integer('status_pay')->length(11)->default(1)->comment('0：no pay、1：some pay, 2: pay all');
             $table->dateTime('date_pay')->nullable();
+            $table->text('product_note')->nullable();
             $table->timestamps();
         });
     }

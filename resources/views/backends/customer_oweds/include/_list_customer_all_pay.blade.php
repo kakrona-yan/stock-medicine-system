@@ -48,7 +48,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($saleAllPays as $sale) 
-                                    @if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 2)
+                                    @if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 2 || $sale->customerOwed->status_pay == 3)
                                         @php
                                             $customerOwed = 0;
                                             $amount = $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount;
