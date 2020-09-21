@@ -9,6 +9,7 @@ use App\Models\CustomerOwed;
 use App\Models\Sale;
 use App\Http\Constants\DeleteStatus;
 use App\Models\CustomerOwedHistory;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CustomerOwedsController extends Controller
 {
@@ -161,8 +162,8 @@ class CustomerOwedsController extends Controller
             
             // Check flash danger
             flashDanger($saleAllPays->count(), __('flash.empty_data'));
-            $saleAllPays = $saleAllPays->paginate(30);
-            $saleAllPays = $saleAllPays->setCollection($saleAllPays->sortByDesc('customerOwed'));
+            $saleAllPays = $saleAllPays->get()->sortByDesc('customerOwed.receive_date');
+            $saleAllPays = $this->paginateArrayToCllect($saleAllPays, $request, 3);
             $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
             return view('backends.customer_oweds.index_all_pay', [
                 'request' => $request,
@@ -391,5 +392,17 @@ class CustomerOwedsController extends Controller
                     'message' => $e->getMessage()
                 ]);
         }
+    }
+
+    public function paginateArrayToCllect($dataArray, $request, $perPage = 1)
+    {
+        $currentPage = LengthAwarePaginator::resolveCurrentPage(); // Get current page form url e.x. &page=1
+        $itemCollection = collect($dataArray); // Create a new Laravel collection from the array data
+        // Slice the collection to get the items to display in current page
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        // Create our paginator and pass it to the view
+        $paginatedItems = new LengthAwarePaginator($currentPageItems, count($itemCollection), $perPage); 
+        // set url path for generted links
+        return $paginatedItems->setPath($request->url());
     }
 }

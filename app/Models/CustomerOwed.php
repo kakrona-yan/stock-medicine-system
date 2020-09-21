@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerOwed extends BaseModel
 {
+    protected $table = 'customer_oweds';
+
     protected $fillable = [
         'sale_id',
         'customer_id',
