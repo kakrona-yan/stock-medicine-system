@@ -82,7 +82,6 @@ class CustomerOwedsController extends Controller
             // customer of sale
             $saleSomePays = $this->sale->where('is_delete', '<>', 0)
                 ->with('customerOwed')
-                ->orderBy('customer_oweds.receive_date')
                 ->whereHas('customerOwed', function($customerOwed) use ($somePay){
                     $customerOwed->where('status_pay',  $somePay);
                 });
@@ -133,7 +132,6 @@ class CustomerOwedsController extends Controller
             // customer of sale
             $saleAllPays = $this->sale->where('is_delete', '<>', 0)
                 ->with('customerOwed')
-                ->orderBy('customer_oweds.receive_date')
                 ->whereHas('customerOwed', function($customerOwed) use ($allPay){
                     $customerOwed->whereIn('status_pay',  [2,3]);
                 });
