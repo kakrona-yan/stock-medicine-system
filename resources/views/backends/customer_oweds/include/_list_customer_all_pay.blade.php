@@ -56,7 +56,7 @@
                                             $customerOwed = $sale->customerOwed()->exists() && $sale->customerOwed->owed_amount ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
                                         @endphp
                                         <tr>
-                                            <td>{{ $sale->quotaion_no }}</td>
+                                            <td>{{ $sale->quotaion_no }} {{date('h:i', strtotime($sale->sale_date))}}</td>
                                             <td>{{ $sale->customer->customerFullName() }}</td>
                                             <td class="text-right">{{ $sale->customerOwed()->exists() && $sale->customerOwed->amount_pay ? $sale->customerOwed->amount_pay : $sale->total_amount }}</td>
                                             <td class="text-right">{{ currencyFormat($customerOwed) }}</td>

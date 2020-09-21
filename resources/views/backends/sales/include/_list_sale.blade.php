@@ -87,7 +87,7 @@
                                         <a href="#slae_{{$sale->id}}" data-toggle="collapse" style="text-decoration: none !important;" class="collapsed"><i class="fas fa-minus-circle"></i></a>
                                         @endif
                                     </td>
-                                    <td>{{$sale->quotaion_no}}</td>
+                                    <td>{{$sale->quotaion_no}} {{date('h:i', strtotime($sale->sale_date))}}</td>
                                     <td>{{$sale->customer ? $sale->customer->customerFullName() : ''}}</td>
                                     <td>{{$sale->total_quantity}}</td>
                                     <td>{{currencyFormat($sale->total_amount)}}</td>
