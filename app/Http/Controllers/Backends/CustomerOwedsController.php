@@ -163,7 +163,7 @@ class CustomerOwedsController extends Controller
             // Check flash danger
             flashDanger($saleAllPays->count(), __('flash.empty_data'));
             $saleAllPays = $saleAllPays->get()->sortByDesc('customerOwed.receive_date');
-            $saleAllPays = $this->paginateArrayToCllect($saleAllPays, $request, 3);
+            $saleAllPays = $this->paginateArrayToCllect($saleAllPays, $request, 40);
             $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
             return view('backends.customer_oweds.index_all_pay', [
                 'request' => $request,
