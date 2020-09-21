@@ -82,8 +82,9 @@ class CustomerOwedsController extends Controller
             // customer of sale
             $saleSomePays = $this->sale->where('is_delete', '<>', 0)
                 ->with('customerOwed')
+                ->orderBy('customerOwed.receive_date')
                 ->whereHas('customerOwed', function($customerOwed) use ($somePay){
-                    $customerOwed->where('status_pay',  $somePay)->orderBy('receive_date', 'ASC');
+                    $customerOwed->where('status_pay',  $somePay);
                 });
                 
             if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
@@ -131,11 +132,9 @@ class CustomerOwedsController extends Controller
             
             // customer of sale
             $saleAllPays = $this->sale->where('is_delete', '<>', 0)
-                ->with(['customerOwed' => function($customerOwedW){
-                    $customerOwedW->orderBy('receive_date', 'DESC');
-                }])
+                ->with('customerOwed')
+                ->orderBy('customerOwed.receive_date')
                 ->whereHas('customerOwed', function($customerOwed) use ($allPay){
-                    $customerOwed->orderBy('receive_date', 'ASC');
                     $customerOwed->whereIn('status_pay',  [2,3]);
                 });
                 
