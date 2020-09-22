@@ -82,7 +82,7 @@ class UsersController extends Controller
                 }
                 $staffRequest['user_id'] = $saveUser->id;
                 $staffRequest['name'] = $saveUser->name;
-                $staffRequest['email'] = $user['email'];
+                $staffRequest['email'] = $request->email;
                 $staffRequest['password'] = $request->password;
                 $staffRequest['is_delete'] = $saveUser->role == 1 || $saveUser->role == 3 || $saveUser->role == 4 ? 0 : 1;
                 $this->staff->create($staffRequest);
@@ -169,7 +169,7 @@ class UsersController extends Controller
                 }
                 $staffRequest['user_id'] = $user->id;
                 $staffRequest['name'] = $user->name;
-                $staffRequest['email'] = $requestUser['email'];
+                $staffRequest['email'] = $request->email;
                 if ($request->password && !empty($request->password)) {
                     $staffRequest['password'] = $request->password;
                 } 
