@@ -40,12 +40,18 @@ class ReportsController extends Controller
                 }
             }
             
+            $startIS = '01 00:00:00';
+            $endIS = ' 23:59:59';
             if ($request->exists('start_date') && !empty($request->start_date) && 
                 $request->exists('end_date') && !empty($request->end_date)) 
             {
-                $sales->whereBetween('sale_date', [date('Y-m-d', strtotime($request->start_date)), date('Y-m-d', strtotime($request->end_date))]);
+                $startOfDate = $request->start_date . '-' . $startIS;
+                $endOfDate =  $request->end_date . $endIS;
+                $sales->whereBetween('sale_date', [$startOfDate, $endOfDate]);
             } else {
-                $sales->whereBetween('sale_date', [date('Y-m-d', strtotime(date('Y-m-d'))), date('Y-m-d', strtotime(date('Y-m-d')))]);
+                $startOfDate = date('Y-m-d') . '-' . $startIS;
+                $endOfDate =  date('Y-m-d') . $endIS;
+                $sales->whereBetween('sale_date', [$startOfDate, $endOfDate]);
             }
             // Check flash danger
             flashDanger($sales->count(), __('flash.empty_data'));
