@@ -45,7 +45,7 @@ class ReportsController extends Controller
             {
                 $sales->whereBetween('sale_date', [date('Y-m-d', strtotime($request->start_date)), date('Y-m-d', strtotime($request->end_date))]);
             } else {
-                $sales->whereBetween('sale_date', [date('Y-m-d'), date('Y-m-d')]);
+                $sales->whereBetween('sale_date', [date('Y-m-d', strtotime(date('Y-m-d'))), date('Y-m-d', strtotime(date('Y-m-d')))]);
             }
             // Check flash danger
             flashDanger($sales->count(), __('flash.empty_data'));
