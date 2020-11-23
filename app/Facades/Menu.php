@@ -101,10 +101,10 @@ class Menu
             ],
             [
                 // Setting management
-                'route' => 'setting.index',
+                'route' => 'report.index',
                 'icon' => 'fas fa-cogs',
-                'label' => __('menu.setting'),
-                'role_type' => $this->RoleType('setting.index'),
+                'label' => __('menu.report'),
+                'role_type' => $this->RoleType('report.index'),
                 'sub_menu' => null
             ],
         ];

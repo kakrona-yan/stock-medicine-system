@@ -187,6 +187,11 @@ Route::group(
                     ->name('map.gps.staff');
             Route::get('staffs/checkin', 'CustomerMapsController@staffCheckinList')
                     ->name('staff.checkin');
+            // Setting Report
+            Route::group(['prefix' => 'reports', 'as' => 'report.'], function () {
+                Route::get('/', 'ReportsController@index')
+                    ->name('index');
+            });
         });
     }
 );

@@ -134,7 +134,7 @@
                                 </tr>
                                 @if ($sale->productSales->count() > 0)
                                 <tr>
-                                    <td colspan="9" id="slae_{{$sale->id}}" class="collapse p-0">
+                                    <td colspan="7" id="slae_{{$sale->id}}" class="collapse p-0">
                                         <table class="table table-borderless mb-0">
                                             <thead>
                                                 <tr>

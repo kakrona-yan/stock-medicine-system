@@ -14,5 +14,6 @@ return [
     'customer_type' => 'ប្រភេទអតិថិជន',
     'customer_owed' => 'ប្រាក់ជំពាក់',
     'customer_map' => 'អតិថិជន MAP',
-    'staff_check_in' => 'បុគ្គលិកCHECKIN'
+    'staff_check_in' => 'បុគ្គលិកCHECKIN',
+    'report' => 'របាយការណ៏'
 ];

@@ -167,7 +167,6 @@
           width: $sidebar-base-width;
           i {
             font-size: 0.85rem;
-            margin-right: 0.25rem;
           }
           span {
             font-size: 0.85rem;
@@ -239,9 +238,6 @@
             span {
               font-size: 0.65rem;
               display: block;
-            }
-            i {
-              margin-right: 1rem;
             }
             &[data-toggle="collapse"]::after {
               display: none;

@@ -100,6 +100,14 @@ class Customer extends BaseModel
             ->all();
     }
 
+    public function scopeOfList()
+    {
+        return $this->where('is_delete', '<>', DeleteStatus::DELETED)
+            ->orderBy('id', 'DESC')   
+            ->pluck('name', 'id')
+            ->all();
+    }
+
     public function customerType()
     {
         return $this->belongsTo('App\Models\CustomerType', 'customer_type_id');

@@ -108,6 +108,14 @@ class Staff extends BaseModel
             ->get();
     }
 
+    public function scopeOfList()
+    {
+        return $this->where('is_delete', '<>', DeleteStatus::DELETED)
+            ->orderBy('id', 'DESC')   
+            ->pluck('name', 'id')
+            ->all();
+    }
+
     /**
      * getQuestionImagePath
      * @param $path
