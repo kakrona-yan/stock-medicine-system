@@ -40,25 +40,23 @@ class ReportsController extends Controller
                 }
             }
             
-            $startIS = '01 00:00:00';
-            $endIS = ' 23:59:59';
-            if ($request->exists('start_date') && !empty($request->start_date) && 
-                $request->exists('end_date') && !empty($request->end_date)) 
-            {
-                $startOfDate = $request->start_date . '-' . $startIS;
-                $endOfDate =  $request->end_date . $endIS;
-                $sales->whereBetween('sale_date', [$startOfDate, $endOfDate]);
+            if ($request->exists('start_date') && !empty($request->start_date) && $request->exists('end_date') && !empty($request->end_date)) {
+                $startOfDate = $request->start_date;
+                $endOfDate =  $request->end_date;
+                $sales->whereBetween(\DB::raw("DATE_FORMAT(sale_date,'%Y-%m-%d')"), [$startOfDate, $endOfDate]);
             } else {
-                $startOfDate = date('Y-m-d') . '-' . $startIS;
-                $endOfDate =  date('Y-m-d') . $endIS;
-                $sales->whereBetween('sale_date', [$startOfDate, $endOfDate]);
+                $startOfDate = date('Y-m-d');
+                $endOfDate =  date('Y-m-d');
+                $sales->whereBetween(\DB::raw("DATE_FORMAT(sale_date,'%Y-%m-%d')"), [$startOfDate, $endOfDate]);
             }
             // Check flash danger
             flashDanger($sales->count(), __('flash.empty_data'));
             $saleExecls = [];
-            if ($request->exists('download_sale') && !empty($request->download_sale)) {
+            $sumTotalQuantity = $sales->count() > 0 ? $sales->sum('total_quantity') : 0;
+            $sumTotalamount = $sales->count() > 0 ? $sales->sum('total_amount') : 0;
+            if ($request->exists('download_sale') && !empty($request->download_sale) && $request->download_sale == 2) { 
                 $saleExecls = $sales->get();
-                $this->downloadSale($saleExecls);
+                $this->downloadSale($saleExecls, $sumTotalQuantity, $sumTotalamount);
             }
             $limit = config('pagination.limit');
             $sales = $sales->paginate($limit);
@@ -68,59 +66,54 @@ class ReportsController extends Controller
                 'sales' => $sales,
                 'customers' => $customers,
                 'staffs' =>  $staffs,
-                'saleCount' => $sales->count()
+                'saleCount' => $sales->count(),
+                'sumTotalQuantity' =>  $sumTotalQuantity,
+                'sumTotalamount' => $sumTotalamount
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.report.index');
         }
     }
 
-    private function downloadSale($saleExecls)
+    private function downloadSale($saleExecls, $sumTotalQuantity, $sumTotalamount)
     {
-        // $columns = mb_convert_encoding([
-        //                 '注文ID',
-        //                 'ユーザーID',
-        //                 '代理店',
-        //                 '店舗',
-        //                 'スタッフ名',
-        //                 '決済タイプ',
-        //                 '商品名',
-        //                 '購入確定日',
-        //                 '利用停止日',
-        //                 '販売金額',
-        //                 '手数料'
-        //             ],"Shift-JIS");
+        ob_end_clean();
+        $file = fopen('php://temp', 'r+b');
+        $columnSummary = mb_convert_encoding([
+            __('report.total_medicine').":{$sumTotalQuantity}",
+            __('report.total_currency'). ": {$sumTotalamount}"
+        ],'UTF-8');
+        $columns = mb_convert_encoding([
+            '#',
+            __('sale.list.invoice_code'),
+            __('sale.list.customer_name'),
+            __('sale.list.staff_name'),
+            __('sale.list.product_name'),
+            __('sale.list.quantity'),
+            __('sale.list.amount'),
+            __('customer_owed.list.status_pay'),
+        ],'UTF-8');
+        fputcsv($file, $columnSummary);
+        fputcsv($file, $columns);
+        foreach ($saleExecls as $saleExecl) {
+            $quotaionNo = $saleExecl->quotaion_no . date('h:i', strtotime($saleExecl->sale_date));
+            fputcsv(
+                $file,[
+                    $saleExecl->id,
+                    $quotaionNo
+                ]
+            );
+        }
+        // fclose($file);
+        rewind($file);
+        $csv = str_replace(PHP_EOL, "\r\n", stream_get_contents($file));
+        $csv = mb_convert_encoding($csv, 'UTF-8');
+        $now = date('Ymd');
+        $headers = [
+            "Content-type" => "text/csv; chartset=UTF-8; application/octet-stream",
+            "Content-Disposition" => "attachment; filename={$now}report.csv"
+        ];
         
-        // $callback = function() use ($saleReports, $columns)
-        // {
-        //     ob_end_clean();
-        //     $file = fopen('php://output', 'w');
-        //     fputcsv($file, $columns);
-        //     foreach($saleReports as $saleReport) {
-        //         $customID = $saleReport->customer ? $saleReport->customer->id : '';
-        //         $storeName = $saleReport->staff ? $saleReport->store->name : '';
-        //         $staffName = $saleReport->staff ? $saleReport->staff->name : '';
-        //         $orderType = $saleReport->paymentType() ? $saleReport->paymentType() : '';
-        //         $productName = $saleReport->productName() ? $saleReport->productName() : '';
-        //         $price = $saleReport->agencyProduct ? $saleReport->agencyProduct->sell_price : '';
-        //         $fee = $saleReport->agencyFee() ? $saleReport->agencyFee() : '';
-        //         fputcsv($file, [
-        //                 $saleReport->id,
-        //                 $customID,
-        //                 mb_convert_encoding($saleReport->agencyName(), "Shift-JIS"),
-        //                 mb_convert_encoding($storeName, "Shift-JIS"),
-        //                 mb_convert_encoding($staffName, "Shift-JIS"),
-        //                 $orderType,
-        //                 mb_convert_encoding($productName, "Shift-JIS"),
-        //                 $saleReport->createdAt(),
-        //                 $saleReport->canceledAt(),
-        //                 $price,
-        //                 $fee,
-        //             ]
-        //         );
-        //     }
-        //     fclose($file);
-        // };
-        // return Response::stream($callback, 200, $headers);
+        return \Response::make($csv, 200, $headers);
     }
 }

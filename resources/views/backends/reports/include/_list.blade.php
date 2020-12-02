@@ -58,13 +58,20 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group mt-3">
-                                <button id="downloadReportSale" type="button" name="download_sale" value="1" class="btn btn-circle btn-primary"
+                                <input id="download_sale" type="hidden" name="download_sale" value="1">
+                                <button id="downloadReportSale" type="button" class="btn btn-circle btn-primary"
                                     {{$saleCount == 0 ? 'disabled' : ''}}
                                 ><i class="fas fa-file-excel mr-1"></i>DownloadExcel</button>
                             </div>
                         </div>
                     </div>
                 </form>
+                <div class="w-100 mb-1">
+                    <div class="d-flex justify-content-end">
+                        <div class="p-2 border-right bg-success">{{ __('report.total_medicine') }}: {{$sumTotalQuantity}} </div>
+                        <div class="p-2 bg-primary">{{ __('report.total_currency') }}: {{$sumTotalamount}} </div>
+                      </div>
+                </div>
                <div class="table-responsive cus-table">
                     <table class="table table-bordered">
                         <thead class="bg-primary text-light">
@@ -91,8 +98,16 @@
                                             <div><span>{{ $key+1 }}. </span><span>{{$productSale->product ? $productSale->product->title : '' }}</span></div>
                                         @endforeach
                                     </td>
-                                    <td> {{ $sale->total_quantity }}</td>
-                                    <td> {{ $sale->total_amount }}</td>
+                                    <td> 
+                                        @foreach ($sale->productSales as $key => $productSale)
+                                            <div><span>{{ $productSale ? $productSale->quantity : 0 }}</span></div>
+                                        @endforeach
+                                    </td>
+                                    <td> 
+                                        @foreach ($sale->productSales as $key => $productSale)
+                                            <div><span>{{ $productSale ? $productSale->amount : 0 }}</span></div>
+                                        @endforeach
+                                    </td>
                                     <td class="text-center">
                                         <div class="btn-sm text-white font-size-10 d-inline-block" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
                                             {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សង' }}
@@ -110,3 +125,13 @@
         </div>
     </div>
 </div><!--/row-->
+@push('footer-script')
+    <script>
+        $(function () {
+            $('#downloadReportSale').click(function(){
+                $('#download_sale').val(2);
+                $('#sale-search').submit();
+            });
+        });
+    </script>
+@endpush
