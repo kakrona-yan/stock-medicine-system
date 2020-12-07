@@ -118,7 +118,7 @@
             border-radius: 50px;
             color: #0dc6d3;
             position: absolute;
-            right: 30px;
+            right: 170px;
             z-index: 99;
             top: -20px;
             font-size: 20px;
@@ -171,14 +171,18 @@
     <div class="container mt-5">
         <button type="button" class="btn-print" id="btn-print" onclick="printInvoice()">Print</button>
         <div class="con-print">
-            <div class="company-info mb-3">
+            <div class="company-info mb-3" style="display: inline-block;">
                 <div class="company-info--name">
                     <h1>RRPS PHARMA CO., LTD</h1>
                 </div>
                 <div class="company-info--address">
                     <p>អាស័យដ្ឋាន : NO. 01, ST. 182, សង្កាត់ វាលវង់, ខណ្ឌ ៧មករា, រាជធានីភ្នំពេញ</p>
                     <p>ទូរស័ព្ទ     : 093 399 330 / 099 399 339</p>
+                    <p>ABA : 002222201 RRPS PHARMA</p>
                 </div>
+            </div>
+            <div class="logo-rrps" style="display: inline-block;width: 30%;text-align: right;">
+                <img src="{{asset('images/rrps-logo.jpg')}}" width="100px">
             </div>
             <table class="table">
                 <tr>
@@ -286,6 +290,18 @@
                     <p style="margin-top: 50px;border-bottom: 1px solid #000;"></p>
                 </div>
             </div>
+            <div class="list-sale" style="margin-top: 20px;">
+                <table class="table table-bordered">
+                <thead style="background:#eee">
+                    <tr>
+                        <th>បាទទទួលប្រាក់</th>
+                        <th>កាលបរិច្ឆេទ</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
             </div>
         </div>
     </div>
