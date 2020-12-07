@@ -294,7 +294,7 @@
                 <table class="table table-bordered">
                 <thead style="background:#eee">
                     <tr>
-                        <th style="width: 130px;">បាទទទួលប្រាក់</th>
+                        <th style="width: 130px;">បានទទួលប្រាក់</th>
                         <th>កាលបរិច្ឆេទ</th>
                     </tr>
                 </thead>
