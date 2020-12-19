@@ -56,7 +56,64 @@ class ReportsController extends Controller
             $sumTotalamount = $sales->count() > 0 ? $sales->sum('total_amount') : 0;
             if ($request->exists('download_sale') && !empty($request->download_sale) && $request->download_sale == 2) { 
                 $saleExecls = $sales->get();
-                $this->downloadSale($saleExecls, $sumTotalQuantity, $sumTotalamount);
+                $now = now();
+                $headers = [
+                    "Content-type" => "text/xlsx; chartset=UTF-8; application/octet-stream",
+                    "Content-Disposition" => "attachment; filename=$now-sale-report.xlsx"
+                ];
+                
+                $columnSummary = mb_convert_encoding([
+                    __('report.total_medicine').":{$sumTotalQuantity}",
+                    __('report.total_currency'). ": {$sumTotalamount}"
+                ],'UTF-8');
+                $columns = mb_convert_encoding([
+                    '#',
+                    __('sale.list.invoice_code'),
+                    __('sale.list.customer_name'),
+                    __('sale.list.staff_name'),
+                    __('sale.list.product_name'),
+                    __('sale.list.quantity'),
+                    __('sale.list.amount'),
+                    __('customer_owed.list.status_pay'),
+                ],'UTF-8');
+        
+                $callback = function() use ($saleExecls, $columnSummary,  $columns)
+                {
+                    ob_end_clean();
+                    $file = fopen('php://output', 'w');
+                    
+                    fputcsv($file, $columnSummary);
+                    fputcsv($file, $columns);
+                    foreach($saleExecls as $saleExecl) {
+                        $quotaionNo = $saleExecl->quotaion_no .' '. date('h:i', strtotime($saleExecl->sale_date));
+                        $productTitle = [];
+                        $productQuantity = [];
+                        $productAmount = [];
+                        foreach ($saleExecl->productSales as $key => $productSale){
+                            $productTitle[] = ($key + 1).'.'.$productSale->product->title.'\n';
+                            $productQuantity[] = $productSale->quantity;
+                            $productAmount[] = $productSale->amount;
+                        }
+                        $strProductTitle = implode('', $productTitle);
+                        $strProductQuantity = implode('', $productQuantity);
+                        $strProductAmount = implode('', $productAmount);
+                        fputcsv(
+                            $file,[
+                                $saleExecl->id,
+                                $quotaionNo,
+                                $saleExecl->customer ? $saleExecl->customer->customerFullName() : '',
+                                $saleExecl->staff ? $saleExecl->staff->getFullnameAttribute() : \Auth::user()->name,
+                                $strProductTitle,
+                                $strProductQuantity,
+                                $strProductAmount,
+                                $saleExecl->customerOwed()->exists() ? $saleExecl->customerOwed->statusPay()['statusText'] : 'មិនទាន់សង'
+                            ]
+                        );
+                    }
+                    fclose($file);
+                };
+                
+                return \Response::stream($callback, 200, $headers);
             }
             $limit = config('pagination.limit');
             $sales = $sales->paginate($limit);
@@ -75,45 +132,5 @@ class ReportsController extends Controller
         }
     }
 
-    private function downloadSale($saleExecls, $sumTotalQuantity, $sumTotalamount)
-    {
-        ob_end_clean();
-        $file = fopen('php://temp', 'r+b');
-        $columnSummary = mb_convert_encoding([
-            __('report.total_medicine').":{$sumTotalQuantity}",
-            __('report.total_currency'). ": {$sumTotalamount}"
-        ],'UTF-8');
-        $columns = mb_convert_encoding([
-            '#',
-            __('sale.list.invoice_code'),
-            __('sale.list.customer_name'),
-            __('sale.list.staff_name'),
-            __('sale.list.product_name'),
-            __('sale.list.quantity'),
-            __('sale.list.amount'),
-            __('customer_owed.list.status_pay'),
-        ],'UTF-8');
-        fputcsv($file, $columnSummary);
-        fputcsv($file, $columns);
-        foreach ($saleExecls as $saleExecl) {
-            $quotaionNo = $saleExecl->quotaion_no . date('h:i', strtotime($saleExecl->sale_date));
-            fputcsv(
-                $file,[
-                    $saleExecl->id,
-                    $quotaionNo
-                ]
-            );
-        }
-        // fclose($file);
-        rewind($file);
-        $csv = str_replace(PHP_EOL, "\r\n", stream_get_contents($file));
-        $csv = mb_convert_encoding($csv, 'UTF-8');
-        $now = date('Ymd');
-        $headers = [
-            "Content-type" => "text/csv; chartset=UTF-8; application/octet-stream",
-            "Content-Disposition" => "attachment; filename={$now}report.csv"
-        ];
-        
-        return \Response::make($csv, 200, $headers);
-    }
+
 }
