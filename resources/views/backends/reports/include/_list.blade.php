@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="form-group mb-2 d-flex align-items-end">
-                                <button type="submit" class="btn btn-circle btn-primary"><i class="fa fa-search"></i> @lang('button.search')</button>
+                                <button type="submit" class="btn btn-circle btn-primary" name="search_report" value="1"><i class="fa fa-search"></i> @lang('button.search')</button>
                             </div>
                         </div>
                     </div>

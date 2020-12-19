@@ -54,6 +54,10 @@ class ReportsController extends Controller
             $saleExecls = [];
             $sumTotalQuantity = $sales->count() > 0 ? $sales->sum('total_quantity') : 0;
             $sumTotalamount = $sales->count() > 0 ? $sales->sum('total_amount') : 0;
+            if($request->exists('search_report') && !empty($request->search_report)) {
+                $request->download_sale = 1;
+            }
+           
             if ($request->exists('download_sale') && !empty($request->download_sale) && $request->download_sale == 2) { 
                 $saleExecls = $sales->get();
                 $now = now();
