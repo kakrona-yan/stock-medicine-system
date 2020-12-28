@@ -27,7 +27,7 @@ class ReportsController extends Controller
                 if ($request->exists('customer_name') && !empty($request->customer_name)) {
                     $customerName = $request->customer_name;
                     $sales->whereHas('customer', function($customer) use ($customerName){
-                        $customer->where('name', 'like', '%' . $customerName . '%');
+                        $customer->where('id', $customerName);
                     });
                 }
             }
@@ -35,7 +35,7 @@ class ReportsController extends Controller
                 if ($request->exists('staff_name') && !empty($request->staff_name)) {
                     $staffName = $request->staff_name;
                     $sales->whereHas('staff', function($staff) use ($staffName){
-                        $staff->where('name', 'like', '%' . $staffName . '%');
+                        $staff->where('id', $staffName);
                     });
                 }
             }
