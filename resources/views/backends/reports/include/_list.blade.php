@@ -121,6 +121,27 @@
                 <div class="d-flex justify-content-center">
                     {{ $sales->appends(request()->query())->links() }}
                 </div>
+                <button class="btn btn-circle btn-primary px-3 mb-2" data-toggle="collapse" data-target="#productMonthly">​សរុបតាមមុខថ្នាំនីមួយៗ</button>
+                <div id="productMonthly" class="collapse">
+                    <table class="table table-bordered">
+                        <thead class="bg-primary text-light">
+                            <tr>
+                                <th>{{__('sale.list.product_name')}}</th>
+                                <th>ចំនួួនថ្នាំសរុប</th>
+                                <th>{{__('sale.list.amount')}}សរុប</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($products as $product)
+                                <tr>
+                                    <td> {{ $product->title }}</td>
+                                    <td> {{ $product->sumQuantity() }}</td>
+                                    <td> {{ $product->SumAmount() }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

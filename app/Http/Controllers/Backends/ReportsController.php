@@ -8,11 +8,17 @@ use App\Models\Sale;
 use App\Models\Customer;
 use App\Models\Staff;
 use App\Http\Constants\DeleteStatus;
+use App\Models\Product;
+use DB;
 
 class ReportsController extends Controller
 {
-    public function __construct(Sale $sale) {
+    public function __construct(
+        Sale $sale,
+        Product $product
+    ) {
         $this->sale = $sale;
+        $this->product = $product;
     }
 
     public function index(Request $request)
@@ -121,7 +127,9 @@ class ReportsController extends Controller
             }
             $limit = config('pagination.limit');
             $sales = $sales->paginate($limit);
-
+            // each product monthly sales
+            $products = $this->product->select(['id', 'title'])->get();
+            
             return view('backends.reports.index', [
                 'request' => $request,
                 'sales' => $sales,
@@ -129,7 +137,8 @@ class ReportsController extends Controller
                 'staffs' =>  $staffs,
                 'saleCount' => $sales->count(),
                 'sumTotalQuantity' =>  $sumTotalQuantity,
-                'sumTotalamount' => $sumTotalamount
+                'sumTotalamount' => $sumTotalamount,
+                'products' => $products
             ]);
         } catch (\ValidationException $e) {
             return exceptionError($e, 'backends.report.index');

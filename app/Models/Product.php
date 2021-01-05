@@ -43,8 +43,22 @@ class Product extends BaseModel
     {
         return $this->hasMany('App\Models\ProductImage', 'product_id', 'id');
     }
-    
-    /**
+    public function productSales()
+    {
+        return $this->hasMany('App\Models\SaleProduct', 'product_id', 'id');
+    }
+
+    public function scopeSumQuantity()
+    {
+        return $this->productSales->sum('quantity');
+    }
+
+    public function scopeSumAmount()
+    {
+        return $this->productSales->sum('amount');
+    }
+
+    /**s
      * The product that belong to the category
      * From table user
      */
