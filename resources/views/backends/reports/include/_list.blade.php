@@ -122,7 +122,7 @@
                     {{ $sales->appends(request()->query())->links() }}
                 </div>
                 <button class="btn btn-circle btn-primary px-3 mb-2" data-toggle="collapse" data-target="#productMonthly">​សរុបតាមមុខថ្នាំនីមួយៗ</button>
-                <div id="productMonthly" class="collapse">
+                <div id="productMonthly" class="collapse show">
                     <table class="table table-bordered">
                         <thead class="bg-primary text-light">
                             <tr>
