@@ -127,6 +127,8 @@
                         <thead class="bg-primary text-light">
                             <tr>
                                 <th>{{__('sale.list.product_name')}}</th>
+                                <th>ចំនួួនលក់</th>
+                                <th>ចំនួួនថែម</th>
                                 <th>ចំនួួនថ្នាំសរុប</th>
                                 <th>{{__('sale.list.amount')}}សរុប</th>
                             </tr>
@@ -136,7 +138,9 @@
                                 <tr>
                                     <td> {{ $product->title }}</td>
                                     <td> {{ $product->sumQuantity() }}</td>
-                                    <td> {{ $product->SumAmount() }}</td>
+                                    <td> {{ $product->sumProductFree() }}</td>
+                                    <td> {{ ($product->sumQuantity() + $product->sumProductFree()) }}</td>
+                                    <td> {{ abs($product->SumAmount()) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

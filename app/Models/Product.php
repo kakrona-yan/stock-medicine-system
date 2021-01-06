@@ -53,6 +53,11 @@ class Product extends BaseModel
         return $this->productSales->sum('quantity');
     }
 
+    public function scopeSumProductFree()
+    {
+        return $this->productSales->sum('product_free');
+    }
+
     public function scopeSumAmount()
     {
         return $this->productSales->sum('amount');
