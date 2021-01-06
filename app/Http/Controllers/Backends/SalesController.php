@@ -116,7 +116,7 @@ class SalesController extends Controller
                     $sale = $this->sale->create($requestSale);
                     if($sale) {
                         $sale->update([
-                            "quotaion_no" => date('d/m') ."/A".$sale->id
+                            "quotaion_no" => date('d/m') ."/B".$sale->id
                         ]);
                     }
                     // insert to table salesProduct
