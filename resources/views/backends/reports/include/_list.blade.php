@@ -81,7 +81,9 @@
                                 <th>{{__('sale.list.customer_name')}}</th>
                                 <th>{{__('sale.list.staff_name')}}</th>
                                 <th>{{__('sale.list.product_name')}}</th>
-                                <th>{{__('sale.list.quantity')}}</th>
+                                <th>ចំនួួនលក់</th>
+                                <th>ចំនួួនថែម</th>
+                                <th>ចំនួួនថ្នាំសរុប</th>
                                 <th>{{__('sale.list.amount')}}</th>
                                 <th class="text-center">{{ __('customer_owed.list.status_pay') }}</th>
                             </tr>
@@ -103,11 +105,13 @@
                                             <div><span>{{ $productSale ? $productSale->quantity : 0 }}</span></div>
                                         @endforeach
                                     </td>
-                                    <td> 
+                                    <td>
                                         @foreach ($sale->productSales as $key => $productSale)
-                                            <div><span>{{ $productSale ? $productSale->amount : 0 }}</span></div>
+                                            <div><span>{{ $productSale ? abs($productSale->product_free) : 0 }}</span></div>
                                         @endforeach
                                     </td>
+                                    <td>{{ $sale->total_quantity}}</td>
+                                    <td> {{ $sale->total_amount}}</td>
                                     <td class="text-center">
                                         <div class="btn-sm text-white font-size-10 d-inline-block" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
                                             {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សង' }}
@@ -137,10 +141,10 @@
                             @foreach ($products as $product)
                                 <tr>
                                     <td> {{ $product->title }}</td>
-                                    <td> {{ $product->sumQuantity() }}</td>
-                                    <td> {{ $product->sumProductFree() }}</td>
-                                    <td> {{ ($product->sumQuantity() + $product->sumProductFree()) }}</td>
-                                    <td> {{ abs($product->SumAmount()) }}</td>
+                                    <td> {{ $product->total_quantity }}</td>
+                                    <td> {{ abs($product->total_product_free) }}</td>
+                                    <td> {{ abs($product->total_quantity + $product->total_product_free) }}</td>
+                                    <td> {{ $product->total_amount }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -45,16 +45,13 @@ class ReportsController extends Controller
                     });
                 }
             }
-            
+            $startOfDate = date('Y-m-d');
+            $endOfDate =  date('Y-m-d');
             if ($request->exists('start_date') && !empty($request->start_date) && $request->exists('end_date') && !empty($request->end_date)) {
                 $startOfDate = $request->start_date;
                 $endOfDate =  $request->end_date;
-                $sales->whereBetween(\DB::raw("DATE_FORMAT(sale_date,'%Y-%m-%d')"), [$startOfDate, $endOfDate]);
-            } else {
-                $startOfDate = date('Y-m-d');
-                $endOfDate =  date('Y-m-d');
-                $sales->whereBetween(\DB::raw("DATE_FORMAT(sale_date,'%Y-%m-%d')"), [$startOfDate, $endOfDate]);
-            }
+            } 
+            $sales->whereBetween(\DB::raw("DATE_FORMAT(sale_date,'%Y-%m-%d')"), [$startOfDate, $endOfDate]);
             // Check flash danger
             flashDanger($sales->count(), __('flash.empty_data'));
             $saleExecls = [];
@@ -127,9 +124,18 @@ class ReportsController extends Controller
             }
             $limit = config('pagination.limit');
             $sales = $sales->paginate($limit);
-            // each product monthly sales
-            $products = $this->product->select(['id', 'title'])->get();
-            
+            // Get each product monthly sales
+            $products = $this->product->join('sale_products', 'sale_products.product_id', '=', 'products.id')
+                ->whereBetween(\DB::raw("DATE_FORMAT(sale_products.created_at,'%Y-%m-%d')"), [$startOfDate, $endOfDate])
+                ->groupBy('sale_products.product_id')
+                ->get([
+                    'products.id',
+                    'products.title', 
+                    DB::raw('sum(sale_products.quantity) as total_quantity'),
+                    DB::raw('sum(sale_products.product_free) as total_product_free'),
+                    DB::raw('sum(sale_products.amount) as total_amount')
+                ]);
+
             return view('backends.reports.index', [
                 'request' => $request,
                 'sales' => $sales,
