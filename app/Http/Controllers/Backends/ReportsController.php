@@ -65,7 +65,7 @@ class ReportsController extends Controller
                 $saleExecls = $sales->get();
                 $now = now();
                 $headers = [
-                    "Content-type" => "text/xlsx; chartset=UTF-8; application/octet-stream",
+                    "Content-type" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                     "Content-Disposition" => "attachment; filename=$now-sale-report.xlsx"
                 ];
                 
@@ -79,7 +79,9 @@ class ReportsController extends Controller
                     __('sale.list.customer_name'),
                     __('sale.list.staff_name'),
                     __('sale.list.product_name'),
-                    __('sale.list.quantity'),
+                    __('report.quantity'),
+                    __('report.product_free'),
+                    __('report.total_quantity'),
                     __('sale.list.amount'),
                     __('customer_owed.list.status_pay'),
                 ],'UTF-8');
@@ -95,14 +97,15 @@ class ReportsController extends Controller
                         $quotaionNo = $saleExecl->quotaion_no .' '. date('h:i', strtotime($saleExecl->sale_date));
                         $productTitle = [];
                         $productQuantity = [];
-                        $productAmount = [];
+                        $productFree = [];
                         foreach ($saleExecl->productSales as $key => $productSale){
                             $productTitle[] = ($key + 1).'.'.$productSale->product->title.'\n';
                             $productQuantity[] = $productSale->quantity;
-                            $productAmount[] = $productSale->amount;
+                            $productFree[] = $productSale->product_free;
                         }
                         $strProductTitle = implode('', $productTitle);
                         $strProductQuantity = implode('', $productQuantity);
+                        $strProductFree = implode('', $productFree);
                         $strProductAmount = implode('', $productAmount);
                         fputcsv(
                             $file,[
@@ -112,7 +115,9 @@ class ReportsController extends Controller
                                 $saleExecl->staff ? $saleExecl->staff->getFullnameAttribute() : \Auth::user()->name,
                                 $strProductTitle,
                                 $strProductQuantity,
-                                $strProductAmount,
+                                $strProductFree,
+                                $saleExecl->total_quantity,
+                                $saleExecl->total_amount,
                                 $saleExecl->customerOwed()->exists() ? $saleExecl->customerOwed->statusPay()['statusText'] : 'មិនទាន់សង'
                             ]
                         );

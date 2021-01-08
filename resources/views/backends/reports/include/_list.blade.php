@@ -81,9 +81,9 @@
                                 <th>{{__('sale.list.customer_name')}}</th>
                                 <th>{{__('sale.list.staff_name')}}</th>
                                 <th>{{__('sale.list.product_name')}}</th>
-                                <th>ចំនួួនលក់</th>
-                                <th>ចំនួួនថែម</th>
-                                <th>ចំនួួនថ្នាំសរុប</th>
+                                <th>{{__('report.quantity')}}</th>
+                                <th>{{__('report.product_free')}}</th>
+                                <th>{{__('report.total_quantity')}}</th>
                                 <th>{{__('sale.list.amount')}}</th>
                                 <th class="text-center">{{ __('customer_owed.list.status_pay') }}</th>
                             </tr>
@@ -131,9 +131,9 @@
                         <thead class="bg-primary text-light">
                             <tr>
                                 <th>{{__('sale.list.product_name')}}</th>
-                                <th>ចំនួួនលក់</th>
-                                <th>ចំនួួនថែម</th>
-                                <th>ចំនួួនថ្នាំសរុប</th>
+                                <th>{{__('report.quantity')}}</th>
+                                <th>{{__('report.product_free')}}</th>
+                                <th>{{__('report.total_quantity')}}</th>
                                 <th>{{__('sale.list.amount')}}សរុប</th>
                             </tr>
                         </thead>

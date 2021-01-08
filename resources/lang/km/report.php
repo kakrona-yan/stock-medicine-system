@@ -5,5 +5,8 @@ return [
     'product_sale' => 'របាយការណ៏ផលិតផល',
     'date' => 'កាលបរិច្ឆេទ',
     'total_medicine' => 'ចំនួនថ្នាំ',
-    'total_currency' => 'លុយលក់បាន'
+    'total_currency' => 'លុយលក់បាន',
+    'quantity' => 'ចំនួួនលក់',
+    'product_free' => 'ចំនួួនថែម',
+    'total_quantity' => 'ចំនួួនថ្នាំសរុប'
 ];
