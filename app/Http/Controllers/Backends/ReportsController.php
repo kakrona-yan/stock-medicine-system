@@ -50,9 +50,9 @@ class ReportsController extends Controller
             if($request->product_name != 'all') {
                 if ($request->exists('product_name') && !empty($request->product_name)) {
                     $productId = $request->product_name;
-                    $sales->with(['productSales' => function($productSales) use ($productId){
+                    $sales->whereHas('productSales', function($productSales) use ($productId){
                         $productSales->where('product_id', $productId);
-                    }]);
+                    });
                 }
             }
             $startOfDate = date('Y-m-d');
