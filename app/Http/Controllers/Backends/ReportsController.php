@@ -133,6 +133,7 @@ class ReportsController extends Controller
             $products = $this->product->join('sale_products', 'sale_products.product_id', '=', 'products.id')
                 ->whereBetween(\DB::raw("DATE_FORMAT(sale_products.created_at,'%Y-%m-%d')"), [$startOfDate, $endOfDate])
                 ->groupBy('sale_products.product_id')
+                ->orderBy('products.title')
                 ->get([
                     'products.id',
                     'products.title', 
