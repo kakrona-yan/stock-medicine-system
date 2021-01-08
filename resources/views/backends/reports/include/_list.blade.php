@@ -136,12 +136,6 @@
                     {{ $sales->appends(request()->query())->links() }}
                 </div>
                 <button class="btn btn-circle btn-primary px-3 my-2" data-toggle="collapse" data-target="#productMonthly">​សរុបតាមមុខថ្នាំនីមួយៗ</button>
-                <div class="w-100 mb-1">
-                    <div class="d-flex justify-content-end">
-                        <div class="p-2 border-right bg-success">{{ __('report.total_medicine') }}: {{$sumTotalQuantity}} </div>
-                        <div class="p-2 bg-primary">{{ __('report.total_currency') }}: {{$sumTotalamount}} </div>
-                      </div>
-                </div>
                 <div id="productMonthly" class="collapse show">
                     <table class="table table-bordered cus-table">
                         <thead class="bg-primary text-light">
