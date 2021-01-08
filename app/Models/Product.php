@@ -144,4 +144,12 @@ class Product extends BaseModel
         return GroupStaff::whereIn("id", $groupStaffIds)
             ->get();
     }
+
+    public function scopeOfList()
+    {
+        return $this->where('is_delete', '<>', DeleteStatus::DELETED)
+            ->orderBy('id', 'DESC')   
+            ->pluck('title', 'id')
+            ->all();
+    }
 }

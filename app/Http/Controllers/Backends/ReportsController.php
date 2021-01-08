@@ -27,8 +27,10 @@ class ReportsController extends Controller
 
             $customers = Customer::ofList();
             $staffs = Staff::ofList();
-            $sales = $this->sale->where('is_delete', '<>', DeleteStatus::DELETED)->orderBy('id', 'DESC');
+            $productLists = Product::ofList();
 
+            $sales = $this->sale->where('is_delete', '<>', DeleteStatus::DELETED)->orderBy('id', 'DESC');
+            // Filter
             if($request->customer_name != 'all') {
                 if ($request->exists('customer_name') && !empty($request->customer_name)) {
                     $customerName = $request->customer_name;
@@ -42,6 +44,14 @@ class ReportsController extends Controller
                     $staffName = $request->staff_name;
                     $sales->whereHas('staff', function($staff) use ($staffName){
                         $staff->where('id', $staffName);
+                    });
+                }
+            }
+            if($request->product_name != 'all') {
+                if ($request->exists('product_name') && !empty($request->product_name)) {
+                    $productId = $request->product_name;
+                    $sales->whereHas('productSales', function($staff) use ($productId){
+                        $staff->where('product_id', $productId);
                     });
                 }
             }
@@ -60,7 +70,7 @@ class ReportsController extends Controller
             if($request->exists('search_report') && !empty($request->search_report)) {
                 $request->download_sale = 1;
             }
-           
+            // Download xlsx
             if ($request->exists('download_sale') && !empty($request->download_sale) && $request->download_sale == 2) { 
                 $saleExecls = $sales->get();
                 $now = now();
@@ -127,26 +137,20 @@ class ReportsController extends Controller
                 
                 return \Response::stream($callback, 200, $headers);
             }
+
             $limit = config('pagination.limit');
             $sales = $sales->paginate($limit);
+
             // Get each product monthly sales
-            $products = $this->product->join('sale_products', 'sale_products.product_id', '=', 'products.id')
-                ->whereBetween(\DB::raw("DATE_FORMAT(sale_products.created_at,'%Y-%m-%d')"), [$startOfDate, $endOfDate])
-                ->groupBy('sale_products.product_id')
-                ->orderBy('products.title')
-                ->get([
-                    'products.id',
-                    'products.title', 
-                    DB::raw('sum(sale_products.quantity) as total_quantity'),
-                    DB::raw('sum(sale_products.product_free) as total_product_free'),
-                    DB::raw('sum(sale_products.amount) as total_amount')
-                ]);
+            $products = $this->filterProducts($request, $startOfDate, $endOfDate);
+            
 
             return view('backends.reports.index', [
                 'request' => $request,
                 'sales' => $sales,
                 'customers' => $customers,
                 'staffs' =>  $staffs,
+                'productLists' => $productLists,
                 'saleCount' => $sales->count(),
                 'sumTotalQuantity' =>  $sumTotalQuantity,
                 'sumTotalamount' => $sumTotalamount,
@@ -157,5 +161,29 @@ class ReportsController extends Controller
         }
     }
 
+    private function filterProducts($request, $startOfDate, $endOfDate)
+    {
+        $products =  $this->product->join('sale_products', 'sale_products.product_id', '=', 'products.id')
+                ->whereBetween(\DB::raw("DATE_FORMAT(sale_products.created_at,'%Y-%m-%d')"), [$startOfDate, $endOfDate])
+                ->groupBy('sale_products.product_id')
+                ->orderBy('products.title');
+                
+        if($request->product_name != 'all') {
+            if ($request->exists('product_name') && !empty($request->product_name)) {
+                $productId = $request->product_name;
+                $products->where('products.id', $productId);
+            }
+        }
+        
+        $products = $products->get([
+            'products.id',
+            'products.title', 
+            DB::raw('sum(sale_products.quantity) as total_quantity'),
+            DB::raw('sum(sale_products.product_free) as total_product_free'),
+            DB::raw('sum(sale_products.amount) as total_amount')
+        ]);
+
+        return $products;
+    }
 
 }

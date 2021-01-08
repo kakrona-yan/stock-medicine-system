@@ -31,6 +31,16 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="select-group form-group mb-2 mr-2">
+                                <label for="title" class="mr-sm-2">{{__('sale.list.product_name')}}:</label>
+                                <select class="form-control report_staff" id="staff" name="product_name" placeholder="{{__('sale.list.product_name')}}">
+                                    <option value="all" selected>ALL</option>
+                                    @foreach ($productLists as $key => $product)
+                                        <option value="{{$key}}" {{ $key == $request->product_name ? 'selected' : ''}}>{{ $product }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group mb-2 mr-2">
                                 <label for='date' class="mr-sm-2">{{__('report.date')}}</label>
                                 <div class="d-flex">
