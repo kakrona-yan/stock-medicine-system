@@ -127,7 +127,7 @@
                 </div>
                 <button class="btn btn-circle btn-primary px-3 my-2 w-100" data-toggle="collapse" data-target="#productMonthly">​សរុបតាមមុខថ្នាំនីមួយៗ</button>
                 <div id="productMonthly" class="collapse show">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered cus-table">
                         <thead class="bg-primary text-light">
                             <tr>
                                 <th>{{__('sale.list.product_name')}}</th>
