@@ -101,14 +101,14 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{-- <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center">
                             {{ $sales->appends(request()->query())->links() }}
                         </div>
                         @if( Session::has('flash_danger') )
                             <p class="alert text-center {{ Session::get('alert-class', 'alert-danger') }}">
                                 <span class="spinner-border spinner-border-sm text-darktext-danger align-middle"></span> {{ Session::get('flash_danger') }}
                             </p>
-                        @endif --}}
+                        @endif
                     </div>
                 </div>
             </div>

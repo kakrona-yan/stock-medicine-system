@@ -61,7 +61,7 @@ class CustomerOwedsController extends Controller
             }
             // Check flash danger
             flashDanger($sales->count(), __('flash.empty_data'));
-            $sales = $sales->get();
+            $sales = $sales->paginate(30, ['*'], 'sale-page');
 
             $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
             return view('backends.customer_oweds.index', [
