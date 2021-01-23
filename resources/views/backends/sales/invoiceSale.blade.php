@@ -202,6 +202,9 @@
                                     <p>
                                         {{ $sale->customer ? $sale->customer->phone1 : '' }}
                                     </p>
+                                    <p>
+                                        {{ $sale->customer ? $sale->customer->address : '' }}
+                                    </p>
                                 </td>
                             </tr>
                             </tbody>
