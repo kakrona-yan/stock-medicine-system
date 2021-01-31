@@ -116,7 +116,6 @@ class ReportsController extends Controller
                         $strProductTitle = implode('', $productTitle);
                         $strProductQuantity = implode('', $productQuantity);
                         $strProductFree = implode('', $productFree);
-                        $strProductAmount = implode('', $productAmount);
                         fputcsv(
                             $file,[
                                 $saleExecl->id,
