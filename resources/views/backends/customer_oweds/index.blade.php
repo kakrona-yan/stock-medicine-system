@@ -25,6 +25,13 @@
             </ol>
         </nav>
     </div>
+    <div class="my-3">
+        <a class="btn btn-circle btn-primary mb-2"
+            href="{{route('customer_owed.download-pdf')}}"
+            target="_blank"
+            ><i class="far fa-file-pdf mr-2"></i>ReportPDF
+        </a>
+    </div>
     <!--list product-->
     <ul class="nav nav-tabs nav-justified mb-2" role="tablist">
         <li class="nav-item">

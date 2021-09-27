@@ -60,7 +60,7 @@ class ReportsController extends Controller
             if ($request->exists('start_date') && !empty($request->start_date) && $request->exists('end_date') && !empty($request->end_date)) {
                 $startOfDate = $request->start_date;
                 $endOfDate =  $request->end_date;
-            } 
+            }
             $sales->whereBetween(\DB::raw("DATE_FORMAT(sale_date,'%Y-%m-%d')"), [$startOfDate, $endOfDate]);
             // Check flash danger
             flashDanger($sales->count(), __('flash.empty_data'));
@@ -71,14 +71,14 @@ class ReportsController extends Controller
                 $request->download_sale = 1;
             }
             // Download xlsx
-            if ($request->exists('download_sale') && !empty($request->download_sale) && $request->download_sale == 2) { 
+            if ($request->exists('download_sale') && !empty($request->download_sale) && $request->download_sale == 2) {
                 $saleExecls = $sales->get();
                 $now = now();
                 $headers = [
-                    "Content-type" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                    "Content-Disposition" => "attachment; filename=$now-sale-report.xlsx"
+                    "Content-type"        => "text/csv",
+                    "Content-Disposition" => "attachment; filename=$now-sale-report.csv"
                 ];
-                
+
                 $columnSummary = mb_convert_encoding([
                     __('report.total_medicine').":{$sumTotalQuantity}",
                     __('report.total_currency'). ": {$sumTotalamount}"
@@ -95,12 +95,12 @@ class ReportsController extends Controller
                     __('sale.list.amount'),
                     __('customer_owed.list.status_pay'),
                 ],'UTF-8');
-        
+
                 $callback = function() use ($saleExecls, $columnSummary,  $columns)
                 {
                     ob_end_clean();
                     $file = fopen('php://output', 'w');
-                    
+
                     fputcsv($file, $columnSummary);
                     fputcsv($file, $columns);
                     foreach($saleExecls as $saleExecl) {
@@ -133,7 +133,7 @@ class ReportsController extends Controller
                     }
                     fclose($file);
                 };
-                
+
                 return \Response::stream($callback, 200, $headers);
             }
 
@@ -142,7 +142,7 @@ class ReportsController extends Controller
 
             // Get each product monthly sales
             $products = $this->filterProducts($request, $startOfDate, $endOfDate);
-            
+
 
             return view('backends.reports.index', [
                 'request' => $request,
@@ -166,17 +166,17 @@ class ReportsController extends Controller
                 ->whereBetween(\DB::raw("DATE_FORMAT(sale_products.created_at,'%Y-%m-%d')"), [$startOfDate, $endOfDate])
                 ->groupBy('sale_products.product_id')
                 ->orderBy('products.title');
-                
+
         if($request->product_name != 'all') {
             if ($request->exists('product_name') && !empty($request->product_name)) {
                 $productId = $request->product_name;
                 $products->where('products.id', $productId);
             }
         }
-        
+
         $products = $products->get([
             'products.id',
-            'products.title', 
+            'products.title',
             DB::raw('sum(sale_products.quantity) as total_quantity'),
             DB::raw('sum(sale_products.product_free) as total_product_free'),
             DB::raw('sum(sale_products.amount) as total_amount')

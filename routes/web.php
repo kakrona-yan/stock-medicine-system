@@ -172,6 +172,8 @@ Route::group(
                     ->name('update.set_date');
                 Route::get('/sale', 'CustomerOwedsController@getSaleByCustomer')
                     ->name('sale');
+                Route::get('/download-pdf', 'CustomerOwedsController@downloadPDF')
+                    ->name('download-pdf');
             });
             // customer maps
             Route::group(['prefix' => 'customer_maps', 'as' => 'customer_map.'], function () {
