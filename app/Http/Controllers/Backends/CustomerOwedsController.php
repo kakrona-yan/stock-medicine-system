@@ -408,10 +408,6 @@ class CustomerOwedsController extends Controller
 
     public function downloadPDF()
     {
-        $sales = $this->sale->where('is_delete', '<>', 0)
-                ->orderBy('created_at', 'DESC')
-                ->with('customerOwed')
-                ->get();
         try {
             $sales = $this->sale->where('is_delete', '<>', 0)
                 ->orderBy('created_at', 'DESC')
@@ -423,29 +419,16 @@ class CustomerOwedsController extends Controller
             $amount = 0;
             $customerOwed = 0;
             $receiveAmount = 0;
-            // SamePay pays
-            $totalOwedsSamePay = 0;
-            $amountSamePay = 0;
-            $customerOwedSamePay = 0;
-            $receiveAmountSamePay = 0;
             foreach ($sales as $sale) {
-                if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0) {
+                if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0 || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 1) {
                     $customerOwed = 0;
                     $amount = $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount;
                     $receiveAmount = $sale->customerOwed()->exists() && $sale->customerOwed->receive_amount  ? $sale->customerOwed->receive_amount : 0;
                     $customerOwed = $sale->customerOwed()->exists() && $sale->customerOwed->owed_amount ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
+                    $totalOweds += $customerOwed;
                 }
-                $totalOweds += $customerOwed;
-
-                if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 1) {
-                    $customerOwedSamePay = 0;
-                    $amountSamePay = $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount;
-                    $receiveAmountSamePay = $sale->customerOwed()->exists() && $sale->customerOwed->receive_amount  ? $sale->customerOwed->receive_amount : 0;
-                    $customerOwedSamePay = $sale->customerOwed()->exists() && $sale->customerOwed->owed_amount ? $sale->customerOwed->owed_amount : ($amountSamePay - $receiveAmountSamePay);
-                }
-                $totalOwedsSamePay += $customerOwedSamePay;
             }
-            $total = ($totalOweds+$totalOwedsSamePay);
+            $total = $totalOweds;
             return view('backends.customer_oweds.invoice_owed', [
                 'total' => $total,
             ]);
