@@ -28,7 +28,7 @@ class Sale extends BaseModel
         'sale_date',
     ];
 
-    public $sortables = ['id', 'staff_id', 'customer_id', 'quotaion_no'];
+    public $sortables = ['id', 'staff_id', 'customer_id', 'created_at'];
 
     public function customer()
     {
@@ -82,7 +82,7 @@ class Sale extends BaseModel
             $orderType = strtolower($request->order) == 'desc' ? 'desc' : 'asc';
             switch ($request->orderby) {
                 case 'id':
-                case 'quotaion_no':
+               case 'created_at':
                         $sales = $sales->orderBy($request->orderby, $orderType);
                     break;
             }

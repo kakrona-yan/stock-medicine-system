@@ -66,7 +66,7 @@
                                     {!! \App\Helper\SortableHelper::order('#', 'id', 'sale.index') !!}
                                 </th>
                                 <th>
-                                    {!! \App\Helper\SortableHelper::order(__('sale.list.invoice_code'), 'quotaion_no', 'sale.index') !!}
+                                    {!! \App\Helper\SortableHelper::order(__('sale.list.invoice_code'), 'created_at', 'sale.index') !!}
                                 </th>
                                 <th>{{__('sale.list.customer_name')}}</th>
                                 <th>{{__('sale.list.quantity')}}</th>

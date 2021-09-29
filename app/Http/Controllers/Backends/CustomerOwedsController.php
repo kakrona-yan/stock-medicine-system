@@ -62,7 +62,7 @@ class CustomerOwedsController extends Controller
                 $orderType = strtolower($request->order) == 'desc' ? 'desc' : 'asc';
                 switch ($request->orderby) {
                     case 'id':
-                    case 'quotaion_no':
+                   case 'created_at':
                             $sales = $sales->orderBy($request->orderby, $orderType);
                         break;
                 }
@@ -124,7 +124,7 @@ class CustomerOwedsController extends Controller
                 $orderType = strtolower($request->order) == 'desc' ? 'desc' : 'asc';
                 switch ($request->orderby) {
                     case 'id':
-                    case 'quotaion_no':
+                    case 'created_at':
                             $saleSomePays = $saleSomePays->orderBy($request->orderby, $orderType);
                         break;
                 }
@@ -186,7 +186,7 @@ class CustomerOwedsController extends Controller
                 $orderType = strtolower($request->order) == 'desc' ? 'desc' : 'asc';
                 switch ($request->orderby) {
                     case 'id':
-                    case 'quotaion_no':
+                    case 'created_at':
                             $saleAllPays = $saleAllPays->orderBy($request->orderby, $orderType);
                         break;
                 }

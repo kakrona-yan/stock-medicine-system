@@ -34,7 +34,7 @@
                                 <thead class="bg-success text-light">
                                     <tr>
                                         <th class="pr-4">
-                                            {!! \App\Helper\SortableHelper::order(__('sale.list.invoice_code'), 'quotaion_no', 'customer_owed.index') !!}
+                                            {!! \App\Helper\SortableHelper::order(__('sale.list.invoice_code'), 'created_at', 'customer_owed.index') !!}
                                         </th>
                                         <th>{{__('customer.list.name')}}</th>
                                         <th>{{ __('customer_owed.list.amount') }}</th>
