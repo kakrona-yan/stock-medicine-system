@@ -40,9 +40,7 @@ class CustomerOwedsController extends Controller
             $allPay = self::STATUS_ALL_PAY;
 
             // customer of sale
-            $sales = $this->sale->where('is_delete', '<>', 0)
-                ->orderBy('created_at', 'DESC')
-                ->with('customerOwed');
+            $sales = $this->sale->where('is_delete', '<>', 0)->with('customerOwed');
 
             if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
                 $quotationNo = $request->quotaion_no;
@@ -59,6 +57,17 @@ class CustomerOwedsController extends Controller
                 $sales->whereHas('staff', function ($staff) use ($staffName) {
                     $staff->where('name', 'like', '%' . $staffName . '%');
                 });
+            }
+            if ($request->exists('orderby') && !empty($request->orderby)) {
+                $orderType = strtolower($request->order) == 'desc' ? 'desc' : 'asc';
+                switch ($request->orderby) {
+                    case 'id':
+                    case 'quotaion_no':
+                            $sales = $sales->orderBy($request->orderby, $orderType);
+                        break;
+                }
+            } else {
+                $sales = $sales->orderBy('id', 'DESC');
             }
             // Check flash danger
             flashDanger($sales->count(), __('flash.empty_data'));
@@ -83,7 +92,7 @@ class CustomerOwedsController extends Controller
             $allPay = self::STATUS_ALL_PAY;
 
             // customer of sale
-            $saleSamePayPays = $this->sale->where('is_delete', '<>', 0)
+            $saleSomePays = $this->sale->where('is_delete', '<>', 0)
                 ->with('customerOwed')
                 ->whereHas('customerOwed', function ($customerOwed) use ($SamePayPay) {
                     $customerOwed->where('status_pay',  $SamePayPay);
@@ -91,34 +100,45 @@ class CustomerOwedsController extends Controller
 
             if ($request->exists('quotaion_no') && !empty($request->quotaion_no)) {
                 $quotationNo = $request->quotaion_no;
-                $saleSamePayPays = $saleSamePayPays->where('quotaion_no', 'like', '%' . $quotationNo . '%');
+                $saleSomePays = $saleSomePays->where('quotaion_no', 'like', '%' . $quotationNo . '%');
             }
             if ($request->exists('customer_name') && !empty($request->customer_name)) {
                 $customerName = $request->customer_name;
-                $saleSamePayPays->whereHas('customer', function ($customer) use ($customerName) {
+                $saleSomePays->whereHas('customer', function ($customer) use ($customerName) {
                     $customer->where('name', 'like', '%' . $customerName . '%');
                 });
             }
             if ($request->exists('staff_name') && !empty($request->staff_name)) {
                 $staffName = $request->staff_name;
-                $saleSamePayPays->whereHas('staff', function ($staff) use ($staffName) {
+                $saleSomePays->whereHas('staff', function ($staff) use ($staffName) {
                     $staff->where('name', 'like', '%' . $staffName . '%');
                 });
             }
             if ($request->exists('status_pay') && !empty($request->status_pay)) {
                 $status_pay = $request->status_pay;
-                $saleSamePayPays->whereHas('customerOwed', function ($customerOwed) use ($status_pay) {
+                $saleSomePays->whereHas('customerOwed', function ($customerOwed) use ($status_pay) {
                     $customerOwed->where('status_pay',  $status_pay);
                 });
             }
+            if ($request->exists('orderby') && !empty($request->orderby)) {
+                $orderType = strtolower($request->order) == 'desc' ? 'desc' : 'asc';
+                switch ($request->orderby) {
+                    case 'id':
+                    case 'quotaion_no':
+                            $saleSomePays = $saleSomePays->orderBy($request->orderby, $orderType);
+                        break;
+                }
+            } else {
+                $saleSomePays = $saleSomePays->orderBy('id', 'DESC');
+            }
             // Check flash danger
-            flashDanger($saleSamePayPays->count(), __('flash.empty_data'));
-            $saleSamePayPays = $saleSamePayPays->get()->sortByDesc('customerOwed.receive_date');
-            $saleSamePayPays = $this->paginateArrayToCllect($saleSamePayPays, $request, 40);
+            flashDanger($saleSomePays->count(), __('flash.empty_data'));
+            $saleSomePays = $saleSomePays->get()->sortByDesc('customerOwed.receive_date');
+            $saleSomePays = $this->paginateArrayToCllect($saleSomePays, $request, 40);
             $statusPays = CustomerOwed::STATUS_PAY_TEXT_FORM;
-            return view('backends.customer_oweds.index_SamePay_pay', [
+            return view('backends.customer_oweds.index_some_pay', [
                 'request' => $request,
-                'saleSamePayPays' => $saleSamePayPays,
+                'saleSomePays' => $saleSomePays,
                 'statusPays' => $statusPays
             ]);
         } catch (\ValidationException $e) {
@@ -162,7 +182,17 @@ class CustomerOwedsController extends Controller
                     $customerOwed->where('status_pay',  $status_pay);
                 });
             }
-
+            if ($request->exists('orderby') && !empty($request->orderby)) {
+                $orderType = strtolower($request->order) == 'desc' ? 'desc' : 'asc';
+                switch ($request->orderby) {
+                    case 'id':
+                    case 'quotaion_no':
+                            $saleAllPays = $saleAllPays->orderBy($request->orderby, $orderType);
+                        break;
+                }
+            } else {
+                $saleAllPays = $saleAllPays->orderBy('id', 'DESC');
+            }
             // Check flash danger
             flashDanger($saleAllPays->count(), __('flash.empty_data'));
             $saleAllPays = $saleAllPays->get()->sortByDesc('customerOwed.receive_date');

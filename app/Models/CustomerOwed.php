@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\SortableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class CustomerOwed extends BaseModel
 {
+    use SortableTrait;
     protected $table = 'customer_oweds';
 
     protected $fillable = [
@@ -23,11 +25,13 @@ class CustomerOwed extends BaseModel
         'product_note'
 
     ];
-    
+
     protected $dates = [
         'receive_date',
         'date_pay'
     ];
+
+    public $sortables = ['id', 'sale_id', 'customer_id'];
 
     public function customer()
     {
@@ -39,7 +43,7 @@ class CustomerOwed extends BaseModel
         return $this->belongsTo('App\Models\Sale', 'sale_id');
     }
 
-    public function filter($request) 
+    public function filter($request)
     {
         $customerOweds = $this->orderBy('id', 'DESC');
         $limit = config('pagination.limit');
@@ -110,7 +114,7 @@ class CustomerOwed extends BaseModel
                 break;
         }
         return [
-            'statusText' => $statusText, 
+            'statusText' => $statusText,
             'color' => $color
         ];
     }

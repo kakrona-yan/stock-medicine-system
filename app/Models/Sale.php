@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Constants\DeleteStatus;
+use App\Traits\SortableTrait;
 
 class Sale extends BaseModel
 {
+    use SortableTrait;
     protected $fillable = [
+        'id',
         'staff_id',
         'customer_id',
         'quotaion_no',
@@ -18,12 +21,14 @@ class Sale extends BaseModel
         'sale_date',
         'note',
         'is_active',
-        'is_delete'   
+        'is_delete'
     ];
-    
+
     protected $dates = [
         'sale_date',
     ];
+
+    public $sortables = ['id', 'staff_id', 'customer_id', 'quotaion_no'];
 
     public function customer()
     {
@@ -47,7 +52,7 @@ class Sale extends BaseModel
 
     public function filter($request)
     {
-        $sales = $this->where('is_delete', '<>', DeleteStatus::DELETED)->orderBy('id', 'DESC');
+        $sales = $this->where('is_delete', '<>', DeleteStatus::DELETED);
         // login of staff
         if(\Auth::user()->isRoleStaff()) {
             $staffId = \Auth::user()->staff ? \Auth::user()->staff->id : \Auth::id();
@@ -72,6 +77,17 @@ class Sale extends BaseModel
         }
         if ($request->exists('sale_date') && !empty($request->sale_date)) {
             $sales->whereDate('sale_date', date('Y-m-d', strtotime($request->sale_date)));
+        }
+        if ($request->exists('orderby') && !empty($request->orderby)) {
+            $orderType = strtolower($request->order) == 'desc' ? 'desc' : 'asc';
+            switch ($request->orderby) {
+                case 'id':
+                case 'quotaion_no':
+                        $sales = $sales->orderBy($request->orderby, $orderType);
+                    break;
+            }
+        } else {
+            $sales = $sales->orderBy('id', 'DESC');
         }
         // Check flash danger
         flashDanger($sales->count(), __('flash.empty_data'));

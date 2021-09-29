@@ -10,21 +10,21 @@
                 <form id="sale-search" action="{{ route('sale.index') }}" method="GET" class="form form-horizontal form-search form-inline mb-2 d-inline-flex">
                     <div class="form-group mb-2 mr-2">
                         <label for="title" class="mr-sm-2">{{__('sale.list.invoice_code')}}:</label>
-                        <input type="text" class="form-control mr-1" id="quotaion_no" 
+                        <input type="text" class="form-control mr-1" id="quotaion_no"
                             name="quotaion_no" value="{{ old('quotaion_no', $request->quotaion_no)}}"
                             placeholder="{{__('sale.list.invoice_code')}}"
                         >
                     </div>
                     <div class="form-group mb-2 mr-2">
                         <label for="title" class="mr-sm-2">{{__('sale.list.customer_name')}}:</label>
-                        <input type="text" class="form-control mr-1" id="customer" 
+                        <input type="text" class="form-control mr-1" id="customer"
                             name="customer_name" value="{{ old('customer_name', $request->customer_name)}}"
                             placeholder="{{__('sale.list.customer_name')}}"
                         >
                     </div>
                     <div class="form-group mb-2 mr-2">
                         <label for="title" class="mr-sm-2">{{__('sale.list.staff_name')}}:</label>
-                        <input type="text" class="form-control mr-1" id="staff_name" 
+                        <input type="text" class="form-control mr-1" id="staff_name"
                             name="staff_name" value="{{ old('staff_name', $request->staff_name)}}"
                             placeholder="{{__('sale.list.staff_name')}}"
                         >
@@ -49,7 +49,7 @@
                             </div>
                             <select class="form-control" name="limit" id="limit">
                                 @for( $i=10; $i<=50; $i +=10 )
-                                    <option value="{{$i}}" 
+                                    <option value="{{$i}}"
                                     {{ $request->limit == $i || config('pagination.limit') == $i ? 'selected' : ''}}
                                     >{{ $i }}</option>
                                 @endfor
@@ -62,8 +62,12 @@
                     <table class="table table-bordered">
                         <thead class="bg-primary text-light">
                             <tr>
-                                <th class="text-center">#</th>
-                                <th>{{__('sale.list.invoice_code')}}</th>
+                                <th class="text-center">
+                                    {!! \App\Helper\SortableHelper::order('#', 'id', 'sale.index') !!}
+                                </th>
+                                <th>
+                                    {!! \App\Helper\SortableHelper::order(__('sale.list.invoice_code'), 'quotaion_no', 'sale.index') !!}
+                                </th>
                                 <th>{{__('sale.list.customer_name')}}</th>
                                 <th>{{__('sale.list.quantity')}}</th>
                                 <th>{{__('sale.list.price')}}</th>
@@ -96,24 +100,24 @@
                                     {{-- <td>{{date('Y-m-d h:i', strtotime($sale->sale_date))}}</td> --}}
                                     <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
                                     @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleView() || Auth::user()->isRoleEditor())
-                                    <td rowspan="{{$sale->productSales->count() > 0 ? 2 : 1}}">   
-                                        {{-- <a class="btn btn-circle btn-circle btn-sm btn-warning btn-circle mr-1" 
-                                            data-toggle="tooltip" 
+                                    <td rowspan="{{$sale->productSales->count() > 0 ? 2 : 1}}">
+                                        {{-- <a class="btn btn-circle btn-circle btn-sm btn-warning btn-circle mr-1"
+                                            data-toggle="tooltip"
                                             data-placement="top"
                                             data-original-title="Invoice #{{$sale->quotaion_no}}"
                                             href="{{route('sale.viewPDF', $sale->id)}}"
                                         ><i class="far far fa-eye"></i>
                                         </a> --}}
-                                        <a class="btn btn-circle btn-circle btn-sm btn-success btn-circle mr-1" 
-                                            data-toggle="tooltip" 
+                                        <a class="btn btn-circle btn-circle btn-sm btn-success btn-circle mr-1"
+                                            data-toggle="tooltip"
                                             data-placement="top"
                                             data-original-title="Invoice #{{$sale->quotaion_no}}"
                                             href="{{route('sale.downloadPDF', $sale->id)}}"
                                             ><i class="far fa-file-pdf"></i>
                                         </a>
                                         @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
-                                        <a class="btn btn-circle btn-sm btn-warning btn-circle" 
-                                            data-toggle="tooltip" 
+                                        <a class="btn btn-circle btn-sm btn-warning btn-circle"
+                                            data-toggle="tooltip"
                                             data-placement="top"
                                             data-original-title="{{__('button.edit')}}"
                                             href="{{route('sale.edit', $sale->id)}}"
@@ -191,12 +195,12 @@
 <!--Modal delete product-->
 <div class="modal fade" id="deleteSale">
     <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">       
+    <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
             <h5 class="modal-title"><i class="fa fa-trash"></i> {{__('product.confirm_delete')}}</h5>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div> 
+        </div>
         <!-- Modal body -->
         <div class="modal-body text-center">
             <div class="message">{{__('product.confirm_msg') }}</div>

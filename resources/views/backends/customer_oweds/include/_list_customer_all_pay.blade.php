@@ -5,19 +5,19 @@
             <div class="card-body">
                 <form id="sale-search" action="{{ route('customer_owed.all_pay') }}" method="GET" class="form form-horizontal form-search form-inline mb-2 d-inline-flex">
                     <div class="form-group mb-2 mr-2">
-                        <input type="text" class="form-control mr-1" id="quotaion_no" 
+                        <input type="text" class="form-control mr-1" id="quotaion_no"
                             name="quotaion_no" value="{{ old('quotaion_no', $request->quotaion_no)}}"
                             placeholder="{{__('sale.list.invoice_code')}}"
                         >
                     </div>
                     <div class="form-group mb-2 mr-2">
-                        <input type="text" class="form-control mr-1" id="customer" 
+                        <input type="text" class="form-control mr-1" id="customer"
                             name="customer_name" value="{{ old('customer_name', $request->customer_name)}}"
                             placeholder="{{__('sale.list.customer_name')}}"
                         >
                     </div>
                     <div class="form-group mb-2 mr-2">
-                        <input type="text" class="form-control mr-1" id="staff_name" 
+                        <input type="text" class="form-control mr-1" id="staff_name"
                             name="staff_name" value="{{ old('staff_name', $request->staff_name)}}"
                             placeholder="{{__('sale.list.staff_name')}}"
                         >
@@ -33,7 +33,9 @@
                             <table class="table table-bordered">
                                 <thead class="bg-info text-light">
                                     <tr>
-                                        <th>{{__('sale.list.invoice_code')}}</th>
+                                        <th class="pr-4">
+                                            {!! \App\Helper\SortableHelper::order(__('sale.list.invoice_code'), 'quotaion_no', 'customer_owed.all_pay') !!}
+                                        </th>
                                         <th>{{__('customer.list.name')}}</th>
                                         <th>{{ __('customer_owed.list.amount') }}</th>
                                         <th>{{ __('customer_owed.list.owed_amount') }}</th>
@@ -47,7 +49,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($saleAllPays as $sale) 
+                                    @foreach ($saleAllPays as $sale)
                                     @if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 2 || $sale->customerOwed->status_pay == 3)
                                         @php
                                             $customerOwed = 0;
@@ -64,7 +66,7 @@
                                             <td class="text-center">
                                                 <div class="btn-sm text-white font-size-10 d-inline-block" style="background:{{$sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['color']:'#e74a3b'}}">
                                                     {{ $sale->customerOwed()->exists() ? $sale->customerOwed->statusPay()['statusText'] : 'មិនទាន់សង' }}
-                                                </div>             
+                                                </div>
                                             </td>
                                             <td class="text-center">
                                                 <div>{{ $sale->customerOwed()->exists() && $sale->customerOwed->date_pay ? date('Y-m-d h:i', strtotime($sale->customerOwed->date_pay)) : '-'}}</div>
@@ -72,8 +74,8 @@
                                             <td>{{$sale->staff ? $sale->staff->getFullnameAttribute() : \Auth::user()->name}}</td>
                                             @if(Auth::user()->isRoleAdmin() || Auth::user()->isRoleEditor())
                                             <td class="text-center" style="width: 130px;">
-                                                <a class="btn btn-sm btn-warning d-inline-flex" 
-                                                    data-toggle="tooltip" 
+                                                <a class="btn btn-sm btn-warning d-inline-flex"
+                                                    data-toggle="tooltip"
                                                     data-placement="top"
                                                     data-original-title="{{__('button.pay')}}"
                                                     href="{{route('customer_owed.edit', $sale->id)}}"
@@ -104,12 +106,12 @@
 <!--pay fast-->
 <div class="modal fade" id="update_sale_confirm">
     <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">       
+    <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
             <h5 class="modal-title"><i class="fa fa-trash"></i> {{__('customer_owed.confirm_pay')}}</h5>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div> 
+        </div>
         <!-- Modal body -->
         <div class="modal-body text-center">
             <div class="message">{{__('customer_owed.confirm_msg_pay') }}</div>
@@ -133,12 +135,12 @@
 <!--set date-->
 <div class="modal fade" id="set_date_pay_confirm">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">       
+        <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
                 <h5 class="modal-title"><i class="fa fa-trash"></i> {{__('customer_owed.confirm_set_date')}}</h5>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div> 
+            </div>
             <form id="set_date_pay_confirm_form" action="{{route('customer_owed.update.set_date')}}" method="POST">
                 @csrf
                 <!-- Modal body -->
@@ -152,7 +154,7 @@
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
                 <!-- Modal footer -->
