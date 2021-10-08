@@ -95,7 +95,7 @@ Route::group(
                 Route::get('/create', 'StaffsController@create')->name('create');
                 Route::post('/store', 'StaffsController@store')->name('store');
                 Route::get('/show/{id}', 'StaffsController@show')->name('show');
-                
+
                 Route::get('/edit/{id}', 'StaffsController@edit')->name('edit');
                 Route::post('/update/{id}', 'StaffsController@update')->name('update');
                 Route::post('/destroy', 'StaffsController@destroy')->name('destroy');
@@ -174,6 +174,13 @@ Route::group(
                     ->name('sale');
                 Route::get('/download-pdf', 'CustomerOwedsController@downloadPDF')
                     ->name('download-pdf');
+                Route::get('/download-owed', 'CustomerOwedsController@downloadOwed')
+                    ->name('download-owed');
+                Route::get('/download-some-owed', 'CustomerOwedsController@downloadSomeOwed')
+                    ->name('download-some-owed');
+                Route::get('/download-already-owed', 'CustomerOwedsController@downloadAlreadyPay')
+                    ->name('download-already-pay');
+
             });
             // customer maps
             Route::group(['prefix' => 'customer_maps', 'as' => 'customer_map.'], function () {

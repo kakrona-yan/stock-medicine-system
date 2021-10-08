@@ -26,10 +26,15 @@
         </nav>
     </div>
     <div class="my-3">
-        <a class="btn btn-circle btn-primary mb-2"
+        <a class="btn btn-circle btn-primary mb-2 mr-2"
             href="{{route('customer_owed.download-pdf')}}"
             target="_blank"
-            ><i class="far fa-file-pdf mr-2"></i>ReportPDF
+            ><i class="far fa-file-pdf mr-2"></i>Report PDF
+        </a>
+        <a class="btn btn-circle btn-primary mb-2"
+            href="{{route('customer_owed.download-owed')}}"
+            target="_blank"
+        ><i class="far fa-file-excel mr-2"></i>មិនទាន់សង
         </a>
     </div>
     <!--list product-->

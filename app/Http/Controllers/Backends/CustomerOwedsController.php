@@ -11,6 +11,7 @@ use App\Http\Constants\DeleteStatus;
 use App\Models\CustomerOwedHistory;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Response;
 
 class CustomerOwedsController extends Controller
 {
@@ -62,8 +63,8 @@ class CustomerOwedsController extends Controller
                 $orderType = strtolower($request->order) == 'desc' ? 'desc' : 'asc';
                 switch ($request->orderby) {
                     case 'id':
-                   case 'created_at':
-                            $sales = $sales->orderBy($request->orderby, $orderType);
+                    case 'created_at':
+                        $sales = $sales->orderBy($request->orderby, $orderType);
                         break;
                 }
             } else {
@@ -125,7 +126,7 @@ class CustomerOwedsController extends Controller
                 switch ($request->orderby) {
                     case 'id':
                     case 'created_at':
-                            $saleSomePays = $saleSomePays->orderBy($request->orderby, $orderType);
+                        $saleSomePays = $saleSomePays->orderBy($request->orderby, $orderType);
                         break;
                 }
             } else {
@@ -187,7 +188,7 @@ class CustomerOwedsController extends Controller
                 switch ($request->orderby) {
                     case 'id':
                     case 'created_at':
-                            $saleAllPays = $saleAllPays->orderBy($request->orderby, $orderType);
+                        $saleAllPays = $saleAllPays->orderBy($request->orderby, $orderType);
                         break;
                 }
             } else {
@@ -450,7 +451,7 @@ class CustomerOwedsController extends Controller
             $customerOwed = 0;
             $receiveAmount = 0;
             foreach ($sales as $sale) {
-                if(!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0 || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 1) {
+                if (!$sale->customerOwed()->exists() || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 0 || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 1) {
                     $customerOwed = 0;
                     $amount = $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount;
                     $receiveAmount = $sale->customerOwed()->exists() && $sale->customerOwed->receive_amount  ? $sale->customerOwed->receive_amount : 0;
@@ -467,9 +468,184 @@ class CustomerOwedsController extends Controller
             $pdfSale = PDF::loadView('backends.customer_oweds.invoice_owed.', ['sale' => $sale]);
             $pdfSale->setPaper('a4');
             return $pdfSale->download($pdfName);
-
         } catch (ValidationException $e) {
             return exceptionError($e, 'customer_owed.index');
         }
+    }
+
+    public function downloadOwed()
+    {
+        $customers = Customer::whereHas('sales')->get();
+        $now = now();
+        $headers = [
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$now-customer-owed-report.csv"
+        ];
+
+        $columns = mb_convert_encoding([
+            'Name',
+            'Sale',
+            'Total owed'
+        ], 'UTF-8');
+        $data = [];
+        foreach ($customers as $customer) {
+            $productTitle = [];
+            $productAmount = 0;
+            if ($sales = $customer->sales) {
+                foreach ($sales as $key => $sale) {
+                    foreach ($sale->productSales as $key => $productSale) {
+                        $productTitle[] = ($key + 1) . '.' . $productSale->product->title;
+                        $productAmount += $productSale->amount;
+                    }
+                }
+                $strProductTitle = implode(' ', $productTitle);
+            }
+
+            $row = [];
+            $row[] = $customer->name;
+            $row[] = $strProductTitle;
+            $row[] = $productAmount;
+            array_push($data, $row);
+        }
+
+        $callback = function () use ($data,  $columns) {
+            ob_end_clean();
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+            foreach ($data as $row) {
+                fputcsv($file, $row);
+            }
+            fclose($file);
+        };
+
+        return Response::stream($callback, 200, $headers);
+    }
+
+    public function downloadSomeOwed()
+    {
+        $customers = Customer::whereHas('customerOweds', function ($customerOwed) {
+            $customerOwed->where('status_pay', 1);
+        })->get();
+        $data = [];
+        foreach ($customers as $customer) {
+            if ($sales = $customer->sales) {
+                $productTitle = [];
+                $total = 0;
+                $totalOweds = 0;
+                $amount = 0;
+                $customerOwed = 0;
+                $receiveAmount = 0;
+                foreach ($sales as $sale) {
+                    if ($sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 1) {
+                        $customerOwed = 0;
+                        $amount = $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount;
+                        $receiveAmount = $sale->customerOwed()->exists() && $sale->customerOwed->receive_amount  ? $sale->customerOwed->receive_amount : 0;
+                        $customerOwed = $sale->customerOwed()->exists() && $sale->customerOwed->owed_amount ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
+                        $totalOweds += $customerOwed;
+                    }
+                    foreach ($sale->productSales as $key => $productSale) {
+                        $productTitle[] = ($key + 1) . '.' . $productSale->product->title;
+                    }
+                }
+                $total = $totalOweds;
+                $strProductTitle = implode(' ', $productTitle);
+            }
+
+            $row = [];
+            $row[] = $customer->name;
+            $row[] = $strProductTitle;
+            $row[] = $total;
+
+            array_push($data, $row);
+        }
+
+
+        $now = now();
+        $headers = [
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$now-customer-some-owed-report.csv"
+        ];
+
+        $columns = mb_convert_encoding([
+            'Name',
+            'Sale',
+            'Total owed'
+        ], 'UTF-8');
+
+        $callback = function () use ($data,  $columns) {
+            ob_end_clean();
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+            foreach ($data as $row) {
+                fputcsv($file, $row);
+            }
+            fclose($file);
+        };
+
+        return Response::stream($callback, 200, $headers);
+    }
+
+    public function downloadAlreadyPay()
+    {
+        $customers = Customer::whereHas('customerOweds', function ($customerOwed) {
+            $customerOwed->whereIn('status_pay', [2,3]);
+        })->get();
+        $data = [];
+        foreach ($customers as $customer) {
+            if ($sales = $customer->sales) {
+                $productTitle = [];
+                $total = 0;
+                $totalOweds = 0;
+                $amount = 0;
+                $customerOwed = 0;
+                $receiveAmount = 0;
+                foreach ($sales as $sale) {
+                    if ($sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 2 || $sale->customerOwed()->exists() && $sale->customerOwed->status_pay == 3 ) {
+                        $customerOwed = 0;
+                        $amount = $sale->customerOwed()->exists() && $sale->customerOwed->amount ? $sale->customerOwed->amount : $sale->total_amount;
+                        $receiveAmount = $sale->customerOwed()->exists() && $sale->customerOwed->receive_amount  ? $sale->customerOwed->receive_amount : 0;
+                        $customerOwed = $sale->customerOwed()->exists() && $sale->customerOwed->owed_amount ? $sale->customerOwed->owed_amount : ($amount - $receiveAmount);
+                        $totalOweds += $customerOwed;
+                    }
+                    foreach ($sale->productSales as $key => $productSale) {
+                        $productTitle[] = ($key + 1) . '.' . $productSale->product->title;
+                    }
+                }
+                $total = $totalOweds;
+                $strProductTitle = implode(' ', $productTitle);
+            }
+
+            $row = [];
+            $row[] = $customer->name;
+            $row[] = $strProductTitle;
+            $row[] = $total;
+
+            array_push($data, $row);
+        }
+
+
+        $now = now();
+        $headers = [
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$now-customer-some-owed-report.csv"
+        ];
+
+        $columns = mb_convert_encoding([
+            'Name',
+            'Sale',
+            'Total owed'
+        ], 'UTF-8');
+
+        $callback = function () use ($data,  $columns) {
+            ob_end_clean();
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+            foreach ($data as $row) {
+                fputcsv($file, $row);
+            }
+            fclose($file);
+        };
+
+        return Response::stream($callback, 200, $headers);
     }
 }
