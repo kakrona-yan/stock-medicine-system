@@ -56,7 +56,7 @@ abstract class BaseModel extends Model
     }
 
     /**
-     * Auto increment uninque id string 
+     * Auto increment uninque id string
      * @param $model
      * @return string
      * */
@@ -66,6 +66,7 @@ abstract class BaseModel extends Model
             ->orderBy('id', 'DESC')->first();
         $digits = $lastest ? $lastest->id + $num : $num;
         // return date('d/m') ."/A".$digits;
-        return date('d/m') ."/B".$digits;
+        // return date('d/m') ."/B".$digits;
+        return date('d/m') ."/C".$digits;
     }
 }
