@@ -100,7 +100,7 @@ class SalesController extends Controller
                 }else{
                     $staff = \Auth::user()->staff ? \Auth::user()->staff->id : \Auth::id();
                 }
-               
+
                 $requestSale = [];
                 if ($request->exists('sale_product') && !empty($request->sale_product)) {
                     $requestSale['staff_id'] = $staff;
@@ -116,7 +116,7 @@ class SalesController extends Controller
                     $sale = $this->sale->create($requestSale);
                     if($sale) {
                         $sale->update([
-                            "quotaion_no" => date('d/m') ."/B".$sale->id
+                            "quotaion_no" => date('d/m') ."/C".$sale->id
                         ]);
                     }
                     // insert to table salesProduct
@@ -175,9 +175,9 @@ class SalesController extends Controller
         }
     }
 
-    function downloadInvoiceSalePDF(int $id) 
+    function downloadInvoiceSalePDF(int $id)
     {
-       
+
         try {
             $sale = $this->sale->available($id);
             if (!$sale) {
@@ -196,7 +196,7 @@ class SalesController extends Controller
             return exceptionError($e, 'backends.sales.index');
         }
     }
-    
+
     function viewInvoiceSalePDF(int $id)
     {
 
@@ -209,7 +209,7 @@ class SalesController extends Controller
             $pdfName = "{$sale->customer->customerFullName()}-{$sale->quotaion_no}-{$dateSale}" . ".pdf";
             $view = view('backends.sales.invoiceSale', ['sale' => $sale]);
             $html = mb_convert_encoding($view, 'HTML-ENTITIES', 'UTF-8');
-            
+
             $pdfSale = PDF::loadHTML($html)
                 ->setPaper('a4')
                 ->setWarnings(false)
@@ -284,7 +284,7 @@ class SalesController extends Controller
                 }else{
                     $staff = \Auth::user()->staff ? \Auth::user()->staff->id : \Auth::id();
                 }
-               
+
                 $requestSale = [];
                 if ($request->exists('sale_product') && !empty($request->sale_product)) {
                     $requestSale['staff_id'] = $staff;
@@ -339,7 +339,7 @@ class SalesController extends Controller
                                 ]);
                             }
                         }
-                        // update and delete table 
+                        // update and delete table
                         if (isset($request->sale_ids)) {
                             $saleIds = preg_split("/,/", $request->sale_ids);
                             foreach ($saleIds as $key => $saleId) {
