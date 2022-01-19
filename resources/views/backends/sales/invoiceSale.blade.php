@@ -42,7 +42,7 @@
             color: #333;
             border-collapse: collapse;
         }
-        table th, table td{           
+        table th, table td{
             color: #333;
         }
         tfoot tr td {
@@ -159,6 +159,9 @@
             width: 100%;
             padding-right: 0.75rem;
             padding-left: 0.75rem;
+        }
+        .py-3{
+            padding: 15px 5px !important;
         }
     </style>
     <script>
@@ -280,7 +283,7 @@
                             <input type="text" class="form-control" name="pay_amount" accept="application/pdf">
                         </td>
                     </tr>
-                    
+
                 </tfoot>
             </table>
             <div class="row text-center" style="margin-top: 50px;">
@@ -302,7 +305,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @for ($i = 0; $i < 5; $i++)
+                        <tr>
+                            <td class="py-3">
 
+                            </td>
+                            <td class="py-3">
+
+                            </td>
+                        </tr>
+                    @endfor
                 </tbody>
             </table>
             </div>
