@@ -180,7 +180,7 @@
                 </div>
                 <div class="company-info--address">
                     <p>អាស័យដ្ឋាន : NO. 01, ST. 182, សង្កាត់ វាលវង់, ខណ្ឌ ៧មករា, រាជធានីភ្នំពេញ</p>
-                    <p>ទូរស័ព្ទ     : 093 399 330 / 099 399 339</p>
+                    <p>ទូរស័ព្ទ     : 093 399 330 / 099 277701</p>
                     <p>ABA : 002222201 RRPS PHARMA</p>
                 </div>
             </div>
@@ -300,8 +300,8 @@
                 <table class="table table-bordered">
                 <thead style="background:#eee">
                     <tr>
-                        <th style="width: 130px;">បានទទួលប្រាក់</th>
                         <th>កាលបរិច្ឆេទ</th>
+                        <th style="width: 130px;">បានទទួលប្រាក់</th>
                     </tr>
                 </thead>
                 <tbody>
