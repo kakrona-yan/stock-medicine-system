@@ -301,7 +301,7 @@
                 <thead style="background:#eee">
                     <tr>
                         <th>កាលបរិច្ឆេទ</th>
-                        <th style="width: 130px;">បានទទួលប្រាក់</th>
+                        <th style="width: 200px;">បានទទួលប្រាក់</th>
                     </tr>
                 </thead>
                 <tbody>
