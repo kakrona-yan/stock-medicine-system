@@ -272,18 +272,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="text-right" style="border: none;"><strong>ទទួលបានចំនួនផលិតផល:</strong></td>
+                        <td colspan="4" class="text-right" style="border: none;"><strong>ឈ្មោះអ្នកដឹក:</strong></td>
                         <td class="text-right">
                             <input type="text" class="form-control" name="receive_money" accept="application/pdf">
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="4" class="text-right" style="border: none;"><strong>ចំនួនទឹកប្រាក់ទូទាត់:</strong></td>
-                        <td class="text-right">
-                            <input type="text" class="form-control" name="pay_amount" accept="application/pdf">
-                        </td>
-                    </tr>
-
                 </tfoot>
             </table>
             <div class="row text-center" style="margin-top: 50px;">
@@ -301,12 +294,20 @@
                 <thead style="background:#eee">
                     <tr>
                         <th>កាលបរិច្ឆេទ</th>
-                        <th style="width: 200px;">បានទទួលប្រាក់</th>
+                        <th style="width: 150px;">បានទទួលប្រាក់</th>
+                        <th style="width: 100px;">ចំនួនទឹកប្រាក់</th>
+                        <th style="width: 100px;">ហត្ថលេខា</th>
                     </tr>
                 </thead>
                 <tbody>
                     @for ($i = 0; $i < 5; $i++)
                         <tr>
+                            <td class="py-3">
+
+                            </td>
+                            <td class="py-3">
+
+                            </td>
                             <td class="py-3">
 
                             </td>
