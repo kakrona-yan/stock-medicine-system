@@ -293,10 +293,10 @@
                 <table class="table table-bordered">
                 <thead style="background:#eee">
                     <tr>
-                        <th style="width: 150px;">កាលបរិច្ឆេទ</th>
-                        <th style="width: 200px;">បានទទួលប្រាក់</th>
-                        <th style="width: 150px;">ចំនួនទឹកប្រាក់</th>
-                        <th style="width: 150px;">ហត្ថលេខា</th>
+                        <th style="width: 120px;">កាលបរិច្ឆេទ</th>
+                        <th style="width: 200px;">ឈ្មោះអ្នកទទួល</th>
+                        <th style="width: 200px;">ចំនួនទឹកប្រាក់</th>
+                        <th style="width: 100px;">ហត្ថលេខា</th>
                     </tr>
                 </thead>
                 <tbody>
